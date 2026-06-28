@@ -35,7 +35,7 @@ Designed to be hosted on **[tiiny.host](https://tiiny.host)** (or any static hos
 
 1. Push this repository to GitHub (see below).
 2. In tiiny.host, choose **Import from GitHub**, select this repository, and deploy.
-3. tiiny.host serves `index.html` as the home page; every other page is reachable from the cards and by direct URL, e.g. `your-site.tiiny.site/education/bba/bba_college_comparison.html`.
+3. tiiny.host serves `index.html` as the home page; every other page is reachable from the cards and by direct URL, e.g. `web-hosting.tiiny.site/education/bba/bba_college_comparison.html`.
 
 ## Notes
 
