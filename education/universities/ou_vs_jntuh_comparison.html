@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osmania University vs JNTUH — Campus Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ou: #5C1E0A;       --ou-lt: #FBF3EF;  --ou-md: #C4603A;  --ou-acc: #E8885A;
+  --jn: #0A2E5C;       --jn-lt: #EEF4FB;  --jn-md: #2E6DB8;  --jn-acc: #5A9AE8;
+  --ink: #12110F;      --paper: #F8F5EE;  --cream: #EDE9DF;
+  --rule: #CEC8BC;     --muted: #6B6560;  --white: #FFFFFF;
+  --ok: #1B5E20;       --warn: #8B1A1A;   --gold: #B8860B;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
+
+/* ═══════════════════════════════════
+   MASTHEAD
+═══════════════════════════════════ */
+.masthead {
+  background: var(--ink);
+  padding: 2.8rem 1.5rem 2.2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.masthead::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1A0A02 0%, #0A0A0A 50%, #020A1A 100%);
+}
+.mast-inner { position: relative; z-index: 1; }
+.mast-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: .8rem;
+}
+.mast-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5.5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--paper);
+  margin-bottom: .5rem;
+}
+.mast-h1 .vs {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 400;
+  font-size: .6em;
+  color: #666;
+  margin: 0 .4em;
+  vertical-align: middle;
+}
+.mast-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: #666;
+  letter-spacing: .06em;
+}
+/* UNIVERSITY IDENTITY BARS */
+.id-bars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.id-bar {
+  padding: .8rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.id-bar.ou { background: var(--ou); }
+.id-bar.jn { background: var(--jn); }
+.id-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  opacity: .6;
+}
+.id-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.id-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .6rem;
+  color: rgba(255,255,255,.5);
+  margin-top: .15rem;
+  letter-spacing: .04em;
+}
+
+/* ═══════════════════════════════════
+   QUICK STATS STRIP
+═══════════════════════════════════ */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background: var(--white);
+  border-bottom: 2px solid var(--cream);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.stat {
+  padding: .75rem .6rem;
+  text-align: center;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stat:last-child { border-right: none; }
+.stat-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: .25rem;
+}
+.stat-vals { display: flex; gap: 0; }
+.stat-v {
+  flex: 1;
+  font-family: 'Playfair Display', serif;
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.stat-v.ou { color: var(--ou); }
+.stat-v.jn { color: var(--jn); }
+.stat-sep { color: var(--rule); font-size: .7rem; align-self: center; margin: 0 .15rem; }
+
+/* ═══════════════════════════════════
+   SECTION HEADING
+═══════════════════════════════════ */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: 1.6rem 0 .6rem;
+  border-top: 2px solid var(--ink);
+  margin-top: 1.5rem;
+}
+.sec-head:first-of-type { border-top: none; margin-top: 1rem; }
+.sec-icon { font-size: .95rem; }
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .63rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.sec-line { flex: 1; height: 1px; background: var(--rule); }
+
+/* ═══════════════════════════════════
+   SPLIT CARD PAIRS
+═══════════════════════════════════ */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--white); margin-bottom: 1rem; box-shadow: 0 1px 6px rgba(0,0,0,.04); }
+.half { padding: 1.2rem 1.3rem; }
+.half.ou-side { border-right: 1px solid var(--rule); border-top: 3px solid var(--ou); }
+.half.jn-side { border-top: 3px solid var(--jn); }
+.half-head {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: .65rem;
+  padding-bottom: .45rem;
+  border-bottom: 1px solid var(--cream);
+}
+.half-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ou-side .half-dot { background: var(--ou); }
+.jn-side .half-dot { background: var(--jn); }
+.half-title {
+  font-family: 'Playfair Display', serif;
+  font-size: .88rem;
+  font-weight: 700;
+}
+.ou-side .half-title { color: var(--ou); }
+.jn-side .half-title { color: var(--jn); }
+.half-badge {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .55rem;
+  padding: 1px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.ou-side .half-badge { background: var(--ou-lt); color: var(--ou); border: 1px solid var(--ou-acc); }
+.jn-side .half-badge { background: var(--jn-lt); color: var(--jn); border: 1px solid var(--jn-acc); }
+.item { display: flex; gap: .5rem; padding: 3.5px 0; border-bottom: 1px dotted var(--rule); font-size: .73rem; line-height: 1.45; }
+.item:last-child { border-bottom: none; }
+.item-key { font-weight: 600; color: var(--muted); min-width: 80px; font-size: .67rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .04em; flex-shrink: 0; }
+.item-val { color: var(--ink); }
+
+/* ═══════════════════════════════════
+   FULL-WIDTH COMPARISON TABLE
+═══════════════════════════════════ */
+.cmp-table { background: var(--white); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.04); margin-bottom: 1rem; }
+.cmp-row { display: grid; grid-template-columns: 160px 1fr 1fr; border-bottom: 1px solid var(--rule); }
+.cmp-row:last-child { border-bottom: none; }
+.cmp-row.alt .cparam, .cmp-row.alt .ccell { background: #FAFAF7; }
+.cparam { padding: 9px 12px; font-family: 'JetBrains Mono', monospace; font-size: .62rem; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-right: 1px solid var(--rule); background: var(--cream); display: flex; align-items: flex-start; line-height: 1.4; }
+.ccell { padding: 9px 12px; font-size: .74rem; color: var(--ink); line-height: 1.52; border-right: 1px solid var(--rule); vertical-align: top; }
+.ccell:last-child { border-right: none; }
+.ccell.ou-c { border-top: 2px solid var(--ou-acc); }
+.ccell.jn-c { border-top: 2px solid var(--jn-acc); }
+.ch { font-family: 'Playfair Display', serif; font-size: .8rem; font-weight: 700; padding: 8px 12px; border-right: 1px solid var(--rule); }
+.ch:last-child { border-right: none; }
+.ch.ou-c { color: var(--ou); background: var(--ou-lt); }
+.ch.jn-c { color: var(--jn); background: var(--jn-lt); }
+.ch.blank { background: var(--cream); }
+
+/* RATING STARS */
+.st { color: #C9960C; font-size: .75rem; }
+.se { color: #D8D4CC; font-size: .75rem; }
+
+/* BADGES / TAGS */
+.tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: .62rem; font-weight: 600; margin: 2px 2px 2px 0; font-family: 'JetBrains Mono', monospace; }
+.tou { background: var(--ou-lt); color: var(--ou); border: 1px solid #DDB8A8; }
+.tjn { background: var(--jn-lt); color: var(--jn); border: 1px solid #A8C0D8; }
+.tok { background: #EAF3DE; color: var(--ok); border: 1px solid #C2DCA0; }
+.twn { background: #FBF0E8; color: var(--warn); border: 1px solid #DDAAA0; }
+.tgd { background: #FDF5E0; color: var(--gold); border: 1px solid #E8CC80; }
+.tgr { background: var(--cream); color: #5A5550; border: 1px solid var(--rule); }
+
+/* PROS / CONS */
+.pro { color: var(--ok); font-size: .7rem; line-height: 1.55; padding: 1px 0; }
+.con { color: var(--warn); font-size: .7rem; line-height: 1.55; padding: 1px 0; }
+
+/* ═══════════════════════════════════
+   PLACEMENT HIGHLIGHT CARDS
+═══════════════════════════════════ */
+.place-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: 1rem; }
+.pcard { background: var(--white); border-radius: 8px; padding: .9rem 1rem; border: 1px solid var(--rule); box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.pcard.ou-p { border-top: 3px solid var(--ou); }
+.pcard.jn-p { border-top: 3px solid var(--jn); }
+.pcard-label { font-family: 'JetBrains Mono', monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .3rem; }
+.pcard-val { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; line-height: 1; margin-bottom: .2rem; }
+.ou-p .pcard-val { color: var(--ou); }
+.jn-p .pcard-val { color: var(--jn); }
+.pcard-sub { font-size: .67rem; color: var(--muted); line-height: 1.35; }
+
+/* ═══════════════════════════════════
+   VERDICT SECTION
+═══════════════════════════════════ */
+.verdict-section { background: var(--ink); padding: 2.5rem 1.5rem; margin-top: 1.5rem; }
+.vwrap { max-width: 1100px; margin: 0 auto; }
+.v-masthead {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--paper);
+  margin-bottom: 1.2rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid #2A2820;
+}
+.v-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-bottom: 1rem; }
+.vcard { background: #1C1B18; border-radius: 6px; padding: .95rem 1.05rem; border-top: 3px solid; }
+.vcard.ou-v { border-color: var(--ou-acc); }
+.vcard.jn-v { border-color: var(--jn-acc); }
+.vcard.tie { border-color: var(--gold); }
+.vc-label { font-family: 'JetBrains Mono', monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .45rem; }
+.ou-v .vc-label { color: var(--ou-acc); }
+.jn-v .vc-label { color: var(--jn-acc); }
+.tie .vc-label { color: var(--gold); }
+.vc-val { font-size: .75rem; color: #C8C4BC; line-height: 1.6; }
+.final-verdict { background: #1C1B18; border-radius: 6px; padding: 1.2rem 1.4rem; border: 1px solid #2A2820; margin-top: .75rem; }
+.fv-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold); margin-bottom: .8rem; }
+.fv-row { display: grid; grid-template-columns: 180px 1fr; gap: .8rem; padding: .4rem 0; border-bottom: 1px solid #2A2820; font-size: .74rem; align-items: flex-start; }
+.fv-row:last-child { border-bottom: none; }
+.fv-key { color: #888; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: .63rem; text-transform: uppercase; letter-spacing: .05em; }
+.fv-val { color: var(--paper); line-height: 1.55; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: .65rem; font-weight: 700; margin-right: 4px; }
+.p-ou { background: var(--ou); color: #fff; }
+.p-jn { background: var(--jn); color: #fff; }
+.p-tie { background: var(--gold); color: #fff; }
+.note { font-size: .67rem; color: #6B6560; margin-top: .3rem; display: block; line-height: 1.4; }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 800px) {
+  .split { grid-template-columns: 1fr; }
+  .half.ou-side { border-right: none; border-bottom: 1px solid var(--rule); }
+  .cmp-row { grid-template-columns: 90px 1fr 1fr; }
+  .stats-strip { grid-template-columns: repeat(3, 1fr); }
+  .place-grid { grid-template-columns: repeat(2, 1fr); }
+  .v-grid { grid-template-columns: 1fr 1fr; }
+  .id-bars { grid-template-columns: 1fr; }
+  .fv-row { grid-template-columns: 1fr; gap: .2rem; }
+  .mast-h1 { font-size: 1.7rem; }
+}
+@media (max-width: 500px) {
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .place-grid { grid-template-columns: 1fr 1fr; }
+  .v-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mast-inner">
+    <div class="mast-eyebrow">Hyderabad · Campus Comparison · 2025–26</div>
+    <h1 class="mast-h1">
+      Osmania University
+      <span class="vs">vs</span>
+      JNTUH
+    </h1>
+    <p class="mast-sub">Campus · Hostels · Mess · Sports · Classrooms · Symposiums · Research · Placements · Student Life</p>
+  </div>
+</div>
+<div class="id-bars">
+  <div class="id-bar ou">
+    <div class="id-icon">🏛</div>
+    <div>
+      <div class="id-name">Osmania University (OU)</div>
+      <div class="id-tag">Est. 1917 · Amberpet, Hyderabad · NAAC A+ · NIRF #30 University · #53 Overall</div>
+    </div>
+  </div>
+  <div class="id-bar jn">
+    <div class="id-icon">⚙️</div>
+    <div>
+      <div class="id-name">JNTUH — Jawaharlal Nehru Tech. University</div>
+      <div class="id-tag">Est. 1972 · Kukatpally, Hyderabad · NAAC A+ · NIRF #81 University · #94 Engineering</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat">
+    <div class="stat-key">Campus Area</div>
+    <div class="stat-vals">
+      <span class="stat-v ou">1,300</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-v jn">~89</span>
+    </div>
+    <div style="font-size:.58rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">acres</div>
+  </div>
+  <div class="stat">
+    <div class="stat-key">Students</div>
+    <div class="stat-vals">
+      <span class="stat-v ou">300K+</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-v jn">~20K</span>
+    </div>
+    <div style="font-size:.58rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">incl. affiliates</div>
+  </div>
+  <div class="stat">
+    <div class="stat-key">NIRF 2025 Rank</div>
+    <div class="stat-vals">
+      <span class="stat-v ou">#30</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-v jn">#81</span>
+    </div>
+    <div style="font-size:.58rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">university category</div>
+  </div>
+  <div class="stat">
+    <div class="stat-key">BTech Median Pkg</div>
+    <div class="stat-vals">
+      <span class="stat-v ou">₹10L</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-v jn">₹9.4L</span>
+    </div>
+    <div style="font-size:.58rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">NIRF 2025 (UCE/JNTUHCEH)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-key">Highest Pkg (BTech)</div>
+    <div class="stat-vals">
+      <span class="stat-v ou">₹24L</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-v jn">₹26.35L</span>
+    </div>
+    <div style="font-size:.58rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">NIRF 2025</div>
+  </div>
+  <div class="stat">
+    <div class="stat-key">Est. Year</div>
+    <div class="stat-vals">
+      <span class="stat-v ou">1917</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-v jn">1972</span>
+    </div>
+    <div style="font-size:.58rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">55 years apart</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- CAMPUS & LOCATION -->
+<div class="sec-head"><span class="sec-icon">🗺</span><span class="sec-label">Campus &amp; Location</span><span class="sec-line"></span></div>
+<div class="split">
+  <div class="half ou-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">Osmania University</span><span class="half-badge">1,300 Acres</span></div>
+    <div class="item"><span class="item-key">Area</span><span class="item-val">1,300 acres — one of the largest university campuses in India and among the largest in Asia. Lush, green, heritage landscape.</span></div>
+    <div class="item"><span class="item-key">Location</span><span class="item-val">Amberpet / Tarnaka, central Hyderabad. Nearest metro: Nampally / Osmania Medical College station. TSRTC buses from MGBS in 8–10 min.</span></div>
+    <div class="item"><span class="item-key">Architecture</span><span class="item-val">Iconic colonial-era Deccan architecture — the Arts College building is a UNESCO-worthy heritage structure (1934). Blend of historic and modern wings.</span></div>
+    <div class="item"><span class="item-key">Greenery</span><span class="item-val">Extensively tree-lined, botonical-garden-like grounds. Century-old trees, gardens, walking paths. Highly scenic campus; beloved by alumni for its aesthetics.</span></div>
+    <div class="item"><span class="item-key">Departments</span><span class="item-val">12 faculties, 53 departments. UCE and UCT are constituent colleges within the OU campus. Sprawling multi-college ecosystem.</span></div>
+    <div class="item"><span class="item-key">City connect</span><span class="item-val">Well-connected but inside city traffic; metro red line accessible. Airport ~40 km (40–50 min). Railway station ~10 min.</span></div>
+    <div class="item"><span class="item-key">Vibe</span><span class="item-val">Historic, prestigious, diverse — students from arts, science, law, management, engineering all on one campus. Cosmopolitan, intellectually rich environment.</span></div>
+  </div>
+  <div class="half jn-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">JNTUH</span><span class="half-badge">~89 Acres (Main)</span></div>
+    <div class="item"><span class="item-key">Area</span><span class="item-val">~89-acre main campus in Kukatpally + constituent colleges (Sultanpur, Jagtial, etc.) on separate campuses. Main campus is compact vs OU.</span></div>
+    <div class="item"><span class="item-key">Location</span><span class="item-val">Kukatpally, Hyderabad — near IT corridor, HITEC City, financial district. JNTU Metro station (red line) directly adjacent. Excellent urban connectivity.</span></div>
+    <div class="item"><span class="item-key">Architecture</span><span class="item-val">Modern functional engineering campus. Purpose-built academic blocks, labs, auditoriums. No heritage architecture. Clean, utilitarian design.</span></div>
+    <div class="item"><span class="item-key">Greenery</span><span class="item-val">Moderately green campus. Students note "soothing greenery and nice playgrounds." Less scenic than OU but functional. Some beautification in recent years.</span></div>
+    <div class="item"><span class="item-key">Departments</span><span class="item-val">Engineering, pharmacy, management, science & technology. 8 constituent colleges. Strong tech focus. Separate blocks per department.</span></div>
+    <div class="item"><span class="item-key">City connect</span><span class="item-val">Excellent — Metro directly outside campus. Close to Kukatpally bus stand. Near HITEC City and Gachibowli IT hubs. Airport ~35–40 min by Outer Ring Road.</span></div>
+    <div class="item"><span class="item-key">Vibe</span><span class="item-val">Engineering-tech focused, modern, industry-proximate. Students from across India and some international. Strong career-orientation atmosphere.</span></div>
+  </div>
+</div>
+
+<!-- CLASSROOMS -->
+<div class="sec-head"><span class="sec-icon">🎓</span><span class="sec-label">Classrooms &amp; Academic Infrastructure</span><span class="sec-line"></span></div>
+<div class="split">
+  <div class="half ou-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">Osmania University</span><span class="half-badge">UCE — NIRF #18 Engg (2023)</span></div>
+    <div class="item"><span class="item-key">Classrooms</span><span class="item-val">Large lecture halls with audio-visual equipment, smart boards, and good acoustics. Some older rooms in heritage buildings; UCE's newer blocks are modern.</span></div>
+    <div class="item"><span class="item-key">Labs</span><span class="item-val">Well-equipped discipline-specific labs. UCE has BME, signal processing, microwave, navigation, and central computer labs. Central Facilities for Research &amp; Development (CFRD) houses Central Instrumentation Lab, IT &amp; Communication Lab.</span></div>
+    <div class="item"><span class="item-key">Library</span><span class="item-val">Central Library: 67,000 sq ft building. 6 lakh+ books. Coordinates 8 campus + 4 constituent college libraries. DELNET, e-journals, Scopus, CD-ROM databases. Panoramic hilltop location. Open till 8 PM.</span></div>
+    <div class="item"><span class="item-key">Digitisation</span><span class="item-val">Smart boards, digital classrooms, Wi-Fi campus-wide via NKN/BSNL OFC. ISO 9001:2015 certified facilities at UCE. Two auditoriums: 1,050-seat + 330-seat.</span></div>
+    <div class="item"><span class="item-key">Research labs</span><span class="item-val">CFRD established for advanced research. UGC, DST, CSIR, DBT-funded projects ongoing. Strong pharma, chemistry, electronics research infrastructure.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★★</span> — One of the best academic infrastructure setups in Telangana for a public university. Heritage + modern blend.</span></div>
+  </div>
+  <div class="half jn-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">JNTUH</span><span class="half-badge">NAAC A+ · ISO Certified</span></div>
+    <div class="item"><span class="item-key">Classrooms</span><span class="item-val">Digital classrooms in all departments. Students rate classroom design positively — well-designed with good furniture, ventilation. Separate blocks per department keep class sizes manageable.</span></div>
+    <div class="item"><span class="item-key">Labs</span><span class="item-val">Well-equipped modern labs. Costly equipment available as per student reviews. Strong lab setups for electronics, computing, metallurgy. TeQiP-funded labs (World Bank project) significantly upgraded equipment quality.</span></div>
+    <div class="item"><span class="item-key">Library</span><span class="item-val">Central Library: 500-seat capacity. 93,441 books, 33,053 titles, 9,230 references, 201 national + 36 international journals, 30,418 e-resources. Member of e-ShodhSindhu, UGC-INFONET, INDEST-AICTE, INFLIBNET, DELNET. Digital library available. Open till 7:30 PM.</span></div>
+    <div class="item"><span class="item-key">Digitisation</span><span class="item-val">Smart boards, digital classrooms. Two auditoriums (1,050 + 330 seats). Wi-Fi available in departments — students note it's not campus-wide (vs OU's broader coverage).</span></div>
+    <div class="item"><span class="item-key">Research labs</span><span class="item-val">TeQiP (World Bank) funded infrastructure upgrades. Research centres in bioinformatics, smart grid, IoT. Collaboration with industry labs nearby (proximity to HITEC City is an advantage).</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★</span><span class="se">★</span> — Strong modern engineering infrastructure. Slightly less iconic than OU but more industry-aligned and tech-forward.</span></div>
+  </div>
+</div>
+
+<!-- HOSTELS & MESS -->
+<div class="sec-head"><span class="sec-icon">🏠</span><span class="sec-label">Hostels &amp; Mess</span><span class="sec-line"></span></div>
+<div class="split">
+  <div class="half ou-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">Osmania University</span><span class="half-badge">22 Hostels · 15 Messes</span></div>
+    <div class="item"><span class="item-key">Hostel count</span><span class="item-val">22 hostels and 15 messes across campus — the largest residential system of any Hyderabad university. Boys hostels: Maneru (83 rooms), Krishnaveni (101 rooms), Yamuna (109 rooms, PG), Kinnera, Ganga, Swarnamukhi. 4 girls hostels.</span></div>
+    <div class="item"><span class="item-key">Room sharing</span><span class="item-val">Typically 3–4 person sharing for regular rooms. Some PG rooms are 2-sharing. Students note rooms are "quite spacious." Some older blocks have 5-sharing.</span></div>
+    <div class="item"><span class="item-key">Fees</span><span class="item-val">₹2,000/month hostel fee. Mess: ~₹150/day (good quality). Deposit: ₹10,000. Extremely affordable. Private PGs nearby cost ₹4,500–₹5,000/month.</span></div>
+    <div class="item"><span class="item-key">Mess food</span><span class="item-val">Generally well-rated — students note "tastes like home food." Menu variety changes periodically. Some complaints about inconsistency. Managed by Mess Committees with student involvement.</span></div>
+    <div class="item"><span class="item-key">Facilities</span><span class="item-val">Wi-Fi in hostel premises, study lounges, common rooms with TV, gym access, recreation areas. 43 permanent + 45 time-scale + 357 outsourcing staff manage hostels. 24×7 security. Health centre nearby.</span></div>
+    <div class="item"><span class="item-key">Maintenance</span><span class="item-val">Some older blocks show wear — infrastructure noted as "old, sometimes poorly maintained." ₹19 crore renovation approved by Telangana govt in 2019 for newer construction. Newer blocks are excellent. Mixed reviews — new blocks good, old blocks average.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★</span><span class="se">★</span> — Best hostel diversity and scale in Hyderabad. Affordable. Food generally good. Older blocks need upkeep; newer blocks are excellent.</span></div>
+  </div>
+  <div class="half jn-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">JNTUH</span><span class="half-badge">3 Boys · 2 Girls Hostels</span></div>
+    <div class="item"><span class="item-key">Hostel count</span><span class="item-val">3 boys hostels (capacity ~800 students) + 2 girls hostels (capacity ~530 students) on the main Kukatpally campus. Gayatri Hostel (girls) newly built. Constituent colleges have their own hostel setups.</span></div>
+    <div class="item"><span class="item-key">Room sharing</span><span class="item-val">Students report 3–4 person rooms typically. Some variation across blocks. "Normal quality classrooms" noted for hostel rooms in general. Newer Gayatri Hostel has better facilities.</span></div>
+    <div class="item"><span class="item-key">Fees</span><span class="item-val">No separate hostel fee — students pay only mess fee (~₹2,500/month). TS EPASS scholarship covers mess fee for eligible students. Outside PG/hostel costs ₹80,000/year approximately.</span></div>
+    <div class="item"><span class="item-key">Mess food</span><span class="item-val">Mixed reviews. One student review: "limited in quantity and pretty average in taste." Another: "canteen has hygienic food." Reports of rooms getting flooded during heavy rain in older Krishna hostel. Food is a common complaint point.</span></div>
+    <div class="item"><span class="item-key">Facilities</span><span class="item-val">Library open till 7:30 PM (students stay there to study). CCTV surveillance. 24×7 security guards. RO drinking water. TV halls, reading rooms. Hostel administration noted as slow-responding.</span></div>
+    <div class="item"><span class="item-key">Maintenance</span><span class="item-val">Older blocks have maintenance issues (rain leakage reported). Newer Gayatri Hostel is well-maintained. TeQiP upgrades improved some blocks. Overall student sentiment: "comfortable but don't expect much."</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★</span><span class="se">★★</span> — Functional but basic. Free mess for scholarship holders is a major plus. Newer blocks good; older blocks below standard. OU wins clearly on hostel quality and scale.</span></div>
+  </div>
+</div>
+
+<!-- SPORTS -->
+<div class="sec-head"><span class="sec-icon">🏏</span><span class="sec-label">Sports Facilities</span><span class="sec-line"></span></div>
+<div class="split">
+  <div class="half ou-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">Osmania University</span><span class="half-badge">Full Sports Complex</span></div>
+    <div class="item"><span class="item-key">Outdoor</span><span class="item-val">Cricket grounds, football fields, athletic tracks, basketball courts, volleyball courts, throwball, kabaddi. Multiple fields spread across the 1,300-acre campus — enough space for simultaneous events.</span></div>
+    <div class="item"><span class="item-key">Indoor</span><span class="item-val">Indoor stadium, badminton courts, table tennis, chess, carrom. Faculty Club (est. 1980) hosts faculty sports and recreational events.</span></div>
+    <div class="item"><span class="item-key">Swimming</span><span class="item-val">Swimming pool available — swimming lessons offered at nominal fee. One of the few Hyderabad public universities with a swimming facility.</span></div>
+    <div class="item"><span class="item-key">Gym</span><span class="item-val">Gymnasium and fitness zones. Yoga and wellness programmes run alongside sports. Health centre nearby for sports injury support.</span></div>
+    <div class="item"><span class="item-key">Competitions</span><span class="item-val">South Zone Inter-University competitions hosted. Strong tradition of inter-department tournaments. Faculty Club events add to campus sporting culture.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★★</span> — Best sports infrastructure of the two. Swimming pool alone is a differentiator. Ample space on the 1,300-acre campus. Strong tradition.</span></div>
+  </div>
+  <div class="half jn-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">JNTUH</span><span class="half-badge">Sports Complex + Indoor Stadium</span></div>
+    <div class="item"><span class="item-key">Outdoor</span><span class="item-val">Cricket ground, football ground, basketball court, volleyball court, kabaddi, kho-kho. Sports complex on campus. Students note "playgrounds are nice." Mecharonza (annual fest) includes sports events.</span></div>
+    <div class="item"><span class="item-key">Indoor</span><span class="item-val">Indoor stadium. Badminton court, volleyball, table tennis. Students note sports events are held once a month — structured but less frequent than at OU.</span></div>
+    <div class="item"><span class="item-key">Swimming</span><span class="item-val">No swimming pool on main Kukatpally campus. Constituent colleges (Sultanpur) may have facilities.</span></div>
+    <div class="item"><span class="item-key">Gym</span><span class="item-val">Gymnasium available on main campus and at constituent colleges. Well-equipped gym at Sultanpur campus noted by students.</span></div>
+    <div class="item"><span class="item-key">Competitions</span><span class="item-val">Inter-university sports. Annual sports day. Students note sports culture is present but not as dominant as academics. Tech events and hackathons dominate student time.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★</span><span class="se">★</span> — Good sports infrastructure but constrained by smaller campus. No swimming pool. Sports culture is secondary to tech at JNTUH.</span></div>
+  </div>
+</div>
+
+<!-- STUDENT ACTIVITIES & FESTS -->
+<div class="sec-head"><span class="sec-icon">🎭</span><span class="sec-label">Student Activities, Fests &amp; Symposiums</span><span class="sec-line"></span></div>
+<div class="split">
+  <div class="half ou-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">Osmania University</span><span class="half-badge">Cultural · Sports · Academic</span></div>
+    <div class="item"><span class="item-key">Major fests</span><span class="item-val">OU Fest (annual cultural extravaganza). UCEOU's Techfest (technical symposium). Department-level symposiums. Bathukamma, Ganesh Chaturthi, Holi, Teej, Vinayaka Chavithi celebrated grandly in hostels.</span></div>
+    <div class="item"><span class="item-key">Cultural events</span><span class="item-val">Light shows on the historic Arts College building during festivals. Deeply rooted in Hyderabadi culture. Active student unions, cultural clubs. Cosmopolitan crowd from arts, science, engineering, law creates diverse event culture.</span></div>
+    <div class="item"><span class="item-key">Technical events</span><span class="item-val">UCE hosts technical paper presentations, hackathons, workshops in collaboration with IEEE, SAE, CSI student chapters. Symposiums draw students from across Telangana and AP.</span></div>
+    <div class="item"><span class="item-key">National seminars</span><span class="item-val">Two large auditoriums (1,050 + 330 seats) host national and international seminars and lectures. OU's UGC-funded research seminars regularly attract distinguished speakers.</span></div>
+    <div class="item"><span class="item-key">Clubs</span><span class="item-val">Literary clubs, debate societies, theatre groups, music groups, sports clubs, NSS, NCC (active unit), YRC (Youth Red Cross), Rotary chapters. Strong soft-skills development.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★★</span> — Richest student activity ecosystem among both campuses. Cultural diversity of OU's multi-discipline campus creates a uniquely vibrant student life unmatched by JNTUH.</span></div>
+  </div>
+  <div class="half jn-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">JNTUH</span><span class="half-badge">Tech · Hackathons · Startup Events</span></div>
+    <div class="item"><span class="item-key">Major fests</span><span class="item-val">Mecharonza (annual 3-day festival at Sultanpur — cultural + technical). JNTUH-CEH runs its own annual tech fest. Students note "3-day fest is very enjoyable — everyone participates."</span></div>
+    <div class="item"><span class="item-key">Cultural events</span><span class="item-val">Traditional Day, Holi, Ganesh Chaturthi, cultural performances. Less multi-disciplinary than OU — primarily engineering students. Good student bonding events but smaller cultural canvas.</span></div>
+    <div class="item"><span class="item-key">Technical events</span><span class="item-val">Hackathons, paper presentations, project expos, coding competitions. JNTUH proximity to HITEC City brings industry professionals for guest lectures and seminars. Smart India Hackathon participants regularly from JNTUH.</span></div>
+    <div class="item"><span class="item-key">National seminars</span><span class="item-val">Two auditoriums. JNTUH hosts faculty development programmes, research workshops. Collaboration with nearby IT and pharma companies brings industry experts to campus regularly.</span></div>
+    <div class="item"><span class="item-key">Clubs</span><span class="item-val">EDC (Entrepreneurship Development Cell), technical clubs, IEEE chapter, CSI chapter, coding clubs (competitive programming), robotics clubs, drama, music. Strong startup culture — Innovation Hub at JNTUH.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★</span><span class="se">★</span> — Strong technical/entrepreneurship culture. Less rich cultural diversity than OU but better industry interface through symposiums and startup activities.</span></div>
+  </div>
+</div>
+
+<!-- CAMPUS LIFE TABLE -->
+<div class="sec-head"><span class="sec-icon">🌿</span><span class="sec-label">Campus Life — Head to Head</span><span class="sec-line"></span></div>
+<div class="cmp-table">
+  <div class="cmp-row">
+    <div class="cparam" style="background:#F0EDE8">Dimension</div>
+    <div class="ch ou-c">Osmania University</div>
+    <div class="ch jn-c">JNTUH</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Overall campus size</div>
+    <div class="ccell">1,300 acres — sprawling, park-like. Heritage colonial buildings. Students often describe walking/cycling across campus as a daily pleasure. Feels like a mini city.</div>
+    <div class="ccell">~89 acres — compact but functional. Well-laid-out blocks. Easier to navigate but very different feel from OU's grandeur.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">Campus beauty</div>
+    <div class="ccell"><span class="st">★★★★★</span> — Iconic. The OU Arts College is one of India's most photographed buildings. Century-old trees, gardens, scenic hilltop library. Frequently voted "most beautiful campus" in Hyderabad.</div>
+    <div class="ccell"><span class="st">★★★</span><span class="se">★★</span> — Clean and functional. Some greenery. No architectural heritage. Practical rather than scenic.</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Student diversity</div>
+    <div class="ccell">Extremely diverse — arts, science, engineering, law, management, pharmacy all on one campus. Students from 80+ countries. 300,000+ student community. Deeply cosmopolitan.</div>
+    <div class="ccell">Primarily engineering students. Some management, pharmacy, science streams. ~20,000 campus students. Less diverse but good quality student body.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">Alumni network</div>
+    <div class="ccell">Exceptional — Prime Minister PV Narasimha Rao, Adobe CEO Shantanu Narayen, numerous IAS/IPS/IFS officers, politicians, industrialists. One of India's most powerful alumni networks.</div>
+    <div class="ccell">Good but primarily engineering/tech alumni. Strong in IT sector in Hyderabad. Less broad than OU but well-connected in tech industry.</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Medical facilities</div>
+    <div class="ccell">Health Centre near B-Hostel. Open Mon–Fri, 9am–12pm &amp; 4–6pm. Chief Medical Officer + specialists (cardiology, gynaecology, ophthalmology, orthopaedic). Each constituent college has its own health centre. Free treatment for all students.</div>
+    <div class="ccell">Dispensary on main campus and at constituent colleges (Sultanpur). Basic medical support. Students with serious needs go to nearby Kukatpally hospitals. Less comprehensive than OU's health setup.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">Bank / ATM</div>
+    <div class="ccell">State Bank of India branch (Arts College ground floor) + SBI extension counters at UCE, examination branch, distance education, CIEFL. Post Office on campus. Very convenient.</div>
+    <div class="ccell">Bank branch with ATM facility on campus. Standard availability. Students use nearby Kukatpally ATMs as well.</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Food / Canteen</div>
+    <div class="ccell">Multiple canteens across faculties. Guest House offers traditional Mughlai cuisine fondly remembered by alumni. Mess food generally well-reviewed ("tastes like home"). Cultural food diversity reflects student diversity.</div>
+    <div class="ccell">Central canteen with "hygienic food." Student reviews mixed — some rate it well, others prefer going outside. Kukatpally's commercial area nearby gives students many outside food options.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">Safety / Security</div>
+    <div class="ccell">24×7 hostel security. Separate security for girls' hostels (stricter entry/exit logging). Overall campus security present but large campus size makes complete monitoring challenging.</div>
+    <div class="ccell">24×7 security guards in hostels. CCTV surveillance. Smaller campus = easier to monitor. Girls hostel security noted as strict. Industry reputation for reasonable campus safety.</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Transport connectivity</div>
+    <div class="ccell">TSRTC buses (MGBS in 8–10 min). Metro (Nampally, red line nearby). Auto/cab easily available. Central location = best connectivity for job seekers during internships.</div>
+    <div class="ccell">JNTU Metro station directly outside campus (red line). Kukatpally bus stand adjacent. Outer Ring Road access to airport (~35 min). Excellent for IT corridor access.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">Campus Wi-Fi</div>
+    <div class="ccell">NKN/BSNL OFC high-speed Wi-Fi campus-wide. Students rate connectivity well. Available in academic blocks, library, hostels, common zones.</div>
+    <div class="ccell">Wi-Fi available in department blocks; not campus-wide per student reviews. Hostel internet available. Some students note inconsistency. Improving with recent upgrades.</div>
+  </div>
+</div>
+
+<!-- RESEARCH FUNDING -->
+<div class="sec-head"><span class="sec-icon">🔬</span><span class="sec-label">Research &amp; Funding</span><span class="sec-line"></span></div>
+<div class="split">
+  <div class="half ou-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">Osmania University</span><span class="half-badge">NIRF #30 University</span></div>
+    <div class="item"><span class="item-key">Funding bodies</span><span class="item-val">DST, UGC, CSIR, DBT, ICAR, ICMR, DRDO, DAE. Research activities funded by various autonomous agencies of the Government of India. Well-diversified research funding.</span></div>
+    <div class="item"><span class="item-key">Research infra</span><span class="item-val">CFRD (Central Facilities for Research &amp; Development): Central Instrumentation Lab, IT &amp; Communication Lab. Serves as a shared research facility across departments.</span></div>
+    <div class="item"><span class="item-key">PhD output</span><span class="item-val">One of the highest PhD-producing universities in South India. Strong research tradition across chemistry, physics, mathematics, engineering, social sciences, literature. Chief Minister Non-NET Fellowship introduced 2025 for full-time PhD scholars.</span></div>
+    <div class="item"><span class="item-key">International</span><span class="item-val">3,700 international students from 80+ nations (as of 2012 data). QS rank: 1201–1400 globally (2025). Active collaborations with international universities.</span></div>
+    <div class="item"><span class="item-key">Publications</span><span class="item-val">NIRF research score strong — consistent publications in Scopus and Web of Science indexed journals. Chemistry, physics, engineering most active research departments.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★★</span> — Stronger research tradition and funding diversity. 107-year legacy of research excellence. More disciplines = more interdisciplinary research potential.</span></div>
+  </div>
+  <div class="half jn-side">
+    <div class="half-head"><span class="half-dot"></span><span class="half-title">JNTUH</span><span class="half-badge">NIRF #94 Engg</span></div>
+    <div class="item"><span class="item-key">Funding bodies</span><span class="item-val">DST, UGC, AICTE, TeQiP (World Bank Technical Education Quality Improvement Programme — major funder), DRDO, industry partnerships. TeQiP funding significantly upgraded labs and research facilities.</span></div>
+    <div class="item"><span class="item-key">Research infra</span><span class="item-val">Research centres in bioinformatics, smart grid technology, IoT, machine learning, pharmaceutical sciences. Industry-proximity to HITEC City facilitates joint research with IT companies.</span></div>
+    <div class="item"><span class="item-key">PhD output</span><span class="item-val">Strong engineering-focused PhD programme. PhD in computer science, electronics, mechanical, pharma, management. MTech + PhD pathway well-established at JNTUH. Less diverse disciplines than OU.</span></div>
+    <div class="item"><span class="item-key">International</span><span class="item-val">Some international collaborations. Students from other states and countries. Less international diversity than OU's 80+ nation student body. Global ranking: NIRF 101–150 band overall.</span></div>
+    <div class="item"><span class="item-key">Publications</span><span class="item-val">Engineering research publications growing. Faculty with strong industry experience publish in IEEE, Elsevier, Springer journals. Innovation Hub encourages patent applications and startup incubation.</span></div>
+    <div class="item"><span class="item-key">Rating</span><span class="item-val"><span class="st">★★★★</span><span class="se">★</span> — Good engineering research funding (especially TeQiP). Less broad than OU but more industry-aligned and practically oriented research.</span></div>
+  </div>
+</div>
+
+<!-- PLACEMENTS -->
+<div class="sec-head"><span class="sec-icon">💼</span><span class="sec-label">Placements — The Data</span><span class="sec-line"></span></div>
+<div class="place-grid">
+  <div class="pcard ou-p">
+    <div class="pcard-label">OU — BTech Median (NIRF 2025)</div>
+    <div class="pcard-val">₹10 LPA</div>
+    <div class="pcard-sub">UCE 4-yr UG. Up from ₹7.5 LPA in 2024. Strong improvement year-on-year.</div>
+  </div>
+  <div class="pcard jn-p">
+    <div class="pcard-label">JNTUHCEH — BTech Median (NIRF 2025)</div>
+    <div class="pcard-val">₹9.42 LPA</div>
+    <div class="pcard-sub">JNTUH College of Engineering UG 4-yr. 867 placed out of 1,301 graduated.</div>
+  </div>
+  <div class="pcard ou-p">
+    <div class="pcard-label">OU — Highest Package (BTech)</div>
+    <div class="pcard-val">₹24 LPA</div>
+    <div class="pcard-sub">By Mathworks. DeShaw, Fanatics, Oracle, Optum, Maruti Suzuki among top recruiters.</div>
+  </div>
+  <div class="pcard jn-p">
+    <div class="pcard-label">JNTUHCEH — Highest Package (BTech)</div>
+    <div class="pcard-val">₹26.35 LPA</div>
+    <div class="pcard-sub">2025 data. Historical best: ₹46 LPA (Amazon, 2022). Amazon, CommVault, Oracle, Invesco.</div>
+  </div>
+</div>
+<div class="cmp-table">
+  <div class="cmp-row">
+    <div class="cparam" style="background:#F0EDE8">Placement Factor</div>
+    <div class="ch ou-c">Osmania University (UCE)</div>
+    <div class="ch jn-c">JNTUH (JNTUHCEH)</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Students placed (2024)</div>
+    <div class="ccell">256 out of 402 BTech students (64%) + 1,069 out of 2,105 PG students placed. NIRF 2025 data.</div>
+    <div class="ccell">867 UG + 706 PG students placed. 867/1,301 UG = 67% placement rate. NIRF 2025 data.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">PG median salary</div>
+    <div class="ccell">₹8 LPA (MTech, NIRF 2025)</div>
+    <div class="ccell">₹9.71 LPA (MTech, NIRF 2025) — slightly higher than OU PG median</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Top recruiters</div>
+    <div class="ccell">DeShaw, Fanatics, Oracle, Optum, Mathworks, Maruti Suzuki, Deloitte, Accenture, FactSet, Impact Guru, Federal Bank, HDFC, Aragen Life Sciences</div>
+    <div class="ccell">CommVault, Amazon, Invesco, Mathworks, Oracle, Ion Trading, TCS Ninja, Honeywell, Pega Systems, Quantum, Emerson, Wipro, Dr Reddy's, Deccan Fine Chemicals</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">Sector distribution</div>
+    <div class="ccell">IT, BFSI, analytics, pharma, manufacturing, consulting, research. More diverse sector spread due to multi-discipline campus.</div>
+    <div class="ccell">Heavily IT/software biased. Non-CSE branches get fewer placements — student reviews confirm CSE/ECE dominate. Pharma, manufacturing, core engineering also represented.</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Placement process</div>
+    <div class="ccell">Human Capital Development Centre (HCDC) + Directorate of Placement Services. Pre-placement aptitude training, mock interviews, GD prep. Campus drives + off-campus referrals.</div>
+    <div class="ccell">Training &amp; Placement Cell. Mock interviews, resume workshops, aptitude tests, soft skills training. Active pre-placement preparation. Industry partnerships bring more companies annually.</div>
+  </div>
+  <div class="cmp-row alt">
+    <div class="cparam">BME-specific (for your daughter)</div>
+    <div class="ccell">UCEOU BME median ₹10 LPA (same as overall UCE). Medtronic, Philips, GE Healthcare, Siemens Healthineers, J&J, Abbott visit. Fewer pure BME recruiters but OU brand opens doors.</div>
+    <div class="ccell">JNTUH does not offer BME at the Kukatpally campus. This parameter does not apply for JNTUH in your daughter's context.</div>
+  </div>
+  <div class="cmp-row">
+    <div class="cparam">Placement verdict</div>
+    <div class="ccell"><span class="st">★★★★★</span> — Higher median salary (₹10 LPA vs ₹9.42 LPA). OU's broader sector spread is advantageous for non-IT branches including BME. HCDC actively organises regular drives.</div>
+    <div class="ccell"><span class="st">★★★★</span><span class="se">★</span> — Slightly lower median but better highest package. IT-dominant placement profile. Better for CSE/ECE; less advantage for niche branches.</div>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+
+<!-- VERDICT -->
+<div class="verdict-section">
+  <div class="vwrap">
+    <h2 class="v-masthead">Final Verdict — Osmania University vs JNTUH</h2>
+    <div class="v-grid">
+      <div class="vcard ou-v">
+        <div class="vc-label">🏆 OU Wins Clearly</div>
+        <div class="vc-val">Campus beauty &amp; heritage · Sports infrastructure (swimming pool!) · Hostel scale (22 hostels, 15 messes) · Mess food quality · Cultural student life richness · Alumni network prestige · Research breadth &amp; tradition · Campus Wi-Fi coverage · International student diversity · Medical facilities</div>
+      </div>
+      <div class="vcard jn-v">
+        <div class="vc-label">🏆 JNTUH Wins Clearly</div>
+        <div class="vc-val">Industry proximity to HITEC City / IT corridor · Startup &amp; innovation culture (EDC, Innovation Hub) · Highest BTech package (₹26.35L vs ₹24L) · Tech-focused events and hackathons · Metro station directly outside campus · PG median salary (₹9.71L vs ₹8L) · TeQiP-funded modern lab upgrades · Hostel security (smaller campus = easier monitoring)</div>
+      </div>
+      <div class="vcard tie">
+        <div class="vc-label">⚖️ Broadly Equal</div>
+        <div class="vc-val">BTech median placement salary (₹10L vs ₹9.42L — very close) · Overall NAAC grade (both A+) · Classroom digital infrastructure · Library e-resources (both DELNET, e-ShodhSindhu) · Govt university fees affordability · NIRF ranking trajectory (both improving) · Annual fests &amp; symposium culture · Security arrangements</div>
+      </div>
+    </div>
+    <div class="final-verdict">
+      <h3 class="fv-title">Bottom Line — For Your Daughter's BE BME at UCE Osmania</h3>
+      <div class="fv-row">
+        <div class="fv-key">Right choice for her</div>
+        <div class="fv-val"><span class="pill p-ou">UCE Osmania</span> is clearly the right campus for BE Biomedical Engineering — JNTUH does not offer BME at its main Kukatpally campus. This comparison reassures you that UCE Osmania is not just the only option for BME — it is genuinely one of the best campuses in Hyderabad.</div>
+      </div>
+      <div class="fv-row">
+        <div class="fv-key">Campus experience</div>
+        <div class="fv-val">Your daughter will study on one of India's most beautiful and historic university campuses. The 1,300-acre green campus, heritage architecture, diverse student community, swimming pool, extensive hostel system, and rich cultural life make OU a genuinely memorable place to spend four years. <span class="note">For a student relocating from the USA, OU's campus richness makes the transition significantly more welcoming.</span></div>
+      </div>
+      <div class="fv-row">
+        <div class="fv-key">Academic quality</div>
+        <div class="fv-val">Osmania University is ranked 30th among universities and 53rd overall in NIRF 2025, with UCE's engineering ranking in the top bracket. The UCE BME programme has strong lab infrastructure, hospital internship tie-ups (Apollo, Yashoda, NIMS), and a solid placement record with a median of ₹10 LPA for BTech graduates.</div>
+      </div>
+      <div class="fv-row">
+        <div class="fv-key">What OU lacks vs JNTUH</div>
+        <div class="fv-val">JNTUH's proximity to HITEC City and its stronger startup/innovation culture would have been better for a CSE student. For BME, this matters less — Medtronic, GE Healthcare, and Philips aren't in HITEC City anyway. The industry interface she needs (healthcare and medical device companies) is accessible from OU's central Hyderabad location. <span class="note">The only genuine gap is that JNTUH's hostel maintenance is arguably more consistent for newer blocks. OU's hostels are larger-scale but mixed in quality across old and new blocks.</span></div>
+      </div>
+      <div class="fv-row" style="border-bottom:none">
+        <div class="fv-key">Our overall verdict</div>
+        <div class="fv-val"><span class="pill p-ou">UCE Osmania</span> for heritage, campus beauty, student life, research tradition, sports, and placement quality for non-IT branches including BME. <span class="pill p-jn">JNTUH</span> for startup culture, IT placement dominance, and HITEC City industry proximity if she were doing CSE/ECE. For BE Biomedical Engineering specifically, UCE Osmania is the clear winner — and it happens to be the most beautiful and storied campus in Hyderabad to boot.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

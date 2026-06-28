@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MassMutual EA Interview Prep — Nag Arvind Gudiseva</title>
+<style>
+  :root {
+    --navy: #1F3864;
+    --steel: #2E5F8A;
+    --red-bg: #FDECEA; --red-fg: #9B2335;
+    --amber-bg: #FEF4E4; --amber-fg: #884D00;
+    --green-bg: #EAF4EE; --green-fg: #1A6B3A;
+    --blue-bg: #E8F2FC; --blue-fg: #1A4F82;
+    --purple-bg: #EEEDFE; --purple-fg: #3C3489;
+    --gray-bg: #F5F5F5; --gray-fg: #555;
+    --border: #E0E0E0;
+    --text: #1A1A1A;
+    --muted: #666;
+    --surface: #FAFAFA;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; color: var(--text); background: #F0F2F5; line-height: 1.5; }
+  .page { max-width: 1300px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  /* ── HEADER ── */
+  .header { background: var(--navy); color: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .header-left h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .header-left p { font-size: 13px; opacity: 0.75; }
+  .header-right { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat-pill { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 99px; padding: 6px 14px; text-align: center; }
+  .stat-pill .val { font-size: 18px; font-weight: 600; display: block; }
+  .stat-pill .lbl { font-size: 10px; opacity: 0.75; display: block; }
+
+  /* ── LEGEND ── */
+  .legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .legend span { font-size: 11px; color: var(--muted); margin-right: 4px; }
+  .leg-pill { font-size: 11px; padding: 3px 10px; border-radius: 99px; font-weight: 500; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .filter-bar label { font-size: 11px; color: var(--muted); margin-right: 4px; }
+  .fbtn { padding: 5px 12px; border-radius: 99px; border: 1px solid var(--border); font-size: 12px; cursor: pointer; background: #fff; color: var(--muted); transition: all .12s; font-family: inherit; }
+  .fbtn:hover { border-color: var(--steel); color: var(--steel); }
+  .fbtn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  /* ── PROGRESS ── */
+  .progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .prog-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .prog-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .prog-bar-bg { height: 6px; background: #E8ECF0; border-radius: 99px; overflow: hidden; margin-bottom: 4px; }
+  .prog-bar-fill { height: 6px; border-radius: 99px; }
+  .prog-pct { font-size: 11px; color: var(--muted); }
+
+  /* ── TABLE ── */
+  .tbl-wrap { background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .tbl-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 900px; }
+  thead th { background: #F0F2F5; color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; position: sticky; top: 0; z-index: 5; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+  tbody tr:hover { background: #F7F9FC; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr.hidden { display: none; }
+  td { padding: 11px 12px; vertical-align: top; }
+
+  /* section divider rows */
+  .section-row td { background: #E8ECF2; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--navy); padding: 6px 12px; }
+
+  /* column widths */
+  .col-day   { width: 72px; }
+  .col-mode  { width: 90px; }
+  .col-pri   { width: 36px; }
+  .col-ready { width: 82px; }
+  .col-topic { width: 170px; }
+  .col-study { width: 240px; }
+  .col-anchor{ width: 190px; }
+  .col-story { width: 155px; }
+  .col-act   { width: 90px; }
+
+  /* cells */
+  .day-pill  { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+  .mode-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+  .pri-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 5px; color: #fff; }
+  .p1 { background: #C0392B; }
+  .p2 { background: #D68910; }
+  .p3 { background: #27AE60; }
+
+  .bar-bg { width: 100%; height: 5px; background: #E8ECF0; border-radius: 99px; margin-top: 3px; }
+  .bar-fill { height: 5px; border-radius: 99px; }
+  .pct-label { font-size: 11px; font-weight: 600; }
+
+  .topic-title { font-weight: 600; font-size: 13px; color: var(--navy); margin-bottom: 3px; }
+  .topic-body  { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+  .story-point { font-size: 11px; color: var(--muted); padding: 3px 0; border-bottom: 1px dashed #E8ECF0; line-height: 1.4; }
+  .story-point:last-child { border-bottom: none; }
+  .story-label { font-weight: 600; color: var(--text); display: block; font-size: 11px; }
+
+  .act-link { display: inline-block; font-size: 11px; padding: 4px 9px; border-radius: 6px; background: var(--blue-bg); color: var(--blue-fg); border: 1px solid #C5DCF5; text-decoration: none; cursor: pointer; font-weight: 500; transition: background .1s; font-family: inherit; }
+  .act-link:hover { background: #D0E7F8; }
+
+  /* ── FOOTER ── */
+  .footer { text-align: center; margin-top: 20px; font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>MassMutual — Enterprise Architect (Application)</h1>
+      <p>Interview Preparation Master Table &nbsp;·&nbsp; Nag Arvind Gudiseva &nbsp;·&nbsp; 5-Day Sprint Plan</p>
+    </div>
+    <div class="header-right">
+      <div class="stat-pill"><span class="val">20</span><span class="lbl">Topics</span></div>
+      <div class="stat-pill"><span class="val">5</span><span class="lbl">Days</span></div>
+      <div class="stat-pill"><span class="val">P1&ndash;P3</span><span class="lbl">Priorities</span></div>
+    </div>
+  </div>
+
+  <!-- READINESS OVERVIEW -->
+  <div class="progress-grid">
+    <div class="prog-card">
+      <div class="prog-label">Event-driven architecture (Kafka, NiFi)</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:90%;background:#1A6B3A"></div></div>
+      <div class="prog-pct">90% — strong, your deepest skill</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">API-first &amp; security architecture</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:85%;background:#1A6B3A"></div></div>
+      <div class="prog-pct">85% — ready, sharpen JD language</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Financial services domain</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:80%;background:#1A6B3A"></div></div>
+      <div class="prog-pct">80% — Point72 &amp; NYSE are premium anchors</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">AI-first / Agentic AI architecture</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:70%;background:#1A6B3A"></div></div>
+      <div class="prog-pct">70% — n8n work is differentiating</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Cloud platforms &amp; cost rationalization</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:65%;background:#884D00"></div></div>
+      <div class="prog-pct">65% — bridge via AWS EMR/S3 experience</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Architecture design patterns (named)</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:55%;background:#884D00"></div></div>
+      <div class="prog-pct">55% — applied intuitively, needs naming</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">TOGAF / Archimate methodology</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:15%;background:#9B2335"></div></div>
+      <div class="prog-pct">15% — biggest gap, priority Day 1</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Capability mapping &amp; business architecture</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:25%;background:#9B2335"></div></div>
+      <div class="prog-pct">25% — learn concept + build 1 example</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Insurance / Wealth Management domain</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:25%;background:#9B2335"></div></div>
+      <div class="prog-pct">25% — Nationwide Insurance is your anchor</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Executive storytelling &amp; EA presence</div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:40%;background:#884D00"></div></div>
+      <div class="prog-pct">40% — flip technical-first instinct</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span>Mode:</span>
+    <span class="leg-pill" style="background:var(--red-bg);color:var(--red-fg)">Must learn</span>
+    <span class="leg-pill" style="background:var(--amber-bg);color:var(--amber-fg)">Brush up</span>
+    <span class="leg-pill" style="background:var(--green-bg);color:var(--green-fg)">Story prep</span>
+    <span class="leg-pill" style="background:var(--blue-bg);color:var(--blue-fg)">Good to know</span>
+    &nbsp;
+    <span>Priority:</span>
+    <span class="leg-pill" style="background:#FADBD8;color:#922B21">P1 Critical</span>
+    <span class="leg-pill" style="background:#FCF3CF;color:#7D6608">P2 Important</span>
+    <span class="leg-pill" style="background:#D5F5E3;color:#1D6A39">P3 Nice to have</span>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <label>Filter by:</label>
+    <button class="fbtn active" onclick="filter('all',this)">All 20 topics</button>
+    <button class="fbtn" onclick="filter('Day 1',this)">Day 1</button>
+    <button class="fbtn" onclick="filter('Day 2',this)">Day 2</button>
+    <button class="fbtn" onclick="filter('Day 3',this)">Day 3</button>
+    <button class="fbtn" onclick="filter('Day 4',this)">Day 4</button>
+    <button class="fbtn" onclick="filter('Day 5',this)">Day 5</button>
+    <button class="fbtn" onclick="filter('LEARN',this)">Must learn</button>
+    <button class="fbtn" onclick="filter('BRUSHUP',this)">Brush up</button>
+    <button class="fbtn" onclick="filter('STORY',this)">Story prep</button>
+    <button class="fbtn" onclick="filter('P1',this)">P1 only</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="tbl-wrap">
+  <div class="tbl-scroll">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th class="col-day">Day</th>
+        <th class="col-mode">Mode</th>
+        <th class="col-pri">Pri</th>
+        <th class="col-ready">Readiness</th>
+        <th class="col-topic">Topic</th>
+        <th class="col-study">What to study / do</th>
+        <th class="col-anchor">Your experience anchor</th>
+        <th class="col-story">JD connection</th>
+        <th class="col-act">Ask Claude</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  </div>
+  </div>
+
+  <div class="footer">Generated for Nag Arvind Gudiseva &nbsp;&middot;&nbsp; MassMutual EA Application Interview Prep &nbsp;&middot;&nbsp; May&ndash;June 2026</div>
+</div>
+
+<script>
+const dayPillStyle = {
+  "Day 1":["#FDECEA","#9B2335"],
+  "Day 2":["#FEF4E4","#884D00"],
+  "Day 3":["#EAF4EE","#1A6B3A"],
+  "Day 4":["#E8F2FC","#1A4F82"],
+  "Day 5":["#EEEDFE","#3C3489"],
+};
+const modePillStyle = {
+  "LEARN":  ["#FDECEA","#9B2335","Must learn"],
+  "BRUSHUP":["#FEF4E4","#884D00","Brush up"],
+  "STORY":  ["#EAF4EE","#1A6B3A","Story prep"],
+  "GTK":    ["#E8F2FC","#1A4F82","Good to know"],
+};
+const barColor = r => r >= 70 ? "#1A6B3A" : r >= 45 ? "#884D00" : "#9B2335";
+
+const data = [
+  {day:"Day 1",mode:"LEARN",pri:"P1",readiness:15,
+   topic:"TOGAF ADM phases",
+   study:"Learn all 8 ADM phases: Preliminary, Architecture Vision, Business Architecture, Information Systems, Technology, Opportunities & Solutions, Migration Planning, Implementation Governance. Know what deliverable each phase produces.",
+   anchor:"Map your Point72 platform design onto phases — Preliminary = security baseline review; Vision = ELK + Kafka strategy; Technology = Kerberos and NiFi selection decisions.",
+   jd:"'Demonstrated experience using Architecture Methodology (TOGAF, Archimate)' — explicitly listed as ideal qualification.",
+   btn:"Teach me TOGAF ADM phases and help me map my Point72 ELK and Kafka architecture work onto each phase"},
+
+  {day:"Day 1",mode:"LEARN",pri:"P1",readiness:20,
+   topic:"Archimate 3 layers",
+   study:"Business layer (actors, processes, roles), Application layer (apps, services, interfaces), Technology layer (infrastructure, platforms, networks). Learn the key relationships: Realisation, Serving, Assignment, Triggering. Sketch one diagram.",
+   anchor:"NYSE Stock Loan pipeline: Business = trade request/response process; Application = Pentaho + NiFi pipeline; Technology = SQL Server + Kafka cluster.",
+   jd:"Archimate is the diagram standard used alongside TOGAF — you need vocabulary to use it in whiteboard discussions.",
+   btn:"Explain Archimate's three layers with a capital markets example and help me sketch one Archimate-style diagram from my NYSE Stock Loan work"},
+
+  {day:"Day 1",mode:"LEARN",pri:"P1",readiness:25,
+   topic:"Capability mapping",
+   study:"A business capability map groups WHAT the business does (not how) in a 2-level hierarchy. Learn the heat map overlay (red/amber/green per capability for technology health). Practice: draw one for NYSE Stock Loan — capabilities: Trade Initiation, Allocation, Confirmation, Settlement, Audit & Reporting.",
+   anchor:"Stock Loan platform covers all 5 capabilities above. Your ETL pipelines, NiFi flows, and SQL Server stored procedures directly support each one.",
+   jd:"'Experience in Capability mapping and business architecture concepts' — ideal qualification. This differentiates EA candidates from pure technical architects.",
+   btn:"Help me build a capability map for the NYSE Centrally Aggregated Stock Loan platform and coach me on how to present it in an EA interview"},
+
+  {day:"Day 1",mode:"BRUSHUP",pri:"P2",readiness:55,
+   topic:"Named design patterns",
+   study:"Name the patterns you have already applied: Adapter (Phoenix-to-SQL Server via NiFi MERGE), Event Sourcing (Kafka audit trail), CQRS (separate read/write paths in Stock Loan), Saga (12-step pipeline with compensation), API Gateway (NiFi as integration front), Strangler Fig (Pentaho-to-Scala re-architecture at Cisco).",
+   anchor:"You have used ALL of these in production. The work is done — you just need to call them by name when answering questions.",
+   jd:"'Strong experience in Architecture and Design patterns' — core requirement. Interviewers will ask you to name and explain patterns.",
+   btn:"Map my real architecture work at Point72 and NYSE onto named design patterns including Adapter, Saga, Event Sourcing, and Strangler Fig with explanations I can use in an interview"},
+
+  {day:"Day 2",mode:"LEARN",pri:"P1",readiness:30,
+   topic:"LLM integration patterns",
+   study:"Learn: RAG (Retrieval-Augmented Generation) — vector DB stores embeddings, LLM queries against them for grounded answers. LLM Gateway pattern — single API surface routing to multiple models with cost and rate controls. Prompt orchestration layer — sits between app and LLM, manages context, memory, and tool use. How to connect these to existing API and data platforms.",
+   anchor:"Your n8n Agentic AI workflows are already an orchestration layer. Frame them as a lightweight LLM gateway prototype — connecting agents to APIs and data sources.",
+   jd:"'Design and govern AI-ready application architecture patterns integrating LLMs, APIs, and data platforms' — core mandate of this role.",
+   btn:"Explain RAG, LLM gateway patterns, and prompt orchestration so I can speak confidently about AI-ready application architecture in an EA interview at MassMutual"},
+
+  {day:"Day 2",mode:"LEARN",pri:"P1",readiness:35,
+   topic:"GenAI domain roadmap embedding",
+   study:"Framework: 1) Identify high-value low-risk use cases in the domain (e.g. client document summarization, advisor Q&A bot). 2) Define AI-ready architecture — API gateway in front of LLMs, RAG data platform feeding grounded context. 3) Governance guardrails — cost per query, latency SLAs, data privacy and PII handling. 4) Value targets and metrics — how will you know it worked?",
+   anchor:"Your n8n initiative is exactly this — you identified a gap (manual ETL orchestration), designed an AI agent solution, prototyped it, and published it for reuse. That is an AI-first roadmap in miniature.",
+   jd:"'Drive AI-first application architecture by embedding GenAI and Agentic AI capabilities into domain roadmaps aligned to enterprise AI strategy and value targets' — verbatim JD. Most important question to prepare.",
+   btn:"Help me build a complete structured interview answer for: how would you approach embedding GenAI and Agentic AI into the MassMutual Wealth Management domain roadmap, using my n8n Agentic AI experience as a concrete example"},
+
+  {day:"Day 2",mode:"LEARN",pri:"P2",readiness:25,
+   topic:"Wealth Management domain",
+   study:"Key concepts: advisory accounts (fiduciary duty) vs brokerage (suitability), portfolio management systems (PMS), client onboarding KYC/AML, custodian integrations (DTC, DTCC), financial advisor workflow. Typical application stack: CRM + PMS + Order Management + Custodian API + Client Portal + Compliance Monitoring.",
+   anchor:"Wipro delivered for Nationwide Insurance — this is your honest insurance domain anchor. Point72 covers portfolio and trade concepts that transfer directly to wealth management.",
+   jd:"'Preferred job experience includes some knowledge of Insurance and Wealth Management' — preferred, not required. Honest domain adjacency plus your capital markets depth is more than sufficient.",
+   btn:"Give me a Wealth Management and Insurance domain primer for an Enterprise Architect interview, connecting to my Nationwide Insurance work at Wipro and my capital markets experience at Point72"},
+
+  {day:"Day 2",mode:"BRUSHUP",pri:"P2",readiness:65,
+   topic:"Kafka vs AWS Kinesis",
+   study:"Kinesis: shards (vs Kafka partitions), Kinesis Client Library vs consumer groups, 24h to 365d retention tiers, tight AWS integration (Lambda triggers, S3 direct). Kafka: more configuration control, higher throughput ceiling, larger ecosystem. Core concepts transfer: ordering within shard/partition, at-least-once vs exactly-once semantics, consumer group / KCL scaling.",
+   anchor:"Deep Kafka expertise including AVRO, Hortonworks Schema Registry, and custom NiFi processors reading Kafka topics. Say: 'I have deep Kafka experience and the partitioning, consumer group, and ordering concepts translate directly to Kinesis shards and KCL.'",
+   jd:"'Experience in Event Driven Architecture — Kafka, Kinesis, or similar tech' — Kinesis is named alongside Kafka as an acceptable equivalent.",
+   btn:"Explain the key differences between Apache Kafka and AWS Kinesis so I can speak confidently about both in an interview, given my deep hands-on Kafka background"},
+
+  {day:"Day 3",mode:"BRUSHUP",pri:"P2",readiness:50,
+   topic:"Domain Driven Design service boundaries",
+   study:"Bounded context: a domain with its own model, language, and data store. Aggregate root: single entry point for a cluster of related objects. Context map: how bounded contexts integrate — upstream/downstream, shared kernel, anti-corruption layer. Ubiquitous language: consistent vocabulary within a bounded context.",
+   anchor:"Your Phoenix-to-SQL Server migration used an anti-corruption layer via NiFi MERGE. Your 12-step Stock Loan pipeline has natural bounded contexts: Trade Initiation, Allocation, Settlement, and Audit.",
+   jd:"'Developed acumen in Domain Driven Design' — explicitly listed ideal qualification.",
+   btn:"Explain Domain Driven Design bounded contexts, aggregate roots, and context maps, and help me map them onto my Stock Loan pipeline and Point72 architecture decisions"},
+
+  {day:"Day 3",mode:"BRUSHUP",pri:"P2",readiness:60,
+   topic:"AWS cost rationalization",
+   study:"Reserved Instances vs Savings Plans vs Spot Instances. Right-sizing EMR clusters (instance families, autoscaling). S3 storage tiers: Standard, Intelligent-Tiering, Glacier Instant, Glacier Deep Archive. Architecture decisions affecting TCO: serverless vs provisioned, managed service vs self-managed, data transfer costs between regions/services.",
+   anchor:"You ran AWS EMR for MapReduce and Hive, and AWS S3 for data lakes at CSS Corp. Frame cluster sizing and storage decisions you made as cost rationalization trade-offs.",
+   jd:"'Understanding of cost rationalization' — explicit requirement alongside Cloud platform experience.",
+   btn:"Give me AWS cost rationalization talking points for an Enterprise Architect interview, connecting to my experience with AWS EMR clusters and S3 data lake architecture"},
+
+  {day:"Day 3",mode:"BRUSHUP",pri:"P2",readiness:70,
+   topic:"Microservices operational trade-offs",
+   study:"Benefits: independent deployment, team autonomy, technology polyglot, fault isolation. Costs: distributed tracing (Jaeger, Zipkin), service mesh overhead (Istio, Linkerd), eventual consistency management, operational complexity. When NOT to use microservices: small teams, tightly coupled data models, early-stage systems. Strangler Fig pattern for gradual migration.",
+   anchor:"Your custom NiFi processors are independently deployable components — this is a practical microservices analogy. ELK Stack = the observability layer for your distributed system. Cisco re-architecture from Pentaho to Scala = Strangler Fig in action.",
+   jd:"'Strong experience with event streaming design and micro-service based architectures' — core requirement.",
+   btn:"Quiz me on microservices trade-offs including service mesh, distributed tracing, and the strangler fig pattern, and help me frame my NiFi processor and Cisco re-architecture experience in this language"},
+
+  {day:"Day 3",mode:"STORY",pri:"P1",readiness:80,
+   topic:"50X ETL — executive narrative",
+   study:"Reframe in BLUF (Bottom Line Up Front) format for an executive audience. Lead: 'We cut trade batch processing time by 50X — from hours to minutes.' Then: what the business problem was (blocked Portfolio Manager workflows), the options you evaluated, the risk of each, why you chose stored procedures, and the measurable business outcome. Deliver in under 90 seconds.",
+   anchor:"NYSE Centrally Aggregated Stock Loan Platform. This is your single strongest quantified architecture achievement. Practise out loud until it flows naturally.",
+   jd:"'Provide recommendations on system options, risks, cost/benefit analysis' and 'Strong decision-making capabilities' — this story proves both.",
+   btn:"Help me write and rehearse a 90-second executive-level narrative for my 50X ETL performance improvement on the NYSE Stock Loan platform, structured as an architecture decision story for a MassMutual EA interview"},
+
+  {day:"Day 3",mode:"STORY",pri:"P1",readiness:80,
+   topic:"ELK security — governance story",
+   study:"Frame as an architecture governance decision, not a technical implementation. Structure: identified risk (uncontrolled cross-department data access at a hedge fund), designed the solution (ELK role-based access control at index and field level), defined a reusable standard (data isolation pattern for regulated environments), measured outcome (compliance-grade enforcement across trading desks).",
+   anchor:"Point72 Asset Management. Directly maps to the EA mandate: 'Specification and publication of standards around application design and software engineering best practices.'",
+   jd:"'Specification and publication of standards' and 'partner with senior leaders to develop Technology strategies' — this story demonstrates both in a financial services context.",
+   btn:"Help me frame my Point72 ELK Stack security architecture as an enterprise architecture governance story, including how I identified the risk, designed the standard, and measured the outcome"},
+
+  {day:"Day 4",mode:"STORY",pri:"P1",readiness:75,
+   topic:"Agentic AI initiative — AI-first story",
+   study:"Frame as a self-directed strategic architecture initiative. Structure: identified the gap (ETL pipelines require constant manual monitoring and intervention), designed the vision (AI agents as autonomous orchestrators with self-healing capability), built and prototyped n8n workflows, published to GitHub as a reusable reference architecture. Connect to MassMutual's AI-first mandate explicitly.",
+   anchor:"Your n8n workflows on GitHub are the proof-of-work artefact. This is the story that directly answers the most important JD requirement about AI-first architecture.",
+   jd:"'Drive AI-first application architecture by embedding GenAI and Agentic AI capabilities into domain roadmaps' — verbatim. This story IS the answer to the most important JD requirement.",
+   btn:"Help me build a structured interview story for my Agentic AI n8n initiative framed as a strategic AI-first architecture vision that directly addresses the MassMutual EA role mandate"},
+
+  {day:"Day 4",mode:"STORY",pri:"P2",readiness:70,
+   topic:"Informatica proactive initiative",
+   study:"Frame as proactive enterprise architecture thinking: no mandate existed, you identified a future migration risk, designed a mitigation strategy, produced a reusable artefact (ETL scenarios on GitHub), conducted an internal audit to close gaps. This demonstrates 'stay abreast of emerging technologies' and 'provide recommendations on system options, risks.'",
+   anchor:"Tudor Investment Corporation cloud migration readiness. GitHub repo is your public proof-of-work artefact showing self-direction without being asked.",
+   jd:"'Stay abreast of emerging technologies' and 'Track record of designing architectural reference material' — both demonstrated by this initiative.",
+   btn:"Help me frame my proactive Informatica cloud migration readiness work for Tudor Investment Corporation as a strategic enterprise architecture story for the MassMutual interview"},
+
+  {day:"Day 4",mode:"STORY",pri:"P2",readiness:65,
+   topic:"Mock interview — full 45 min",
+   study:"Run a complete mock: Tell me about yourself (2 min) → GenAI roadmap question → TOGAF/Archimate experience → Conflict or influence scenario → Cost-benefit decision example → System design question (design a Wealth Management data platform) → Your 3 questions to ask them. Record yourself or have someone listen.",
+   anchor:"All 5 prepared stories + TOGAF vocabulary + AI-first framing + Wealth Management domain context. This session converts study into delivery confidence.",
+   jd:"'Excellent communication, presentation, influencing and reasoning skills' — tested in every moment of the interview, not just one question.",
+   btn:"Run a full mock interview with me for the MassMutual Enterprise Architect Application role — ask me all likely questions including technical, behavioral, and system design, and give me specific feedback on each answer"},
+
+  {day:"Day 4",mode:"BRUSHUP",pri:"P2",readiness:55,
+   topic:"Executive storytelling technique",
+   study:"BLUF: Bottom Line Up Front. Lead with the outcome, then explain how. Practice cutting the technical preamble from your opening sentence. Target: any answer should make business sense to a non-technical executive by sentence 3. For each story: Outcome first → Context second → Options evaluated → Decision rationale → Business impact. Never lead with 'So what happened was...'",
+   anchor:"Your natural instinct is technical-first (you're an engineer at heart). For EA interviews, deliberately flip the order. Practise by recording yourself and listening back.",
+   jd:"'Executive presence and understanding which storytelling tools will convey the appropriate message' — explicitly stated as a requirement in the JD Summary section.",
+   btn:"Coach me on executive storytelling technique for an Enterprise Architect interview using BLUF structure, with my 50X ETL and ELK security stories as practice material — give me feedback on my phrasing"},
+
+  {day:"Day 5",mode:"LEARN",pri:"P2",readiness:40,
+   topic:"Application Portfolio Management",
+   study:"APM = cataloguing, rationalising, and managing all applications in an enterprise. TIME model: Tolerate (keep for now, low investment), Invest (strategic, grow), Migrate (move to better platform), Eliminate (retire). Application heat maps show technology health, business value, and technical debt per app. Lifecycle stages: new, active, maintain, sunset.",
+   anchor:"You managed 25 mission-critical applications at Tesco — this is directly APM experience. Frame it using TIME model language: which were Tolerate, which were Invest, which were Migrate.",
+   jd:"'Manage a domain of the MassMutual Application Portfolio Management data for quality' — explicitly listed as a core responsibility of this role.",
+   btn:"Explain Application Portfolio Management concepts including the TIME model and how to present a heat map, then help me reframe my Tesco experience managing 25 applications in APM vocabulary"},
+
+  {day:"Day 5",mode:"BRUSHUP",pri:"P3",readiness:55,
+   topic:"MassMutual business context",
+   study:"MassMutual: mutual life insurer, founded 1851, Springfield MA, ~$300B AUM. Not publicly traded — customer-owned mutual company, which shapes long-term investment horizon. Key lines: life insurance, disability, long-term care, annuities, wealth management (through subsidiaries). Wealth Management domain = specific domain of this role. Recent strategic theme: digital transformation, cloud adoption.",
+   anchor:"Use in personalisation: 'In a mutual company like MassMutual where long-term client relationships are the core value proposition, the data platform and AI roadmap have to be built for trust and permanence, not just speed.' This signals cultural fit.",
+   jd:"'Understanding of the impact of IT on business results' — answering in MassMutual's specific context signals genuine preparation and business acumen.",
+   btn:"Give me a business briefing on MassMutual, their Wealth Management strategy, and how to personalise my interview answers to their mutual company culture and strategic priorities"},
+
+  {day:"Day 5",mode:"STORY",pri:"P2",readiness:60,
+   topic:"3 questions to ask them",
+   study:"Prepare exactly 3 questions. Q1: 'How is the Application Architecture domain structured relative to Business, Infrastructure, and Security EA — and how much cross-domain collaboration happens day to day?' Q2: 'What does success look like in the first 90 days for this role, especially regarding the AI-first roadmap mandate?' Q3: 'How mature is MassMutual's current adoption of TOGAF and Archimate — is this an established practice or still being built?'",
+   anchor:"These questions signal seniority, genuine curiosity, and that you have read the JD carefully. The TOGAF maturity question is particularly smart — if they say 'early stage' it removes the gap concern entirely.",
+   jd:"EA role at MassMutual means you are a strategic partner, not an order-taker. Asking sharp questions at the end demonstrates the EA mindset they are hiring for.",
+   btn:"Help me refine and rehearse my three questions to ask the MassMutual interviewer, and advise on tone and timing for when to ask them"},
+
+  {day:"Day 5",mode:"STORY",pri:"P1",readiness:70,
+   topic:"TOGAF gap — honest answer",
+   study:"Prepare a confident, honest answer to 'What architecture methodology have you used?': 'My formal exposure to TOGAF and Archimate is recent and deliberate — I have been building fluency specifically for this kind of EA role. However, the underlying discipline — documenting current and target state, defining building blocks, planning migration, governance — is exactly what I have done in practice at Point72 and on the NYSE platform. I would pair that hands-on delivery track record with the formal TOGAF structure quickly.' This answer is far stronger than overclaiming.",
+   anchor:"Point72 (current + target state ELK architecture), NYSE Stock Loan (phased ETL migration), Informatica audit (gap analysis and remediation) — all map to TOGAF ADM phases even if not named as such.",
+   jd:"'Demonstrated experience using Architecture Methodology (TOGAF, Archimate)' — ideal qualification. Honesty here builds more trust than a rehearsed claim that gets exposed in follow-up.",
+   btn:"Help me craft and rehearse a confident, honest answer to 'What architecture methodology have you used?' that acknowledges my TOGAF gap while highlighting the underlying EA discipline I have demonstrated at Point72 and NYSE"},
+];
+
+const tbody = document.getElementById('tbody');
+let currentDay = null;
+data.forEach(r => {
+  if(r.day !== currentDay) {
+    currentDay = r.day;
+    const sr = document.createElement('tr');
+    sr.className = 'section-row';
+    sr.dataset.day = r.day;
+    sr.dataset.mode = 'SECTION';
+    sr.innerHTML = `<td colspan="9">${r.day} — ${
+      r.day==='Day 1'?'TOGAF, Archimate &amp; capability mapping foundations':
+      r.day==='Day 2'?'AI-first architecture, GenAI patterns &amp; Wealth Management domain':
+      r.day==='Day 3'?'Technical brush-up, DDD, patterns &amp; first story prep':
+      r.day==='Day 4'?'Story building, mock interview &amp; executive delivery':
+      'Final review, APM, business context &amp; interview-day prep'
+    }</td>`;
+    tbody.appendChild(sr);
+  }
+
+  const [dpBg,dpFg] = dayPillStyle[r.day] || ["#eee","#333"];
+  const [mpBg,mpFg,mpLbl] = modePillStyle[r.mode] || ["#eee","#333","?"];
+  const rc = barColor(r.readiness);
+  const priClass = r.pri === 'P1' ? 'p1' : r.pri === 'P2' ? 'p2' : 'p3';
+
+  const tr = document.createElement('tr');
+  tr.dataset.day = r.day;
+  tr.dataset.mode = r.mode;
+  tr.dataset.pri = r.pri;
+  tr.innerHTML = `
+    <td class="col-day"><span class="day-pill" style="background:${dpBg};color:${dpFg}">${r.day}</span></td>
+    <td class="col-mode"><span class="mode-pill" style="background:${mpBg};color:${mpFg}">${mpLbl}</span></td>
+    <td class="col-pri"><span class="pri-badge ${priClass}">${r.pri}</span></td>
+    <td class="col-ready">
+      <div class="pct-label" style="color:${rc}">${r.readiness}%</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${r.readiness}%;background:${rc}"></div></div>
+    </td>
+    <td class="col-topic"><div class="topic-title">${r.topic}</div></td>
+    <td class="col-study"><div class="topic-body">${r.study}</div></td>
+    <td class="col-anchor"><div class="topic-body">${r.anchor}</div></td>
+    <td class="col-story"><div class="topic-body" style="font-size:11px">${r.jd}</div></td>
+    <td class="col-act"><button class="act-link" onclick="handleAsk('${encodeURIComponent(r.btn)}')">Ask Claude ↗</button></td>`;
+  tbody.appendChild(tr);
+});
+
+function handleAsk(encodedQ) {
+  const q = decodeURIComponent(encodedQ);
+  const msg = encodeURIComponent(q);
+  window.open('https://claude.ai/new?q=' + msg, '_blank');
+}
+
+function filter(key, el) {
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#main-table tbody tr').forEach(tr => {
+    if(key === 'all') { tr.classList.remove('hidden'); return; }
+    const isSection = tr.classList.contains('section-row');
+    if(isSection) { tr.classList.remove('hidden'); return; }
+    const matchDay  = tr.dataset.day  === key;
+    const matchMode = tr.dataset.mode === key;
+    const matchPri  = tr.dataset.pri  === key;
+    const match = matchDay || matchMode || matchPri;
+    tr.classList.toggle('hidden', !match);
+  });
+}
+</script>
+</body>
+</html>

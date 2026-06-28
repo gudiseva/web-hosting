@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBA Distance Education: Pondicherry University DDE vs IGNOU</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pu:#5C3D0A; --pu-lt:#FBF5EC; --pu-md:#C4843A; --pu-acc:#E8A85A; --pu-border:#E8C89A;
+  --ig:#0A3D5C; --ig-lt:#EBF4FB; --ig-md:#2E7DB8; --ig-acc:#5AA8E8; --ig-border:#9AC8E8;
+  --ink:#0F0E0C; --paper:#F7F4EE; --cream:#EDE9DF; --rule:#CEC8BC; --muted:#6B6560;
+  --white:#FFFFFF; --ok:#1B5E20; --warn:#8B1A1A; --gold:#B8860B; --gold-lt:#FDF5E0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
+
+/* ═══ MASTHEAD ═══ */
+.masthead { background: var(--ink); padding: 2.8rem 1.5rem 0; overflow: hidden; position: relative; }
+.masthead::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, #1A0D02 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, #020A1A 0%, transparent 60%); }
+.m-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+.m-kicker { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: #888; margin-bottom: .8rem; }
+.m-h1 { font-family: 'Crimson Pro', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.05; color: var(--paper); margin-bottom: .4rem; letter-spacing: -.02em; }
+.m-h1 em { font-style: italic; color: #9A9080; }
+.m-sub { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: #666; letter-spacing: .06em; margin-bottom: 1.5rem; }
+
+/* Identity bars */
+.id-bars { display: grid; grid-template-columns: 1fr 1fr; max-width: 1100px; margin: 0 auto; }
+.id-bar { padding: .75rem 1.4rem; display: flex; align-items: center; gap: .7rem; position: relative; z-index: 1; }
+.id-bar.pu-b { background: var(--pu); }
+.id-bar.ig-b { background: var(--ig); }
+.id-name { font-family: 'Crimson Pro', serif; font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.2; }
+.id-info { font-family: 'JetBrains Mono', monospace; font-size: .58rem; color: rgba(255,255,255,.5); margin-top: .1rem; }
+
+/* ═══ QUICK STATS ═══ */
+.qs-grid { display: grid; grid-template-columns: repeat(6, 1fr); background: var(--white); border-bottom: 1.5px solid var(--cream); max-width: 1100px; margin: 0 auto; }
+.qs { padding: .7rem .5rem; text-align: center; border-right: 1px solid var(--rule); }
+.qs:last-child { border-right: none; }
+.qs-key { font-family: 'JetBrains Mono', monospace; font-size: .52rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .2rem; }
+.qs-vals { display: flex; align-items: baseline; justify-content: center; gap: .2rem; }
+.qs-v { font-family: 'Crimson Pro', serif; font-size: 1rem; font-weight: 700; line-height: 1; }
+.qs-v.pu { color: var(--pu); }
+.qs-v.ig { color: var(--ig); }
+.qs-sep { color: var(--rule); font-size: .65rem; }
+
+/* ═══ LAYOUT ═══ */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+.sh { display: flex; align-items: center; gap: .7rem; padding: 1.6rem 0 .6rem; border-top: 2px solid var(--ink); margin-top: 1.5rem; }
+.sh:first-of-type { border-top: none; margin-top: 1rem; }
+.sh-icon { font-size: .95rem; }
+.sh-label { font-family: 'JetBrains Mono', monospace; font-size: .62rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+.sh-line { flex: 1; height: 1px; background: var(--rule); }
+
+/* ═══ SPLIT CARDS ═══ */
+.split { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--white); box-shadow: 0 1px 6px rgba(0,0,0,.04); margin-bottom: 1rem; }
+.half { padding: 1.2rem 1.3rem; }
+.half.pu-h { border-right: 1px solid var(--rule); border-top: 3px solid var(--pu); }
+.half.ig-h { border-top: 3px solid var(--ig); }
+.hh { display: flex; align-items: center; gap: .4rem; margin-bottom: .65rem; padding-bottom: .4rem; border-bottom: 1px solid var(--cream); }
+.hh-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.pu-h .hh-dot { background: var(--pu); }
+.ig-h .hh-dot { background: var(--ig); }
+.hh-title { font-family: 'Crimson Pro', serif; font-size: .95rem; font-weight: 700; }
+.pu-h .hh-title { color: var(--pu); }
+.ig-h .hh-title { color: var(--ig); }
+.hh-badge { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: .53rem; padding: 1px 6px; border-radius: 2px; }
+.pu-h .hh-badge { background: var(--pu-lt); color: var(--pu); border: 1px solid var(--pu-border); }
+.ig-h .hh-badge { background: var(--ig-lt); color: var(--ig); border: 1px solid var(--ig-border); }
+.it { display: flex; gap: .4rem; padding: 3.5px 0; border-bottom: 1px dotted var(--rule); font-size: .73rem; line-height: 1.45; }
+.it:last-child { border-bottom: none; }
+.ik { font-weight: 600; color: var(--muted); min-width: 85px; font-size: .65rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .04em; flex-shrink: 0; }
+.iv { color: var(--ink); }
+
+/* ═══ COMPARISON TABLE ═══ */
+.ct { background: var(--white); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.04); margin-bottom: 1rem; }
+.cr { display: grid; grid-template-columns: 150px 1fr 1fr; border-bottom: 1px solid var(--rule); }
+.cr:last-child { border-bottom: none; }
+.cr.alt .cp, .cr.alt .cc { background: #FAFAF7; }
+.cp { padding: 8px 11px; font-family: 'JetBrains Mono', monospace; font-size: .62rem; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-right: 1px solid var(--rule); background: var(--cream); display: flex; align-items: flex-start; line-height: 1.4; }
+.cc { padding: 8px 11px; font-size: .73rem; color: var(--ink); line-height: 1.52; border-right: 1px solid var(--rule); vertical-align: top; }
+.cc:last-child { border-right: none; }
+.ch { padding: 8px 11px; font-family: 'Crimson Pro', serif; font-size: .85rem; font-weight: 700; border-right: 1px solid var(--rule); }
+.ch:last-child { border-right: none; }
+.ch.pu-c { color: var(--pu); background: var(--pu-lt); }
+.ch.ig-c { color: var(--ig); background: var(--ig-lt); }
+.ch.blank { background: var(--cream); }
+
+/* TAGS */
+.tag { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: .62rem; font-weight: 600; margin: 2px 2px 2px 0; font-family: 'JetBrains Mono', monospace; }
+.tpu { background: var(--pu-lt); color: var(--pu); border: 1px solid var(--pu-border); }
+.tig { background: var(--ig-lt); color: var(--ig); border: 1px solid var(--ig-border); }
+.tok { background: #EAF3DE; color: var(--ok); border: 1px solid #C2DCA0; }
+.twn { background: #FBF0E8; color: var(--warn); border: 1px solid #DDAAA0; }
+.tgd { background: var(--gold-lt); color: var(--gold); border: 1px solid #E8CC80; }
+.tgr { background: var(--cream); color: #5A5550; border: 1px solid var(--rule); }
+.st { color: #C9960C; font-size: .78rem; }
+.se { color: #D8D4CC; font-size: .78rem; }
+.pro { color: var(--ok); font-size: .7rem; line-height: 1.55; padding: 1px 0; }
+.con { color: var(--warn); font-size: .7rem; line-height: 1.55; padding: 1px 0; }
+
+/* ═══ SCORE BARS ═══ */
+.score-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: 1rem; }
+.sc { background: var(--white); border: 1px solid var(--rule); border-radius: 8px; padding: .9rem 1rem; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.sc-label { font-family: 'JetBrains Mono', monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .55rem; }
+.sc-row { display: flex; align-items: center; gap: .5rem; margin-bottom: .35rem; }
+.sc-row:last-child { margin-bottom: 0; }
+.sc-name { font-family: 'JetBrains Mono', monospace; font-size: .6rem; width: 28px; flex-shrink: 0; font-weight: 600; }
+.sc-name.pu { color: var(--pu); }
+.sc-name.ig { color: var(--ig); }
+.sc-bar-bg { flex: 1; height: 6px; background: var(--cream); border-radius: 3px; overflow: hidden; }
+.sc-bar { height: 100%; border-radius: 3px; }
+.sc-bar.pu { background: var(--pu-md); }
+.sc-bar.ig { background: var(--ig-md); }
+.sc-score { font-family: 'Crimson Pro', serif; font-size: .85rem; font-weight: 700; min-width: 22px; text-align: right; }
+.sc-score.pu { color: var(--pu); }
+.sc-score.ig { color: var(--ig); }
+
+/* ═══ VERDICT ═══ */
+.verdict { background: var(--ink); padding: 2.5rem 1.5rem; margin-top: 1.5rem; }
+.vw { max-width: 1100px; margin: 0 auto; }
+.vt { font-family: 'Crimson Pro', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--paper); margin-bottom: 1.2rem; padding-bottom: .6rem; border-bottom: 1px solid #2A2820; }
+.vg { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
+.vc { background: #1C1B18; border-radius: 6px; padding: 1rem 1.1rem; border-top: 3px solid; }
+.vc.pu-v { border-color: var(--pu-acc); }
+.vc.ig-v { border-color: var(--ig-acc); }
+.vc.tie-v { border-color: var(--gold); }
+.vc.warn-v { border-color: #CC6644; }
+.vck { font-family: 'JetBrains Mono', monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .45rem; }
+.pu-v .vck { color: var(--pu-acc); }
+.ig-v .vck { color: var(--ig-acc); }
+.tie-v .vck { color: var(--gold); }
+.warn-v .vck { color: #CC8866; }
+.vcv { font-size: .75rem; color: #C8C4BC; line-height: 1.6; }
+.fv { background: #1C1B18; border-radius: 6px; padding: 1.2rem 1.4rem; border: 1px solid #2A2820; margin-top: .75rem; }
+.fvt { font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--gold); margin-bottom: .8rem; }
+.frow { display: grid; grid-template-columns: 175px 1fr; gap: .8rem; padding: .4rem 0; border-bottom: 1px solid #2A2820; font-size: .73rem; align-items: flex-start; }
+.frow:last-child { border-bottom: none; }
+.fk { color: #888; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: .63rem; text-transform: uppercase; letter-spacing: .05em; line-height: 1.4; }
+.fval { color: var(--paper); line-height: 1.55; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: .65rem; font-weight: 700; margin-right: 3px; }
+.p-pu { background: var(--pu); color: #fff; }
+.p-ig { background: var(--ig); color: #fff; }
+.p-tie { background: var(--gold); color: #fff; }
+.note { font-size: .66rem; color: #6B6560; margin-top: .3rem; display: block; line-height: 1.4; }
+.highlight-box { background: #2A2820; border: 1px solid #3A3830; border-radius: 4px; padding: .6rem .8rem; font-size: .72rem; color: #C8C4BC; line-height: 1.55; margin-top: .6rem; border-left: 3px solid var(--gold); }
+
+/* RESPONSIVE */
+@media (max-width: 780px) {
+  .split, .vg { grid-template-columns: 1fr; }
+  .half.pu-h { border-right: none; border-bottom: 1px solid var(--rule); }
+  .cr { grid-template-columns: 90px 1fr 1fr; }
+  .qs-grid { grid-template-columns: repeat(3, 1fr); }
+  .score-section { grid-template-columns: repeat(2, 1fr); }
+  .id-bars { grid-template-columns: 1fr; }
+  .frow { grid-template-columns: 1fr; gap: .15rem; }
+  .m-h1 { font-size: 1.9rem; }
+}
+@media (max-width: 480px) {
+  .qs-grid { grid-template-columns: repeat(2, 1fr); }
+  .score-section { grid-template-columns: 1fr 1fr; }
+  body { padding-bottom: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="m-inner">
+    <div class="m-kicker">Distance BBA Comparison · 2025–26 · India</div>
+    <h1 class="m-h1">BBA by Distance Education<br><em>Which is the better choice?</em></h1>
+    <p class="m-sub">Pondicherry University DDE &nbsp;·&nbsp; vs &nbsp;·&nbsp; IGNOU &nbsp;·&nbsp; Fees · Recognition · Study Support · PG Pathway · Career Value</p>
+  </div>
+  <div class="id-bars">
+    <div class="id-bar pu-b">
+      <div>
+        <div class="id-name">Pondicherry University — DDE</div>
+        <div class="id-info">Central University · Est. 1985 (DDE from 1995) · NAAC A+ · NIRF #101 · 2,00,000+ DDE students</div>
+      </div>
+    </div>
+    <div class="id-bar ig-b">
+      <div>
+        <div class="id-name">IGNOU — Indira Gandhi National Open University</div>
+        <div class="id-info">Central University · Est. 1985 · NAAC A++ · NIRF #1 Open Univ. · 30 lakh+ active learners</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STATS -->
+<div class="qs-grid">
+  <div class="qs"><div class="qs-key">BBA Total Fees</div><div class="qs-vals"><span class="qs-v pu">₹45K–60K</span><span class="qs-sep">·</span><span class="qs-v ig">₹30K–31.5K</span></div><div style="font-size:.52rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">3 years total</div></div>
+  <div class="qs"><div class="qs-key">Annual Fee</div><div class="qs-vals"><span class="qs-v pu">₹15–20K</span><span class="qs-sep">·</span><span class="qs-v ig">₹10–10.5K</span></div><div style="font-size:.52rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">per year</div></div>
+  <div class="qs"><div class="qs-key">NAAC Grade</div><div class="qs-vals"><span class="qs-v pu">A+</span><span class="qs-sep">·</span><span class="qs-v ig">A++</span></div><div style="font-size:.52rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">accreditation</div></div>
+  <div class="qs"><div class="qs-key">NIRF Rank</div><div class="qs-vals"><span class="qs-v pu">#101</span><span class="qs-sep">·</span><span class="qs-v ig">#1</span></div><div style="font-size:.52rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">overall / open univ.</div></div>
+  <div class="qs"><div class="qs-key">Duration</div><div class="qs-vals"><span class="qs-v pu">3 yrs</span><span class="qs-sep">·</span><span class="qs-v ig">3 yrs</span></div><div style="font-size:.52rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">max 6 years</div></div>
+  <div class="qs"><div class="qs-key">Admission Cycles</div><div class="qs-vals"><span class="qs-v pu">2×/yr</span><span class="qs-sep">·</span><span class="qs-v ig">2×/yr</span></div><div style="font-size:.52rem;color:#999;font-family:'JetBrains Mono',monospace;margin-top:.2rem">Jan &amp; July</div></div>
+</div>
+
+<div class="wrap">
+
+<!-- UNIVERSITY PROFILE -->
+<div class="sh"><span class="sh-icon">🎓</span><span class="sh-label">University Profile &amp; Recognition</span><span class="sh-line"></span></div>
+<div class="split">
+  <div class="half pu-h">
+    <div class="hh"><span class="hh-dot"></span><span class="hh-title">Pondicherry University DDE</span><span class="hh-badge">Central Univ.</span></div>
+    <div class="it"><span class="ik">Type</span><span class="iv">Central University (Govt of India) established 1985. DDE launched 1995–96. Located on 800-acre beachside campus in Puducherry.</span></div>
+    <div class="it"><span class="ik">NAAC</span><span class="iv">A+ Grade — strong accreditation. Well-regarded central university. UGC-DEB recognised for distance education.</span></div>
+    <div class="it"><span class="ik">NIRF 2024</span><span class="iv">Ranked #101 overall. Strong research university with 40+ departments. DDE is a separate wing — not the main campus.</span></div>
+    <div class="it"><span class="ik">Recognitions</span><span class="iv">UGC-DEB approved · AICTE approved · AIU (Association of Indian Universities) recognised · Degree valid nationwide for govt and private employment.</span></div>
+    <div class="it"><span class="ik">DDE scale</span><span class="iv">Over 2,00,000 students have studied through DDE since 1995. 13+ distance programmes. Enrols students across India via conventional and Twinning modes.</span></div>
+    <div class="it"><span class="ik">Unique feature</span><span class="iv">First distance education institute in India to host job fairs for distance learners (2019). Runs webinars and workshops on resume building, interview skills, and communication.</span></div>
+    <div class="it"><span class="ik">Special fee waivers</span><span class="iv">100% tuition fee waiver for differently-abled persons. 50% waiver for defence personnel, widows, deserted women, prisoners, and transgender individuals.</span></div>
+  </div>
+  <div class="half ig-h">
+    <div class="hh"><span class="hh-dot"></span><span class="hh-title">IGNOU</span><span class="hh-badge">World's Largest Open Univ.</span></div>
+    <div class="it"><span class="ik">Type</span><span class="iv">Central University established by Act of Parliament in 1985. World's largest open university by enrolment. Headquartered in New Delhi.</span></div>
+    <div class="it"><span class="ik">NAAC</span><span class="iv">A++ Grade — highest NAAC accreditation in India. The gold standard for open and distance education. UGC-DEB and AICTE approved.</span></div>
+    <div class="it"><span class="ik">NIRF 2026</span><span class="iv">Ranked #1 in the Open University category. Recognised as Category-1 Open University by UGC — the highest designation.</span></div>
+    <div class="it"><span class="ik">Recognitions</span><span class="iv">UGC-DEB · AICTE · AIU · WES (World Education Services) · NAAC A++ · Degrees recognised by UGC, AIU, UPSC, all state governments, banks, and PSUs.</span></div>
+    <div class="it"><span class="ik">Scale</span><span class="iv">30 lakh+ active learners. 300+ programmes. 67 regional centres. 3,000+ study centres. 21 Schools of Study. Operations in 33 countries. World's largest enrolling distance university.</span></div>
+    <div class="it"><span class="ik">Unique feature</span><span class="iv">Dedicated Campus Placement Cell for students. Study materials in 12 languages. GyanDarshan (TV), Gyan Vani (FM radio), e-GyanKosh (digital repository) — multi-modal learning.</span></div>
+    <div class="it"><span class="ik">International</span><span class="iv">Degrees recognised by WES (used for Canadian PR, US admissions), most European countries, and Gulf nations. Truly global recognition — unmatched in Indian distance education.</span></div>
+  </div>
+</div>
+
+<!-- BBA PROGRAMME DETAILS -->
+<div class="sh"><span class="sh-icon">📋</span><span class="sh-label">BBA Programme — Details &amp; Curriculum</span><span class="sh-line"></span></div>
+<div class="ct">
+  <div class="cr" style="background:var(--cream)">
+    <div class="cp" style="background:var(--cream)">Parameter</div>
+    <div class="ch pu-c">BBA — Pondicherry Univ. DDE</div>
+    <div class="ch ig-c">BBA — IGNOU</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Programme name</div>
+    <div class="cc">Bachelor of Business Administration (BBA) — General</div>
+    <div class="cc">BBA (General) · BBA in Retail Management (BBA-RL) · BBA in Service Management (BBASM) — 3 variants</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Duration</div>
+    <div class="cc">3 years minimum · Maximum 6 years · Annual examination pattern (non-semester for UG)</div>
+    <div class="cc">3 years minimum · Maximum 6 years · Semester-based pattern for some courses. Flexible credit system.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Total fees (3 yrs)</div>
+    <div class="cc"><strong style="color:var(--pu)">~₹45,000–60,000</strong> total over 3 years<br><span style="font-size:.68rem;color:var(--muted)">Annual fee: ₹15,000–20,000/yr. Application fee: ₹200. Exam fees extra. Study material included. No hostel.</span></div>
+    <div class="cc"><strong style="color:var(--ig)">~₹30,000–31,500</strong> total for full programme<br><span style="font-size:.68rem;color:var(--muted)">BBA General: ₹30,000 total. BBA Retail: ₹31,500 total. ₹10,000–10,500 first year. Exam fee ₹300–400 per subject extra.</span></div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Eligibility</div>
+    <div class="cc">10+2 (Class 12) pass from any recognized board in any stream. No minimum percentage specified for BBA. No entrance exam.</div>
+    <div class="cc">10+2 (Class 12) pass with minimum 50% marks (45% for SC/ST/OBC) from any recognized board. No entrance exam.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Admission mode</div>
+    <div class="cc">Merit-based (qualifying exam marks). Two windows: January (Dec–Feb applications) and July (Jun–Aug applications). Online + offline Spot Admission Centres across India.</div>
+    <div class="cc">Merit-based on 12th marks. January and July admission cycles. 100% online admission via ignou.ac.in. No spot admission — fully digital process.</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Curriculum focus</div>
+    <div class="cc">Principles of Management, Business Communication, Marketing Management, Financial Accounting, Business Economics, Human Resource Management, Organisational Behaviour, Business Law, Entrepreneurship, Project Work in Year 3.</div>
+    <div class="cc">BBA General: Management Principles, Business Communication, Financial Accounting, Marketing, HR, Operations, Business Environment, Business Law, E-Commerce, Project. BBA Retail adds retail-specific specialisation. BBA Service Mgmt adds service operations.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Specialisations</div>
+    <div class="cc">BBA (General) — no specialisation variant at DDE Pondicherry. Single general management programme.</div>
+    <div class="cc">3 variants: BBA General · BBA Retail Management · BBA Service Management. Choose based on career interest.</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Exam pattern</div>
+    <div class="cc">Annual exams (June + December). MCQ + descriptive format. Must score 38/100 in external exam and 50/100 total (internal + external) to pass each subject. Internal assignments carry 30% weightage.</div>
+    <div class="cc">Term End Examinations (TEE) in June and December. Assignment-based internal assessment (30% weightage). Theory external exam (70%). Must score 40% in each separately. Assignments mandatory.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Study material</div>
+    <div class="cc">Printed self-learning material dispatched by post. Online access via DDE portal (dde.pondiuni.edu.in). PDF study material downloadable for enrolled students. Limited video content.</div>
+    <div class="cc">Printed SLMs (Self Learning Materials) by post + e-GyanKosh digital repository + GyanDarshan TV + Gyan Vani radio + YouTube IGNOU Official. Best multi-modal learning ecosystem in Indian distance education.</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Study centres</div>
+    <div class="cc">Conventional mode: self-study from home. Twinning mode: classes at authorised Twinning Partner Institutions (TPI) — classroom-like support at designated centres.</div>
+    <div class="cc">3,000+ Study Centres across India. 67 Regional Centres. Personal Contact Programme (PCP) / counselling sessions held at study centres. Truly pan-India network — study centre near any location in India.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Max time to complete</div>
+    <div class="cc">6 years maximum from enrolment. Students can take gap years between exams as per DDE rules.</div>
+    <div class="cc">6 years maximum. IGNOU's flexible credit system allows students to complete at any pace. Course credits never expire within the window.</div>
+  </div>
+</div>
+
+<!-- RECOGNITION & CAREER VALUE -->
+<div class="sh"><span class="sh-icon">💼</span><span class="sh-label">Recognition, Career Value &amp; Job Prospects</span><span class="sh-line"></span></div>
+<div class="ct">
+  <div class="cr" style="background:var(--cream)">
+    <div class="cp" style="background:var(--cream)">Category</div>
+    <div class="ch pu-c">Pondicherry Univ. DDE</div>
+    <div class="ch ig-c">IGNOU</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Govt job eligibility</div>
+    <div class="cc"><span class="tag tok">Fully valid</span><br>Recognised by UGC-DEB. Eligible for UPSC, SSC, banking exams (IBPS PO/Clerk, SBI PO), PSU recruitment, state govt jobs. All central govt departments accept PU DDE degrees.</div>
+    <div class="cc"><span class="tag tok">Fully valid — strongest recognition</span><br>IGNOU is UGC-DEB approved, AICTE recognised, and UGC Category-1. UPSC explicitly accepts IGNOU degrees. SBI PO, IBPS, RBI, PSUs all accept. 12% of IAS officers selected in 2025 had pursued distance/part-time education.</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Employer acceptance</div>
+    <div class="cc">Good — well-accepted by most employers in South India and increasingly pan-India. Central university brand gives it credibility over many state open universities. Less recognised than IGNOU in North India.</div>
+    <div class="cc">Excellent — TCS, Wipro, Infosys, HDFC Bank, ICICI Bank, Air India, Aptara and hundreds of companies recruit IGNOU graduates. UGC has formally confirmed ODL degrees carry equal standing as regular degrees. Best employer recognition among all distance universities.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">MBA eligibility (PG)</div>
+    <div class="cc">BBA from PU DDE is accepted for MBA admission at most universities including PU's own MBA programmes (8 specialisations), IIMs (if CAT score qualifies), and private B-schools. Good pathway to PU's own distance MBA post-graduation.</div>
+    <div class="cc">BBA from IGNOU is accepted for MBA everywhere — IGNOU's own MBA (₹62,000, AICTE+UGC approved), IIMs via CAT, all B-schools, and IGNOU MBA itself. IGNOU BBA → IGNOU MBA is a very clean, affordable, fully recognised pathway.</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">International recognition</div>
+    <div class="cc">Moderate — recognised in India and most South Asian countries. Not evaluated by WES (World Education Services) as a separate entity for international purposes. For USA purposes, degree validity may need evaluation.</div>
+    <div class="cc">Strong — IGNOU is recognised by WES (World Education Services) — critical for Canadian PR, US graduate admissions, and UK/Australia/Germany work visa applications. For a US citizen studying in India, IGNOU's WES recognition is a significant advantage.</div>
+  </div>
+  <div class="cr">
+    <div class="cp">USA relevance (for your daughter)</div>
+    <div class="cc">As a supplementary degree alongside her BE BME from Osmania University, a PU DDE BBA would be recognised in India. However, US employers and graduate schools would primarily focus on her engineering degree — the DDE BBA adds theoretical business context.</div>
+    <div class="cc">As a supplementary degree, IGNOU's BBA has better international credibility. IGNOU degrees are WES-evaluated and accepted by US graduate schools for admissions. For a US citizen, IGNOU's brand is better recognised abroad than PU DDE.</div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Career roles (BBA)</div>
+    <div class="cc"><span class="tag tpu">Marketing Executive</span><span class="tag tpu">Sales Manager</span><span class="tag tpu">HR Executive</span><span class="tag tpu">Business Analyst</span><span class="tag tpu">Entrepreneur</span><span class="tag tpu">Operations Exec</span><span class="tag tpu">Banking Officer</span></div>
+    <div class="cc"><span class="tag tig">Marketing Executive</span><span class="tag tig">Retail Manager</span><span class="tag tig">Sales Officer</span><span class="tag tig">HR Executive</span><span class="tag tig">Service Manager</span><span class="tag tig">Banking Officer</span><span class="tag tig">Entrepreneur</span></div>
+  </div>
+  <div class="cr">
+    <div class="cp">Placement support</div>
+    <div class="cc">DDE Pondicherry University hosted India's first job fairs for distance learners (2019). Organises webinars and workshops for employability. Limited compared to regular campus — this is a distance programme after all.</div>
+    <div class="cc">IGNOU has a dedicated Campus Placement Cell. In 2024, collaborated with companies like GLOBIVA, ARCIS, APTARA, Air India SATS for placement drives. Highest package ₹15 LPA recorded. Median placement packages between ₹2–3.4 LPA (backend/service roles).</div>
+  </div>
+</div>
+
+<!-- STUDY SUPPORT -->
+<div class="sh"><span class="sh-icon">📚</span><span class="sh-label">Study Support &amp; Learning Experience</span><span class="sh-line"></span></div>
+<div class="split">
+  <div class="half pu-h">
+    <div class="hh"><span class="hh-dot"></span><span class="hh-title">Pondicherry Univ. DDE</span><span class="hh-badge">Conventional + Twinning Mode</span></div>
+    <div class="it"><span class="ik">Learning modes</span><span class="iv">1. Conventional Mode: Self-study from home using printed study materials. 2. Twinning Partner Institution (TPI) Mode: Classes conducted at authorised partner institutions — provides classroom-like environment.</span></div>
+    <div class="it"><span class="ik">Study material</span><span class="iv">Well-structured printed SLMs (Self Learning Materials) dispatched by post. Online portal (dde.pondiuni.edu.in) for PDF downloads. Limited video content compared to IGNOU.</span></div>
+    <div class="it"><span class="ik">Online platform</span><span class="iv">Student portal for study material access, assignment submission, and exam registration. Not as robust as IGNOU's multi-platform ecosystem. Improving over time.</span></div>
+    <div class="it"><span class="ik">Counselling</span><span class="iv">Personal contact sessions available through TPI mode. Conventional mode students must be largely self-directed.</span></div>
+    <div class="it"><span class="ik">Assignment support</span><span class="iv">Assignments count for 30% of final assessment. Students submit assignments to the DDE office or via online portal. Feedback provided by evaluators.</span></div>
+    <div class="it"><span class="ik">Language</span><span class="iv">English medium. Study materials in English only. No regional language options for BBA.</span></div>
+    <div class="it"><span class="ik">Overall rating</span><span class="iv"><span class="st">★★★</span><span class="se">★★</span> — Good for TPI mode students. Self-study mode requires high discipline. Limited multi-modal content vs IGNOU.</span></div>
+  </div>
+  <div class="half ig-h">
+    <div class="hh"><span class="hh-dot"></span><span class="hh-title">IGNOU</span><span class="hh-badge">Best Distance Learning Ecosystem</span></div>
+    <div class="it"><span class="ik">Learning modes</span><span class="iv">Multi-modal: Printed SLMs + e-GyanKosh digital repository + GyanDarshan TV channel + Gyan Vani FM radio + YouTube (IGNOU Official) + personal contact/counselling sessions at study centres.</span></div>
+    <div class="it"><span class="ik">Study material</span><span class="iv">SLMs written by subject matter experts from premier institutions. Available in print (dispatched free) and digital. e-GyanKosh has 20,000+ learning resources. Considered the best-quality study material in Indian distance education.</span></div>
+    <div class="it"><span class="ik">Online platform</span><span class="iv">IGNOU's LMS (Learning Management System) via SAMARTH platform. Students access lectures, assignments, results, exam schedules, and study materials. Mobile app available. Regular updates.</span></div>
+    <div class="it"><span class="ik">Counselling</span><span class="iv">3,000+ study centres. Personal Contact Programme (PCP) sessions held on weekends. Students can attend counselling at the nearest study centre for doubt clearing. Not mandatory but highly recommended.</span></div>
+    <div class="it"><span class="ik">Assignment support</span><span class="iv">Assignments are mandatory (30% weightage) — must submit all assignments to appear in Term End Examination (TEE). Clear guidelines, format templates, and faculty feedback provided.</span></div>
+    <div class="it"><span class="ik">Language</span><span class="iv">English and Hindi for most programmes. Some regional language options available for select subjects. Better language accessibility than PU DDE.</span></div>
+    <div class="it"><span class="ik">Overall rating</span><span class="iv"><span class="st">★★★★★</span> — Best study support ecosystem in Indian distance education. Unmatched digital content. 3,000+ study centres. TV + radio + online + print = truly multi-modal.</span></div>
+  </div>
+</div>
+
+<!-- PROS & CONS -->
+<div class="sh"><span class="sh-icon">⚖️</span><span class="sh-label">Advantages &amp; Disadvantages</span><span class="sh-line"></span></div>
+<div class="ct">
+  <div class="cr" style="background:var(--cream)">
+    <div class="cp" style="background:var(--cream)">Dimension</div>
+    <div class="ch pu-c">Pondicherry Univ. DDE — BBA</div>
+    <div class="ch ig-c">IGNOU — BBA</div>
+  </div>
+  <div class="cr">
+    <div class="cp">Key advantages</div>
+    <div class="cc">
+      <div class="pro">✔ Central university (not just open university) — stronger brand perception</div>
+      <div class="pro">✔ TPI (Twinning) mode gives classroom-like experience</div>
+      <div class="pro">✔ First to host job fairs for distance learners in India</div>
+      <div class="pro">✔ Recognised by AICTE + UGC-DEB + AIU</div>
+      <div class="pro">✔ 100% fee waiver for differently-abled students</div>
+      <div class="pro">✔ Flexible admission twice a year</div>
+      <div class="pro">✔ Perceived as slightly more "prestigious" than IGNOU due to central university status</div>
+    </div>
+    <div class="cc">
+      <div class="pro">✔ Cheapest BBA — ₹30,000 total (vs ₹45–60K at PU DDE)</div>
+      <div class="pro">✔ NAAC A++ (vs A+ for PU) — highest accreditation</div>
+      <div class="pro">✔ #1 Open University in India (NIRF 2026)</div>
+      <div class="pro">✔ WES-recognised — critical for international use</div>
+      <div class="pro">✔ 3 BBA variants (General, Retail, Service Management)</div>
+      <div class="pro">✔ Best study material and multi-modal learning ecosystem</div>
+      <div class="pro">✔ 3,000+ study centres across India</div>
+      <div class="pro">✔ Strongest employer and govt job recognition</div>
+      <div class="pro">✔ Placement cell with annual campus drives</div>
+    </div>
+  </div>
+  <div class="cr alt">
+    <div class="cp">Key disadvantages</div>
+    <div class="cc">
+      <div class="con">✘ More expensive — ₹45–60K total vs ₹30K at IGNOU</div>
+      <div class="con">✘ Less internationally recognised (not WES-evaluated independently)</div>
+      <div class="con">✘ Fewer study centres — less support for self-study students</div>
+      <div class="con">✘ No BBA specialisation variants (only general BBA)</div>
+      <div class="con">✘ Less robust digital learning ecosystem vs IGNOU</div>
+      <div class="con">✘ Less well-known in North India compared to IGNOU</div>
+    </div>
+    <div class="cc">
+      <div class="con">✘ "Open University" tag — some employers still prefer central university degrees (unfair but real bias)</div>
+      <div class="con">✘ Exam registration and administrative processes can be bureaucratic</div>
+      <div class="con">✘ Assignments are mandatory — missing them blocks exam appearance</div>
+      <div class="con">✘ Placement packages modest (₹2–3.4 LPA median) — distance BBA is not a placement-focused degree</div>
+      <div class="con">✘ Very large student body — less personal attention</div>
+    </div>
+  </div>
+  <div class="cr">
+    <div class="cp">Who should choose</div>
+    <div class="cc">Students who want a "regular university" brand name on their distance degree, live near a TPI centre and prefer some classroom interaction, are based in South India, or whose employers or admission offices specifically favour central university (non-open university) degrees.</div>
+    <div class="cc">Students who want maximum affordability, best study material support, strongest govt job recognition, international credibility (WES), flexibility in specialisation (General/Retail/Service), or are based anywhere in India (3,000+ centres). Best for working professionals and students pursuing it alongside another degree/job.</div>
+  </div>
+</div>
+
+<!-- SCORE OVERVIEW -->
+<div class="sh"><span class="sh-icon">📊</span><span class="sh-label">Head-to-Head Scorecard</span><span class="sh-line"></span></div>
+<div class="score-section">
+  <div class="sc">
+    <div class="sc-label">Affordability</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:65%"></div></div><span class="sc-score pu">6.5</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:95%"></div></div><span class="sc-score ig">9.5</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Employer Recognition</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:75%"></div></div><span class="sc-score pu">7.5</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:92%"></div></div><span class="sc-score ig">9.2</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Study Support</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:65%"></div></div><span class="sc-score pu">6.5</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:95%"></div></div><span class="sc-score ig">9.5</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">International Reach</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:60%"></div></div><span class="sc-score pu">6.0</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:88%"></div></div><span class="sc-score ig">8.8</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Brand Perception</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:78%"></div></div><span class="sc-score pu">7.8</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:80%"></div></div><span class="sc-score ig">8.0</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Govt Job Validity</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:85%"></div></div><span class="sc-score pu">8.5</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:98%"></div></div><span class="sc-score ig">9.8</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">MBA Pathway</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:80%"></div></div><span class="sc-score pu">8.0</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:90%"></div></div><span class="sc-score ig">9.0</span></div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Overall Value</div>
+    <div class="sc-row"><span class="sc-name pu">PU</span><div class="sc-bar-bg"><div class="sc-bar pu" style="width:72%"></div></div><span class="sc-score pu">7.2</span></div>
+    <div class="sc-row"><span class="sc-name ig">IGNOU</span><div class="sc-bar-bg"><div class="sc-bar ig" style="width:90%"></div></div><span class="sc-score ig">9.0</span></div>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="vw">
+    <h2 class="vt">Our Verdict — Which BBA Should You Choose?</h2>
+    <div class="vg">
+      <div class="vc ig-v">
+        <div class="vck">🏆 IGNOU Wins on Almost Every Metric</div>
+        <div class="vcv">IGNOU's BBA is cheaper (₹30,000 vs ₹45–60,000), better recognised nationally and internationally (WES-evaluated), offers more specialisation variants, has stronger govt job validity, operates the best distance learning infrastructure in India (3,000+ study centres, multi-modal content), and is ranked #1 in its category. For pure value and practical utility, IGNOU is the stronger choice in almost every dimension.</div>
+      </div>
+      <div class="vc pu-v">
+        <div class="vck">✅ When to Choose Pondicherry University DDE</div>
+        <div class="vcv">PU DDE is the better choice if: (1) you specifically want a "central university" (not "open university") on your degree — some employers and admission offices make this distinction, (2) you are in South India near a Twinning Partner Institution and want classroom support, (3) you plan to pursue PU's own MBA programmes after the BBA (PU DDE → PU MBA is a smooth internal pathway), or (4) the 50% minimum marks criterion at IGNOU is a barrier (PU DDE has no stated minimum %).</div>
+      </div>
+      <div class="vc tie-v">
+        <div class="vck">⚡ Critical Context — For Your Daughter Specifically</div>
+        <div class="vcv">Your daughter is pursuing a full-time BE BME at UCE Osmania (4 years). A BBA by distance alongside it is a supplementary credential — not her primary degree. In this context, affordability and minimal administrative hassle matter more. IGNOU's simpler all-online admission, cheaper fees (₹30K total vs ₹45–60K), and better international recognition (WES) make it the smarter parallel choice. The BBA from either university will not significantly change her engineering-led career trajectory — but it adds a management dimension that could help in MBA admission applications later.</div>
+      </div>
+      <div class="vc warn-v">
+        <div class="vck">⚠️ Important Caution — Dual Degree Workload</div>
+        <div class="vcv">Pursuing a BBA by distance simultaneously with a full-time BE is very challenging. BE BME at Osmania University is demanding — labs, clinicals, projects. Distance BBA assignments and exams on top of that requires strong time management. Many students underestimate this. We recommend starting the distance BBA from Year 2 of BE (not Year 1), once she is settled into the engineering programme. Also verify that Osmania University rules permit students to simultaneously pursue another degree — UGC's 2022 guidelines allow it but check UCE's specific regulations.</div>
+      </div>
+    </div>
+    <div class="fv">
+      <div class="fvt">Summary Verdict — Quick Reference</div>
+      <div class="frow"><div class="fk">Winner — affordability</div><div class="fval"><span class="pill p-ig">IGNOU</span> ₹30,000 total vs ₹45–60,000 at PU DDE. IGNOU is ₹15,000–30,000 cheaper for the same 3-year degree.</div></div>
+      <div class="frow"><div class="fk">Winner — recognition</div><div class="fval"><span class="pill p-ig">IGNOU</span> NAAC A++ · #1 Open Univ. NIRF · WES-evaluated · strongest govt and employer recognition in India.</div></div>
+      <div class="frow"><div class="fk">Winner — study support</div><div class="fval"><span class="pill p-ig">IGNOU</span> 3,000+ study centres · GyanDarshan TV · e-GyanKosh · best multi-modal learning in Indian distance education.</div></div>
+      <div class="frow"><div class="fk">Winner — brand perception</div><div class="fval">Slight edge to <span class="pill p-pu">Pondicherry Univ.</span> for the "central university" label vs "open university." This matters in some hiring contexts.</div></div>
+      <div class="frow"><div class="fk">Winner — specialisations</div><div class="fval"><span class="pill p-ig">IGNOU</span> 3 BBA variants (General, Retail, Service Management) vs just General BBA at PU DDE.</div></div>
+      <div class="frow"><div class="fk">Winner — intl recognition</div><div class="fval"><span class="pill p-ig">IGNOU</span> WES-recognised — valid for Canadian PR, US grad school applications, UK/Australia work visas. PU DDE not independently WES-evaluated.</div></div>
+      <div class="frow"><div class="fk">Winner — MBA pathway</div><div class="fval">Both equal. <span class="pill p-ig">IGNOU</span> BBA → IGNOU MBA (₹62K, AICTE+UGC) is clean and affordable. <span class="pill p-pu">PU DDE</span> BBA → PU MBA is also clean internally.</div></div>
+      <div class="frow" style="border-bottom:none"><div class="fk">Our recommendation</div><div class="fval"><span class="pill p-ig">IGNOU BBA</span> is the better choice for most students — it is cheaper, better recognised, more flexible, and has stronger international credibility. <span class="pill p-pu">PU DDE BBA</span> is worth considering only if the "central university" branding matters to your specific employer or admission target, or if you are near a Twinning centre in South India.
+      <span class="note">For your daughter pursuing BE BME at Osmania: start the distance BBA in Year 2 of engineering (not Year 1). Choose IGNOU for its lower fees and WES recognition given her US citizenship and potential US graduate school applications. Prioritise her engineering degree above all — the BBA is supplementary, not primary.</span></div></div>
+      <div class="highlight-box">One final perspective: Both degrees are from UGC-approved central universities. Both are fully valid for government and private employment in India. The real career differentiator for your daughter will be her BE BME from Osmania University, her FAFSA-funded MS in Biomedical Engineering from a US university, and her US citizenship — not which of these two distance BBA programmes she picks. Choose whichever is more convenient and affordable. IGNOU wins on those criteria.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

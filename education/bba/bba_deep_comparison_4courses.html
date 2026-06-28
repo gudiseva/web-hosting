@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBA 4-Course Deep Comparison 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --A:#1A3F6F; --A-lt:#EAF1FA; --A-md:#3A6BAF; --A-bd:#B0C8E8;
+  --B:#4A1A00; --B-lt:#FBF2EC; --B-md:#C0602A; --B-bd:#E8B88A;
+  --C:#0A3F2A; --C-lt:#E8F5EF; --C-md:#2A8F5A; --C-bd:#9AD8B8;
+  --D:#3A1A5F; --D-lt:#F0EBFA; --D-md:#7A4ABF; --D-bd:#C8A8E8;
+  --ink:#0E0D0B; --paper:#F6F3ED; --cream:#EDEAD E; --rule:#CCC7B8;
+  --white:#FFF; --muted:#6A6560; --ok:#1A5C28; --err:#8B1A1A; --gold:#B8850A;
+}
+.cream{background:#EDE9DF}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* MASTHEAD */
+.mh{background:var(--ink);overflow:hidden;position:relative}
+.mh::after{content:'BBA';font-family:'Libre Baskerville',serif;position:absolute;right:-1rem;top:-2rem;font-size:clamp(8rem,20vw,16rem);font-weight:700;opacity:.04;color:#fff;pointer-events:none;line-height:1}
+.mh-in{position:relative;z-index:1;padding:2.5rem 1.4rem 1.8rem;max-width:1150px;margin:0 auto}
+.mh-ey{font-family:'Inconsolata',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#777;margin-bottom:.7rem}
+.mh-t{font-family:'Libre Baskerville',serif;font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:700;color:var(--paper);line-height:1.08;letter-spacing:-.02em;margin-bottom:.4rem}
+.mh-t em{font-style:italic;color:#9A9080}
+.mh-s{font-family:'Inconsolata',monospace;font-size:.64rem;color:#666;letter-spacing:.05em}
+
+/* COLOUR LEGEND STRIP */
+.cls{display:grid;grid-template-columns:repeat(4,1fr);max-width:1150px;margin:0 auto}
+.cl{padding:.75rem 1.2rem;display:flex;align-items:flex-start;gap:.55rem}
+.cl.A{background:var(--A)} .cl.B{background:var(--B)} .cl.C{background:var(--C)} .cl.D{background:var(--D)}
+.cl-letter{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.18);line-height:1;flex-shrink:0;margin-top:.1rem}
+.cl-text{}
+.cl-name{font-size:.8rem;font-weight:600;color:#fff;line-height:1.25;margin-bottom:.15rem}
+.cl-sub{font-family:'Inconsolata',monospace;font-size:.56rem;color:rgba(255,255,255,.5);line-height:1.4}
+
+/* QS STRIP */
+.qs{display:grid;grid-template-columns:repeat(5,1fr);background:var(--white);border-bottom:2px solid #EDE9DF;max-width:1150px;margin:0 auto}
+.q{padding:.65rem .5rem;text-align:center;border-right:1px solid var(--rule)}
+.q:last-child{border-right:none}
+.q-k{font-family:'Inconsolata',monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem}
+.q-vs{display:flex;justify-content:center;flex-wrap:wrap;gap:.15rem}
+.qv{font-family:'Libre Baskerville',serif;font-size:.82rem;font-weight:700;line-height:1;padding:1px 3px}
+.qv.A{color:var(--A)} .qv.B{color:var(--B)} .qv.C{color:var(--C)} .qv.D{color:var(--D)}
+.q-sep{color:#DDD;font-size:.6rem;align-self:center}
+
+/* LAYOUT */
+.wr{max-width:1150px;margin:0 auto;padding:0 1rem}
+.sh{display:flex;align-items:center;gap:.65rem;padding:1.5rem 0 .55rem;border-top:2px solid var(--ink);margin-top:1.4rem}
+.sh:first-of-type{border-top:none;margin-top:.8rem}
+.sh-ic{font-size:.9rem}
+.sh-lb{font-family:'Inconsolata',monospace;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.sh-ln{flex:1;height:1px;background:var(--rule)}
+
+/* 4-COL CARDS */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--white);box-shadow:0 1px 5px rgba(0,0,0,.04);margin-bottom:1rem}
+.gc{padding:1.1rem 1.15rem;border-right:1px solid var(--rule)}
+.gc:last-child{border-right:none}
+.gc.A{border-top:3px solid var(--A)} .gc.B{border-top:3px solid var(--B)} .gc.C{border-top:3px solid var(--C)} .gc.D{border-top:3px solid var(--D)}
+.gc-h{font-family:'Libre Baskerville',serif;font-size:.88rem;font-weight:700;margin-bottom:.55rem;padding-bottom:.38rem;border-bottom:1px solid #EDE9DF;line-height:1.2}
+.gc.A .gc-h{color:var(--A)} .gc.B .gc-h{color:var(--B)} .gc.C .gc-h{color:var(--C)} .gc.D .gc-h{color:var(--D)}
+.it{display:flex;gap:.4rem;padding:3px 0;border-bottom:1px dotted var(--rule);font-size:.71rem;line-height:1.42}
+.it:last-child{border-bottom:none}
+.ik{font-weight:600;color:var(--muted);min-width:72px;font-size:.63rem;font-family:'Inconsolata',monospace;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+.iv{color:var(--ink)}
+
+/* TABLE */
+.ct{background:var(--white);border:1px solid var(--rule);border-radius:8px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.04);margin-bottom:1rem}
+.cr{display:grid;grid-template-columns:142px 1fr 1fr 1fr 1fr;border-bottom:1px solid var(--rule)}
+.cr:last-child{border-bottom:none}
+.cr.alt .cp,.cr.alt .cc{background:#FAFAF7}
+.cp{padding:8px 10px;font-family:'Inconsolata',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-right:1px solid var(--rule);background:#EDE9DF;display:flex;align-items:flex-start;line-height:1.4}
+.cc{padding:8px 10px;font-size:.71rem;color:var(--ink);line-height:1.5;border-right:1px solid var(--rule);vertical-align:top}
+.cc:last-child{border-right:none}
+.ch{padding:8px 10px;font-family:'Libre Baskerville',serif;font-size:.8rem;font-weight:700;border-right:1px solid var(--rule)}
+.ch:last-child{border-right:none}
+.ch.blank{background:#EDE9DF}
+.ch.A{color:var(--A);background:var(--A-lt)} .ch.B{color:var(--B);background:var(--B-lt)}
+.ch.C{color:var(--C);background:var(--C-lt)} .ch.D{color:var(--D);background:var(--D-lt)}
+
+/* TAGS */
+.tg{display:inline-block;padding:1px 5px;border-radius:2px;font-size:.6rem;font-weight:600;margin:2px 2px 2px 0;font-family:'Inconsolata',monospace;white-space:nowrap}
+.tA{background:var(--A-lt);color:var(--A);border:1px solid var(--A-bd)}
+.tB{background:var(--B-lt);color:var(--B);border:1px solid var(--B-bd)}
+.tC{background:var(--C-lt);color:var(--C);border:1px solid var(--C-bd)}
+.tD{background:var(--D-lt);color:var(--D);border:1px solid var(--D-bd)}
+.tG{background:#EAF3DE;color:var(--ok);border:1px solid #C0DCA0}
+.tW{background:#FBF0E8;color:var(--err);border:1px solid #DDB0A0}
+.tN{background:#EDE9DF;color:#5A5550;border:1px solid var(--rule)}
+.st{color:#C99808;font-size:.78rem} .se{color:#D8D4CC;font-size:.78rem}
+.pro{color:var(--ok);font-size:.69rem;line-height:1.55;padding:1px 0}
+.con{color:var(--err);font-size:.69rem;line-height:1.55;padding:1px 0}
+
+/* SCORE BARS */
+.sb-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;margin-bottom:1rem}
+.sbc{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:.85rem .9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.sbc-label{font-family:'Inconsolata',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem}
+.sb-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.28rem}
+.sb-row:last-child{margin-bottom:0}
+.sb-n{font-family:'Inconsolata',monospace;font-size:.58rem;font-weight:700;min-width:14px;flex-shrink:0}
+.sb-n.A{color:var(--A)} .sb-n.B{color:var(--B)} .sb-n.C{color:var(--C)} .sb-n.D{color:var(--D)}
+.sb-bg{flex:1;height:5px;background:#EDE9DF;border-radius:3px;overflow:hidden}
+.sb-fill{height:100%;border-radius:3px}
+.sb-fill.A{background:var(--A-md)} .sb-fill.B{background:var(--B-md)} .sb-fill.C{background:var(--C-md)} .sb-fill.D{background:var(--D-md)}
+.sb-val{font-family:'Libre Baskerville',serif;font-size:.8rem;font-weight:700;min-width:20px;text-align:right}
+.sb-val.A{color:var(--A)} .sb-val.B{color:var(--B)} .sb-val.C{color:var(--C)} .sb-val.D{color:var(--D)}
+
+/* VERDICT */
+.verd{background:var(--ink);padding:2.5rem 1.5rem;margin-top:1.5rem}
+.vw{max-width:1150px;margin:0 auto}
+.vt{font-family:'Libre Baskerville',serif;font-size:clamp(1.4rem,3vw,2rem);color:var(--paper);font-weight:700;margin-bottom:1.2rem;padding-bottom:.55rem;border-bottom:1px solid #2A2820}
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.8rem}
+.vc{background:#1C1B18;border-radius:6px;padding:.95rem 1.05rem;border-top:3px solid}
+.vc.A{border-color:var(--A-md)} .vc.B{border-color:var(--B-md)} .vc.C{border-color:var(--C-md)} .vc.D{border-color:var(--D-md)}
+.vc.tie{border-color:var(--gold)} .vc.warn{border-color:#CC5533}
+.vc-k{font-family:'Inconsolata',monospace;font-size:.57rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.4rem}
+.vc.A .vc-k{color:var(--A-md)} .vc.B .vc-k{color:var(--B-md)} .vc.C .vc-k{color:var(--C-md)}
+.vc.D .vc-k{color:var(--D-md)} .vc.tie .vc-k{color:var(--gold)} .vc.warn .vc-k{color:#CC7755}
+.vc-v{font-size:.73rem;color:#C8C4BC;line-height:1.6}
+.fn{background:#1C1B18;border-radius:6px;padding:1.1rem 1.3rem;border:1px solid #2A2820;margin-top:.7rem}
+.fn-t{font-family:'Libre Baskerville',serif;font-size:.95rem;color:var(--gold);margin-bottom:.75rem}
+.fr{display:grid;grid-template-columns:170px 1fr;gap:.7rem;padding:.4rem 0;border-bottom:1px solid #2A2820;font-size:.72rem;align-items:flex-start}
+.fr:last-child{border-bottom:none}
+.fk{color:#888;font-weight:600;font-family:'Inconsolata',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;line-height:1.4}
+.fv{color:var(--paper);line-height:1.55}
+.pill{display:inline-block;padding:2px 7px;border-radius:2px;font-size:.63rem;font-weight:700;margin-right:3px}
+.pA{background:var(--A);color:#fff} .pB{background:var(--B);color:#fff}
+.pC{background:var(--C);color:#fff} .pD{background:var(--D);color:#fff}
+.pt{background:var(--gold);color:#fff}
+.fnt{font-size:.66rem;color:#6B6560;margin-top:.25rem;display:block;line-height:1.4}
+.hi{background:#2A2820;border:1px solid #3A3830;border-radius:4px;padding:.55rem .75rem;font-size:.71rem;color:#C8C4BC;line-height:1.55;border-left:3px solid var(--gold);margin-top:.65rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .cls,.g4{grid-template-columns:1fr 1fr}
+  .gc{border-bottom:1px solid var(--rule)}
+  .cr{grid-template-columns:90px 1fr 1fr 1fr 1fr}
+  .qs{grid-template-columns:repeat(3,1fr)}
+  .sb-grid{grid-template-columns:repeat(3,1fr)}
+  .vg{grid-template-columns:1fr}
+  .fr{grid-template-columns:1fr;gap:.15rem}
+  body{padding-bottom:2rem}
+}
+@media(max-width:580px){
+  .cls{grid-template-columns:1fr}
+  .g4{grid-template-columns:1fr}
+  .qs{grid-template-columns:repeat(2,1fr)}
+  .sb-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="mh">
+  <div class="mh-in">
+    <div class="mh-ey">4-Course BBA Comparison · Hyderabad & Tirupati · 2025–26</div>
+    <h1 class="mh-t">BBA Deep-Dive Comparison<br><em>Placements · Fees · Infrastructure · Internships</em></h1>
+    <p class="mh-s">Salaries · Hostels · Facilities · Funding · Career Scope · India & USA · Campus Life</p>
+  </div>
+  <div class="cls">
+    <div class="cl A"><div class="cl-letter">A</div><div class="cl-text"><div class="cl-name">BBA Tourism &amp; Hospitality</div><div class="cl-sub">NITHM, Gachibowli · Hyderabad · 4 yrs · Govt-aided · JNTUH affiliated</div></div></div>
+    <div class="cl B"><div class="cl-letter">B</div><div class="cl-text"><div class="cl-name">BBA Culinary Arts</div><div class="cl-sub">ICI, Tirupati · Andhra Pradesh · 3 yrs · Ministry of Tourism, Govt of India</div></div></div>
+    <div class="cl C"><div class="cl-letter">C</div><div class="cl-text"><div class="cl-name">BBA Data Analytics</div><div class="cl-sub">JNTUH UCM, Kukatpally · Hyderabad · 3 yrs · JNTUH constituent college</div></div></div>
+    <div class="cl D"><div class="cl-letter">D</div><div class="cl-text"><div class="cl-name">BBA Analytics</div><div class="cl-sub">UPGCS, Secunderabad · Osmania University · 3 yrs · Govt constituent college</div></div></div>
+  </div>
+</div>
+
+<!-- QS STRIP -->
+<div class="qs">
+  <div class="q"><div class="q-k">Duration</div><div class="q-vs"><span class="qv A">4yr</span><span class="q-sep">·</span><span class="qv B">3yr</span><span class="q-sep">·</span><span class="qv C">3yr</span><span class="q-sep">·</span><span class="qv D">3yr</span></div></div>
+  <div class="q"><div class="q-k">Total Fees</div><div class="q-vs"><span class="qv A">₹3.75L</span><span class="q-sep">·</span><span class="qv B">₹4–4.5L</span><span class="q-sep">·</span><span class="qv C">₹1–1.5L</span><span class="q-sep">·</span><span class="qv D">₹20K–40K</span></div></div>
+  <div class="q"><div class="q-k">Avg Package</div><div class="q-vs"><span class="qv A">₹5 LPA</span><span class="q-sep">·</span><span class="qv B">₹3–4 LPA</span><span class="q-sep">·</span><span class="qv C">₹4–8 LPA*</span><span class="q-sep">·</span><span class="qv D">₹1.5–3 LPA</span></div></div>
+  <div class="q"><div class="q-k">Highest Package</div><div class="q-vs"><span class="qv A">₹16 LPA</span><span class="q-sep">·</span><span class="qv B">₹6–8 LPA</span><span class="q-sep">·</span><span class="qv C">₹26L (JNTUH)</span><span class="q-sep">·</span><span class="qv D">₹4–5 LPA</span></div></div>
+  <div class="q"><div class="q-k">Placement Rate</div><div class="q-vs"><span class="qv A">~95%</span><span class="q-sep">·</span><span class="qv B">~70–80%</span><span class="q-sep">·</span><span class="qv C">~60–70%*</span><span class="q-sep">·</span><span class="qv D">~30–50%</span></div></div>
+</div>
+
+<div class="wr">
+
+<!-- INSTITUTIONAL PROFILE -->
+<div class="sh"><span class="sh-ic">🏛</span><span class="sh-lb">Institution Profile &amp; Recognition</span><span class="sh-ln"></span></div>
+<div class="ct">
+  <div class="cr" style="background:#EDE9DF">
+    <div class="cp" style="background:#EDE9DF">Parameter</div>
+    <div class="ch A">A — NITHM<br><small>BBA Tourism &amp; Hosp.</small></div>
+    <div class="ch B">B — ICI Tirupati<br><small>BBA Culinary Arts</small></div>
+    <div class="ch C">C — JNTUH UCM<br><small>BBA Data Analytics</small></div>
+    <div class="ch D">D — UPGCS, OU<br><small>BBA Analytics</small></div>
+  </div>
+  <div class="cr"><div class="cp">Type &amp; Affiliation</div>
+    <div class="cc">Govt-aided autonomous institute. Affiliated to JNTUH. Established 2004. Ranked 10th among Govt HMIs in India (GHRDC). NCHMCT accredited. 2nd in Telangana among Govt Hospitality institutes.</div>
+    <div class="cc">Autonomous body under Ministry of Tourism, Govt of India. Affiliated to IGNTU (Central University). Established 2014 (Tirupati), 2008 (Noida). Purpose-built culinary centre of excellence.</div>
+    <div class="cc">Constituent college of JNTUH. Govt university college. Started as School of Management Studies (SMS) in 1989. BBA Data Analytics launched 2022. NAAC A+ (JNTUH), NIRF #81.</div>
+    <div class="cc">Constituent college of Osmania University (est. 1947). Co-educational. Govt college. NAAC A+ (OU), NIRF #30 Univ. 19 courses, 10 degree programmes, 43 faculty members.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Annual / Total fees</div>
+    <div class="cc"><strong style="color:var(--A)">₹3.75 lakh total (4 yrs)</strong><br><span style="font-size:.67rem;color:var(--muted)">~₹94K/yr approx. Highest fees of all four. Some scholarship provisions available.</span></div>
+    <div class="cc"><strong style="color:var(--B)">~₹4–4.5 lakh total (3 yrs)</strong><br><span style="font-size:.67rem;color:var(--muted)">Sem 1: ₹80,500; Sem 2–6: ₹72,000–77,000/sem. Hostel extra: ₹30,000/sem (incl. mess). 2nd highest.</span></div>
+    <div class="cc"><strong style="color:var(--C)">~₹1–1.5 lakh total (3 yrs)</strong><br><span style="font-size:.67rem;color:var(--muted)">Govt university fees ~₹30K–50K/yr. Exact BBA DA fees TBC — comparable to other JNTUH constituent programmes. Very affordable.</span></div>
+    <div class="cc"><strong style="color:var(--D)">₹20,000–40,000 total (3 yrs)</strong><br><span style="font-size:.67rem;color:var(--muted)">Osmania constituent college fees. BBA (self-finance): ~₹6K–12K/yr. Most affordable of the four — essentially free govt education.</span></div>
+  </div>
+  <div class="cr"><div class="cp">Admission criteria</div>
+    <div class="cc">Written aptitude test + counselling. Entrance: UGAT, NCHMCT JEE, TS EAMCET or equivalent. Age limit 22 yrs (Gen/OBC), 25 yrs (SC/ST). Limited seats for foreign/NRI/industry-sponsored candidates.</div>
+    <div class="cc">ICI-JEE (UG) or CUET (UG). All-India Rank based on written exam. No GD/interview. CUET UG 2024 cutoff rank was 44 (Gen). Age ≤22 yrs Gen/OBC. Min 45% in 10+2 (40% for SC/ST/PWD).</div>
+    <div class="cc">TS EAMCET rank / JNTUH selection process. Pass 10+2 / Intermediate — no minimum percentage stated. BTech I/II/III year students of JNTUH-affiliated institutes also eligible (dual degree option).</div>
+    <div class="cc">Merit in 10+2. No entrance exam. OUCET merit list for some PG courses. Very accessible — essentially merit-only for UG BBA. Among easiest admissions of the four.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Duration &amp; structure</div>
+    <div class="cc">4 years / 8 semesters. Includes 10 months of mandatory industrial training. Longest programme. JNTUH degree awarded.</div>
+    <div class="cc">3 years / 6 semesters. Each semester has viva. Practical labs + internship built into the programme. IGNTU degree awarded (Central University).</div>
+    <div class="cc">3 years / 6 semesters. 2 mandatory summer internships (Yr 2 and Yr 3). Final year project. JNTUH degree. Dual degree option for BTech students (no extra year needed).</div>
+    <div class="cc">3 years / 6 semesters. Annual exam pattern at some constituent colleges. No formal internship requirement — student-driven. Osmania University degree awarded.</div>
+  </div>
+</div>
+
+<!-- INFRASTRUCTURE & CAMPUS -->
+<div class="sh"><span class="sh-ic">🏗</span><span class="sh-lb">Infrastructure, Campus &amp; Facilities</span><span class="sh-ln"></span></div>
+<div class="g4">
+  <div class="gc A">
+    <div class="gc-h">NITHM — Gachibowli</div>
+    <div class="it"><span class="ik">Location</span><span class="iv">Telecom Nagar, Gachibowli — prime Hyderabad location near HiTEC City. Metro-accessible. Near financial district.</span></div>
+    <div class="it"><span class="ik">Campus</span><span class="iv">Dedicated hospitality campus. Focused, purpose-built. Movie shootings happen on campus monthly (per student reviews) — indicator of premium aesthetics.</span></div>
+    <div class="it"><span class="ik">Classrooms</span><span class="iv">Well-maintained with projectors, digital boards. "Top-notch infrastructure" per student reviews. Canteen, lab, stationary available on campus.</span></div>
+    <div class="it"><span class="ik">Specialised Labs</span><span class="iv">Training kitchen, F&B lab, front office simulation, housekeeping lab, mock hotel rooms, travel agency simulation lab — industry-standard equipment.</span></div>
+    <div class="it"><span class="ik">Library</span><span class="iv">Dedicated management library. Hospitality and tourism titles. Digital resources included.</span></div>
+    <div class="it"><span class="ik">Wi-Fi</span><span class="iv">Wi-Fi and general internet access on campus. Canteen facilities available and well-reviewed.</span></div>
+    <div class="it"><span class="ik">Sports</span><span class="iv">Large sports ground. Cultural activity space. Sports events and student activities conducted regularly. Student activity centre.</span></div>
+    <div class="it"><span class="ik">Rating</span><span class="iv"><span class="st">★★★★</span><span class="se">★</span> — Best for hospitality-specific infrastructure in Hyderabad. Premium campus in prime location.</span></div>
+  </div>
+  <div class="gc B">
+    <div class="gc-h">ICI Tirupati — 14-Acre Campus</div>
+    <div class="it"><span class="ik">Location</span><span class="iv">Tirupati, AP — 550 km from Hyderabad. Pilgrimage city. Mandatory residential campus. Away from metro city industry but peaceful for study.</span></div>
+    <div class="it"><span class="ik">Campus</span><span class="iv">Purpose-built 14-acre Ministry of Tourism campus. Inaugurated 2018 by VP Venkaiah Naidu. "State-of-art institute at par with best international culinary institutes."</span></div>
+    <div class="it"><span class="ik">Classrooms</span><span class="iv">Lecture halls with modern tools and technology. Smart classrooms. Cuisine Theatre with AV equipment for industry chef demonstrations. Best-in-class for culinary education in South India.</span></div>
+    <div class="it"><span class="ik">Specialised Labs</span><span class="iv">World-class: specialised kitchens (Indian, Continental, Oriental cuisines), microbiology labs, training restaurants, bakery labs, cuisine theatre. Best specialised infrastructure of all four.</span></div>
+    <div class="it"><span class="ik">Library</span><span class="iv">Culinary library with specialised titles. Research and documentation centre for Indian cuisine. Unique resource not available elsewhere.</span></div>
+    <div class="it"><span class="ik">Wi-Fi</span><span class="iv">Wi-Fi enabled campus. Medical facility, departmental store on campus. Students note "good hostel overall review."</span></div>
+    <div class="it"><span class="ik">Sports</span><span class="iv">Campus sports facilities. Cultural activities — dance, singing, art, literature, drama, anchoring, event management, modelling. Very active campus life per student reviews.</span></div>
+    <div class="it"><span class="ik">Rating</span><span class="iv"><span class="st">★★★★★</span> — Best overall infrastructure of the four. World-class culinary facilities. Ministry of Tourism investment shows.</span></div>
+  </div>
+  <div class="gc C">
+    <div class="gc-h">JNTUH UCM — Kukatpally</div>
+    <div class="it"><span class="ik">Location</span><span class="iv">Kukatpally, Hyderabad — JNTU metro station directly outside campus. Near IT corridor, HITEC City, financial district. Best city connectivity.</span></div>
+    <div class="it"><span class="ik">Campus</span><span class="iv">Within JNTUH's 89-acre main campus. UCM is the management constituent college. Benefits from all JNTUH central infrastructure.</span></div>
+    <div class="it"><span class="ik">Classrooms</span><span class="iv">Digital classrooms with projectors. Computer labs for data analytics software (Python, R, SQL, Tableau). "Clean and spacious classrooms, good seating and ventilation" per student reviews.</span></div>
+    <div class="it"><span class="ik">Specialised Labs</span><span class="iv">Computer labs for data analytics, Python, R programming, data visualisation. TeQiP-funded upgrades have improved equipment quality. Labs well-equipped per reviews.</span></div>
+    <div class="it"><span class="ik">Library</span><span class="iv">JNTUH Central Library — 93,441 books, 30,418+ e-resources. Member of INFLIBNET, DELNET, e-ShodhSindhu, INDEST-AICTE. Best library resource of all four.</span></div>
+    <div class="it"><span class="ik">Wi-Fi</span><span class="iv">Available in department blocks. Some inconsistency noted by students. Kukatpally commercial area nearby for food and other needs. Two large auditoriums on JNTUH campus.</span></div>
+    <div class="it"><span class="ik">Sports</span><span class="iv">Full JNTUH sports complex — cricket, basketball, volleyball, badminton, indoor stadium, gymnasium. Kukatpally bus stand and metro station adjacent.</span></div>
+    <div class="it"><span class="ik">Rating</span><span class="iv"><span class="st">★★★★</span><span class="se">★</span> — Best urban connectivity. Good analytics lab infrastructure. Strong library. Shares JNTUH's broad campus facilities.</span></div>
+  </div>
+  <div class="gc D">
+    <div class="gc-h">UPGCS — Secunderabad</div>
+    <div class="it"><span class="ik">Location</span><span class="iv">Sardar Patel Road, Rasoolpura, Secunderabad — central twin-city location. Bus, metro, auto easily accessible. Excellent for day scholars.</span></div>
+    <div class="it"><span class="ik">Campus</span><span class="iv">Historic constituent college (est. 1947). Co-educational. Separate UG &amp; PG blocks. 1,949 students. Elegant seminar hall noted positively by students.</span></div>
+    <div class="it"><span class="ik">Classrooms</span><span class="iv">Mixed reviews. Students note "old infrastructure" and "old-model fans" but "peaceful ground." Some note "good and well-maintained" — variation across buildings. Digital boards available.</span></div>
+    <div class="it"><span class="ik">Specialised Labs</span><span class="iv">Computer labs with internet access. Shared OU library network. BBA Analytics labs likely basic computing setup. No dedicated analytics studio like JNTUH UCM.</span></div>
+    <div class="it"><span class="ik">Library</span><span class="iv">College library — 56,000 books, 20 subject journals, 15 magazines, 12 newspapers. Automated since 2011. Solid but smaller than JNTUH's central library.</span></div>
+    <div class="it"><span class="ik">Wi-Fi</span><span class="iv">"Good maintained Wi-Fi with clean living spaces" per some students. Others note canteen is "too small." Medical facilities described as "good enough."</span></div>
+    <div class="it"><span class="ik">Sports</span><span class="iv">Sports ground — cricket, volleyball, basketball, throwball, badminton, kabaddi. Health centre on campus. "Sports not highly encouraged" per student review.</span></div>
+    <div class="it"><span class="ik">Rating</span><span class="iv"><span class="st">★★★</span><span class="se">★★</span> — Functional but dated. Good location. Weakest infrastructure of the four but cheapest. OU brand partly compensates.</span></div>
+  </div>
+</div>
+
+<!-- HOSTELS & MESS -->
+<div class="sh"><span class="sh-ic">🏠</span><span class="sh-lb">Hostels, Mess &amp; Residential Life</span><span class="sh-ln"></span></div>
+<div class="ct">
+  <div class="cr" style="background:#EDE9DF">
+    <div class="cp" style="background:#EDE9DF">Parameter</div>
+    <div class="ch A">NITHM</div><div class="ch B">ICI Tirupati</div><div class="ch C">JNTUH UCM</div><div class="ch D">UPGCS, OU</div>
+  </div>
+  <div class="cr"><div class="cp">Hostel availability</div>
+    <div class="cc">Hostel available on/near campus for boys &amp; girls. Separate hostels. Available to students who need accommodation — not mandatory.</div>
+    <div class="cc"><strong>Mandatory residential campus.</strong> Boys &amp; girls hostels on campus with dining hall. No choice to be a day scholar — all students must stay on campus.</div>
+    <div class="cc">JNTUH hostels available — 3 boys + 2 girls blocks on main Kukatpally campus. Optional (many BBA students are day scholars from Hyderabad).</div>
+    <div class="cc">Hostel provided only for postgraduate students. <strong>UG BBA students have no hostel at UPGCS</strong> — must arrange private PG or commute from home. Major limitation.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Hostel fees</div>
+    <div class="cc">~₹5,000–8,000/month (approx). Specific fee not publicly declared. Part of overall ₹3.75L package or additional. Gachibowli PGs nearby also available.</div>
+    <div class="cc">₹30,000/semester (includes mess). = ~₹5,000/month all-in (room + food). Very affordable for a residential campus with meals included.</div>
+    <div class="cc">₹2,500–3,500/month. Mess additional. Some JNTUH scholarship holders get mess subsidy. TeQiP-upgraded Gayatri girls hostel is better than older blocks.</div>
+    <div class="cc">No UG hostel at UPGCS. PG students only. UG students must stay in private PGs (₹4,000–7,000/month in Secunderabad) or commute. Adds significant informal cost.</div>
+  </div>
+  <div class="cr"><div class="cp">Mess / food</div>
+    <div class="cc">Canteen on campus — food quality well-reviewed by students. "Canteen food is nice, mess is nice." Gachibowli's commercial area nearby for outside dining.</div>
+    <div class="cc">Campus mess included in hostel fee. Students note food is "above average." Canteen plus dining hall. Being a culinary institute — food quality is generally better than average.</div>
+    <div class="cc">Central canteen available. Mixed reviews — "hygienic" per some, "average taste and quantity" per others. Kukatpally commercial area accessible for outside food options.</div>
+    <div class="cc">Canteen on campus — noted as "too small." Food is "average quality." Students primarily commute and eat at home or nearby Secunderabad restaurants. Not a residential experience.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Hostel rating</div>
+    <div class="cc"><span class="st">★★★★</span><span class="se">★</span> — Hostel available, good location, city access. Food well-reviewed.</div>
+    <div class="cc"><span class="st">★★★★★</span> — Best hostel experience. Mandatory residential = strong peer bonding. Affordable all-in. Culinary institute = best food quality.</div>
+    <div class="cc"><span class="st">★★★</span><span class="se">★★</span> — Functional. Older blocks have issues; newer blocks decent. Affordable fees.</div>
+    <div class="cc"><span class="st">★</span><span class="se">★★★★</span> — No UG hostel at all. Major disadvantage for students from outside Hyderabad.</div>
+  </div>
+</div>
+
+<!-- INTERNSHIP & TRAINING -->
+<div class="sh"><span class="sh-ic">🔧</span><span class="sh-lb">Internships, Industrial Training &amp; Live Projects</span><span class="sh-ln"></span></div>
+<div class="ct">
+  <div class="cr" style="background:#EDE9DF">
+    <div class="cp" style="background:#EDE9DF">Parameter</div>
+    <div class="ch A">NITHM</div><div class="ch B">ICI Tirupati</div><div class="ch C">JNTUH UCM</div><div class="ch D">UPGCS, OU</div>
+  </div>
+  <div class="cr"><div class="cp">Internship structure</div>
+    <div class="cc"><strong>10 months mandatory industrial training</strong> built into the 4-year BBA curriculum. Students placed in hotels, travel companies, tourism enterprises during the programme — not just a summer internship. This is the strongest internship structure of all four.</div>
+    <div class="cc">Internship semester built into curriculum. Domestic field trips semester-wise. <strong>Live training restaurant</strong> on campus where students serve real guests from Year 1. ELP (Experiential Learning Programme) — students prepare and market real food products.</div>
+    <div class="cc"><strong>2 mandatory summer internships</strong> required by curriculum (per JNTUH academic regulations). Summer Internship I (after Year 1) + Summer Internship II (after Year 2). Must score ≥40% in each. Final year project also mandatory.</div>
+    <div class="cc">No formally structured internship in curriculum. Student-driven — students arrange their own internships. Some workshops on HR development (HCDP) and SAP coaching reported. No mandatory industry exposure built into the BBA Analytics programme.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Internship quality</div>
+    <div class="cc">Excellent — students placed with Taj Hotels, Marriott, Hyatt, Hilton, Thomas Cook, Cox &amp; Kings, OYO, MakeMyTrip, TSTDC. Industry standard exposure during 10 months. Strongly valued by hotel industry employers.</div>
+    <div class="cc">Unique — no other institution offers actual restaurant service and food product commercialisation during the degree. Students leave with real kitchen hours, real guest-service experience, and an actual food product they brought to market.</div>
+    <div class="cc">Good — students intern at various MNCs, IT companies, analytics firms. Stipends ₹20,000–50,000/month per JNTUH reports. HITEC City proximity means analytics/tech companies accessible for internships.</div>
+    <div class="cc">Weak — no structured corporate internship placement. Students report "no industry training provided" and "no companies visiting." The SAP coaching programme and HCDP workshops are positive outliers but not substitutes for industry internship.</div>
+  </div>
+  <div class="cr"><div class="cp">Internship rating</div>
+    <div class="cc"><span class="st">★★★★★</span> — Best structured internship of all four. 10 months mandatory industrial training is a major competitive advantage.</div>
+    <div class="cc"><span class="st">★★★★★</span> — Equally unique. Live restaurant service + ELP food product marketing is unmatched anywhere in India for culinary education.</div>
+    <div class="cc"><span class="st">★★★★</span><span class="se">★</span> — Good 2-internship structure. HITEC City proximity + analytics demand = good stipends and exposure.</div>
+    <div class="cc"><span class="st">★</span><span class="se">★★★★</span> — Weakest internship support. Student must self-arrange everything. No structured industry interface.</div>
+  </div>
+</div>
+
+<!-- PLACEMENTS & SALARIES -->
+<div class="sh"><span class="sh-ic">💼</span><span class="sh-lb">Placements, Salary Packages &amp; Key Recruiters</span><span class="sh-ln"></span></div>
+<div class="ct">
+  <div class="cr" style="background:#EDE9DF">
+    <div class="cp" style="background:#EDE9DF">Parameter</div>
+    <div class="ch A">NITHM</div><div class="ch B">ICI Tirupati</div><div class="ch C">JNTUH UCM</div><div class="ch D">UPGCS, OU</div>
+  </div>
+  <div class="cr"><div class="cp">Placement rate</div>
+    <div class="cc"><strong style="color:var(--A)">~95%</strong> per student reviews (Shiksha). Official report not released. "Excellent placements in past 5 years." Students placed in India and abroad including international hotel chains.</div>
+    <div class="cc"><strong style="color:var(--B)">~70–80%</strong> estimated. ICI placement cell active. Invites hotel chains and hospitality companies annually. Smaller batch (30/campus) = personalised placement support.</div>
+    <div class="cc"><strong style="color:var(--C)">~60–70%*</strong> for BBA DA (JNTUH overall CSE: 90–95%, core branches: 60–70%). BBA DA is a new programme (2022) — dedicated placement track record still building. JNTUH has strong overall placement infrastructure.</div>
+    <div class="cc"><strong style="color:var(--D)">~30–50%</strong> per student reviews. One review (2021–24 batch): "No placements provided; I did not see companies visiting throughout my degree." Another notes "81% of students placed." Highly variable — analytics batch specifically unclear.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Average package</div>
+    <div class="cc"><strong style="color:var(--A)">₹5 LPA</strong> average (₹41,000/month). Range: ₹25,000–₹55,000/month. Consistent across batch. Students placed at management trainee, supervisory, and operational levels.</div>
+    <div class="cc"><strong style="color:var(--B)">₹3–4 LPA</strong> estimated for fresh culinary arts graduates. Kitchen career progression: Commis → Chef de Partie → Sous Chef over 3–5 years. High premium for skilled chefs in luxury hotels.</div>
+    <div class="cc"><strong style="color:var(--C)">₹4–8 LPA</strong> projected for data analytics roles (JNTUH overall avg ₹9.4 LPA for BTech; BBA DA likely lower at ₹4–6 LPA initially given it's a new programme). Market demand for data skills supports higher trajectory.</div>
+    <div class="cc"><strong style="color:var(--D)">₹1.5–3 LPA</strong> based on UPGCS median data (₹1.65 LPA Shiksha 2024). Very low starting packages. BBA analytics specifically may be slightly higher but overall UPGCS placement data is weak.</div>
+  </div>
+  <div class="cr"><div class="cp">Highest package</div>
+    <div class="cc"><strong style="color:var(--A)">₹16 LPA</strong> (unofficial, Shiksha reviews). International placements noted. Hotels like Radisson, Marriott offer higher packages for trained hospitality management graduates.</div>
+    <div class="cc"><strong style="color:var(--B)">₹6–8 LPA</strong> estimated. Executive chef roles at luxury properties. McDonald's management trainee placements noted. International culinary career can go significantly higher.</div>
+    <div class="cc"><strong style="color:var(--C)">₹26.35 LPA</strong> highest on JNTUH campus overall (CommVault, 2025). BBA DA highest likely ₹8–12 LPA for strong students as the programme matures and analytics demand rises.</div>
+    <div class="cc"><strong style="color:var(--D)">₹4–5 LPA</strong> estimated. Amazon and Infosys mentioned by students as visiting. But very few BBA analytics students placed in top companies. Most go into banking, SMEs, or govt exam preparation.</div>
+  </div>
+  <div class="cr alt"><div class="cp">Top recruiters</div>
+    <div class="cc"><span class="tg tA">Taj Hotels</span><span class="tg tA">Marriott</span><span class="tg tA">Hyatt</span><span class="tg tA">Hilton</span><span class="tg tA">Oberoi</span><span class="tg tA">Thomas Cook</span><span class="tg tA">Cox &amp; Kings</span><span class="tg tA">SOTC</span><span class="tg tA">OYO</span><span class="tg tA">IndiGo</span><span class="tg tA">TSTDC</span><span class="tg tA">Green Park Hotels</span></div>
+    <div class="cc"><span class="tg tB">Taj Hotels</span><span class="tg tB">Marriott</span><span class="tg tB">Hyatt</span><span class="tg tB">McDonald's</span><span class="tg tB">Cruise lines</span><span class="tg tB">ITC Hotels</span><span class="tg tB">Airline catering</span><span class="tg tB">Food media</span><span class="tg tB">Resort kitchens</span></div>
+    <div class="cc"><span class="tg tC">TCS</span><span class="tg tC">Wipro</span><span class="tg tC">Infosys</span><span class="tg tC">Amazon</span><span class="tg tC">Oracle</span><span class="tg tC">Deloitte</span><span class="tg tC">Cognizant</span><span class="tg tC">HDFC Analytics</span><span class="tg tC">Genpact</span><span class="tg tC">EXL Service</span><span class="tg tC">Honeywell</span><span class="tg tC">CommVault</span></div>
+    <div class="cc"><span class="tg tD">Amazon</span><span class="tg tD">Infosys</span><span class="tg tD">Banking sector</span><span class="tg tD">SMEs</span><span class="tg tD">Govt sector</span><br><span style="font-size:.67rem;color:var(--muted)">Limited campus-specific analytics recruiters. Most UPGCS placements are individual/walk-in.</span></div>
+  </div>
+  <div class="cr"><div class="cp">Placement rating</div>
+    <div class="cc"><span class="st">★★★★★</span> — Best placement of the four. 95% rate. ₹16 LPA highest. Global hospitality sector places students internationally.</span></div>
+    <div class="cc"><span class="st">★★★</span><span class="se">★★</span> — Decent but limited by niche field and Tirupati location. Strong for culinary-passionate students. International kitchen career possible.</span></div>
+    <div class="cc"><span class="st">★★★★</span><span class="se">★</span> — Strong trajectory as analytics demand grows. JNTUH infrastructure + HITEC City proximity = good long-term outlook. Programme too new for definitive data.</span></div>
+    <div class="cc"><span class="st">★★</span><span class="se">★★★</span> — Weakest placement support of the four. Good for govt exam aspirants but poor for corporate analytics careers. Faculty strong, placement weak.</span></div>
+  </div>
+</div>
+
+<!-- FUNDING / SCHOLARSHIPS -->
+<div class="sh"><span class="sh-ic">💰</span><span class="sh-lb">Scholarships &amp; Funding Support</span><span class="sh-ln"></span></div>
+<div class="ct">
+  <div class="cr" style="background:#EDE9DF">
+    <div class="cp" style="background:#EDE9DF">Parameter</div>
+    <div class="ch A">NITHM</div><div class="ch B">ICI Tirupati</div><div class="ch C">JNTUH UCM</div><div class="ch D">UPGCS, OU</div>
+  </div>
+  <div class="cr"><div class="cp">Available scholarships</div>
+    <div class="cc"><span class="tg tG">SC/ST/OBC Govt Scholarships</span><span class="tg tG">TS Post-Matric Scholarship</span><span class="tg tN">Merit scholarships (limited)</span><br><span style="font-size:.67rem;color:var(--muted)">Industry-sponsored seats for NRI/entrepreneur-sponsored candidates. 1/3 seats reserved for women students.</span></div>
+    <div class="cc"><span class="tg tG">SC/ST/OBC Govt Scholarships</span><span class="tg tG">IGNTU merit scholarships</span><span class="tg tG">Ministry of Tourism scholarships</span><span class="tg tG">DGR (Defence ex-servicemen)</span><br><span style="font-size:.67rem;color:var(--muted)">Application fee waiver for SC/ST (₹500 vs ₹1,000 for Gen). Ministry of Tourism backing means potential for additional funding.</span></div>
+    <div class="cc"><span class="tg tG">TS Fee Reimbursement (full tuition waiver for EAMCET rank &lt;10,000)</span><span class="tg tG">₹35,000 for OBC/SC/ST</span><span class="tg tG">JNTUH merit scholarships</span><span class="tg tN">TS ePASS</span><br><span style="font-size:.67rem;color:var(--muted)">Strongest scholarship infrastructure of all four. Fee reimbursement can make the programme near-free.</span></div>
+    <div class="cc"><span class="tg tG">SC/ST/LBC/EBC OU scholarships</span><span class="tg tG">TS Post-Matric Scholarship</span><span class="tg tG">CM Non-NET Fellowship (PhD)</span><br><span style="font-size:.67rem;color:var(--muted)">75%+ attendance mandatory for scholarship. As fees are already minimal (₹6K–12K/yr), scholarship impact is less significant here.</span></div>
+  </div>
+  <div class="cr alt"><div class="cp">Funding rating</div>
+    <div class="cc"><span class="st">★★★</span><span class="se">★★</span> — Govt + community scholarships. Fees are higher so scholarship support matters more here.</div>
+    <div class="cc"><span class="st">★★★★</span><span class="se">★</span> — Ministry of Tourism backing provides additional funding options. DGR programme for ex-servicemen families is unique.</div>
+    <div class="cc"><span class="st">★★★★★</span> — Best scholarship support. TS fee reimbursement can make BBA DA effectively free. JNTUH's broad scholarship ecosystem is the strongest.</div>
+    <div class="cc"><span class="st">★★★★</span><span class="se">★</span> — Scholarships available but fees are already so low (₹20K–40K total) that funding is less critical. OU's scholarship process is well-established.</div>
+  </div>
+</div>
+
+<!-- PROS CONS TABLE -->
+<div class="sh"><span class="sh-ic">⚖</span><span class="sh-lb">Advantages &amp; Disadvantages</span><span class="sh-ln"></span></div>
+<div class="ct">
+  <div class="cr" style="background:#EDE9DF">
+    <div class="cp" style="background:#EDE9DF">Dimension</div>
+    <div class="ch A">NITHM — Tourism &amp; Hosp.</div><div class="ch B">ICI — Culinary Arts</div><div class="ch C">JNTUH — Data Analytics</div><div class="ch D">UPGCS, OU — Analytics</div>
+  </div>
+  <div class="cr"><div class="cp">Key advantages</div>
+    <div class="cc">
+      <div class="pro">✔ Strongest placements of all four (95%, ₹16 LPA high)</div>
+      <div class="pro">✔ 10-month mandatory industrial training</div>
+      <div class="pro">✔ Ranked 10th govt HMI in India — GHRDC</div>
+      <div class="pro">✔ Gachibowli — prime Hyderabad location</div>
+      <div class="pro">✔ International placements in global hotel chains</div>
+      <div class="pro">✔ 4-year structure = more comprehensive exposure</div>
+    </div>
+    <div class="cc">
+      <div class="pro">✔ World-class culinary infrastructure</div>
+      <div class="pro">✔ Only Govt of India dedicated culinary institute</div>
+      <div class="pro">✔ Live training restaurant from Year 1</div>
+      <div class="pro">✔ Small batch (30) = personalised mentoring</div>
+      <div class="pro">✔ Central University (IGNTU) degree</div>
+      <div class="pro">✔ Affordable hostel + mess (₹5,000/month all-in)</div>
+    </div>
+    <div class="cc">
+      <div class="pro">✔ Most future-proof career field of all four</div>
+      <div class="pro">✔ Data analytics demand growing fastest in India</div>
+      <div class="pro">✔ JNTUH brand + HITEC City proximity</div>
+      <div class="pro">✔ 2 mandatory internships + live projects built in</div>
+      <div class="pro">✔ TS fee reimbursement = near-free education</div>
+      <div class="pro">✔ Dual degree option for BTech students</div>
+    </div>
+    <div class="cc">
+      <div class="pro">✔ Cheapest of all four — near-zero fees</div>
+      <div class="pro">✔ Osmania University brand — respected nationally</div>
+      <div class="pro">✔ Central Secunderabad city location</div>
+      <div class="pro">✔ Strong faculty (PhD-qualified OU professors)</div>
+      <div class="pro">✔ Good for CAT/MBA entrance preparation</div>
+      <div class="pro">✔ Eligible for all govt banking &amp; management exams</div>
+    </div>
+  </div>
+  <div class="cr alt"><div class="cp">Key disadvantages</div>
+    <div class="cc">
+      <div class="con">✘ Highest fees (₹3.75L total)</div>
+      <div class="con">✘ 4-year duration vs 3 years for others</div>
+      <div class="con">✘ Hospitality entry salaries low (₹25K–40K/month)</div>
+      <div class="con">✘ Industry demands long shifts and weekend work</div>
+      <div class="con">✘ Limited official placement data published</div>
+    </div>
+    <div class="cc">
+      <div class="con">✘ Tirupati — 550 km from Hyderabad (isolation)</div>
+      <div class="con">✘ Mandatory residential — no day scholar option</div>
+      <div class="con">✘ Kitchen career is physically demanding</div>
+      <div class="con">✘ Lower starting salary among BBA options</div>
+      <div class="con">✘ Career ceiling needs international exposure or own restaurant</div>
+    </div>
+    <div class="cc">
+      <div class="con">✘ Programme very new (2022) — limited placement track record</div>
+      <div class="con">✘ BBA competes with BTech graduates for analytics roles</div>
+      <div class="con">✘ Must supplement with strong certifications (Google, Tableau)</div>
+      <div class="con">✘ JNTUH overall median (₹9.4 LPA) driven by CSE/ECE — BBA likely lower</div>
+    </div>
+    <div class="cc">
+      <div class="con">✘ Worst placement infrastructure of the four</div>
+      <div class="con">✘ No hostel for UG students</div>
+      <div class="con">✘ Outdated infrastructure (old buildings, small canteen)</div>
+      <div class="con">✘ Analytics programme unproven — no corporate track record</div>
+      <div class="con">✘ Multiple student reviews: "no companies visited during my degree"</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCORECARD -->
+<div class="sh"><span class="sh-ic">📊</span><span class="sh-lb">Head-to-Head Scorecard (out of 10)</span><span class="sh-ln"></span></div>
+<div class="sb-grid">
+  <div class="sbc"><div class="sbc-label">Placements</div>
+    <div class="sb-row"><span class="sb-n A">A</span><div class="sb-bg"><div class="sb-fill A" style="width:96%"></div></div><span class="sb-val A">9.5</span></div>
+    <div class="sb-row"><span class="sb-n B">B</span><div class="sb-bg"><div class="sb-fill B" style="width:65%"></div></div><span class="sb-val B">6.5</span></div>
+    <div class="sb-row"><span class="sb-n C">C</span><div class="sb-bg"><div class="sb-fill C" style="width:75%"></div></div><span class="sb-val C">7.5</span></div>
+    <div class="sb-row"><span class="sb-n D">D</span><div class="sb-bg"><div class="sb-fill D" style="width:30%"></div></div><span class="sb-val D">3.0</span></div>
+  </div>
+  <div class="sbc"><div class="sbc-label">Infrastructure</div>
+    <div class="sb-row"><span class="sb-n A">A</span><div class="sb-bg"><div class="sb-fill A" style="width:82%"></div></div><span class="sb-val A">8.2</span></div>
+    <div class="sb-row"><span class="sb-n B">B</span><div class="sb-bg"><div class="sb-fill B" style="width:97%"></div></div><span class="sb-val B">9.7</span></div>
+    <div class="sb-row"><span class="sb-n C">C</span><div class="sb-bg"><div class="sb-fill C" style="width:80%"></div></div><span class="sb-val C">8.0</span></div>
+    <div class="sb-row"><span class="sb-n D">D</span><div class="sb-bg"><div class="sb-fill D" style="width:55%"></div></div><span class="sb-val D">5.5</span></div>
+  </div>
+  <div class="sbc"><div class="sbc-label">Internship Quality</div>
+    <div class="sb-row"><span class="sb-n A">A</span><div class="sb-bg"><div class="sb-fill A" style="width:98%"></div></div><span class="sb-val A">9.8</span></div>
+    <div class="sb-row"><span class="sb-n B">B</span><div class="sb-bg"><div class="sb-fill B" style="width:96%"></div></div><span class="sb-val B">9.6</span></div>
+    <div class="sb-row"><span class="sb-n C">C</span><div class="sb-bg"><div class="sb-fill C" style="width:78%"></div></div><span class="sb-val C">7.8</span></div>
+    <div class="sb-row"><span class="sb-n D">D</span><div class="sb-bg"><div class="sb-fill D" style="width:18%"></div></div><span class="sb-val D">1.8</span></div>
+  </div>
+  <div class="sbc"><div class="sbc-label">Affordability</div>
+    <div class="sb-row"><span class="sb-n A">A</span><div class="sb-bg"><div class="sb-fill A" style="width:45%"></div></div><span class="sb-val A">4.5</span></div>
+    <div class="sb-row"><span class="sb-n B">B</span><div class="sb-bg"><div class="sb-fill B" style="width:40%"></div></div><span class="sb-val B">4.0</span></div>
+    <div class="sb-row"><span class="sb-n C">C</span><div class="sb-bg"><div class="sb-fill C" style="width:85%"></div></div><span class="sb-val C">8.5</span></div>
+    <div class="sb-row"><span class="sb-n D">D</span><div class="sb-bg"><div class="sb-fill D" style="width:99%"></div></div><span class="sb-val D">9.9</span></div>
+  </div>
+  <div class="sbc"><div class="sbc-label">Career Growth (10yr)</div>
+    <div class="sb-row"><span class="sb-n A">A</span><div class="sb-bg"><div class="sb-fill A" style="width:80%"></div></div><span class="sb-val A">8.0</span></div>
+    <div class="sb-row"><span class="sb-n B">B</span><div class="sb-bg"><div class="sb-fill B" style="width:72%"></div></div><span class="sb-val B">7.2</span></div>
+    <div class="sb-row"><span class="sb-n C">C</span><div class="sb-bg"><div class="sb-fill C" style="width:92%"></div></div><span class="sb-val C">9.2</span></div>
+    <div class="sb-row"><span class="sb-n D">D</span><div class="sb-bg"><div class="sb-fill D" style="width:55%"></div></div><span class="sb-val D">5.5</span></div>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+
+<!-- VERDICT -->
+<div class="verd">
+  <div class="vw">
+    <h2 class="vt">Final Verdict — Which BBA Should You Choose?</h2>
+    <div class="vg">
+      <div class="vc A">
+        <div class="vc-k">🏆 Best overall placements &amp; guaranteed career</div>
+        <div class="vc-v"><span class="pill pA">NITHM BBA Tourism &amp; Hospitality</span> wins decisively on placements (95% rate, ₹16 LPA highest, ₹5 LPA average), internship quality (10 months mandatory industrial training), and career entry certainty. If she enjoys people, travel, hotels, and event management — this is the strongest employment guarantee of all four options. The Gachibowli location is excellent, the institute is nationally ranked, and hotel chains like Taj, Marriott, and Hyatt actively recruit here. The only caveat: fees are highest (₹3.75L) and the programme is 4 years, not 3.</div>
+      </div>
+      <div class="vc C">
+        <div class="vc-k">🏆 Best long-term career &amp; salary growth</div>
+        <div class="vc-v"><span class="pill pC">JNTUH BBA Data Analytics</span> wins on 10-year career trajectory. Data analytics is the fastest-growing sector in India and the USA — $118B by 2026, 1.5M+ jobs by 2030. JNTUH brand + HITEC City proximity + 2 mandatory internships + dual degree option for engineering students = a compelling package. Entry salary is ₹4–8 LPA and grows to ₹15–20 LPA mid-career. The programme is new (2022) so placement data is still building — but the field demand more than compensates. Best for career-focused students who are comfortable with data, numbers, and technology.</div>
+      </div>
+      <div class="vc B">
+        <div class="vc-k">🏆 Best infrastructure &amp; passion-driven career</div>
+        <div class="vc-v"><span class="pill pB">ICI Tirupati BBA Culinary Arts</span> has the finest physical infrastructure of all four — world-class kitchens, live training restaurant, Govt of India investment. <em>If cooking is a genuine passion</em>, this is India's only dedicated Govt culinary institute and offers a career with unlimited upside (executive chef in the USA earns $62K–$200K+). But this choice requires genuine passion for the culinary profession — it is not suitable as a management backup option. The mandatory Tirupati residential campus is also a significant lifestyle commitment.</div>
+      </div>
+      <div class="vc D">
+        <div class="vc-k">✅ Best value — MBA stepping stone only</div>
+        <div class="vc-v"><span class="pill pD">UPGCS BBA Analytics</span> is recommended only as a near-free stepping stone to an MBA. At ₹20K–40K total fees for 3 years, it is essentially free education at an Osmania University constituent college. If she plans to clear CAT/GMAT and pursue an MBA from a top institution, this BBA is the cheapest foundation. As a standalone terminal degree for corporate placement — it is the weakest of the four, with minimal structured placement, no hostel for UG students, and limited corporate analytics exposure. Best suited for self-motivated students who supplement aggressively with online certifications and plan to do a strong MBA after.</div>
+      </div>
+    </div>
+    <div class="fn">
+      <div class="fn-t">Quick Decision Guide</div>
+      <div class="fr"><div class="fk">Best guaranteed job</div><div class="fv"><span class="pill pA">NITHM</span> — 95% placement, hospitality industry certainty<span class="fnt">Loves hotels, events, travel? This is the answer.</span></div></div>
+      <div class="fr"><div class="fk">Best salary ceiling (10yr)</div><div class="fv"><span class="pill pC">JNTUH UCM</span> — Data analytics is the highest-growth field<span class="fnt">Comfortable with Python, data, technology? Choose this.</span></div></div>
+      <div class="fr"><div class="fk">Best infrastructure</div><div class="fv"><span class="pill pB">ICI Tirupati</span> — World-class Govt of India culinary campus<span class="fnt">Passionate about cooking? This is the only real choice.</span></div></div>
+      <div class="fr"><div class="fk">Best value for money</div><div class="fv"><span class="pill pD">UPGCS, OU</span> — Near-zero fees; Osmania University brand<span class="fnt">Planning MBA later? Use this as the cheapest bridge.</span></div></div>
+      <div class="fr"><div class="fk">Best internship</div><div class="fv"><span class="pill pA">NITHM</span> — 10 months mandatory training <em>and</em> <span class="pill pB">ICI</span> — live restaurant + ELP both win equally on industry exposure</div></div>
+      <div class="fr"><div class="fk">Best hostel</div><div class="fv"><span class="pill pB">ICI Tirupati</span> — mandatory residential at ₹5K/month all-in (room + meals). <span class="pill pD">UPGCS</span> has NO UG hostel — avoid if out-of-city.</div></div>
+      <div class="fr"><div class="fk">Best for USA career</div><div class="fv"><span class="pill pC">JNTUH BBA Data Analytics</span> → MS Data Science in USA (FAFSA as US citizen, STEM field, highest salary). All four lead to valid US careers as a citizen — data analytics has the highest guaranteed return.</div></div>
+      <div class="fr" style="border-bottom:none"><div class="fk">Overall ranking</div><div class="fv">
+        <span class="pill pA">A — NITHM</span> for employment certainty &nbsp;
+        <span class="pill pC">C — JNTUH UCM</span> for long-term growth &nbsp;
+        <span class="pill pB">B — ICI</span> for culinary passion &nbsp;
+        <span class="pill pD">D — UPGCS</span> only as MBA stepping stone</div>
+      </div>
+      <div class="hi">One important note for your daughter specifically: She is already pursuing BE BME at Osmania University as her primary degree. If she wants to add a BBA as a parallel/distance supplement, the comparison becomes different — in that context the simplest and most affordable supplement is <strong>IGNOU BBA</strong> (₹30K total, WES-recognised, can be done alongside BE with no campus commitments). If this is a standalone BBA decision for someone else — choose based on interest and the career guide above.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

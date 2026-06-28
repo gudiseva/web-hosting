@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java 21 + Spring — One-Page Cheat Sheet</title>
+<style>
+  :root{
+    --ink:#0e1726;--muted:#5a6b80;--line:#d4dae3;--amber:#a97700;
+    --teal:#1f7a72;--indigo:#4b51c8;--rose:#c2453f;--green:#2c7a4b;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#e7eaef;color:#1b2433;font-family:var(--sans);font-size:13px;line-height:1.4}
+  .screen-note{max-width:860px;margin:18px auto 0;padding:12px 16px;background:#fff;border:1px solid var(--line);
+    border-left:3px solid var(--amber);border-radius:8px;font-size:13px;color:#33415c}
+  .screen-note b{color:var(--ink)}
+  .sheet{max-width:860px;margin:14px auto 40px;background:#fff;padding:14px 16px;
+    box-shadow:0 2px 14px rgba(13,19,32,.12);border-radius:6px}
+  header.top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:8px}
+  header.top h1{font-size:16px;margin:0;letter-spacing:-.2px}
+  header.top .meta{font-family:var(--mono);font-size:9.5px;color:var(--muted);text-align:right}
+  .cols{column-count:2;column-gap:14px}
+  .card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;padding:7px 9px;margin:0 0 8px}
+  .card h2{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 5px;
+    padding-bottom:3px;border-bottom:1px solid var(--line);color:var(--ink)}
+  .card h2 .t{color:#fff;background:var(--ink);border-radius:3px;padding:1px 5px;margin-right:5px;font-size:8.5px}
+  .a-acc h2 .t{background:var(--amber)} .teal h2{color:var(--teal)} .indigo h2{color:var(--indigo)}
+  .rose h2{color:var(--rose)} .green h2{color:var(--green)}
+  p{margin:4px 0}
+  ul{margin:4px 0;padding-left:15px} li{margin:2px 0}
+  b,strong{color:var(--ink)}
+  code{font-family:var(--mono);font-size:10.5px;background:#eef1f5;border:1px solid #dde3ec;border-radius:3px;padding:0 3px;color:#10325c}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:1px 8px;font-size:11.5px}
+  .kv b{font-family:var(--mono);font-weight:600;color:var(--ink);white-space:nowrap}
+  .mini{width:100%;border-collapse:collapse;font-size:10.5px}
+  .mini td{border-bottom:1px solid #eef1f5;padding:2px 4px;vertical-align:top}
+  .mini td:first-child{font-family:var(--mono);color:var(--amber);white-space:nowrap;font-weight:600}
+  .q{font-weight:600;color:var(--ink)}
+  .lead{font-size:11.5px;color:var(--muted);margin:-2px 0 8px}
+  pre{font-family:var(--mono);font-size:10px;line-height:1.35;background:#0d1320;color:#e6edf6;
+    border-radius:5px;padding:6px 8px;margin:5px 0;overflow:hidden;white-space:pre-wrap}
+  .tag{color:#7fd1c9}.kw{color:#e0a500}.cm{color:#8aa0bd}
+  @media print{
+    @page{size:A4 portrait;margin:8mm}
+    body{background:#fff;font-size:8.6px}
+    .screen-note{display:none}
+    .sheet{box-shadow:none;margin:0;padding:0;max-width:100%;border-radius:0}
+    .cols{column-gap:9px}
+    .card{padding:5px 7px;margin:0 0 6px}
+    code,pre{font-size:8px} .mini,.kv{font-size:8px} .lead{font-size:8px}
+    header.top h1{font-size:13px}
+  }
+</style>
+</head>
+<body>
+<div class="screen-note">
+  <b>One-page cheat sheet.</b> Print or save to PDF for the morning of the interview:
+  <b>Ctrl/Cmd&nbsp;+&nbsp;P → Save as PDF</b>, portrait, margins “Default”, and enable
+  <b>“Background graphics”</b> so the colour accents print. It’s tuned to fit a single A4 page.
+</div>
+
+<div class="sheet">
+  <header class="top">
+    <h1>Java&nbsp;21 &amp; Spring — Interview Cheat Sheet</h1>
+    <div class="meta">Tudor / Sagarsoft · JDK 21 · Spring Boot 3.5<br>your edge: 20 yrs ETL → modern Java</div>
+  </header>
+
+  <div class="cols">
+
+    <!-- 7 client topics -->
+    <div class="card a-acc">
+      <h2><span class="t">A</span>The 7 named topics — one-liners</h2>
+      <div class="kv">
+        <b>Class/Object</b><span>Blueprint vs instance. <code>==</code> reference, <code>.equals()</code> value. Override equals ⇒ override hashCode.</span>
+        <b>Data structs</b><span>List=ordered/dupes, Set=unique, Map=key→value. Default <code>ArrayList</code>/<code>HashMap</code>.</span>
+        <b>HashMap</b><span>hashCode→bucket→walk chain w/ equals. O(1) avg; long chain→tree (Java 8).</span>
+        <b>Func iface</b><span>1 abstract method (SAM); target of a lambda. Function/Predicate/Consumer/Supplier.</span>
+        <b>REST</b><span>Stateless HTTP; method=intent, JSON in/out, status code = outcome.</span>
+        <b>Java 21</b><span>Virtual threads, pattern-matching switch + record patterns, sequenced collections.</span>
+        <b>SQL index</b><span>B-tree ⇒ O(log n) not full scan. Cost: slower writes. Verify with <code>EXPLAIN ANALYZE</code>.</span>
+      </div>
+    </div>
+
+    <!-- Java versions -->
+    <div class="card">
+      <h2><span class="t">JAVA</span>Version feature map</h2>
+      <table class="mini">
+        <tr><td>8</td><td>lambdas, Streams, Optional, java.time, method refs</td></tr>
+        <tr><td>10</td><td><code>var</code> (local type inference)</td></tr>
+        <tr><td>14/15</td><td>switch expressions, text blocks</td></tr>
+        <tr><td>16</td><td>records, pattern-matching <code>instanceof</code></td></tr>
+        <tr><td>17</td><td>sealed classes (LTS)</td></tr>
+        <tr><td>21</td><td><b>virtual threads</b>, switch patterns + record patterns, sequenced collections (LTS)</td></tr>
+        <tr><td>21*</td><td>structured concurrency = <i>preview</i> (say so)</td></tr>
+      </table>
+    </div>
+
+    <!-- Streams -->
+    <div class="card teal">
+      <h2><span class="t">P1</span>Streams = your ETL pipeline</h2>
+      <p class="lead">source → lazy intermediate ops → 1 terminal op</p>
+      <pre><span class="cm">// filter→map→collect (GROUP BY style)</span>
+emps.<span class="kw">stream</span>()
+  .filter(e -&gt; e.salary() &gt; 100000)
+  .map(Employee::name)
+  .sorted().toList();
+Collectors.<span class="kw">groupingBy</span>(Employee::dept,
+  Collectors.averagingDouble(Employee::salary));</pre>
+      <p><b>Ops:</b> filter, map, flatMap(1→many), distinct, sorted, limit · <b>Terminal:</b> collect, toList, reduce, count, anyMatch. Stream = single-use, no side effects.</p>
+    </div>
+
+    <!-- Functional ifaces -->
+    <div class="card">
+      <h2><span class="t">A4</span>Functional interfaces</h2>
+      <table class="mini">
+        <tr><td>Function&lt;T,R&gt;</td><td><code>apply</code> · transform · <code>.map()</code></td></tr>
+        <tr><td>Predicate&lt;T&gt;</td><td><code>test</code> · boolean · <code>.filter()</code></td></tr>
+        <tr><td>Consumer&lt;T&gt;</td><td><code>accept</code> · void · <code>.forEach()</code></td></tr>
+        <tr><td>Supplier&lt;T&gt;</td><td><code>get</code> · produce · <code>orElseGet()</code></td></tr>
+      </table>
+      <p>Method refs: <code>Integer::parseInt</code>, <code>System.out::println</code>, <code>String::trim</code>, <code>ArrayList::new</code>.</p>
+    </div>
+
+    <!-- HashMap detail -->
+    <div class="card">
+      <h2><span class="t">A3</span>HashMap — the answer</h2>
+      <p><b>put/get:</b> ① hashCode() → ② index = <code>hash &amp; (n-1)</code> → ③ walk bucket, compare with equals().</p>
+      <p><b>Contract:</b> equal objects ⇒ equal hashCode, else <code>get()</code> never finds it. Use <b>immutable keys</b> (String, records). <code>HashMap</code> not thread-safe → <code>ConcurrentHashMap</code>. Default cap 16, load 0.75.</p>
+    </div>
+
+    <!-- Virtual threads -->
+    <div class="card rose">
+      <h2><span class="t">P3</span>Virtual threads (Java 21)</h2>
+      <p>JVM-managed, ~free; run <b>millions</b>. Block on I/O ⇒ unmount from carrier OS thread. Simple blocking code scales like async.</p>
+      <pre>Executors.<span class="kw">newVirtualThreadPerTaskExecutor</span>()</pre>
+      <p><b>Help:</b> I/O-bound. <b>Not:</b> CPU-bound. Don’t pool them; avoid <code>synchronized</code> around blocking calls (pinning). Spring Boot 3.2+: <code>spring.threads.virtual.enabled=true</code>.</p>
+    </div>
+
+    <!-- REST -->
+    <div class="card">
+      <h2><span class="t">A5</span>REST methods &amp; status</h2>
+      <div class="kv">
+        <b>GET</b><span>read · safe · idempotent</span>
+        <b>POST</b><span>create · <i>not</i> idempotent</span>
+        <b>PUT/PATCH</b><span>replace / partial · idempotent</span>
+        <b>DELETE</b><span>remove · idempotent</span>
+      </div>
+      <p><b>2xx</b> ok (200,201,204) · <b>4xx</b> client (400,401,403,404) · <b>5xx</b> server (500,503).</p>
+    </div>
+
+    <!-- Spring core -->
+    <div class="card indigo">
+      <h2><span class="t">P4</span>Spring Boot essentials</h2>
+      <p><b>Layers:</b> <code>@RestController</code> → <code>@Service</code> (<code>@Transactional</code>) → <code>@Repository</code> → DB.</p>
+      <p><b>DI:</b> container creates beans, injects them. Prefer <b>constructor injection</b> (final, testable).</p>
+      <pre><span class="tag">@RestController</span> <span class="cm">// + @GetMapping/@PostMapping</span>
+<span class="tag">@Service</span> <span class="cm">// business logic</span>
+interface R extends <span class="kw">JpaRepository</span>&lt;Customer,Long&gt;{
+  List&lt;Customer&gt; findByActiveTrue(); <span class="cm">//derived</span> }</pre>
+      <p><b>Errors:</b> <code>@RestControllerAdvice</code>+<code>@ExceptionHandler</code>→status+body. <b>Validate:</b> <code>@Valid</code> + <code>@NotBlank/@Email</code> (needs validation starter). <b>DTOs</b>, never expose entities. Watch <b>N+1</b> → <code>JOIN FETCH</code>.</p>
+    </div>
+
+    <!-- Security -->
+    <div class="card">
+      <h2><span class="t">P4</span>Security (stateless)</h2>
+      <p><b>JWT</b> = signed token (header.payload.signature) carrying claims; server verifies signature, no session. <b>OAuth2/OIDC</b> = how tokens are issued. <b>Keycloak</b> = identity provider. Config a <code>SecurityFilterChain</code> bean (no more <code>WebSecurityConfigurerAdapter</code> in Security 6).</p>
+    </div>
+
+    <!-- Spring Batch -->
+    <div class="card teal">
+      <h2><span class="t">P5</span>Spring Batch = ETL in code</h2>
+      <table class="mini">
+        <tr><td>Source</td><td>ItemReader</td></tr>
+        <tr><td>Transform</td><td>ItemProcessor (return null = filter)</td></tr>
+        <tr><td>Target</td><td>ItemWriter</td></tr>
+        <tr><td>Mapping</td><td>Step (chunk = commit interval)</td></tr>
+        <tr><td>Workflow</td><td>Job · run log = BATCH_* tables</td></tr>
+      </table>
+      <p>Chunk: read N→process→write N→commit→repeat; restartable. Skip/retry = <code>faultTolerant().skip(...)</code>. Batch 5: <code>JobBuilder</code>/<code>StepBuilder</code> + JobRepository.</p>
+    </div>
+
+    <!-- SQL index detail -->
+    <div class="card">
+      <h2><span class="t">A7</span>SQL fast retrieval</h2>
+      <p><b>Leftmost-prefix:</b> index <code>(symbol,date)</code> serves <code>WHERE symbol=?</code> &amp; both, <b>not</b> date alone.</p>
+      <p><b>Ignored when:</b> low selectivity, stale stats (<code>ANALYZE</code>), function on column, leading <code>LIKE '%x'</code>. Covering index (<code>INCLUDE</code>) answers from index. Index high-cardinality cols.</p>
+    </div>
+
+    <!-- Setup + posture -->
+    <div class="card green">
+      <h2><span class="t">GO</span>Setup &amp; posture</h2>
+      <pre>java -version  <span class="cm"># 21</span>
+mvn -version
+<span class="cm"># scaffold:</span> start.spring.io  Web+JPA+Validation+Batch
+docker compose up -d   <span class="cm"># postgres</span>
+mvn spring-boot:run</pre>
+      <p><b>Honest line:</b> “My Java is pre-8 vintage; I’m ramping fast on Spring Boot. My depth is ETL, SQL, and event-driven systems — Spring Batch is my Informatica/Pentaho experience in code.” Lead with strength, be candid on gaps.</p>
+    </div>
+
+  </div><!-- /cols -->
+</div><!-- /sheet -->
+</body>
+</html>

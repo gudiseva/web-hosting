@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBA Culinary Arts — USA Career Opportunities Guide 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:#8B3A00; --orange-lt:#FBF2EA; --orange-md:#C4652A; --orange-acc:#E8924A; --orange-bd:#EAB890;
+  --navy:#0F2A4A; --navy-lt:#EAF2FA; --navy-md:#2A5FA0; --navy-acc:#5A9AE0; --navy-bd:#A0C0E0;
+  --forest:#0D3D28; --forest-lt:#E8F5EF; --forest-acc:#40A870;
+  --gold:#B8850A; --gold-lt:#FEF5DA;
+  --plum:#3D1A5A; --plum-lt:#F0E8FA; --plum-acc:#8A50C0;
+  --ink:#0E0D0A; --paper:#F7F3EC; --cream:#EDE8DC; --rule:#CCC6B5; --muted:#6A6258;
+  --white:#FFFFFF; --ok:#1A5C28; --err:#8B1A1A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* ══ HERO ══ */
+.hero{background:var(--orange);overflow:hidden;position:relative;padding:3rem 1.5rem 0}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#5C2000 0%,#8B3A00 50%,#3A1A00 100%)}
+.hero::after{content:'🍴';position:absolute;right:2rem;bottom:-1rem;font-size:clamp(8rem,18vw,15rem);opacity:.07;line-height:1;pointer-events:none}
+.h-in{position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.h-kicker{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange-acc);margin-bottom:.75rem}
+.h-title{font-family:'Cormorant',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-.02em;margin-bottom:.45rem}
+.h-title em{font-style:italic;color:rgba(255,255,255,.5)}
+.h-sub{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:rgba(255,255,255,.5);letter-spacing:.06em;margin-bottom:1.8rem}
+
+/* citizen advantage bar */
+.cit-bar{background:var(--forest);padding:.7rem 1.5rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.cit-bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%}
+.cit-icon{font-size:1.1rem}
+.cit-text{font-size:.75rem;color:#fff;line-height:1.5}
+.cit-text strong{color:var(--forest-acc)}
+
+/* ══ QUICK NUMBERS ══ */
+.qn{display:grid;grid-template-columns:repeat(5,1fr);background:var(--white);border-bottom:2px solid var(--cream);max-width:1100px;margin:0 auto}
+.qni{padding:.7rem .5rem;text-align:center;border-right:1px solid var(--rule)}
+.qni:last-child{border-right:none}
+.qni-k{font-family:'JetBrains Mono',monospace;font-size:.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.25rem}
+.qni-v{font-family:'Cormorant',serif;font-size:1.15rem;font-weight:700;color:var(--orange);line-height:1}
+.qni-s{font-size:.6rem;color:var(--muted);margin-top:.15rem;line-height:1.2}
+
+/* ══ LAYOUT ══ */
+.wr{max-width:1100px;margin:0 auto;padding:0 1rem}
+.sh{display:flex;align-items:center;gap:.65rem;padding:1.6rem 0 .55rem;border-top:2px solid var(--ink);margin-top:1.4rem}
+.sh:first-of-type{border-top:none;margin-top:.9rem}
+.sh-ic{font-size:.9rem}
+.sh-lb{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.sh-ln{flex:1;height:1px;background:var(--rule)}
+
+/* ══ CAREER GRID ══ */
+.career-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-bottom:1rem}
+.cc{background:var(--white);border-radius:10px;border:1px solid var(--rule);overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.04)}
+.cc-head{padding:.75rem 1rem;display:flex;align-items:center;gap:.55rem}
+.cc.kitchen .cc-head{background:var(--orange-lt);border-bottom:2px solid var(--orange-bd)}
+.cc.corporate .cc-head{background:var(--navy-lt);border-bottom:2px solid var(--navy-bd)}
+.cc.media .cc-head{background:var(--plum-lt);border-bottom:2px solid #C8A8E8}
+.cc.govt .cc-head{background:var(--forest-lt);border-bottom:2px solid #A8D8B8}
+.cc.entrepreneur .cc-head{background:var(--gold-lt);border-bottom:2px solid #E0C070}
+.cc.edu .cc-head{background:#EAF3FA;border-bottom:2px solid #A0C8E8}
+.cc-emoji{font-size:1.3rem;line-height:1}
+.cc-ht{font-family:'Cormorant',serif;font-size:.95rem;font-weight:700;line-height:1.2}
+.cc.kitchen .cc-ht{color:var(--orange)} .cc.corporate .cc-ht{color:var(--navy-md)}
+.cc.media .cc-ht{color:var(--plum)} .cc.govt .cc-ht{color:var(--forest)}
+.cc.entrepreneur .cc-ht{color:var(--gold)} .cc.edu .cc-ht{color:#1A4A6A}
+.cc-body{padding:.9rem 1rem}
+.role{display:flex;gap:.5rem;padding:3.5px 0;border-bottom:1px dotted var(--rule);font-size:.71rem;line-height:1.42}
+.role:last-child{border-bottom:none}
+.role-title{font-weight:600;min-width:130px;font-size:.7rem;flex-shrink:0}
+.cc.kitchen .role-title{color:var(--orange)} .cc.corporate .role-title{color:var(--navy-md)}
+.cc.media .role-title{color:var(--plum)} .cc.govt .role-title{color:var(--forest)}
+.cc.entrepreneur .role-title{color:var(--gold)} .cc.edu .role-title{color:#1A4A6A}
+.role-sal{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);min-width:90px;flex-shrink:0}
+.role-note{font-size:.67rem;color:var(--muted);line-height:1.35}
+
+/* ══ SALARY TIMELINE ══ */
+.sal-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--white);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.ss{padding:.85rem .9rem;border-right:1px solid var(--rule);position:relative}
+.ss:last-child{border-right:none}
+.ss-stage{font-family:'JetBrains Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem}
+.ss-role{font-size:.73rem;font-weight:600;color:var(--ink);margin-bottom:.2rem;line-height:1.25}
+.ss-sal{font-family:'Cormorant',serif;font-size:1.1rem;font-weight:700;color:var(--orange);line-height:1;margin-bottom:.2rem}
+.ss-note{font-size:.62rem;color:var(--muted);line-height:1.3}
+.ss-bar{height:4px;border-radius:2px;margin-top:.5rem;background:var(--orange-acc)}
+
+/* ══ CERT SECTION ══ */
+.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;margin-bottom:1rem}
+.cert{background:var(--white);border-radius:10px;border:1px solid var(--rule);padding:1rem 1.1rem;box-shadow:0 1px 5px rgba(0,0,0,.04)}
+.cert-priority{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.1em;padding:2px 7px;border-radius:2px;margin-bottom:.5rem;font-weight:600}
+.must{background:#F8E8E5;color:#8B1A1A;border:1px solid #DDB0A8}
+.recommended{background:#EAF3DE;color:#1A5C28;border:1px solid #B8D898}
+.optional{background:var(--navy-lt);color:var(--navy);border:1px solid var(--navy-bd)}
+.cert-title{font-family:'Cormorant',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.cert-row{display:flex;gap:.4rem;padding:3px 0;border-bottom:1px dotted var(--rule);font-size:.71rem;line-height:1.4}
+.cert-row:last-child{border-bottom:none}
+.cert-key{font-weight:600;color:var(--muted);min-width:80px;font-size:.63rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+.cert-val{color:var(--ink)}
+
+/* ══ PATH COMPARISON ══ */
+.path-table{background:var(--white);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.pt-row{display:grid;grid-template-columns:160px 1fr 1fr;border-bottom:1px solid var(--rule)}
+.pt-row:last-child{border-bottom:none}
+.pt-row.head{background:var(--cream)}
+.pt-param{padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-right:1px solid var(--rule);background:#F0EDE5;line-height:1.4}
+.pt-cell{padding:8px 11px;font-size:.72rem;color:var(--ink);line-height:1.5;border-right:1px solid var(--rule)}
+.pt-cell:last-child{border-right:none}
+.pt-head{padding:8px 11px;font-family:'Cormorant',serif;font-size:.88rem;font-weight:700;border-right:1px solid var(--rule)}
+.pt-head:last-child{border-right:none}
+.pt-head.a{color:var(--orange);background:var(--orange-lt)} .pt-head.b{color:var(--navy-md);background:var(--navy-lt)}
+.pt-row.alt .pt-param,.pt-row.alt .pt-cell{background:#FAFAF5}
+
+/* TAGS */
+.tg{display:inline-block;padding:1px 6px;border-radius:2px;font-size:.6rem;font-weight:600;margin:2px 2px 2px 0;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.to{background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-bd)}
+.tn{background:var(--navy-lt);color:var(--navy);border:1px solid var(--navy-bd)}
+.tg2{background:var(--forest-lt);color:var(--forest);border:1px solid #A0D0B0}
+.tp{background:var(--plum-lt);color:var(--plum);border:1px solid #C0A0E0}
+.tgd{background:var(--gold-lt);color:var(--gold);border:1px solid #DDB838}
+.pro{color:var(--ok);font-size:.69rem;line-height:1.55;padding:1px 0}
+.con{color:var(--err);font-size:.69rem;line-height:1.55;padding:1px 0}
+.st{color:#C09808;font-size:.75rem} .se{color:#D8D3C8;font-size:.75rem}
+
+/* ══ INDIAN CUISINE SPOTLIGHT ══ */
+.spotlight{background:var(--navy);border-radius:10px;padding:1.3rem 1.4rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.sp-title{font-family:'Cormorant',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid rgba(255,255,255,.15);grid-column:1/-1}
+.sp-item{font-size:.72rem;color:rgba(255,255,255,.8);padding:3px 0;line-height:1.45;border-bottom:1px dotted rgba(255,255,255,.1)}
+.sp-item:last-child{border-bottom:none}
+.sp-item strong{color:var(--orange-acc)}
+
+/* ══ VERDICT / ROADMAP ══ */
+.roadmap{background:var(--ink);padding:2.5rem 1.5rem;margin-top:1.5rem}
+.rm-in{max-width:1100px;margin:0 auto}
+.rm-title{font-family:'Cormorant',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;color:var(--paper);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid #2A2820}
+.rm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}
+.rm-card{background:#1C1B17;border-radius:7px;padding:.95rem 1.05rem;border-top:3px solid}
+.rm-card.yr1{border-color:var(--orange-acc)} .rm-card.yr2{border-color:var(--gold)}
+.rm-card.yr3{border-color:var(--forest-acc)} .rm-card.yr4{border-color:var(--navy-acc)}
+.rm-card.yr5{border-color:var(--plum-acc)} .rm-card.warn{border-color:#CC5533}
+.rm-k{font-family:'JetBrains Mono',monospace;font-size:.57rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.4rem}
+.rm-card.yr1 .rm-k{color:var(--orange-acc)} .rm-card.yr2 .rm-k{color:var(--gold)}
+.rm-card.yr3 .rm-k{color:var(--forest-acc)} .rm-card.yr4 .rm-k{color:var(--navy-acc)}
+.rm-card.yr5 .rm-k{color:var(--plum-acc)} .rm-card.warn .rm-k{color:#CC7755}
+.rm-v{font-size:.73rem;color:#C8C4B8;line-height:1.6}
+.fn-box{background:#1C1B17;border-radius:7px;padding:1.1rem 1.3rem;border:1px solid #2A2820;margin-top:.8rem}
+.fn-title{font-family:'Cormorant',serif;font-size:.95rem;color:var(--gold);margin-bottom:.7rem}
+.fn-row{display:grid;grid-template-columns:185px 1fr;gap:.7rem;padding:.4rem 0;border-bottom:1px solid #2A2820;font-size:.72rem;align-items:flex-start}
+.fn-row:last-child{border-bottom:none}
+.fn-k{color:#888;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.05em}
+.fn-v{color:var(--paper);line-height:1.55}
+.fn-n{font-size:.65rem;color:#6B6560;margin-top:.25rem;display:block;line-height:1.4}
+.pill{display:inline-block;padding:2px 7px;border-radius:2px;font-size:.63rem;font-weight:700;margin-right:3px}
+.po{background:var(--orange);color:#fff} .pn{background:var(--navy-md);color:#fff}
+.pg{background:var(--forest);color:#fff} .pp{background:var(--plum);color:#fff} .pt2{background:var(--gold);color:#fff}
+.hi-box{background:#2A2820;border:1px solid #3A3828;border-radius:5px;padding:.55rem .8rem;font-size:.71rem;color:#C8C4B8;line-height:1.6;border-left:3px solid var(--orange-acc);margin-top:.65rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .career-grid{grid-template-columns:1fr 1fr}
+  .rm-grid{grid-template-columns:1fr 1fr}
+  .sal-steps{grid-template-columns:repeat(3,1fr)}
+  .ss:nth-child(4),.ss:nth-child(5){border-top:1px solid var(--rule)}
+  .spotlight{grid-template-columns:1fr}
+  .fn-row{grid-template-columns:1fr;gap:.15rem}
+  .cert-grid{grid-template-columns:1fr}
+}
+@media(max-width:580px){
+  .qn{grid-template-columns:repeat(3,1fr)}
+  .qni:nth-child(4),.qni:nth-child(5){display:none}
+  .career-grid{grid-template-columns:1fr}
+  .rm-grid{grid-template-columns:1fr}
+  .sal-steps{grid-template-columns:1fr 1fr}
+  .pt-row{grid-template-columns:90px 1fr 1fr}
+  body{padding-bottom:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="h-in">
+    <div class="h-kicker">BBA Culinary Arts — ICI Tirupati · USA Career Guide 2025–26</div>
+    <h1 class="h-title">USA Career Opportunities<br><em>for Culinary Arts Graduates</em></h1>
+    <p class="h-sub">Career Paths · Certifications Required · Salary Ladders · Indian Cuisine Advantage · Step-by-Step Roadmap</p>
+  </div>
+</div>
+<div class="cit-bar">
+  <div class="cit-bar-in">
+    <span class="cit-icon">🇺🇸</span>
+    <span class="cit-text"><strong>Key advantage for a US citizen:</strong> No H-1B, no OPT, no employer visa sponsorship needed. A US citizen with a BBA Culinary Arts degree can work in any US kitchen, hotel, food company, or media outlet from Day 1 after arrival. This is a massive advantage over Indian F-1 student graduates who face strict OPT time limits and difficult H-1B lottery for culinary roles.</span>
+  </div>
+</div>
+
+<!-- QUICK NUMBERS -->
+<div class="qn">
+  <div class="qni"><div class="qni-k">Industry Size (2026)</div><div class="qni-v">$1.55T</div><div class="qni-s">US restaurant industry — NRA 2026</div></div>
+  <div class="qni"><div class="qni-k">Total Employees</div><div class="qni-v">15.8M</div><div class="qni-s">US food service workforce 2026</div></div>
+  <div class="qni"><div class="qni-k">Chef median salary</div><div class="qni-v">$60,990</div><div class="qni-s">BLS May 2024 (per year)</div></div>
+  <div class="qni"><div class="qni-k">Job growth (2024–34)</div><div class="qni-v">+7.1%</div><div class="qni-s">Faster than all-occupations avg</div></div>
+  <div class="qni"><div class="qni-k">New openings/yr</div><div class="qni-v">24,400</div><div class="qni-s">Chefs &amp; head cooks — BLS 2025</div></div>
+</div>
+
+<div class="wr">
+
+<!-- CAREER PATHS -->
+<div class="sh"><span class="sh-ic">👨‍🍳</span><span class="sh-lb">USA Career Paths — 6 Tracks Available</span><span class="sh-ln"></span></div>
+<div class="career-grid">
+
+  <div class="cc kitchen">
+    <div class="cc-head"><span class="cc-emoji">🔥</span><div><div class="cc-ht">Track 1 — Kitchen &amp; Restaurant Careers</div></div></div>
+    <div class="cc-body">
+      <div class="role"><span class="role-title">Commis Chef</span><span class="role-sal">$35K–$42K</span><span class="role-note">Entry. The first USA kitchen role. Works under chef de partie. ICI Tirupati graduates enter here but accelerate faster due to formal training.</span></div>
+      <div class="role"><span class="role-title">Chef de Partie (Line Chef)</span><span class="role-sal">$42K–$55K</span><span class="role-note">Runs a specific section (grill, sauté, pastry). 2–3 years. Common 2nd role for trained culinary grads.</span></div>
+      <div class="role"><span class="role-title">Sous Chef</span><span class="role-sal">$55K–$75K</span><span class="role-note">2nd in command. Manages kitchen in Head Chef's absence. 4–6 years. Very strong mid-career role.</span></div>
+      <div class="role"><span class="role-title">Head Chef / Executive Chef</span><span class="role-sal">$62K–$120K+</span><span class="role-note">BLS 2024 median: $60,990. Top 10%: $93,900. Luxury NYC/LA/SF: $120K–$200K. Full kitchen ownership.</span></div>
+      <div class="role"><span class="role-title">Pastry Chef</span><span class="role-sal">$48K–$90K</span><span class="role-note">Specialised baking/desserts. High-end hotels, Michelin restaurants. Growing demand for skilled pastry specialists.</span></div>
+      <div class="role"><span class="role-title">Personal / Private Chef</span><span class="role-sal">$84K–$154K+</span><span class="role-note">CIA estimates $84K–$154K+ for private household chefs to HNW individuals, celebrities, executives. Top-paying kitchen track.</span></div>
+    </div>
+  </div>
+
+  <div class="cc corporate">
+    <div class="cc-head"><span class="cc-emoji">🏢</span><div><div class="cc-ht">Track 2 — Corporate &amp; Hotel Food Service</div></div></div>
+    <div class="cc-body">
+      <div class="role"><span class="role-title">Corporate Chef</span><span class="role-sal">$75K–$120K</span><span class="role-note">Works for hotel chains (Marriott, Hilton), restaurant groups, hospitals, airlines. Menu development, regional oversight. MBA BBA background is an advantage.</span></div>
+      <div class="role"><span class="role-title">Hotel Executive Chef</span><span class="role-sal">$80K–$140K</span><span class="role-note">5-star hotels. Manages all F&amp;B outlets. ICI Tirupati's industrial training with hotel chains builds direct pathway.</span></div>
+      <div class="role"><span class="role-title">F&amp;B Director</span><span class="role-sal">$80K–$130K</span><span class="role-note">Food &amp; Beverage Director — manages all restaurants, bars, banquets in a hotel. BBA's management component is directly relevant here.</span></div>
+      <div class="role"><span class="role-title">R&amp;D Chef (Test Kitchen)</span><span class="role-sal">$65K–$100K</span><span class="role-note">Works for food companies (Nestlé, Campbell's, General Mills) developing new products. Science + culinary arts. Excellent for ICI grads.</span></div>
+      <div class="role"><span class="role-title">Director Restaurant Ops</span><span class="role-sal">$102K avg</span><span class="role-note">Oysterlink 2025 data. Manages multiple restaurant units for chains. BBA managerial training is directly valuable.</span></div>
+      <div class="role"><span class="role-title">Catering Manager</span><span class="role-sal">$55K–$90K</span><span class="role-note">Wedding, corporate, event catering. Blends culinary skill with logistics and business management — perfect BBA Culinary fit.</span></div>
+    </div>
+  </div>
+
+  <div class="cc media">
+    <div class="cc-head"><span class="cc-emoji">📸</span><div><div class="cc-ht">Track 3 — Food Media, Styling &amp; Content</div></div></div>
+    <div class="cc-body">
+      <div class="role"><span class="role-title">Food Stylist</span><span class="role-sal">$60K–$67K avg</span><span class="role-note">ZipRecruiter April 2026: $62,500 avg. École Ducasse: $66,769 avg. Makes food look beautiful for ads, cookbooks, Netflix, magazines. Creative + culinary blend.</span></div>
+      <div class="role"><span class="role-title">Food Writer / Critic</span><span class="role-sal">$102K median</span><span class="role-note">CIA Glassdoor Nov 2025: $102,000 median for food writers. Restaurant reviews, cookbooks, food magazines, Bon Appétit, NYT Food. Requires strong English + culinary knowledge.</span></div>
+      <div class="role"><span class="role-title">Recipe Developer</span><span class="role-sal">$55K–$85K</span><span class="role-note">Creates and tests recipes for brands, food media, apps. Good for ICI grads with strong practical training. Freelance or staff.</span></div>
+      <div class="role"><span class="role-title">Food YouTuber / Content Creator</span><span class="role-sal">Variable → $200K+</span><span class="role-note">Indian food content on YouTube is massively popular in the USA. Channels dedicated to Indian cuisine, street food, restaurant reviews — potential for significant income.</span></div>
+      <div class="role"><span class="role-title">Culinary Instructor (TV/Media)</span><span class="role-sal">$60K–$100K</span><span class="role-note">Food Network, Cooking Channel, streaming platforms (Netflix — Chef's Table). Entry: assisting, demo cooking for shows. High competition but real pathway.</span></div>
+      <div class="role"><span class="role-title">Cookbook Author</span><span class="role-sal">Variable</span><span class="role-note">Indian cuisine cookbook authors are in growing demand in the USA. Advance: $10K–$100K. Royalties ongoing. Builds long-term brand. ICI's Indian cuisine focus is a differentiator.</span></div>
+    </div>
+  </div>
+
+  <div class="cc govt">
+    <div class="cc-head"><span class="cc-emoji">🏛</span><div><div class="cc-ht">Track 4 — Government &amp; Institutional</div></div></div>
+    <div class="cc-body">
+      <div class="role"><span class="role-title">USDA Food Safety Specialist</span><span class="role-sal">$65K–$95K</span><span class="role-note">US citizen only. USDA employs culinary and food science graduates for food inspection, safety auditing. No visa sponsorship needed — exclusive to citizens.</span></div>
+      <div class="role"><span class="role-title">FDA Food Safety Inspector</span><span class="role-sal">$60K–$90K</span><span class="role-note">US citizen preferred. Inspects food processing facilities, restaurants, imports. Stable federal job with benefits. ICI's food safety and microbiology training is relevant.</span></div>
+      <div class="role"><span class="role-title">Military / Armed Forces Chef</span><span class="role-sal">$40K–$75K + benefits</span><span class="role-note">US Army, Navy, Air Force culinary specialists. US citizenship required. Excellent benefits (housing, healthcare, retirement). Stable career for culinary professionals.</span></div>
+      <div class="role"><span class="role-title">Hospital / Institutional Chef</span><span class="role-sal">$45K–$75K</span><span class="role-note">VA hospitals, government hospital systems, school districts (USDA school meal programmes). Stable hours, no late nights, good benefits vs restaurant kitchen.</span></div>
+      <div class="role"><span class="role-title">Culinary Instructor (Community College)</span><span class="role-sal">$50K–$80K</span><span class="role-note">Teach culinary arts at community colleges or culinary schools. Usually needs industry experience + teaching credential. Very stable, regular hours, good benefits.</span></div>
+    </div>
+  </div>
+
+  <div class="cc entrepreneur">
+    <div class="cc-head"><span class="cc-emoji">🚀</span><div><div class="cc-ht">Track 5 — Entrepreneurship &amp; Food Business</div></div></div>
+    <div class="cc-body">
+      <div class="role"><span class="role-title">Restaurant Owner</span><span class="role-sal">Variable → $500K+</span><span class="role-note">US has 5,000+ Indian restaurants. Indian cuisine is the 3rd most popular cuisine in the USA. BBA's business management training + ICI's culinary expertise = strong restaurant foundation.</span></div>
+      <div class="role"><span class="role-title">Food Truck Operator</span><span class="role-sal">$50K–$200K+</span><span class="role-note">Indian food trucks are highly popular in major US cities (NYC, Chicago, Houston, Bay Area). Lower capital than restaurant. High potential for profitable fast growth.</span></div>
+      <div class="role"><span class="role-title">Catering Business Owner</span><span class="role-sal">$75K–$300K+</span><span class="role-note">Indian wedding catering, corporate Indian food events. High demand, good margins. ICI's event training and ELP background directly applicable.</span></div>
+      <div class="role"><span class="role-title">Cloud Kitchen / Food Delivery</span><span class="role-sal">$60K–$200K+</span><span class="role-note">Ghost kitchen / delivery-only model. Indian cuisine delivery is booming via DoorDash, UberEats. Lower overhead vs dine-in. High growth potential in major US metros.</span></div>
+      <div class="role"><span class="role-title">Culinary Consultant</span><span class="role-sal">$80K–$200K+</span><span class="role-note">Restaurant consultant. Menu design, kitchen setup, staff training. Day rate: $500–$2,000/day. CIA notes restaurant consultants earn significantly above median kitchen salaries.</span></div>
+    </div>
+  </div>
+
+  <div class="cc edu">
+    <div class="cc-head"><span class="cc-emoji">🎓</span><div><div class="cc-ht">Track 6 — Education &amp; Research</div></div></div>
+    <div class="cc-body">
+      <div class="role"><span class="role-title">Culinary School Instructor</span><span class="role-sal">$50K–$80K</span><span class="role-note">Teach at CIA (Culinary Institute of America), Le Cordon Bleu USA, Johnson &amp; Wales, community colleges. ICI degree + 3–5 years experience qualifies.</span></div>
+      <div class="role"><span class="role-title">Food Science Researcher</span><span class="role-sal">$65K–$95K</span><span class="role-note">Food companies (Nestlé, Campbell's, Kraft Heinz) run test kitchens. Culinary arts + food science = R&amp;D chef. BBA Culinary Arts graduates qualify with some food science exposure.</span></div>
+      <div class="role"><span class="role-title">Nutrition Consultant</span><span class="role-sal">$55K–$85K</span><span class="role-note">Dietary advisory for clients, hospitals, wellness brands. Usually needs additional nutrition certification (RD licence) alongside culinary background.</span></div>
+      <div class="role"><span class="role-title">Culinary Tourism Guide</span><span class="role-sal">$45K–$80K</span><span class="role-note">Food tours, cultural cuisine experiences, travel companies (Airbnb Experiences, food tour operators). Indian culinary tourism is growing niche in USA.</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SALARY LADDER -->
+<div class="sh"><span class="sh-ic">💰</span><span class="sh-lb">Typical Salary Progression — Kitchen Career Track</span><span class="sh-ln"></span></div>
+<div class="sal-steps">
+  <div class="ss">
+    <div class="ss-stage">Year 0–1</div>
+    <div class="ss-role">Commis / Line Cook</div>
+    <div class="ss-sal">$35K–$42K</div>
+    <div class="ss-note">Entry. Fresh graduate. ICI training means faster promotion vs no-degree peers.</div>
+    <div class="ss-bar" style="width:28%"></div>
+  </div>
+  <div class="ss">
+    <div class="ss-stage">Year 2–3</div>
+    <div class="ss-role">Chef de Partie</div>
+    <div class="ss-sal">$42K–$55K</div>
+    <div class="ss-note">Runs a kitchen section. Skills + speed evaluated. ICI formal training = section lead faster.</div>
+    <div class="ss-bar" style="width:44%"></div>
+  </div>
+  <div class="ss">
+    <div class="ss-stage">Year 4–6</div>
+    <div class="ss-role">Sous Chef</div>
+    <div class="ss-sal">$55K–$75K</div>
+    <div class="ss-note">2nd in command. BLS avg all chefs: $60,990. Many reach this by Year 5.</div>
+    <div class="ss-bar" style="width:62%"></div>
+  </div>
+  <div class="ss">
+    <div class="ss-stage">Year 7–10</div>
+    <div class="ss-role">Executive Chef</div>
+    <div class="ss-sal">$80K–$120K</div>
+    <div class="ss-note">Top 10%: $93,900 (BLS). NYC/LA/SF luxury kitchens: $120K–$200K. Own restaurant possible.</div>
+    <div class="ss-bar" style="width:80%"></div>
+  </div>
+  <div class="ss">
+    <div class="ss-stage">Year 10+</div>
+    <div class="ss-role">Corporate Chef / Owner</div>
+    <div class="ss-sal">$120K–$500K+</div>
+    <div class="ss-note">Corporate chef for hotel chains, own restaurant/brand. Celebrity chef tier: $1M+. Wide range.</div>
+    <div class="ss-bar" style="width:100%"></div>
+  </div>
+</div>
+
+<!-- CERTIFICATIONS REQUIRED -->
+<div class="sh"><span class="sh-ic">📋</span><span class="sh-lb">Certifications &amp; Qualifying Requirements for USA Employment</span><span class="sh-ln"></span></div>
+<div class="cert-grid">
+  <div class="cert">
+    <div class="cert-priority must">🔴 MUST HAVE — Required before starting work</div>
+    <div class="cert-title">ServSafe Food Handler / Food Manager Certification</div>
+    <div class="cert-row"><span class="cert-key">What it is</span><span class="cert-val">Food safety certification from the National Restaurant Association (NRA). The #1 mandatory credential for anyone working with food in the USA.</span></div>
+    <div class="cert-row"><span class="cert-key">Who needs it</span><span class="cert-val">Every food service employee in most US states. Over 90% of restaurant chains require it regardless of state law. Many states legally mandate at least one certified Food Manager per establishment.</span></div>
+    <div class="cert-row"><span class="cert-key">Two levels</span><span class="cert-val">1. Food Handler Card (basic) — for kitchen workers. 2. ServSafe Food Manager Certification — for supervisors/chefs. A BBA Culinary Arts graduate should get the Food Manager level.</span></div>
+    <div class="cert-row"><span class="cert-key">How to get it</span><span class="cert-val">Complete online course (8–16 hours study) + pass proctored exam. Available 100% online. Can be done before arriving in the USA or immediately upon arrival.</span></div>
+    <div class="cert-row"><span class="cert-key">Cost</span><span class="cert-val">Food Handler: ~$15–$25 · Food Manager: $80–$200 (includes study materials + exam fee). Very affordable.</span></div>
+    <div class="cert-row"><span class="cert-key">Validity</span><span class="cert-val">Food Handler Card: 2–3 years (state-dependent). ServSafe Food Manager: 5 years. Must renew.</span></div>
+    <div class="cert-row"><span class="cert-key">Pass rate</span><span class="cert-val">Food Handler exam: ~95% pass rate. Food Manager exam: ~65% pass rate. ICI's food safety and microbiology training is direct preparation for this exam.</span></div>
+    <div class="cert-row"><span class="cert-key">Where to get</span><span class="cert-val">servsafe.com — fully online. Available before arriving in USA. Complete it during the final year at ICI Tirupati or immediately on arrival.</span></div>
+  </div>
+
+  <div class="cert">
+    <div class="cert-priority must">🔴 MUST HAVE — For specific US states</div>
+    <div class="cert-title">State-Level Food Handler Card (varies by state)</div>
+    <div class="cert-row"><span class="cert-key">What it is</span><span class="cert-val">Each US state has its own food handler card requirements. California, Texas, Florida, Illinois, New York, Washington — all have state-specific requirements ON TOP of or instead of ServSafe.</span></div>
+    <div class="cert-row"><span class="cert-key">Examples</span><span class="cert-val">California: ANSI-accredited 30-min online course (SB 476 — employer must now pay for this). Texas: 2-hr ANSI-accredited course, valid 2 years. New York: varies by county (Manhattan is stricter).</span></div>
+    <div class="cert-row"><span class="cert-key">Key point</span><span class="cert-val">As of 2024, California (SB 476) requires EMPLOYERS to pay for and provide paid time for food handler certification. So the cost burden is on the employer, not the employee — a major change.</span></div>
+    <div class="cert-row"><span class="cert-key">Cost</span><span class="cert-val">Typically $10–$30 for basic food handler card. Employer may cover under SB 476 (California).</span></div>
+    <div class="cert-row"><span class="cert-key">When to get</span><span class="cert-val">Get state card immediately upon getting a job offer in a specific state. Takes 30 minutes to 2 hours online. Apply for the state you're working in.</span></div>
+  </div>
+
+  <div class="cert">
+    <div class="cert-priority recommended">🟢 STRONGLY RECOMMENDED — Career advantage</div>
+    <div class="cert-title">American Culinary Federation (ACF) Certification</div>
+    <div class="cert-row"><span class="cert-key">What it is</span><span class="cert-val">ACF is the largest professional chefs' organisation in the USA. Certifications include Certified Culinarian (CC), Certified Sous Chef (CSC), Certified Executive Chef (CEC). Highly respected by US employers.</span></div>
+    <div class="cert-row"><span class="cert-key">Entry level</span><span class="cert-val">CC (Certified Culinarian) — ideal first ACF cert for fresh graduates with formal culinary education. Requires: 6 months culinary work experience + written exam + practical skills evaluation.</span></div>
+    <div class="cert-row"><span class="cert-key">Why get it</span><span class="cert-val">ACF certification signals professional seriousness to US employers. Often leads to higher starting salary and faster promotion. Particularly valuable for non-US culinary school graduates.</span></div>
+    <div class="cert-row"><span class="cert-key">Cost</span><span class="cert-val">$135–$200 for application + exam fees. ACF membership: $100/year. Investment that pays back quickly in salary.</span></div>
+    <div class="cert-row"><span class="cert-key">When to get</span><span class="cert-val">After 6 months of working in a US kitchen. Pursue CC (Certified Culinarian) first, then CSC as you move up to sous chef level.</span></div>
+  </div>
+
+  <div class="cert">
+    <div class="cert-priority recommended">🟢 STRONGLY RECOMMENDED — For management track</div>
+    <div class="cert-title">HACCP Certification (Food Safety Management)</div>
+    <div class="cert-row"><span class="cert-key">What it is</span><span class="cert-val">Hazard Analysis Critical Control Point — the international standard for food safety management systems. Required for food managers in hotels, restaurants, food production facilities.</span></div>
+    <div class="cert-row"><span class="cert-key">Why it matters</span><span class="cert-val">ICI Tirupati already teaches HACCP as part of the BBA Culinary curriculum. Getting the formal US HACCP certification validates this training for American employers and is required in hotel kitchens and food production plants.</span></div>
+    <div class="cert-row"><span class="cert-key">Cost &amp; access</span><span class="cert-val">Online certification available via NEHA (National Environmental Health Association), NSF International, or SQF Institute. Cost: $100–$300. Valid 3 years.</span></div>
+    <div class="cert-row"><span class="cert-key">ICI advantage</span><span class="cert-val">ICI Tirupati's food safety and microbiology labs give graduates a head start — the HACCP exam is much easier for ICI graduates than for kitchen-only trained cooks.</span></div>
+  </div>
+
+  <div class="cert">
+    <div class="cert-priority optional">🔵 OPTIONAL — For specific career tracks</div>
+    <div class="cert-title">Certified Dietary Manager (CDM) — Healthcare Track</div>
+    <div class="cert-row"><span class="cert-key">Who needs it</span><span class="cert-val">For those working in hospital kitchens, VA hospitals, long-term care facilities, or school food service. Required by CMS (Centers for Medicare &amp; Medicaid) in some institutional food settings.</span></div>
+    <div class="cert-row"><span class="cert-key">Cost &amp; process</span><span class="cert-val">CDM credential via ANFP (Association of Nutrition &amp; Foodservice Professionals). Exam fee: ~$200. Requires 90 hours of approved coursework. BBA in Culinary Arts partially satisfies academic requirements.</span></div>
+  </div>
+
+  <div class="cert">
+    <div class="cert-priority optional">🔵 OPTIONAL — For advanced career tracks</div>
+    <div class="cert-title">Certified Executive Chef (CEC) — ACF Advanced / Wine &amp; Spirits Education Trust (WSET)</div>
+    <div class="cert-row"><span class="cert-key">CEC</span><span class="cert-val">ACF's highest culinary certification. Requires 5+ years as an executive chef. Long-term goal — not needed at entry. Significantly raises salary ceiling and career credibility.</span></div>
+    <div class="cert-row"><span class="cert-key">WSET Level 2/3</span><span class="cert-val">For those interested in beverage director, sommelier, or F&amp;B management career tracks alongside culinary. WSET is globally recognised. Adds ₹5K–$10K to annual salary in upscale dining establishments.</span></div>
+  </div>
+</div>
+
+<!-- PATH COMPARISON — With vs Without Degree -->
+<div class="sh"><span class="sh-ic">⚡</span><span class="sh-lb">BBA Culinary Arts Grad vs Kitchen-Only Experience — USA Advantage</span><span class="sh-ln"></span></div>
+<div class="path-table">
+  <div class="pt-row">
+    <div class="pt-param" style="background:#EDE8DC">Factor</div>
+    <div class="pt-head a">BBA Culinary Arts (ICI Tirupati)</div>
+    <div class="pt-head b">No Degree — Kitchen Experience Only</div>
+  </div>
+  <div class="pt-row"><div class="pt-param">Entry into US kitchen</div>
+    <div class="pt-cell">Enters as trained professional — can justify Commis Chef or even Chef de Partie entry based on formal training evidence. US employers increasingly prefer formal education.</div>
+    <div class="pt-cell">Must start as prep cook or dishwasher — entry level regardless of Indian kitchen experience. Long climb to formal chef title without documentation.</div>
+  </div>
+  <div class="pt-row alt"><div class="pt-param">Food safety knowledge</div>
+    <div class="pt-cell">ICI curriculum includes food safety, microbiology labs, HACCP — ServSafe Food Manager exam is much easier to pass. Employer immediately confident.</div>
+    <div class="pt-cell">Must learn all food safety from scratch. ServSafe exam harder without prior education. Risk of failing initial food handler certification.</div>
+  </div>
+  <div class="pt-row"><div class="pt-param">Management track</div>
+    <div class="pt-cell">BBA component (kitchen management, food costing, business operations) qualifies graduate for supervisory and management roles faster. F&amp;B Director track is open.</div>
+    <div class="pt-cell">Pure kitchen experience rarely leads to F&amp;B Director or Corporate Chef without additional business education. Ceiling is lower without management credentials.</div>
+  </div>
+  <div class="pt-row alt"><div class="pt-param">ACF certification</div>
+    <div class="pt-cell">ICI's formal degree counts as the educational component for ACF Certified Culinarian (CC) certification — only needs 6 months work experience. Gets certified faster.</div>
+    <div class="pt-cell">Needs 3+ years work experience AND must meet additional educational requirements before qualifying for CC certification. Slower path to ACF recognition.</div>
+  </div>
+  <div class="pt-row"><div class="pt-param">Salary premium</div>
+    <div class="pt-cell">BLS data: Executive chefs with associate/bachelor degree earn $65,380 median vs $58,897 for high-school-diploma only. Formal education adds ~$6,500/yr at exec level.</div>
+    <div class="pt-cell">Must demonstrate skills through years of experience before reaching equivalent salary. Slower progression without formal credential signals.</div>
+  </div>
+  <div class="pt-row alt"><div class="pt-param">Indian cuisine advantage</div>
+    <div class="pt-cell">ICI's Indian cuisine specialisation — regional cuisines, spice knowledge, traditional techniques — is a genuine differentiator in the 5,000+ Indian restaurant ecosystem in the USA. Very few Western culinary grads have this.</div>
+    <div class="pt-cell">Generic Indian restaurant cook experience. Less formal documentation of specific cuisine mastery. Harder to command premium salary at upscale Indian dining establishments.</div>
+  </div>
+  <div class="pt-row"><div class="pt-param">Media / non-kitchen roles</div>
+    <div class="pt-cell">BBA degree opens food styling, food writing, R&amp;D chef, culinary instructor, and corporate chef tracks. Degree credential is required for most of these roles.</div>
+    <div class="pt-cell">Kitchen-only background limits access to non-kitchen culinary careers that require formal educational credentials or portfolio of academic work.</div>
+  </div>
+</div>
+
+<!-- INDIAN CUISINE SPOTLIGHT -->
+<div class="sh"><span class="sh-ic">🇮🇳</span><span class="sh-lb">The Indian Cuisine Advantage in the USA — Why ICI Tirupati Graduates Have an Edge</span><span class="sh-ln"></span></div>
+<div class="spotlight">
+  <div class="sp-title">🍛 Indian cuisine is one of the fastest-growing food segments in the USA</div>
+  <div>
+    <div class="sp-item"><strong>5,000+ Indian restaurants</strong> operating in the USA as of 2025, with hundreds opening every year in major metros and suburban areas.</div>
+    <div class="sp-item"><strong>$1B+</strong> annual revenue from Indian restaurants in the USA. Growing at 15%+ annually — one of the fastest-growing cuisine segments.</div>
+    <div class="sp-item"><strong>Major cities with strong Indian food scenes:</strong> New York, Chicago, Houston, San Jose/Bay Area, Dallas, New Jersey, Seattle, Atlanta, Boston — all have significant Indian restaurant ecosystems.</div>
+    <div class="sp-item"><strong>Demand for authentic Indian chefs</strong> in upscale dining: High-end Indian restaurants (Babu Ji NYC, Adda Indian Canteen, Semma NYC — Michelin Bib Gourmand) actively seek chefs trained in regional Indian cuisines, not just generic "curry" cooks.</div>
+    <div class="sp-item"><strong>ICI Tirupati's ICI specialisation</strong> in regional Indian cuisines — Andhra, Chettinad, Mughlai, Kerala, Rajasthani, street food documentation — is a differentiator NO American culinary school can replicate.</div>
+  </div>
+  <div>
+    <div class="sp-item"><strong>Indian food in non-Indian spaces:</strong> Major US hotels (Marriott, Hilton, ITC) are adding Indian cuisine stations to their buffets and restaurants — they hire Indian-trained chefs specifically for this.</div>
+    <div class="sp-item"><strong>Food media demand:</strong> Indian food YouTube, cooking shows, streaming content is exploding in the USA. Tastemade, Food Network, Netflix seek Indian culinary expertise. YouTube channels on Indian cuisine regularly hit 1M+ subscribers.</div>
+    <div class="sp-item"><strong>Indian food product market:</strong> US grocery brands (Trader Joe's, Whole Foods) are expanding Indian product lines. R&D chefs with authentic Indian training are being hired by these companies to develop products for the mainstream US market.</div>
+    <div class="sp-item"><strong>Culinary tourism:</strong> Indian food tours, cooking classes for Americans, spice education — all are growing niches in major US cities. ICI graduates with documentation of Indian cuisine mastery are well-positioned.</div>
+    <div class="sp-item"><strong>Her citizenship advantage:</strong> A US citizen who is also a formally trained Indian culinary specialist is extremely rare. This combination is highly marketable — authenticity + legal work status + formal credentials.</div>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+
+<!-- ROADMAP / VERDICT -->
+<div class="roadmap">
+  <div class="rm-in">
+    <h2 class="rm-title">USA Career Roadmap — Step by Step for a BBA Culinary Arts Graduate</h2>
+    <div class="rm-grid">
+      <div class="rm-card yr1">
+        <div class="rm-k">Step 1 — Before Leaving India (Final Year ICI)</div>
+        <div class="rm-v">
+          ✔ Complete ServSafe Food Manager certification online (servsafe.com, ~$150, can do from India)<br>
+          ✔ Build portfolio: photos of dishes, culinary projects, ELP food products, training restaurant work<br>
+          ✔ Document ICI curriculum for US employers — Indian cuisine specialisations, HACCP training, microbiology lab work<br>
+          ✔ Set up LinkedIn with culinary portfolio — US restaurant managers actively scout here
+        </div>
+      </div>
+      <div class="rm-card yr2">
+        <div class="rm-k">Step 2 — First Month in USA</div>
+        <div class="rm-v">
+          ✔ Get state food handler card for your specific state (30 min – 2 hrs online, $10–$30)<br>
+          ✔ Apply for Social Security Number (needed for employment)<br>
+          ✔ Register with American Culinary Federation (ACF membership: $100/yr)<br>
+          ✔ Apply to hotel kitchens, Indian restaurants, catering companies, corporate food service — as Chef de Partie or Commis, NOT line cook
+        </div>
+      </div>
+      <div class="rm-card yr3">
+        <div class="rm-k">Step 3 — Year 1–2 in US Kitchen</div>
+        <div class="rm-v">
+          ✔ Work in a quality kitchen — 5-star hotel preferred for career building<br>
+          ✔ After 6 months, apply for ACF Certified Culinarian (CC) certification<br>
+          ✔ Build US-specific cooking skills alongside Indian cuisine expertise<br>
+          ✔ Attend ACF chapter events for networking — this is how US chef careers are built<br>
+          ✔ Consider HACCP certification if not already obtained (~$200)
+        </div>
+      </div>
+      <div class="rm-card yr4">
+        <div class="rm-k">Step 4 — Year 3–5: Specialise &amp; Advance</div>
+        <div class="rm-v">
+          ✔ Move to sous chef — salary jumps to $55K–$75K<br>
+          ✔ OR pivot to Indian cuisine specialty restaurant / high-end Indian dining — salary premium for authentic regional expertise<br>
+          ✔ OR transition to corporate chef, R&D chef, food styling — BBA management training directly supports this<br>
+          ✔ Build social media following around Indian cuisine — potential for content creation income alongside kitchen career
+        </div>
+      </div>
+      <div class="rm-card yr5">
+        <div class="rm-k">Step 5 — Year 6–10: Peak Career or Own Business</div>
+        <div class="rm-v">
+          ✔ Executive Chef at 5-star property: $80K–$140K<br>
+          ✔ Own Indian restaurant or food truck: $100K–$500K+ potential<br>
+          ✔ Corporate Chef for hotel chain or food company: $100K–$120K<br>
+          ✔ Food media / cookbook / YouTube: Additional income stream<br>
+          ✔ ACF CEC (Certified Executive Chef) certification at this stage
+        </div>
+      </div>
+      <div class="rm-card warn">
+        <div class="rm-k">⚠️ Honest Caution — What to Know Before Choosing</div>
+        <div class="rm-v">
+          ✘ Starting salary ($35K–$42K) is the lowest of all BBA options — data analytics starts higher<br>
+          ✘ Kitchen work is physically demanding: 10–12 hr shifts, late nights, weekends, holidays<br>
+          ✘ Competitive at top US restaurants — executive chef positions at Michelin-level require years of excellence<br>
+          ✘ This career ONLY makes sense if cooking is a genuine passion — not a strategy<br>
+          ✔ BUT: The ceiling for a talented, passionate culinary professional in the USA is extraordinary — $200K+ is real for top chefs, and own-restaurant success has no ceiling
+        </div>
+      </div>
+    </div>
+    <div class="fn-box">
+      <div class="fn-title">Quick Summary — USA Career for BBA Culinary Arts Graduate</div>
+      <div class="fn-row"><div class="fn-k">Mandatory certifications</div><div class="fn-v"><span class="pill po">ServSafe Food Manager</span> ($150, online from India) + <span class="pill po">State Food Handler Card</span> ($10–$30, day-of arrival). Both can be done online. No complex process — just study and pass an exam.</div></div>
+      <div class="fn-row"><div class="fn-k">No visa issues</div><div class="fn-v">As a US citizen, no H-1B, no OPT, no visa lottery. Work anywhere, for anyone, from Day 1. This is the single biggest advantage over Indian student graduates in culinary arts who face very difficult visa situations.</div></div>
+      <div class="fn-row"><div class="fn-k">Entry salary</div><div class="fn-v">$35K–$42K as Commis/Line Cook. Rises to $55K–$75K as Sous Chef (3–5 yrs), $80K–$120K as Executive Chef (7–10 yrs). Personal chef, corporate chef: $84K–$154K+ (CIA data).</div></div>
+      <div class="fn-row"><div class="fn-k">Best cities for Indian culinary careers</div><div class="fn-v">New York City (highest chef salaries), San Francisco Bay Area, Los Angeles, Chicago, Houston, New Jersey (largest Indian diaspora community). All have active Indian restaurant and hotel markets.</div></div>
+      <div class="fn-row"><div class="fn-k">Unique competitive advantage</div><div class="fn-v">ICI Tirupati's deep Indian cuisine training + US citizenship = extremely rare combination. American culinary schools do not teach authentic regional Indian cuisine. This makes an ICI graduate genuinely differentiated in the 5,000+ Indian restaurant US market.</div></div>
+      <div class="fn-row"><div class="fn-k">Non-kitchen careers</div><div class="fn-v">Food stylist ($62K–$67K avg), food writer ($102K median via CIA/Glassdoor), recipe developer ($55K–$85K), food entrepreneur (unlimited), culinary instructor ($50K–$80K). BBA component opens all management and media tracks.</div></div>
+      <div class="fn-row" style="border-bottom:none"><div class="fn-k">Bottom line</div><div class="fn-v">The USA culinary career for a BBA Culinary Arts graduate from ICI Tirupati is <strong>genuinely viable and rewarding</strong> — particularly given US citizenship, Indian cuisine expertise, and formal BBA credentials. The only firm prerequisite is passion for the culinary profession. If that passion is present, this career path has one of the highest satisfaction ratings of any profession <em>and</em> an unlimited financial ceiling for entrepreneurial and talented individuals.</div></div>
+      <div class="hi-box">One important practical note: Get the <strong>ServSafe Food Manager certification</strong> (servsafe.com) during the final year at ICI Tirupati — before arriving in the USA. It is available fully online, takes 8–16 hours of study, costs ~$150, and is valid for 5 years. Having this in hand when you arrive in the USA means you can apply for any food service position immediately, without waiting. It is the single most valuable 16-hour investment a culinary arts graduate can make before their USA career begins.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

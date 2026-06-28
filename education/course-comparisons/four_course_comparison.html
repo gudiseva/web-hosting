@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Course Comparison — BME, Food Tech UCT, Food Tech PJTSAU & Biotechnology JNTU</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1B2C4E; --navy-lt:#EEF2F9; --navy-bd:#BFC9E0;
+  --forest:#0D4F38; --forest-lt:#E5F4EE; --forest-bd:#9FD5BE;
+  --rust:#7A2E00; --rust-lt:#FBF0E8; --rust-bd:#E8BFA0;
+  --violet:#3A1A6B; --violet-lt:#F0ECFB; --violet-bd:#C4B4EE;
+  --bg:#F5F3EE; --white:#FFFFFF; --ink:#1A1A1A;
+  --muted:#6B6560; --line:#E2DED7;
+  --ok:#1A5C28; --warn:#8B1A1A; --gold:#C9960C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);padding:2rem 1rem 4rem;min-height:100vh}
+
+/* HEADER */
+.ph{text-align:center;margin-bottom:2.2rem}
+.ph h1{font-family:'Lora',serif;font-size:1.9rem;color:var(--navy);margin-bottom:.35rem;line-height:1.25}
+.ph p{font-size:.8rem;color:var(--muted);letter-spacing:.02em}
+
+/* HERO GRID */
+.hg{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;max-width:1200px;margin:0 auto 2rem}
+.hc{border-radius:13px;padding:1.1rem 1.2rem;border:1.5px solid transparent;position:relative;overflow:hidden}
+.hc.a{background:var(--navy-lt);border-color:var(--navy-bd)}
+.hc.b{background:var(--forest-lt);border-color:var(--forest-bd)}
+.hc.c{background:var(--rust-lt);border-color:var(--rust-bd)}
+.hc.d{background:var(--violet-lt);border-color:var(--violet-bd)}
+.hc-bg{font-family:'Lora',serif;font-size:5rem;position:absolute;right:.5rem;top:-.4rem;opacity:.07;font-weight:700;line-height:1}
+.hc.a .hc-bg{color:var(--navy)} .hc.b .hc-bg{color:var(--forest)} .hc.c .hc-bg{color:var(--rust)} .hc.d .hc-bg{color:var(--violet)}
+.hc-tag{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:.5rem;color:#fff}
+.hc.a .hc-tag{background:var(--navy)} .hc.b .hc-tag{background:var(--forest)} .hc.c .hc-tag{background:var(--rust)} .hc.d .hc-tag{background:var(--violet)}
+.hc-title{font-family:'Lora',serif;font-size:.95rem;line-height:1.3;margin-bottom:.3rem}
+.hc.a .hc-title{color:var(--navy)} .hc.b .hc-title{color:var(--forest)} .hc.c .hc-title{color:var(--rust)} .hc.d .hc-title{color:var(--violet)}
+.hc-sub{font-size:.7rem;color:var(--muted);line-height:1.5}
+
+/* SECTION LABEL */
+.sl{max-width:1200px;margin:2rem auto .65rem;font-size:.67rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-bottom:.4rem;border-bottom:1.5px solid var(--line);display:flex;align-items:center;gap:.4rem}
+
+/* TABLE */
+.tw{max-width:1200px;margin:0 auto;background:var(--white);border-radius:14px;border:1px solid var(--line);overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.row{display:grid;grid-template-columns:140px 1fr 1fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.row.alt .dc,.row.alt .pc{background:#FAFAF7}
+.pc{padding:9px 11px;font-size:.67rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-right:1px solid var(--line);background:#F7F5F0;line-height:1.4;display:flex;align-items:flex-start}
+.hd{padding:8px 11px;font-size:.73rem;font-weight:600;border-right:1px solid var(--line);line-height:1.3}
+.hd:last-child{border-right:none}
+.hd.a{color:var(--navy);background:#EEF2F9} .hd.b{color:var(--forest);background:#E5F4EE}
+.hd.c{color:var(--rust);background:#FBF0E8} .hd.d{color:var(--violet);background:#F0ECFB}
+.hd small{font-size:.61rem;font-weight:400;color:var(--muted);display:block;margin-top:1px}
+.dc{padding:9px 11px;font-size:.73rem;color:var(--ink);border-right:1px solid var(--line);line-height:1.52;vertical-align:top}
+.dc:last-child{border-right:none}
+
+/* BADGES */
+.bd{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.63rem;font-weight:500;margin:2px 2px 2px 0;white-space:nowrap}
+.ba{background:var(--navy-lt);color:var(--navy);border:1px solid var(--navy-bd)}
+.bb{background:var(--forest-lt);color:var(--forest);border:1px solid var(--forest-bd)}
+.bc{background:var(--rust-lt);color:var(--rust);border:1px solid var(--rust-bd)}
+.bv{background:var(--violet-lt);color:var(--violet);border:1px solid var(--violet-bd)}
+.bgn{background:#EAF3DE;color:#1A5C28;border:1px solid #C2DCA0}
+.bgr{background:#F0EDE8;color:#555;border:1px solid var(--line)}
+.bp{background:#EEEDFE;color:#3C3489;border:1px solid #C9C5F5}
+
+/* STARS */
+.st{color:#D4A017;font-size:.8rem} .se{color:#D9D5CC;font-size:.8rem}
+.pro{color:var(--ok);font-size:.71rem;padding:1px 0;line-height:1.5}
+.con{color:var(--warn);font-size:.71rem;padding:1px 0;line-height:1.5}
+
+/* CAMPUS CARDS */
+.cg{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;max-width:1200px;margin:0 auto}
+.cc{background:var(--white);border-radius:13px;padding:1.1rem 1.2rem;border:1.5px solid var(--line);box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.cc.a{border-top:4px solid var(--navy)} .cc.b{border-top:4px solid var(--forest)}
+.cc.c{border-top:4px solid var(--rust)} .cc.d{border-top:4px solid var(--violet)}
+.cc-t{font-size:.78rem;font-weight:600;margin-bottom:.5rem}
+.cc.a .cc-t{color:var(--navy)} .cc.b .cc-t{color:var(--forest)} .cc.c .cc-t{color:var(--rust)} .cc.d .cc-t{color:var(--violet)}
+.cr{font-size:.7rem;display:flex;gap:.4rem;padding:3.5px 0;border-bottom:1px solid #F5F3EE;line-height:1.4}
+.cr:last-child{border-bottom:none}
+.ck{font-weight:600;color:var(--muted);min-width:85px;flex-shrink:0;font-size:.68rem}
+.cv{color:var(--ink);font-size:.7rem}
+
+/* USA CARDS */
+.ug{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;max-width:1200px;margin:0 auto}
+.uc{background:var(--white);border-radius:13px;padding:1.1rem 1.2rem;border:1.5px solid var(--line);box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.uc.a{border-color:var(--navy-bd)} .uc.b{border-color:var(--forest-bd)} .uc.c{border-color:var(--rust-bd)} .uc.d{border-color:var(--violet-bd)}
+.ut{font-family:'Lora',serif;font-size:.9rem;margin-bottom:.6rem;line-height:1.3}
+.uc.a .ut{color:var(--navy)} .uc.b .ut{color:var(--forest)} .uc.c .ut{color:var(--rust)} .uc.d .ut{color:var(--violet)}
+.ur{font-size:.7rem;padding:3px 0;border-bottom:1px solid #F5F3EE;line-height:1.4;color:var(--ink)}
+.ur:last-of-type{border-bottom:none}
+.ur strong{color:var(--muted);font-weight:600}
+.uhl{margin-top:.6rem;padding:.5rem .7rem;border-radius:8px;font-size:.7rem;line-height:1.5;font-weight:500}
+.uc.a .uhl{background:var(--navy-lt);color:var(--navy)} .uc.b .uhl{background:var(--forest-lt);color:var(--forest)}
+.uc.c .uhl{background:var(--rust-lt);color:var(--rust)} .uc.d .uhl{background:var(--violet-lt);color:var(--violet)}
+
+/* VERDICT */
+.vb{max-width:1200px;margin:0 auto;background:var(--white);border-radius:14px;border:1.5px solid var(--line);padding:1.3rem 1.5rem;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.vt{font-family:'Lora',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1.5px solid var(--line)}
+.vr{display:grid;grid-template-columns:185px 1fr;gap:.8rem;padding:.5rem 0;border-bottom:1px solid #F0EDE8;font-size:.76rem;align-items:flex-start}
+.vr:last-child{border-bottom:none}
+.vk{font-weight:600;color:var(--muted)}
+.vv{color:var(--ink);line-height:1.5}
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.65rem;font-weight:600;margin-right:3px;margin-bottom:2px}
+.pa{background:var(--navy);color:#fff} .pb{background:var(--forest);color:#fff}
+.pc2{background:var(--rust);color:#fff} .pd{background:var(--violet);color:#fff}
+.note{font-size:.67rem;color:var(--muted);margin-top:2px;display:block;line-height:1.4}
+.warn-box{background:#FFF8E7;border:1px solid #F5D87A;border-radius:8px;padding:.5rem .7rem;font-size:.71rem;color:#7A5500;line-height:1.5;margin-top:.5rem}
+
+@media(max-width:900px){
+  .hg,.cg,.ug{grid-template-columns:1fr 1fr}
+  .row{grid-template-columns:110px 1fr 1fr 1fr 1fr}
+  .vr{grid-template-columns:1fr;gap:.2rem}
+  body{padding:1rem .6rem 3rem}
+  .ph h1{font-size:1.4rem}
+}
+@media(max-width:600px){
+  .hg,.cg,.ug{grid-template-columns:1fr}
+  .row{display:block}
+  .pc,.hd,.dc{border-right:none;border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+
+<div class="ph">
+  <h1>4-Course Engineering Comparison</h1>
+  <p>Campus · India Jobs · USA Opportunities · Placements · Salary · Higher Studies &nbsp;|&nbsp; For a US Citizen</p>
+</div>
+
+<!-- HERO -->
+<div class="hg">
+  <div class="hc a"><div class="hc-bg">A</div><div class="hc-tag">Option A</div>
+    <div class="hc-title">BE Biomedical Engineering</div>
+    <div class="hc-sub">University College of Engineering<br>Osmania University, Hyderabad<br>Est. 1929 · Govt · NIRF 101–150 Engg · ₹40K/yr</div></div>
+  <div class="hc b"><div class="hc-bg">B</div><div class="hc-tag">Option B</div>
+    <div class="hc-title">BTech Food Technology</div>
+    <div class="hc-sub">University College of Technology<br>Osmania University, Hyderabad<br>Est. 1969 · Govt · NBA Accredited · ₹44K/yr</div></div>
+  <div class="hc c"><div class="hc-bg">C</div><div class="hc-tag">Option C</div>
+    <div class="hc-title">BTech Food Technology</div>
+    <div class="hc-sub">College of Food Science &amp; Technology<br>PJTSAU, Rudrur, Nizamabad<br>Est. 2015 · Govt Agri Univ · ICAR A Grade · ₹38.8K/yr</div></div>
+  <div class="hc d"><div class="hc-bg">D</div><div class="hc-tag">Option D — NEW</div>
+    <div class="hc-title">BTech Biotechnology</div>
+    <div class="hc-sub">JNTUH College of Engineering<br>Kukatpally, Hyderabad<br>Est. 1972 · Govt · NIRF #94 Engg · ₹50K/yr</div></div>
+</div>
+
+<!-- CAMPUS -->
+<div class="sl"><span>🏛</span> Campus, Infrastructure &amp; Location</div>
+<div class="cg">
+  <div class="cc a"><div class="cc-t">UCE — Osmania University, Hyderabad</div>
+    <div class="cr"><span class="ck">Location</span><span class="cv">Amberpet, central Hyderabad. 7 km from Secunderabad Jn. Excellent city connectivity.</span></div>
+    <div class="cr"><span class="ck">Campus</span><span class="cv">~30 acres within 1,600-acre OU campus. Historic 1929 colonial architecture + modern wings.</span></div>
+    <div class="cr"><span class="ck">Labs</span><span class="cv">Advanced BME labs: bioinstrumentation, imaging, signal processing, prosthetics. Well-equipped.</span></div>
+    <div class="cr"><span class="ck">Library</span><span class="cv">OU Central Library — one of South India's largest. 6 lakh+ books, DELNET, e-journals.</span></div>
+    <div class="cr"><span class="ck">Hostel</span><span class="cv">Separate boys & girls hostels on OU campus. City access, canteen, gym.</span></div>
+    <div class="cr"><span class="ck">Sports</span><span class="cv">Full OU sports complex — cricket, badminton, basketball, gymnasium, indoor stadium.</span></div>
+    <div class="cr"><span class="ck">Wi-Fi</span><span class="cv">NKN/BSNL OFC high-speed campus-wide Wi-Fi. Smart classrooms, digital boards.</span></div>
+    <div class="cr"><span class="ck">Campus vibe</span><span class="cv">Historic, prestigious, urban. Cosmopolitan student body. Active fests, strong alumni.</span></div>
+    <div style="margin-top:.5rem"><span class="bd ba">NAAC A+</span><span class="bd ba">NIRF 101–150 Engg</span><span class="bd ba">ISO 9001:2015</span><span class="bd ba">UGC Cat-I</span></div>
+  </div>
+  <div class="cc b"><div class="cc-t">UCT — Osmania University, Hyderabad</div>
+    <div class="cr"><span class="ck">Location</span><span class="cv">Same OU campus as UCE — central Hyderabad, urban, well connected.</span></div>
+    <div class="cr"><span class="ck">Campus</span><span class="cv">Part of OU campus. Dedicated UCT building. Shares all central OU facilities.</span></div>
+    <div class="cr"><span class="ck">Labs</span><span class="cv">Food processing, microbiology, food chemistry, quality control, packaging labs.</span></div>
+    <div class="cr"><span class="ck">Library</span><span class="cv">Full access to OU Central Library — excellent shared resource.</span></div>
+    <div class="cr"><span class="ck">Hostel</span><span class="cv">OU hostels. City location convenience. Low fees.</span></div>
+    <div class="cr"><span class="ck">Sports</span><span class="cv">Full access to OU sports complex — same as UCE.</span></div>
+    <div class="cr"><span class="ck">Wi-Fi</span><span class="cv">NKN campus Wi-Fi. Digital classrooms. Same OU infrastructure.</span></div>
+    <div class="cr"><span class="ck">Campus vibe</span><span class="cv">Urban, active. Smaller food tech batch = closer peer group. Benefits from all OU events.</span></div>
+    <div style="margin-top:.5rem"><span class="bd bb">NAAC A+ (OU)</span><span class="bd bb">NBA Accredited</span><span class="bd bb">UGC Cat-I</span></div>
+  </div>
+  <div class="cc c"><div class="cc-t">CFST — PJTSAU, Rudrur, Nizamabad</div>
+    <div class="cr"><span class="ck">Location</span><span class="cv">Rudrur, Nizamabad — ~170 km from Hyderabad. Rural residential campus (stay on campus).</span></div>
+    <div class="cr"><span class="ck">Campus</span><span class="cv">Purpose-built (2015) food science campus with own buildings, labs, hostel, grounds.</span></div>
+    <div class="cr"><span class="ck">Labs</span><span class="cv">Food process tech, food engineering, food quality, food business, food plant ops labs. Strong practical exposure.</span></div>
+    <div class="cr"><span class="ck">Library</span><span class="cv">KMC — 2,566 books, 28 Indian + 2 international journals. CERA e-resources via PJTSAU.</span></div>
+    <div class="cr"><span class="ck">Hostel</span><span class="cv">Mandatory residential. Boys & girls hostels with dining hall. Very low hostel fee ~₹2K–3.5K/month.</span></div>
+    <div class="cr"><span class="ck">Sports</span><span class="cv">Large playground. Athletics, TT, volleyball, kabaddi, cricket, badminton, gym. Inter-university selections.</span></div>
+    <div class="cr"><span class="ck">Wi-Fi</span><span class="cv">Wi-Fi enabled campus. Language lab. Mixed student reviews on connectivity in some areas.</span></div>
+    <div class="cr"><span class="ck">Campus vibe</span><span class="cv">Quiet, residential, agri-focused. Close-knit community. Students prepare & sell food products as part of ELP.</span></div>
+    <div style="margin-top:.5rem"><span class="bd bc">ICAR A Grade</span><span class="bd bc">UGC Recognised</span><span class="bd bc">Residential</span><span class="bd bc">NIRF #37 Agri</span></div>
+  </div>
+  <div class="cc d"><div class="cc-t">JNTUHCEH — Kukatpally, Hyderabad</div>
+    <div class="cr"><span class="ck">Location</span><span class="cv">Kukatpally, Hyderabad — well-connected urban area. Close to IT corridor, pharma & biotech industry hubs.</span></div>
+    <div class="cr"><span class="ck">Campus</span><span class="cv">Large multi-college campus. 8 constituent colleges, 16 directorates, 6 centres of excellence. Established 1972.</span></div>
+    <div class="cr"><span class="ck">Labs</span><span class="cv">Biotech labs: molecular biology, microbiology, biochemistry, genetic engineering, fermentation. Generally adequate per student reviews. Some older equipment noted.</span></div>
+    <div class="cr"><span class="ck">Library</span><span class="cv">Well-stocked central library with digital access. e-journals, research databases. Generally well-reviewed.</span></div>
+    <div class="cr"><span class="ck">Hostel</span><span class="cv">Hostel available. Fees ₹2,500–₹3,500/month. No dress code. Students note adequate but basic facilities.</span></div>
+    <div class="cr"><span class="ck">Sports</span><span class="cv">Sports grounds available. Students note limited advanced facilities vs top-tier colleges.</span></div>
+    <div class="cr"><span class="ck">Wi-Fi</span><span class="cv">Internet available. Students note inconsistency; no campus bus for day scholars noted.</span></div>
+    <div class="cr"><span class="ck">Campus vibe</span><span class="cv">Large, urban, diverse. Strong for CSE/ECE; biotech batch is smaller. Good academic freedom. Active tech events.</span></div>
+    <div style="margin-top:.5rem"><span class="bd bv">NAAC A+</span><span class="bd bv">NIRF #94 Engg 2025</span><span class="bd bv">Est. 1972</span><span class="bd bv">State Affiliating Univ</span></div>
+  </div>
+</div>
+
+<!-- COURSE PROFILE TABLE -->
+<div class="sl"><span>📋</span> Course Profile, Fees &amp; Placements</div>
+<div class="tw">
+  <div class="row" style="background:#F0EDE8">
+    <div class="pc">Parameter</div>
+    <div class="hd a">BE Biomedical Engg<small>UCE — Osmania</small></div>
+    <div class="hd b">BTech Food Tech<small>UCT — Osmania</small></div>
+    <div class="hd c">BTech Food Tech<small>CFST — PJTSAU</small></div>
+    <div class="hd d">BTech Biotechnology<small>JNTUHCEH, Hyderabad</small></div>
+  </div>
+  <div class="row">
+    <div class="pc">Total fees (4 yrs)</div>
+    <div class="dc"><strong style="color:var(--navy)">~₹1.60 lakh</strong><br><span style="font-size:.68rem;color:var(--muted)">₹40,000/yr govt college</span></div>
+    <div class="dc"><strong style="color:var(--forest)">~₹1.56 lakh</strong><br><span style="font-size:.68rem;color:var(--muted)">₹44,180 yr1 / ₹36,680 yrs 2–4</span></div>
+    <div class="dc"><strong style="color:var(--rust)">~₹1.55–1.60 lakh</strong><br><span style="font-size:.68rem;color:var(--muted)">₹38,800/yr + hostel ~₹45,550/yr extra</span></div>
+    <div class="dc"><strong style="color:var(--violet)">~₹2.00 lakh</strong><br><span style="font-size:.68rem;color:var(--muted)">₹50,000/yr; hostel ₹2.5K–3.5K/month extra</span></div>
+  </div>
+  <div class="row alt">
+    <div class="pc">TS EAMCET cutoff (Gen)</div>
+    <div class="dc">Rank ~3,000–6,000 · Very competitive</div>
+    <div class="dc">Rank ~1,15,952 · Very accessible</div>
+    <div class="dc">Rank ~1,44,485 + ICAR/Farmers quota · Most accessible</div>
+    <div class="dc">Rank ~33,805 (Chem Engg ref.) · Biotech likely ~40,000–80,000 · Moderate</div>
+  </div>
+  <div class="row">
+    <div class="pc">Accreditation</div>
+    <div class="dc"><span class="bd ba">NAAC A+</span><span class="bd ba">NIRF 101–150 Engg</span><span class="bd ba">ISO 9001</span><span class="bd ba">UGC Cat-I</span></div>
+    <div class="dc"><span class="bd bb">NAAC A+ (OU)</span><span class="bd bb">NBA</span><span class="bd bb">UGC Cat-I</span></div>
+    <div class="dc"><span class="bd bc">ICAR A Grade</span><span class="bd bc">UGC</span><span class="bd bc">NIRF #37 Agri</span></div>
+    <div class="dc"><span class="bd bv">NAAC A+</span><span class="bd bv">NIRF #94 Engg 2025</span><span class="bd bv">UGC</span></div>
+  </div>
+  <div class="row alt">
+    <div class="pc">Curriculum focus</div>
+    <div class="dc">Medical devices, bioelectronics, bioinstrumentation, imaging (MRI/CT/Ultrasound), biomechanics, prosthetics, clinical engineering, neural engineering</div>
+    <div class="dc">Food processing, preservation, food chemistry, microbiology, packaging, quality systems, FSSAI standards</div>
+    <div class="dc">Food Process Technology, Food Engineering, Food Quality Assurance, Food Business Management, Food Plant Operations. ICAR syllabus. ELP startup training.</div>
+    <div class="dc">Molecular biology, microbiology, genetic engineering, biochemistry, cell biology, fermentation technology, bioinformatics, bioprocess engineering, immunology, genomics</div>
+  </div>
+  <div class="row">
+    <div class="pc">Placement data (overall)</div>
+    <div class="dc">NIRF 2025 median <strong>₹10 LPA</strong>; highest ₹45 LPA. 220/310 placed (71%). BME branch has fewer dedicated BME recruiters; many take IT/cross-disciplinary roles.</div>
+    <div class="dc">UCT NIRF 2025 median ~₹5 LPA. 65 UG students placed. FMCG recruiters (Nestlé, ITC, HUL). <em>⚠ Verify if programme is active.</em></div>
+    <div class="dc">PJTSAU UG avg ₹3.99 LPA (2025); highest ₹4.75 LPA. Food-agri sector: ITC, Amul, HUL, NABARD visit. Modest but industry-aligned.</div>
+    <div class="dc">JNTUH NIRF 2025 median <strong>₹4.20 LPA</strong> UG; 534/1,106 placed (48%). Overall university stats — Biotech branch typically lower than CSE/ECE. Top overall package ₹17 LPA. Recruiters: TCS, Infosys, Wipro, Oracle, Deloitte (mostly IT roles).</div>
+  </div>
+  <div class="row alt">
+    <div class="pc">Starting salary India</div>
+    <div class="dc"><strong style="color:var(--navy)">₹4–8 LPA</strong><br><span style="font-size:.68rem;color:var(--muted)">Mid: ₹8–15 LPA. Senior: ₹15–25 LPA+</span></div>
+    <div class="dc"><strong style="color:var(--forest)">₹2.5–5 LPA</strong><br><span style="font-size:.68rem;color:var(--muted)">Mid: ₹5–9 LPA. Senior: ₹9–13 LPA</span></div>
+    <div class="dc"><strong style="color:var(--rust)">₹2.5–4.75 LPA</strong><br><span style="font-size:.68rem;color:var(--muted)">Mid: ₹5–9 LPA. Senior: ₹9–13 LPA</span></div>
+    <div class="dc"><strong style="color:var(--violet)">₹3–6 LPA</strong><br><span style="font-size:.68rem;color:var(--muted)">Mid (5–8 yrs): ₹8–15 LPA. Senior: ₹15–20 LPA. Research/PhD: higher</span></div>
+  </div>
+</div>
+
+<!-- INDIA JOBS TABLE -->
+<div class="sl"><span>🇮🇳</span> India Job Opportunities</div>
+<div class="tw">
+  <div class="row" style="background:#F0EDE8">
+    <div class="pc">Category</div>
+    <div class="hd a">BE Biomedical Engg</div>
+    <div class="hd b">BTech Food Tech (UCT)</div>
+    <div class="hd c">BTech Food Tech (PJTSAU)</div>
+    <div class="hd d">BTech Biotechnology (JNTU)</div>
+  </div>
+  <div class="row">
+    <div class="pc">Private sector roles</div>
+    <div class="dc"><span class="bd ba">Biomedical Engineer</span><span class="bd ba">Clinical Engineer</span><span class="bd ba">Medical Device Design</span><span class="bd ba">Application Specialist</span><span class="bd ba">R&amp;D Engineer</span><span class="bd ba">Healthcare IT</span></div>
+    <div class="dc"><span class="bd bb">Food Technologist</span><span class="bd bb">Quality Analyst</span><span class="bd bb">R&amp;D Scientist</span><span class="bd bb">Product Development</span><span class="bd bb">Food Safety Officer</span><span class="bd bb">Packaging Engg</span></div>
+    <div class="dc"><span class="bd bc">Food Technologist</span><span class="bd bc">QA Officer</span><span class="bd bc">Food Safety Mgr</span><span class="bd bc">Agri-Food Entrepreneur</span><span class="bd bc">Supply Chain Agri</span><span class="bd bc">Product Devlp</span></div>
+    <div class="dc"><span class="bd bv">Research Scientist</span><span class="bd bv">Bioprocess Engineer</span><span class="bd bv">Bioinformatics Analyst</span><span class="bd bv">QC Analyst</span><span class="bd bv">Clinical Research Assoc.</span><span class="bd bv">Biotech Sales/MR</span><span class="bd bv">Genetic Counsellor</span></div>
+  </div>
+  <div class="row alt">
+    <div class="pc">Top private recruiters</div>
+    <div class="dc" style="font-size:.7rem">Medtronic, Philips Healthcare, Siemens Healthineers, GE Healthcare, J&amp;J, Stryker, Abbott, Apollo, Fortis, Biocon, BD, Baxter</div>
+    <div class="dc" style="font-size:.7rem">Nestlé, ITC, Britannia, HUL, Amul, Dabur, PepsiCo, Cargill, Coca-Cola, Marico, Parle, Godrej Foods</div>
+    <div class="dc" style="font-size:.7rem">ITC, Amul, HUL, Nestlé, Venky's, Heritage Foods, NAFED, regional FMCG, agri-food tech startups</div>
+    <div class="dc" style="font-size:.7rem">Biocon, Dr Reddy's, Cipla, Sun Pharma, Piramal, Reliance Life Sciences, Serum Institute, IQVIA, Syngenta, UPL, Agilent, Thermo Fisher</div>
+  </div>
+  <div class="row">
+    <div class="pc">Government sector</div>
+    <div class="dc"><span class="bd bgn">AIIMS / Govt Hospitals</span><span class="bd bgn">DRDO</span><span class="bd bgn">CSIR</span><span class="bd bgn">ISRO</span><span class="bd bgn">Defence R&amp;D</span></div>
+    <div class="dc"><span class="bd bgn">FSSAI</span><span class="bd bgn">FCI</span><span class="bd bgn">Dept Food &amp; Public Distrib.</span><span class="bd bgn">Agmark Labs</span><span class="bd bgn">State Food Labs</span></div>
+    <div class="dc"><span class="bd bgn">FSSAI</span><span class="bd bgn">FCI</span><span class="bd bgn">NABARD</span><span class="bd bgn">State Agri Depts</span><span class="bd bgn">ICAR Research Asst</span><span class="bd bgn">CWC</span></div>
+    <div class="dc"><span class="bd bgn">CSIR Labs</span><span class="bd bgn">ICMR</span><span class="bd bgn">DBT (Dept Biotechnology)</span><span class="bd bgn">ICAR</span><span class="bd bgn">DRDO</span><span class="bd bgn">DST-funded institutes</span><span class="bd bgn">State Biotech Boards</span></div>
+  </div>
+  <div class="row alt">
+    <div class="pc">Govt job scope</div>
+    <div class="dc"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.68rem;color:var(--muted)">Limited dedicated BME posts; mainly research labs & hospital engineering</span></div>
+    <div class="dc"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.68rem;color:var(--muted)">Strong via FSSAI, FCI, food safety officer tracks</span></div>
+    <div class="dc"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.68rem;color:var(--muted)">FSSAI, FCI + NABARD, ICAR — agri-university adds extra govt eligibility</span></div>
+    <div class="dc"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.68rem;color:var(--muted)">CSIR, ICMR, DBT, ICAR — strong for research-focused govt roles. DBT funds ~200+ biotech projects annually.</span></div>
+  </div>
+  <div class="row">
+    <div class="pc">Industry growth India</div>
+    <div class="dc">Medical devices: <strong>16% CAGR</strong>; PLI scheme. Hyderabad MedTech hub growing.</div>
+    <div class="dc">Food processing: <strong>5th largest globally</strong>, ₹26L crore sector; FMCG steady growth.</div>
+    <div class="dc">Same food industry + agri-food tech: alternative proteins, organic food, rural supply chain growing.</div>
+    <div class="dc">India biotech industry projected at <strong>USD 150 billion by 2025</strong>; Hyderabad is a major biotech hub (Genome Valley — 200+ biotech companies). One of the most future-ready sectors.</div>
+  </div>
+  <div class="row alt">
+    <div class="pc">Key advantages (India)</div>
+    <div class="dc">
+      <div class="pro">✔ Highest India salary trajectory of the four</div>
+      <div class="pro">✔ Cross-disciplinary: can pivot to IT/software</div>
+      <div class="pro">✔ Strong OU alumni network across India</div>
+      <div class="pro">✔ Growing Hyderabad MedTech ecosystem</div>
+    </div>
+    <div class="dc">
+      <div class="pro">✔ OU brand + central Hyderabad location</div>
+      <div class="pro">✔ Strong FMCG recruiter access on campus</div>
+      <div class="pro">✔ Excellent shared OU infrastructure</div>
+    </div>
+    <div class="dc">
+      <div class="pro">✔ Only dedicated Food Tech university college in Telangana</div>
+      <div class="pro">✔ ICAR accreditation — premier agri-food credential</div>
+      <div class="pro">✔ Startup / ELP food product commercialisation</div>
+      <div class="pro">✔ NABARD + ICAR research pathway exclusive to agri-univ grads</div>
+    </div>
+    <div class="dc">
+      <div class="pro">✔ Hyderabad — Genome Valley: 200+ biotech companies nearby</div>
+      <div class="pro">✔ Most future-ready sector (CRISPR, mRNA, bioinformatics)</div>
+      <div class="pro">✔ Can bridge into IT (bioinformatics, health data analytics)</div>
+      <div class="pro">✔ Strong CSIR, ICMR, DBT govt research ecosystem</div>
+      <div class="pro">✔ Biotech is among top 50 highest-paying college majors globally</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="pc">Key disadvantages (India)</div>
+    <div class="dc">
+      <div class="con">✘ Very competitive EAMCET rank required</div>
+      <div class="con">✘ Fewer dedicated BME campus recruiters at UCEOU</div>
+      <div class="con">✘ PG often needed for top roles</div>
+    </div>
+    <div class="dc">
+      <div class="con">✘ ⚠ Verify if programme is currently active</div>
+      <div class="con">✘ Salary ceiling lower without PG</div>
+      <div class="con">✘ Smaller batch = fewer campus recruiters</div>
+    </div>
+    <div class="dc">
+      <div class="con">✘ Rural campus (Rudrur, 170 km from Hyderabad)</div>
+      <div class="con">✘ Modest campus placements (avg ₹3.99 LPA)</div>
+      <div class="con">✘ Lesser-known brand vs Osmania/JNTU</div>
+    </div>
+    <div class="dc">
+      <div class="con">✘ JNTUH UG median ₹4.20 LPA; placement % only 48%</div>
+      <div class="con">✘ Most JNTUH placements go to IT roles — not core biotech</div>
+      <div class="con">✘ Core biotech jobs need PG (MTech/MSc/PhD) for best roles</div>
+      <div class="con">✘ JNTUH campus quality noted as average in student reviews</div>
+    </div>
+  </div>
+  <div class="row alt">
+    <div class="pc">India overall rating</div>
+    <div class="dc"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.68rem;color:var(--muted)">Best India salary; strong brand; MedTech growing</span></div>
+    <div class="dc"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.68rem;color:var(--muted)">Good if programme active; modest salary without PG</span></div>
+    <div class="dc"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.68rem;color:var(--muted)">Best for agri-food sector; rural location limitation</span></div>
+    <div class="dc"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.68rem;color:var(--muted)">Most future-ready sector; strong if PG follows; placement rate needs improvement</span></div>
+  </div>
+</div>
+
+<!-- USA JOBS -->
+<div class="sl"><span>🇺🇸</span> USA Job Opportunities — US Citizen Advantage</div>
+<div class="ug">
+  <div class="uc a">
+    <div class="ut">BE Biomedical Engineering</div>
+    <div class="ur"><strong>Entry salary:</strong> $65,000–$95,000/yr</div>
+    <div class="ur"><strong>Average (all levels):</strong> $74,000–$115,020/yr (BLS 2025)</div>
+    <div class="ur"><strong>Senior:</strong> $100,000–$165,000/yr</div>
+    <div class="ur"><strong>US market:</strong> $200B (2025) → $266B by 2030; +7% job growth (BLS)</div>
+    <div class="ur"><strong>Top employers:</strong> Medtronic, Abbott, Boston Scientific, GE Healthcare, Stryker, Zimmer Biomet, Philips, FDA, NIH, BD</div>
+    <div class="ur"><strong>Top US states:</strong> California ($120K avg), Massachusetts, Texas, Minnesota, Arizona</div>
+    <div class="ur"><strong>Best MS:</strong> Johns Hopkins, Duke, Georgia Tech, UC San Diego, Purdue, Univ of Michigan</div>
+    <div class="ur"><strong>STEM OPT:</strong> 3 years (12 + 24-month extension)</div>
+    <div class="uhl">★ Best USA career — highest salary ceiling. US citizenship = direct access to Medtronic, Abbott, GE Healthcare, FDA from Day 1. No OPT or H-1B required.</div>
+    <div style="margin-top:.5rem"><span class="bd ba">Highest USA salary</span><span class="bd bgn">STEM 3yr OPT</span><span class="bd bp">FDA career</span></div>
+  </div>
+  <div class="uc b">
+    <div class="ut">BTech Food Technology (UCT)</div>
+    <div class="ur"><strong>Entry salary:</strong> $47,000–$65,000/yr</div>
+    <div class="ur"><strong>IFT 2024 BS median:</strong> $96,500/yr (experienced)</div>
+    <div class="ur"><strong>Senior:</strong> $75,000–$110,000/yr</div>
+    <div class="ur"><strong>Job growth (BLS):</strong> +6% through 2032</div>
+    <div class="ur"><strong>Top employers:</strong> Nestlé USA, Kraft Heinz, General Mills, Cargill, Tyson Foods, USDA, FDA (CFSAN), Eurofins, Mondelez</div>
+    <div class="ur"><strong>Top US states:</strong> California, Illinois, Wisconsin, Minnesota, Iowa</div>
+    <div class="ur"><strong>Best MS:</strong> Cornell, Penn State, UC Davis, Kansas State, Univ of Florida, Texas A&amp;M</div>
+    <div class="ur"><strong>STEM OPT:</strong> 3 years (12 + 24-month extension)</div>
+    <div class="uhl">Good option. US citizenship = direct USDA, FDA-CFSAN, food MNC access. Starting salary lower than BME/Biotech. Significantly better after MS from Cornell or Penn State.</div>
+    <div style="margin-top:.5rem"><span class="bd bb">USDA/FDA food</span><span class="bd bgn">STEM 3yr OPT</span><span class="bd bb">Cornell MS pathway</span></div>
+  </div>
+  <div class="uc c">
+    <div class="ut">BTech Food Technology (PJTSAU)</div>
+    <div class="ur"><strong>Entry salary:</strong> $47,000–$65,000/yr (same food sector)</div>
+    <div class="ur"><strong>IFT 2024 BS median:</strong> $96,500/yr (experienced)</div>
+    <div class="ur"><strong>Senior:</strong> $75,000–$110,000/yr</div>
+    <div class="ur"><strong>ICAR bonus:</strong> Recognised by some intl agri-food research bodies; useful for USDA/FAO research roles</div>
+    <div class="ur"><strong>Top employers:</strong> Same food MNCs + USDA agri-food research, FAO/CGIAR, agri-food startups</div>
+    <div class="ur"><strong>Best MS:</strong> Cornell, Penn State, UC Davis, Kansas State, Univ of Florida — plus MS Agri-Food Systems options</div>
+    <div class="ur"><strong>STEM OPT:</strong> 3 years (same as Option B)</div>
+    <div class="ur"><strong>Unique:</strong> Startup/ELP training = edge in US $27B agri-food tech ecosystem</div>
+    <div class="uhl">Similar USA path as Option B. ICAR credential may give slight edge for USDA agri-food research. ELP startup training useful for US food-tech VC ecosystem.</div>
+    <div style="margin-top:.5rem"><span class="bd bc">ICAR credential</span><span class="bd bgn">STEM 3yr OPT</span><span class="bd bc">Agri-food startup</span></div>
+  </div>
+  <div class="uc d">
+    <div class="ut">BTech Biotechnology (JNTU)</div>
+    <div class="ur"><strong>Entry salary:</strong> $50,000–$70,000/yr (BS level)</div>
+    <div class="ur"><strong>Average (all levels):</strong> $72,614–$111,302/yr (2025)</div>
+    <div class="ur"><strong>Senior/specialist:</strong> Up to $160,170–$197,600/yr in specialized roles</div>
+    <div class="ur"><strong>Industry growth:</strong> +11.6% projected 2024–2034 (fastest of the four)</div>
+    <div class="ur"><strong>US market:</strong> $226.6B (2025) → $830B by 2034</div>
+    <div class="ur"><strong>Top employers:</strong> Amgen, Genentech, Pfizer, Gilead, Moderna, J&amp;J, Thermo Fisher, Illumina, FDA, NIH, USDA-ARS, Becton Dickinson, Agilent</div>
+    <div class="ur"><strong>US hubs:</strong> San Francisco Bay Area, Boston/Cambridge, Maryland "DNA Valley", San Diego, North Carolina RTP</div>
+    <div class="ur"><strong>Best MS/PhD:</strong> MIT, UC San Diego, Johns Hopkins, UC Berkeley, Purdue, UNC, Penn State, Texas A&amp;M — TA/RA widely available</div>
+    <div class="ur"><strong>STEM OPT:</strong> 3 years (12 + 24-month extension)</div>
+    <div class="ur"><strong>Emerging roles:</strong> CRISPR scientist, bioinformatics engineer, mRNA specialist, biosimilars scientist, cell therapy researcher — all in high demand post-COVID</div>
+    <div class="uhl">★ Strong USA future. US citizenship = immediate access to Amgen, Genentech, Moderna, NIH, FDA from Day 1. Fastest growing sector. BUT: BS Biotech entry-level USA roles are competitive — MS or PhD strongly recommended to unlock premium salaries and research roles.</div>
+    <div style="margin-top:.5rem"><span class="bd bv">Fastest growing sector</span><span class="bd bgn">STEM 3yr OPT</span><span class="bd bv">CRISPR/mRNA future</span></div>
+  </div>
+</div>
+
+<!-- HIGHER STUDIES TABLE -->
+<div class="sl"><span>🎓</span> Higher Studies &amp; Advantages vs Disadvantages</div>
+<div class="tw">
+  <div class="row" style="background:#F0EDE8">
+    <div class="pc">Parameter</div>
+    <div class="hd a">BE Biomedical Engg</div>
+    <div class="hd b">BTech Food Tech (UCT)</div>
+    <div class="hd c">BTech Food Tech (PJTSAU)</div>
+    <div class="hd d">BTech Biotechnology (JNTU)</div>
+  </div>
+  <div class="row">
+    <div class="pc">PG India</div>
+    <div class="dc"><span class="bd ba">MTech BME (GATE)</span><span class="bd ba">MTech Bioelectronics</span><span class="bd ba">MBA Healthcare</span><span class="bd ba">MTech AI Healthcare</span><span class="bd ba">PhD</span></div>
+    <div class="dc"><span class="bd bb">MTech Food Tech (GATE)</span><span class="bd bb">MSc Food Sci</span><span class="bd bb">MBA FMCG</span><span class="bd bb">PhD</span></div>
+    <div class="dc"><span class="bd bc">MTech Food Tech (GATE/ICAR)</span><span class="bd bc">MSc Food Tech</span><span class="bd bc">MBA Agribusiness</span><span class="bd bc">PhD (ICAR)</span><span class="bd bc">ICAR JRF</span></div>
+    <div class="dc"><span class="bd bv">MTech Biotechnology (GATE)</span><span class="bd bv">MSc Molecular Biology</span><span class="bd bv">MTech Bioinformatics</span><span class="bd bv">MBA Pharma</span><span class="bd bv">PhD (ICAR/UGC-JRF)</span><span class="bd bv">PG Dipl. Bioinformatics</span></div>
+  </div>
+  <div class="row alt">
+    <div class="pc">PG USA</div>
+    <div class="dc">MS BME: Johns Hopkins, Duke, Georgia Tech, Purdue, UC San Diego, UMich. TA/RA frequently available.</div>
+    <div class="dc">MS Food Science: Cornell, Penn State, UC Davis, Kansas State, Univ of Florida, Texas A&amp;M. TA/RA available.</div>
+    <div class="dc">Same as UCT Food Tech + MS Agri-Food Systems, MS Sustainable Food Systems options.</div>
+    <div class="dc">MS/PhD Biotechnology: MIT, UC San Diego, UC Berkeley, Johns Hopkins, Purdue, UNC, Penn State, Texas A&amp;M. TA/RA widely available. Biotech PhDs are heavily funded with stipends $25K–$40K/yr.</div>
+  </div>
+  <div class="row">
+    <div class="pc">Emerging opportunities</div>
+    <div class="dc">AI diagnostics, wearables, robotic surgery, neural engineering, gene therapy devices, MedTech startups, telemedicine hardware</div>
+    <div class="dc">Alternative proteins, plant-based foods, precision fermentation, food safety tech, nutraceuticals, agri-food startups</div>
+    <div class="dc">Same food tech trends + agri-biotech convergence, organic food supply chains, rural agri-food entrepreneurship</div>
+    <div class="dc">CRISPR gene editing, mRNA vaccines, biosimilars, synthetic biology, bioinformatics AI, stem cell research, CAR-T cell therapy, precision agriculture biotech — fastest-evolving of the four</div>
+  </div>
+  <div class="row alt">
+    <div class="pc">USA salary ceiling</div>
+    <div class="dc"><strong>$100K–$165K/yr</strong> (senior BME engineer)</div>
+    <div class="dc"><strong>$75K–$110K/yr</strong> (senior food scientist)</div>
+    <div class="dc"><strong>$75K–$110K/yr</strong> (same food sector)</div>
+    <div class="dc"><strong>$72K–$197K/yr</strong> depending on specialization; CRISPR/bioinformatics specialists reach top tier</div>
+  </div>
+  <div class="row">
+    <div class="pc">USA overall rating</div>
+    <div class="dc"><span class="st">★★★★★</span><br><span style="font-size:.68rem;color:var(--muted)">Highest starting salary; fastest MedTech market growth; best entry without PG</span></div>
+    <div class="dc"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.68rem;color:var(--muted)">Good; lower starting salary; strong with MS from Cornell</span></div>
+    <div class="dc"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.68rem;color:var(--muted)">Same food sector; ICAR credential small bonus for agri-food research roles</span></div>
+    <div class="dc"><span class="st">★★★★★</span><br><span style="font-size:.68rem;color:var(--muted)">Highest long-term USA potential; fastest-growing sector; needs MS/PhD for premium roles</span></div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div class="sl"><span>🏆</span> Final Assessment — US Citizen</div>
+<div class="vb">
+  <div class="vt">Strategic Recommendation Summary — All Four Options</div>
+  <div class="vr">
+    <div class="vk">🏆 Best USA career (immediate)</div>
+    <div class="vv"><span class="pill pa">BE Biomedical Engg — UCE Osmania</span> Highest entry-level USA salary ($65K–$95K without PG), $266B US medical device market, +7% job growth. As a US citizen she joins Medtronic / GE Healthcare / FDA from Day 1 — no sponsorship needed. Best ROI without a US master's degree.
+    <span class="note">Roadmap: UCE Osmania (₹1.6L) → MS BME at Purdue/Georgia Tech (FAFSA eligible + TA/RA) → MedTech career in USA.</span></div>
+  </div>
+  <div class="vr">
+    <div class="vk">🏆 Best USA long-term potential</div>
+    <div class="vv"><span class="pill pd">BTech Biotechnology — JNTUHCEH</span> Fastest-growing US sector (+11.6% through 2034, $830B by 2034). Roles in CRISPR, mRNA, bioinformatics, biosimilars command the highest salaries long-term (up to $197K senior). US biotech hubs (Bay Area, Boston, Maryland) are the highest-paying in the world. Her US citizenship removes all work barriers at Amgen, Genentech, Moderna, NIH, FDA.
+    <span class="note">Critical caveat: Entry-level BS Biotechnology USA roles are competitive. An MS or PhD from a US university (MIT, UC San Diego, Johns Hopkins — many funded with stipend) is strongly recommended to unlock premium salaries. FAFSA + TA/RA can make this near-free.</span></div>
+  </div>
+  <div class="vr">
+    <div class="vk">🏆 Best campus experience</div>
+    <div class="vv"><span class="pill pa">BE BME / BTech Food Tech — UCE or UCT, Osmania</span> Both on the same historic 1,600-acre Osmania University campus in central Hyderabad. Best infrastructure, library, sports, city connectivity, alumni network, and overall campus life of the four options.</div>
+  </div>
+  <div class="vr">
+    <div class="vk">🏆 Best for India govt jobs</div>
+    <div class="vv"><span class="pill pb">BTech Food Tech (UCT or PJTSAU)</span> FSSAI, FCI, Food Safety Officers — dedicated govt tracks. PJTSAU additionally opens ICAR, NABARD. <span class="pill pd">BTech Biotechnology (JNTU)</span> runs a very close second — CSIR, ICMR, DBT offer strong research govt pathways.</div>
+  </div>
+  <div class="vr">
+    <div class="vk">🏆 Most future-ready field</div>
+    <div class="vv"><span class="pill pd">BTech Biotechnology — JNTUHCEH</span> CRISPR, mRNA, synthetic biology, bioinformatics, cell therapy — all are transforming healthcare, agriculture, and industry. India's biotech industry is projected at $150B by 2025. Hyderabad's Genome Valley has 200+ biotech companies — one of the best local ecosystems to launch a biotech career.
+    <span class="note">However, core biotech roles in India and USA require PG (MSc/MTech/PhD) for the best positions. Without PG, most fresh BTech Biotech graduates take QC, sales, or research assistant roles at lower salaries.</span></div>
+  </div>
+  <div class="vr">
+    <div class="vk">💰 Fees — all affordable</div>
+    <div class="vv">All four are government colleges with low fees. UCE/UCT Osmania (~₹1.56–1.60L), PJTSAU (~₹1.55L + hostel), JNTUH (~₹2.00L) — all far below private college costs. This is not a differentiating factor in this comparison.</div>
+  </div>
+  <div class="vr">
+    <div class="vk">⚠️ Critical warnings</div>
+    <div class="vv">
+      <div class="warn-box">1. <strong>Option B (BTech Food Tech, UCT Osmania):</strong> Multiple sources suggest this programme may have been discontinued as of 2024. <strong>Please verify directly with UCT Osmania before applying.</strong></div>
+      <div class="warn-box" style="margin-top:.5rem">2. <strong>Option D (BTech Biotechnology, JNTUH):</strong> JNTUH's overall UG placement rate is 48% (534/1,106 placed per NIRF 2025) with a median of ₹4.20 LPA. The Biotechnology branch specifically will likely have lower placement than the university average. Most JNTUH on-campus placements go to IT/software roles. For core biotech jobs, she will need to actively pursue PG — either MS in USA (ideal given US citizenship) or MTech/PhD in India via GATE.</div>
+    </div>
+  </div>
+  <div class="vr" style="border-bottom:none">
+    <div class="vk">🎯 Optimal roadmap (our recommendation)</div>
+    <div class="vv">
+      <strong>If interest is in healthcare technology / medical devices / USA career:</strong><br>
+      <span class="pill pa">BE BME — UCE Osmania</span> (₹1.6L, best campus, top brand) → MS BME in USA (FAFSA + TA/RA, near-zero cost) → Medtronic / GE Healthcare / FDA as US citizen → $65K–$165K career trajectory.
+      <br><br>
+      <strong>If interest is in cutting-edge biology / pharma / biotech startups / long-term USA potential:</strong><br>
+      <span class="pill pd">BTech Biotechnology — JNTUHCEH</span> (₹2L, urban Hyderabad, Genome Valley ecosystem) → PhD or MS Biotechnology in USA (heavily funded TA/RA available, often $25K–$40K stipend + tuition waiver) → Amgen / Moderna / NIH / biotech startup as US citizen → highest long-term USA earning potential.
+      <span class="note">Both roadmaps leverage her US citizenship to bypass all visa/OPT/H-1B restrictions that Indian graduates face. She can work from Day 1 in the US in either career track.</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

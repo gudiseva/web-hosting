@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java 21 + Spring — Tudor / Sagarsoft Interview Prep</title>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e1726;          /* deep slate ink */
+    --ink-2:#16233a;
+    --paper:#eef1f5;        /* cool off-white, not warm cream */
+    --paper-2:#ffffff;
+    --line:#d4dae3;
+    --muted:#5a6b80;
+    --text:#1b2433;
+    --amber:#e0a500;        /* signature accent (highlighter) */
+    --amber-deep:#a97700;
+    --teal:#1f7a72;         /* ETL analogy */
+    --teal-bg:#e4f3f1;
+    --indigo:#4b51c8;       /* interview Q&A */
+    --indigo-bg:#e9eaff;
+    --rose:#c2453f;         /* gotchas */
+    --rose-bg:#fbe9e8;
+    --green:#2c7a4b;        /* exercises */
+    --green-bg:#e5f4ec;
+    --code-bg:#0d1320;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --rail-w:300px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--paper);color:var(--text);
+    font-family:var(--sans);line-height:1.62;font-size:16.5px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- layout ---------- */
+  .shell{display:flex;min-height:100vh}
+  .rail{
+    width:var(--rail-w);flex:0 0 var(--rail-w);position:sticky;top:0;height:100vh;
+    overflow-y:auto;background:var(--ink);color:#c8d2e0;
+    border-right:1px solid #000;padding:0 0 40px;
+  }
+  .rail__brand{padding:22px 22px 16px;border-bottom:1px solid #21304a}
+  .rail__brand .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--amber);margin:0 0 6px}
+  .rail__brand h1{font-size:17px;line-height:1.3;margin:0;color:#fff;font-weight:650}
+  .rail__brand p{margin:8px 0 0;font-size:12.5px;color:#8aa0bd}
+  .rail nav{padding:14px 12px 0}
+  .rail .part{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#6f86a6;margin:18px 10px 6px;display:block}
+  .rail a{
+    display:flex;gap:10px;align-items:baseline;text-decoration:none;color:#bcc8d8;
+    font-size:13.5px;padding:6px 10px;border-radius:7px;border-left:2px solid transparent;
+    transition:background .15s,color .15s,border-color .15s;
+  }
+  .rail a .n{font-family:var(--mono);font-size:11px;color:#62789a;min-width:26px}
+  .rail a:hover{background:#1b2840;color:#fff}
+  .rail a.active{background:#1b2840;color:#fff;border-left-color:var(--amber)}
+  .rail a.active .n{color:var(--amber)}
+
+  .main{flex:1 1 auto;min-width:0}
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px 120px}
+
+  /* ---------- hero ---------- */
+  .hero{background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 100%);color:#eaf0f8;
+    padding:54px 0 46px;border-bottom:3px solid var(--amber)}
+  .hero .wrap{padding-bottom:0}
+  .hero .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--amber);margin:0 0 14px}
+  .hero h1{font-size:38px;line-height:1.12;margin:0 0 16px;font-weight:720;letter-spacing:-.5px;color:#fff}
+  .hero p{font-size:16.5px;color:#aebfd5;max-width:62ch;margin:0 0 10px}
+  .hero .pipe{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;font-family:var(--mono);font-size:12px}
+  .hero .pipe span{background:#1b2840;border:1px solid #2b3d5c;color:#cdd9ea;padding:5px 11px;border-radius:999px}
+  .hero .pipe span.on{background:var(--amber);color:#23170a;border-color:var(--amber);font-weight:600}
+
+  /* ---------- typography ---------- */
+  h2.sec{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber-deep);margin:64px 0 0;padding-top:8px}
+  .module{padding:26px 0 8px;border-top:1px solid var(--line);margin-top:30px}
+  .module:first-of-type{border-top:none}
+  .module > h3{font-size:26px;line-height:1.18;margin:6px 0 4px;font-weight:700;letter-spacing:-.3px;color:var(--ink)}
+  .module .topeyebrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:2px 8px;border-radius:5px;
+    background:var(--ink);color:#fff;text-transform:none}
+  .badge.v{background:var(--amber);color:#23170a}
+  p{margin:14px 0}
+  h4{font-size:16.5px;margin:26px 0 6px;color:var(--ink);font-weight:680}
+  code:not([class*=language]){font-family:var(--mono);font-size:.88em;background:#dde3ec;
+    color:#10325c;padding:1.5px 6px;border-radius:5px;border:1px solid #cfd7e2}
+  a.inline{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+  ul,ol{margin:14px 0;padding-left:22px}
+  li{margin:6px 0}
+  strong{color:var(--ink)}
+  hr{border:none;border-top:1px solid var(--line);margin:30px 0}
+
+  /* ---------- code ---------- */
+  pre[class*=language]{border-radius:11px;border:1px solid #1e2a3f;margin:16px 0;
+    font-size:13.4px;line-height:1.6;box-shadow:0 2px 8px rgba(13,19,32,.18)}
+  pre[class*=language]{background:var(--code-bg)!important}
+  .codecap{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);
+    margin:18px 0 -8px;display:flex;align-items:center;gap:8px}
+  .codecap::before{content:"▸";color:var(--amber-deep)}
+
+  /* ---------- callouts ---------- */
+  .call{border-radius:11px;padding:16px 18px 16px 46px;margin:20px 0;position:relative;
+    border:1px solid var(--line);background:var(--paper-2);font-size:15px}
+  .call::before{position:absolute;left:14px;top:15px;font-size:18px;line-height:1}
+  .call .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:600;display:block;margin-bottom:4px}
+  .call p:first-of-type{margin-top:2px}
+  .call p:last-child{margin-bottom:0}
+  .etl{background:var(--teal-bg);border-color:#bfe0db}
+  .etl::before{content:"⇄"}    .etl .lbl{color:var(--teal)}
+  .gotcha{background:var(--rose-bg);border-color:#f0c9c6}
+  .gotcha::before{content:"▲"}  .gotcha .lbl{color:var(--rose)}
+  .exercise{background:var(--green-bg);border-color:#c4e3d2}
+  .exercise::before{content:"●"} .exercise .lbl{color:var(--green)}
+  .note{background:#eef3fb;border-color:#cfdcf0}
+  .note::before{content:"ℹ"}    .note .lbl{color:var(--indigo)}
+
+  /* ---------- interview Q&A ---------- */
+  details.qa{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--paper-2);overflow:hidden}
+  details.qa[open]{border-color:#c7caf0}
+  details.qa summary{cursor:pointer;padding:12px 16px 12px 42px;position:relative;font-weight:600;
+    color:var(--ink);list-style:none;font-size:15px}
+  details.qa summary::-webkit-details-marker{display:none}
+  details.qa summary::before{content:"Q";position:absolute;left:14px;top:11px;font-family:var(--mono);
+    font-size:12px;font-weight:700;color:#fff;background:var(--indigo);width:18px;height:18px;
+    border-radius:5px;display:grid;place-items:center}
+  details.qa[open] summary{border-bottom:1px solid var(--line);background:var(--indigo-bg)}
+  details.qa .ans{padding:14px 16px 4px}
+  .qa-wrap{margin:14px 0}
+  .qa-wrap > .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--indigo);font-weight:600;display:block;margin:18px 0 8px}
+
+  /* ---------- tables ---------- */
+  table{border-collapse:collapse;width:100%;margin:18px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:#fff;font-weight:600;font-size:13px;letter-spacing:.02em}
+  tr:nth-child(even) td{background:#f5f7fa}
+
+  /* ---------- diagram ---------- */
+  figure{margin:22px 0}
+  figure svg{width:100%;height:auto;border:1px solid var(--line);border-radius:11px;background:var(--paper-2)}
+  figcaption{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:8px;text-align:center}
+
+  /* ---------- misc ---------- */
+  .toplink{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--muted);
+    text-decoration:none;margin-top:20px}
+  .toplink:hover{color:var(--amber-deep)}
+  footer{border-top:1px solid var(--line);margin-top:60px;padding-top:24px;color:var(--muted);font-size:13.5px}
+
+  /* mobile top nav */
+  .mobnav{display:none}
+  @media (max-width:960px){
+    .rail{display:none}
+    .mobnav{display:block;position:sticky;top:0;z-index:50;background:var(--ink);color:#fff;
+      padding:10px 16px;border-bottom:2px solid var(--amber)}
+    .mobnav select{width:100%;padding:9px 10px;border-radius:8px;border:1px solid #2b3d5c;
+      background:#16233a;color:#fff;font-family:var(--mono);font-size:13px}
+    .hero h1{font-size:30px}
+    .wrap{padding:0 18px 90px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="rail__brand">
+      <p class="eyebrow">Interview Prep · Tudor / Sagarsoft</p>
+      <h1>Java 21 &amp; Spring, the ETL Architect's Bridge</h1>
+      <p>From Informatica / Pentaho pipelines to modern Java. JDK 21 · Maven · Spring Boot 3.5.</p>
+    </div>
+    <nav id="rail-nav">
+      <span class="part">Part A — Client's 7 Topics</span>
+      <a href="#t-classes"><span class="n">A1</span><span>Classes &amp; Objects</span></a>
+      <a href="#t-ds"><span class="n">A2</span><span>Data Structures</span></a>
+      <a href="#t-hashmap"><span class="n">A3</span><span>How HashMap Works</span></a>
+      <a href="#t-fi"><span class="n">A4</span><span>Functional Interfaces</span></a>
+      <a href="#t-rest"><span class="n">A5</span><span>REST API Call</span></a>
+      <a href="#t-java21"><span class="n">A6</span><span>Java 21 Features</span></a>
+      <a href="#t-sql"><span class="n">A7</span><span>SQL Indexes &amp; Speed</span></a>
+      <span class="part">Part B — 6-Phase Syllabus</span>
+      <a href="#p1"><span class="n">P1</span><span>Java 8 Core</span></a>
+      <a href="#p2"><span class="n">P2</span><span>Java 9–17</span></a>
+      <a href="#p3"><span class="n">P3</span><span>Java 17–21</span></a>
+      <a href="#p4"><span class="n">P4</span><span>Spring Boot</span></a>
+      <a href="#p5"><span class="n">P5</span><span>Spring Batch</span></a>
+      <a href="#p6"><span class="n">P6</span><span>Migration Project</span></a>
+      <span class="part">Wrap-up</span>
+      <a href="#setup"><span class="n">⚙</span><span>Setup &amp; Study Plan</span></a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <div class="mobnav">
+      <select onchange="if(this.value)location.hash=this.value">
+        <option value="">Jump to a topic…</option>
+        <option value="#t-classes">A1 · Classes &amp; Objects</option>
+        <option value="#t-ds">A2 · Data Structures</option>
+        <option value="#t-hashmap">A3 · How HashMap Works</option>
+        <option value="#t-fi">A4 · Functional Interfaces</option>
+        <option value="#t-rest">A5 · REST API Call</option>
+        <option value="#t-java21">A6 · Java 21 Features</option>
+        <option value="#t-sql">A7 · SQL Indexes &amp; Speed</option>
+        <option value="#p1">P1 · Java 8 Core</option>
+        <option value="#p2">P2 · Java 9–17</option>
+        <option value="#p3">P3 · Java 17–21</option>
+        <option value="#p4">P4 · Spring Boot</option>
+        <option value="#p5">P5 · Spring Batch</option>
+        <option value="#p6">P6 · Migration Project</option>
+        <option value="#setup">⚙ · Setup &amp; Study Plan</option>
+      </select>
+    </div>
+
+    <header class="hero" id="top">
+      <div class="wrap">
+        <p class="eyebrow">// hands-on study guide · novice-friendly · interview-focused</p>
+        <h1>Java 21 &amp; Spring for the<br>ETL Architect</h1>
+        <p>You already think in <strong>sources, transforms, and targets</strong>. This guide maps that mental model straight onto modern Java and Spring so the syntax becomes the only new thing you have to learn — not the concepts. Every topic carries a plain explanation, runnable code for <strong>JDK&nbsp;21&nbsp;+&nbsp;Maven</strong>, an ETL analogy, the interview questions you'll likely face, the traps people fall into, and a hands-on exercise.</p>
+        <div class="pipe">
+          <span class="on">SOURCE: 20 yrs ETL</span>
+          <span>→ TRANSFORM: this guide</span>
+          <span class="on">→ TARGET: interview-ready</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap">
+<h2 class="sec">Part A · The Client's 7 Interview Topics</h2>
+<p style="margin-top:18px;color:var(--muted)">These are the seven items your client named directly, so they are the highest-probability questions. I've ordered them so each one builds on the last. Read these first; Part B then deepens the same ideas across your 6-phase plan.</p>
+
+<!-- ============ A1 CLASSES & OBJECTS ============ -->
+<section class="module" id="t-classes">
+  <div class="topeyebrow"><span>A1 · Fundamentals</span><span class="badge">Core Java</span></div>
+  <h3>Classes &amp; Objects</h3>
+  <p>A <strong>class</strong> is a blueprint: it declares what data an entity holds (fields) and what it can do (methods). An <strong>object</strong> is one concrete thing built from that blueprint, living in memory with its own field values. You write the class once; you create many objects from it.</p>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>A class is like a <strong>table definition / mapping schema</strong> in Informatica — the column list, the contract. An object is a single <strong>row</strong> flowing through the pipeline: same shape as the schema, but its own values. A method on the class is a reusable <strong>transformation</strong> you can apply to any row.</p>
+  </div>
+
+  <p>The four pillars interviewers expect you to name: <strong>Encapsulation</strong> (hide fields behind methods), <strong>Inheritance</strong> (a class reuses/extends another), <strong>Polymorphism</strong> (one reference type, many runtime behaviours), and <strong>Abstraction</strong> (program to an interface, not an implementation).</p>
+
+  <div class="codecap">Encapsulated class + object creation</div>
+<pre><code class="language-java">public class Account {
+    private String owner;        // private = encapsulated state
+    private double balance;
+
+    public Account(String owner, double opening) {  // constructor
+        this.owner = owner;
+        this.balance = opening;
+    }
+
+    public void deposit(double amt) {               // behaviour
+        if (amt &lt;= 0) throw new IllegalArgumentException("amount must be &gt; 0");
+        this.balance += amt;
+    }
+
+    public double getBalance() { return balance; }  // controlled read access
+}
+
+// --- somewhere else ---
+Account a = new Account("Nag", 1000);   // 'a' is an OBJECT of class Account
+a.deposit(500);
+System.out.println(a.getBalance());     // 1500.0</code></pre>
+
+  <p>Interfaces and inheritance let one reference point at many implementations — the basis of polymorphism, and of how Spring swaps implementations for you:</p>
+<pre><code class="language-java">interface Notifier { void send(String msg); }
+
+class EmailNotifier implements Notifier {
+    public void send(String msg) { System.out.println("EMAIL: " + msg); }
+}
+class SmsNotifier implements Notifier {
+    public void send(String msg) { System.out.println("SMS: " + msg); }
+}
+
+Notifier n = new EmailNotifier();   // declared type Notifier, runtime type EmailNotifier
+n.send("Batch finished");           // calls EmailNotifier.send  -> polymorphism</code></pre>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p><strong>== vs equals().</strong> <code>==</code> compares references (same object in memory); <code>.equals()</code> compares logical value. For your own classes, if you override <code>equals()</code> you must also override <code>hashCode()</code> (this comes back in A3). <strong>Static vs instance:</strong> a <code>static</code> member belongs to the class, shared by all objects; an instance member belongs to each object. <strong>Null:</strong> calling a method on a <code>null</code> reference throws <code>NullPointerException</code> — the single most common Java bug.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What's the difference between a class and an object?</summary>
+      <div class="ans"><p>A class is the compile-time blueprint (fields + methods); an object is a runtime instance created with <code>new</code>, holding its own state on the heap. One class, many objects.</p></div></details>
+    <details class="qa"><summary>Explain the four OOP principles with one line each.</summary>
+      <div class="ans"><p><strong>Encapsulation</strong> — keep fields private, expose behaviour via methods. <strong>Inheritance</strong> — <code>extends</code> to reuse a parent's contract. <strong>Polymorphism</strong> — same call resolves to the runtime type's method. <strong>Abstraction</strong> — depend on interfaces so implementations can change.</p></div></details>
+    <details class="qa"><summary>Difference between <code>==</code> and <code>.equals()</code>?</summary>
+      <div class="ans"><p><code>==</code> tests reference identity; <code>.equals()</code> tests value equality (as defined by the class). <code>String</code>, the wrapper types, and records implement value-based <code>equals()</code>.</p></div></details>
+    <details class="qa"><summary>What is a constructor and can you have more than one?</summary>
+      <div class="ans"><p>A constructor initialises a new object; it has the class's name and no return type. Yes — you can overload constructors with different parameter lists. If you write none, the compiler supplies a no-arg default.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Create a <code>BatchJobRun</code> class with fields <code>jobName</code>, <code>rowsRead</code>, <code>rowsWritten</code> and a method <code>skipped()</code> returning the difference. Make a <code>List&lt;BatchJobRun&gt;</code> of three runs and print the one with the most skipped rows. (You'll redo this with Streams in P1 — keep it.)</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+
+<!-- ============ A2 DATA STRUCTURES ============ -->
+<section class="module" id="t-ds">
+  <div class="topeyebrow"><span>A2 · Collections</span><span class="badge">Core Java</span></div>
+  <h3>Data Structures (the Java Collections you must know)</h3>
+  <p>In day-to-day Java the "data structures" interviewers mean are the <strong>Collections Framework</strong> types. Know what each is, its ordering, whether it allows duplicates, and its typical cost. This single table answers most data-structure questions for an enterprise Java role.</p>
+
+  <table>
+    <thead><tr><th>Type</th><th>Backed by</th><th>Order</th><th>Duplicates?</th><th>Lookup / typical use</th></tr></thead>
+    <tbody>
+      <tr><td><code>ArrayList</code></td><td>resizable array</td><td>insertion</td><td>yes</td><td>O(1) index access; default list</td></tr>
+      <tr><td><code>LinkedList</code></td><td>doubly linked nodes</td><td>insertion</td><td>yes</td><td>O(1) add/remove at ends; queue/deque</td></tr>
+      <tr><td><code>HashMap</code></td><td>hash table</td><td>none</td><td>keys unique</td><td>O(1) avg key→value lookup</td></tr>
+      <tr><td><code>LinkedHashMap</code></td><td>hash table + linked list</td><td>insertion (or access)</td><td>keys unique</td><td>predictable iteration; LRU caches</td></tr>
+      <tr><td><code>TreeMap</code></td><td>red-black tree</td><td>sorted by key</td><td>keys unique</td><td>O(log n); range queries, sorted keys</td></tr>
+      <tr><td><code>HashSet</code></td><td>HashMap</td><td>none</td><td>no</td><td>membership test, de-dup</td></tr>
+      <tr><td><code>TreeSet</code></td><td>TreeMap</td><td>sorted</td><td>no</td><td>sorted unique values</td></tr>
+      <tr><td><code>ArrayDeque</code></td><td>array ring</td><td>insertion</td><td>yes</td><td>stack &amp; queue (preferred over Stack)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>You've used these without the Java names. A <strong>HashMap</strong> is a lookup/cache transform — key in, row out, no order. A <strong>TreeMap</strong> is a sorted aggregator. A <strong>HashSet</strong> is a <em>distinct</em> / dedup step. An <strong>ArrayList</strong> is just an ordered staging buffer. Choosing the right one is the same instinct as choosing the right transform.</p>
+  </div>
+
+  <div class="codecap">Picking the right structure</div>
+<pre><code class="language-java">List&lt;String&gt; staging   = new ArrayList&lt;&gt;();           // ordered, duplicates ok
+Set&lt;String&gt;  distinctIds = new HashSet&lt;&gt;();            // de-duplicate
+Map&lt;String,Integer&gt; counts = new HashMap&lt;&gt;();         // key -&gt; count
+Map&lt;String,Integer&gt; sorted = new TreeMap&lt;&gt;();         // iterate keys in order
+Deque&lt;Task&gt;  queue   = new ArrayDeque&lt;&gt;();             // FIFO work queue
+
+counts.merge("AAPL", 1, Integer::sum);  // idiomatic "increment or insert"</code></pre>
+
+  <p>The "Big-O" you actually need to recite: array index = <strong>O(1)</strong>; HashMap get/put = <strong>O(1)</strong> average; TreeMap = <strong>O(log n)</strong>; searching an unsorted list = <strong>O(n)</strong>. That's enough for most enterprise interviews.</p>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p><strong>ArrayList vs LinkedList:</strong> in practice <code>ArrayList</code> wins almost always (cache-friendly); only reach for <code>LinkedList</code> when you constantly add/remove at the head. <strong>Don't use <code>Vector</code>/<code>Stack</code></strong> (legacy, synchronised); use <code>ArrayList</code>/<code>ArrayDeque</code>. <strong>Modifying a collection while iterating</strong> it with a for-each throws <code>ConcurrentModificationException</code> — use an <code>Iterator.remove()</code> or <code>removeIf()</code>.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>List vs Set vs Map — when do you use each?</summary>
+      <div class="ans"><p><strong>List</strong> = ordered, indexed, duplicates allowed. <strong>Set</strong> = unique elements, membership tests. <strong>Map</strong> = key→value lookups. Pick by the question you'll ask the data most often.</p></div></details>
+    <details class="qa"><summary>ArrayList vs LinkedList?</summary>
+      <div class="ans"><p><code>ArrayList</code> = O(1) random access, contiguous memory, resizes by copying. <code>LinkedList</code> = O(1) insert/remove at ends but O(n) random access and poor cache locality. Default to <code>ArrayList</code>.</p></div></details>
+    <details class="qa"><summary>HashMap vs TreeMap vs LinkedHashMap?</summary>
+      <div class="ans"><p><code>HashMap</code> — fastest, no order. <code>TreeMap</code> — sorted by key, O(log n), supports range queries. <code>LinkedHashMap</code> — keeps insertion (or access) order, great for LRU caches.</p></div></details>
+    <details class="qa"><summary>How would you remove duplicates from a list?</summary>
+      <div class="ans"><p><code>new ArrayList&lt;&gt;(new LinkedHashSet&lt;&gt;(list))</code> to keep order, or <code>list.stream().distinct().toList()</code>.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Given a list of stock trades (symbol, qty), build a <code>Map&lt;String,Integer&gt;</code> of total quantity per symbol using <code>merge()</code>, then print it sorted by symbol (hint: wrap in a <code>TreeMap</code>). This is a daily-aggregation pattern you'll recognise from ETL.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ A3 HASHMAP WORKING ============ -->
+<section class="module" id="t-hashmap">
+  <div class="topeyebrow"><span>A3 · Internals</span><span class="badge">High-frequency question</span></div>
+  <h3>How a HashMap Works</h3>
+  <p>This is one of the most asked Java questions. A <code>HashMap</code> stores key→value pairs in an array of <strong>buckets</strong>. To find a key it does three things: compute the key's <code>hashCode()</code>, spread those bits and map them to a bucket index, then walk that bucket comparing keys with <code>equals()</code>. Because a good hash spreads keys evenly, each bucket usually holds one entry — so lookup is <strong>O(1) on average</strong>.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 320" role="img" aria-label="HashMap internal structure">
+      <style>
+        .lbl{font:600 13px var(--mono,monospace);fill:#1b2433}
+        .sub{font:11px var(--mono,monospace);fill:#5a6b80}
+        .bk{fill:#fff;stroke:#cfd7e2}
+        .node{fill:#eef3fb;stroke:#4b51c8}
+        .arrow{stroke:#5a6b80;stroke-width:1.4;fill:none;marker-end:url(#ah)}
+        .amb{fill:#e0a500}
+      </style>
+      <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#5a6b80"/></marker></defs>
+
+      <text x="20" y="28" class="lbl">key "AAPL"</text>
+      <rect x="20" y="40" width="150" height="30" rx="6" class="bk"/>
+      <text x="30" y="60" class="sub">1) hashCode()  →  bits</text>
+      <path class="arrow" d="M172 55 H205"/>
+      <rect x="205" y="40" width="170" height="30" rx="6" class="bk"/>
+      <text x="214" y="60" class="sub">2) spread &amp; index = h &amp; (n-1)</text>
+      <path class="arrow" d="M377 55 H410"/>
+      <text x="415" y="60" class="lbl amb">bucket 5</text>
+
+      <text x="20" y="110" class="lbl">table (array of buckets, size n = 16)</text>
+      <g>
+        <rect x="20"  y="120" width="46" height="34" class="bk"/><text x="34" y="142" class="sub">0</text>
+        <rect x="66"  y="120" width="46" height="34" class="bk"/><text x="80" y="142" class="sub">1</text>
+        <rect x="112" y="120" width="46" height="34" class="bk"/><text x="126" y="142" class="sub">2</text>
+        <rect x="158" y="120" width="46" height="34" class="bk"/><text x="172" y="142" class="sub">3</text>
+        <rect x="204" y="120" width="46" height="34" class="bk"/><text x="218" y="142" class="sub">4</text>
+        <rect x="250" y="120" width="46" height="34" class="bk" stroke="#e0a500" stroke-width="2"/><text x="264" y="142" class="sub amb">5</text>
+        <rect x="296" y="120" width="46" height="34" class="bk"/><text x="310" y="142" class="sub">…</text>
+      </g>
+      <path class="arrow" d="M273 156 V184"/>
+
+      <!-- chain at bucket 5 -->
+      <rect x="200" y="186" width="170" height="34" rx="6" class="node"/>
+      <text x="210" y="207" class="sub">"AAPL"=189  •hash</text>
+      <path class="arrow" d="M372 203 H404"/>
+      <rect x="404" y="186" width="170" height="34" rx="6" class="node"/>
+      <text x="414" y="207" class="sub">"NFLX"=502  •hash</text>
+      <text x="200" y="240" class="sub">3) collision → linked chain; compare keys with equals()</text>
+
+      <text x="200" y="280" class="sub">If a bucket grows past 8 entries (and table ≥ 64),</text>
+      <text x="200" y="298" class="sub">Java 8+ converts that chain into a balanced tree → O(log n) worst case.</text>
+    </svg>
+    <figcaption>HashMap: hash → bucket index → walk chain comparing with equals(); long chains become trees.</figcaption>
+  </figure>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>A HashMap <em>is</em> a hash-join / lookup cache. The "build" side hashes keys into buckets; the "probe" side hashes the incoming key to jump straight to the right bucket instead of scanning every row. Collisions in a HashMap are the same concept as hash-bucket skew in a join.</p>
+  </div>
+
+  <div class="codecap">put / get and the contract</div>
+<pre><code class="language-java">Map&lt;String,Integer&gt; m = new HashMap&lt;&gt;();
+m.put("AAPL", 189);          // hash("AAPL") -&gt; bucket; store entry
+m.put("AAPL", 190);          // same bucket, equals() matches -&gt; value replaced
+Integer v = m.get("AAPL");   // 190, O(1) average
+
+m.getOrDefault("TSLA", 0);   // 0 if absent
+m.computeIfAbsent("watch", k -&gt; new ArrayList&lt;&gt;()).add("AAPL"); // multimap pattern</code></pre>
+
+  <p>The critical rule: keys must implement <code>hashCode()</code> and <code>equals()</code> consistently. <strong>If two objects are <code>equals()</code>, they must return the same <code>hashCode()</code>.</strong> Break this and the map "loses" your keys — you put a value in and can never get it back, because lookup hashes to the wrong bucket.</p>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p><strong>Mutable keys are a trap:</strong> if you mutate a field used in <code>hashCode()</code> after inserting, the entry becomes unreachable. Prefer immutable keys (<code>String</code>, wrapper types, or records — records auto-generate correct <code>equals/hashCode</code>). <strong>HashMap is not thread-safe</strong> — concurrent writes can corrupt it or loop forever on old JDKs; use <code>ConcurrentHashMap</code> for shared mutable maps. <strong>Initial capacity:</strong> default 16, load factor 0.75 → it resizes (rehashes everything) when 75% full; pre-size large maps with <code>new HashMap&lt;&gt;(expected)</code>.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>Walk me through what happens on <code>map.put(key, value)</code>.</summary>
+      <div class="ans"><p>Compute <code>key.hashCode()</code>, spread its bits, derive a bucket index with <code>hash &amp; (n-1)</code>. Go to that bucket. If empty, insert. If occupied, walk the chain comparing with <code>equals()</code>; if a key matches, replace its value, else append. Resize/rehash if the table passes the load-factor threshold.</p></div></details>
+    <details class="qa"><summary>Why must equals() and hashCode() agree?</summary>
+      <div class="ans"><p>Lookup uses <code>hashCode()</code> to find the bucket and <code>equals()</code> to find the entry within it. If equal objects had different hashes, <code>get()</code> would search the wrong bucket and never find the entry. The contract keeps the two steps consistent.</p></div></details>
+    <details class="qa"><summary>What changed in Java 8's HashMap?</summary>
+      <div class="ans"><p>Buckets that grow beyond a threshold (8 entries, table size ≥ 64) convert from a linked list to a red-black tree, improving the worst case from O(n) to O(log n) under heavy collisions or hash-flooding attacks.</p></div></details>
+    <details class="qa"><summary>HashMap vs ConcurrentHashMap?</summary>
+      <div class="ans"><p><code>HashMap</code> is unsynchronised — undefined behaviour under concurrent modification. <code>ConcurrentHashMap</code> allows concurrent reads and segmented/locked writes (CAS + bin-level locks), with no need to lock the whole map.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Write a <code>record CcyPair(String base, String quote)</code> and use it as a HashMap key for FX rates. Put a few rates, then prove lookup works because the record auto-generates <code>equals/hashCode</code>. Then write a normal class with the same fields but <em>no</em> overrides and watch <code>get()</code> return <code>null</code> — that failure is the whole lesson.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+
+<!-- ============ A4 FUNCTIONAL INTERFACES ============ -->
+<section class="module" id="t-fi">
+  <div class="topeyebrow"><span>A4 · Java 8</span><span class="badge">Core Java</span><span class="badge v">enables lambdas</span></div>
+  <h3>Functional Interfaces</h3>
+  <p>A <strong>functional interface</strong> is simply an interface with exactly one abstract method (a "SAM" type — Single Abstract Method). That single method is what a <strong>lambda</strong> or <strong>method reference</strong> provides the body for. This is the foundation everything in Streams (P1) is built on.</p>
+
+  <div class="codecap">Your own functional interface</div>
+<pre><code class="language-java">@FunctionalInterface              // optional, but compiler enforces "one abstract method"
+interface RowTransform {
+    String apply(String row);     // the single abstract method
+}
+
+RowTransform upper = row -&gt; row.toUpperCase();      // lambda implements it
+RowTransform trim  = String::trim;                  // method reference
+
+System.out.println(upper.apply("aapl"));  // AAPL</code></pre>
+
+  <p>You rarely need to write your own — <code>java.util.function</code> ships the ones you'll use constantly:</p>
+  <table>
+    <thead><tr><th>Interface</th><th>Abstract method</th><th>Means</th><th>Stream use</th></tr></thead>
+    <tbody>
+      <tr><td><code>Function&lt;T,R&gt;</code></td><td><code>R apply(T)</code></td><td>transform T → R</td><td><code>.map()</code></td></tr>
+      <tr><td><code>Predicate&lt;T&gt;</code></td><td><code>boolean test(T)</code></td><td>true/false test</td><td><code>.filter()</code></td></tr>
+      <tr><td><code>Consumer&lt;T&gt;</code></td><td><code>void accept(T)</code></td><td>do something, no return</td><td><code>.forEach()</code></td></tr>
+      <tr><td><code>Supplier&lt;T&gt;</code></td><td><code>T get()</code></td><td>produce a value</td><td><code>orElseGet()</code></td></tr>
+      <tr><td><code>BiFunction&lt;T,U,R&gt;</code></td><td><code>R apply(T,U)</code></td><td>two inputs → one out</td><td><code>reduce()</code></td></tr>
+      <tr><td><code>UnaryOperator&lt;T&gt;</code></td><td><code>T apply(T)</code></td><td>T → T</td><td>in-place map</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>These map one-to-one onto pipeline steps you already build: <strong>Function</strong> = a transformation expression, <strong>Predicate</strong> = a filter condition, <strong>Consumer</strong> = a target writer, <strong>Supplier</strong> = a source/sequence generator. A lambda is just an inline transform with no class boilerplate.</p>
+  </div>
+
+  <div class="codecap">The built-ins in action</div>
+<pre><code class="language-java">import java.util.function.*;
+
+Predicate&lt;Integer&gt; big   = n -&gt; n &gt; 100_000;
+Function&lt;String,Integer&gt; len = String::length;
+Consumer&lt;String&gt; log     = System.out::println;
+Supplier&lt;Double&gt; rnd     = Math::random;
+
+System.out.println(big.test(150_000));   // true
+System.out.println(len.apply("AAPL"));   // 4
+log.accept("writing row");               // writing row
+
+// composition: predicates and functions chain
+Predicate&lt;Integer&gt; bigAndEven = big.and(n -&gt; n % 2 == 0);
+Function&lt;String,Integer&gt; lenPlus1 = len.andThen(x -&gt; x + 1);</code></pre>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>A lambda can only capture <strong>effectively final</strong> local variables (you can't reassign a captured local). <code>this</code> inside a lambda refers to the <em>enclosing</em> object, not the lambda (unlike an anonymous class). Don't overuse method references when a lambda reads clearer. And an interface with <em>two</em> abstract methods is <strong>not</strong> functional — <code>@FunctionalInterface</code> makes the compiler tell you.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What is a functional interface? Give examples.</summary>
+      <div class="ans"><p>An interface with exactly one abstract method, usable as the target type of a lambda or method reference. Examples: <code>Runnable</code>, <code>Comparator</code>, <code>Callable</code>, and the <code>java.util.function</code> family (<code>Function</code>, <code>Predicate</code>, <code>Consumer</code>, <code>Supplier</code>).</p></div></details>
+    <details class="qa"><summary>Can a functional interface have default or static methods?</summary>
+      <div class="ans"><p>Yes — only the count of <em>abstract</em> methods must be one. <code>default</code> and <code>static</code> methods are allowed (that's how <code>Predicate.and()</code>/<code>Function.andThen()</code> exist).</p></div></details>
+    <details class="qa"><summary>Lambda vs anonymous inner class?</summary>
+      <div class="ans"><p>Lambdas are concise, don't introduce a new scope for <code>this</code>, and don't generate a separate <code>.class</code> file per use (invoked via <code>invokedynamic</code>). Anonymous classes can have state and implement multi-method interfaces.</p></div></details>
+    <details class="qa"><summary>What are the four kinds of method reference?</summary>
+      <div class="ans"><p>Static (<code>Integer::parseInt</code>), bound instance (<code>System.out::println</code>), unbound instance (<code>String::toUpperCase</code>), and constructor (<code>ArrayList::new</code>).</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Declare a <code>Predicate&lt;Trade&gt;</code> for "qty &gt; 1000", a <code>Function&lt;Trade,String&gt;</code> for "symbol uppercased", and a <code>Consumer&lt;Trade&gt;</code> that prints it. Combine the predicate with <code>.and()</code> to also require a specific symbol, and apply all three over a list with a plain loop. Next module shows the Stream version.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ A5 REST API CALL ============ -->
+<section class="module" id="t-rest">
+  <div class="topeyebrow"><span>A5 · Web</span><span class="badge">Spring Boot</span><span class="badge v">deep-dived in P4</span></div>
+  <h3>REST API Call</h3>
+  <p>REST is a style for exposing data over HTTP. A client sends a <strong>request</strong> (method + URL + optional body) and the server returns a <strong>response</strong> (status code + body, usually JSON). The HTTP method states intent: <code>GET</code> read, <code>POST</code> create, <code>PUT</code> replace, <code>PATCH</code> partial update, <code>DELETE</code> remove.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 210" role="img" aria-label="REST request and response">
+      <style>
+        .b{fill:#fff;stroke:#cfd7e2}.k{font:600 13px var(--mono,monospace);fill:#1b2433}
+        .s{font:12px var(--mono,monospace);fill:#5a6b80}.a{stroke:#1f7a72;stroke-width:1.6;fill:none;marker-end:url(#g)}
+        .a2{stroke:#e0a500;stroke-width:1.6;fill:none;marker-end:url(#g2)}
+      </style>
+      <defs>
+        <marker id="g" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1f7a72"/></marker>
+        <marker id="g2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#e0a500"/></marker>
+      </defs>
+      <rect x="30" y="80" width="150" height="56" rx="10" class="b"/><text x="60" y="113" class="k">Client</text>
+      <rect x="580" y="80" width="150" height="56" rx="10" class="b"/><text x="600" y="106" class="k">Spring Boot</text><text x="600" y="124" class="s">@RestController</text>
+      <path class="a" d="M182 96 H576"/><text x="250" y="88" class="s">GET /api/customers/42</text>
+      <path class="a2" d="M576 124 H184"/><text x="250" y="150" class="s">200 OK  {"id":42,"name":"Asha"}</text>
+      <text x="250" y="172" class="s">JSON in · JSON out · stateless</text>
+    </svg>
+    <figcaption>One round trip: method + path go out, status code + JSON body come back.</figcaption>
+  </figure>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>A REST endpoint is a <strong>real-time, on-demand pipeline</strong>: instead of a scheduled batch reading a file, a single request is the "source", your service logic is the "transform", and the JSON response is the "target". A <code>GET</code> is a query; a <code>POST</code> is an insert.</p>
+  </div>
+
+  <p><strong>Server side</strong> — exposing an endpoint in Spring Boot is a few annotations:</p>
+  <div class="codecap">CustomerController.java — the server</div>
+<pre><code class="language-java">@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+
+    private final CustomerService service;
+    public CustomerController(CustomerService service) { this.service = service; }
+
+    @GetMapping("/{id}")                         // GET /api/customers/42
+    public Customer one(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @GetMapping                                  // GET /api/customers?active=true
+    public List&lt;Customer&gt; list(@RequestParam(defaultValue = "true") boolean active) {
+        return service.findAll(active);
+    }
+
+    @PostMapping                                 // POST /api/customers  (JSON body)
+    @ResponseStatus(HttpStatus.CREATED)          // 201
+    public Customer create(@RequestBody @Valid Customer c) {
+        return service.save(c);
+    }
+}</code></pre>
+
+  <p><strong>Client side</strong> — calling someone else's API. The modern JDK has a built-in <code>HttpClient</code> (no library needed); inside Spring you'd use <code>RestClient</code> (Boot 3.2+).</p>
+  <div class="codecap">Plain JDK 21 HttpClient — the client</div>
+<pre><code class="language-java">import java.net.http.*;
+import java.net.URI;
+
+HttpClient client = HttpClient.newHttpClient();
+HttpRequest req = HttpRequest.newBuilder()
+        .uri(URI.create("https://api.example.com/api/customers/42"))
+        .header("Accept", "application/json")
+        .GET()
+        .build();
+
+HttpResponse&lt;String&gt; res = client.send(req, HttpResponse.BodyHandlers.ofString());
+System.out.println(res.statusCode());   // 200
+System.out.println(res.body());         // {"id":42,...}</code></pre>
+
+  <div class="codecap">Spring RestClient — the idiomatic in-app client</div>
+<pre><code class="language-java">RestClient rest = RestClient.create();
+Customer c = rest.get()
+        .uri("https://api.example.com/api/customers/{id}", 42)
+        .retrieve()
+        .body(Customer.class);   // JSON auto-deserialised to your record/class</code></pre>
+
+  <p>Status codes you must know: <strong>2xx</strong> success (200 OK, 201 Created, 204 No Content), <strong>4xx</strong> client error (400 Bad Request, 401 Unauthorised, 403 Forbidden, 404 Not Found), <strong>5xx</strong> server error (500, 503).</p>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p><strong>REST is stateless</strong> — never store per-client session state in the controller; pass what's needed each call (this is why JWTs exist, see P4). Use the right method: a <code>GET</code> must not change data (it should be safe and idempotent). Return proper status codes, not always 200 with an error in the body. <code>@RequestBody</code> needs JSON + the right <code>Content-Type: application/json</code> header or you'll get 415.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What makes an API "RESTful"?</summary>
+      <div class="ans"><p>Resources addressed by URLs, manipulated with standard HTTP methods, stateless requests, and a uniform interface (typically JSON). Each request carries everything the server needs.</p></div></details>
+    <details class="qa"><summary>PUT vs POST vs PATCH?</summary>
+      <div class="ans"><p><code>POST</code> creates (not idempotent). <code>PUT</code> replaces a resource wholesale (idempotent). <code>PATCH</code> partially updates. Repeating a <code>PUT</code> leaves the same state; repeating a <code>POST</code> may create duplicates.</p></div></details>
+    <details class="qa"><summary>What's idempotency and which methods are idempotent?</summary>
+      <div class="ans"><p>Same request repeated yields the same server state. <code>GET</code>, <code>PUT</code>, <code>DELETE</code> are idempotent; <code>POST</code> generally is not. It matters for retries.</p></div></details>
+    <details class="qa"><summary>How do you handle errors in a Spring REST API?</summary>
+      <div class="ans"><p>Throw domain exceptions and translate them centrally with <code>@RestControllerAdvice</code> + <code>@ExceptionHandler</code>, returning the right status and a consistent error body. Covered in P4.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Once you've done P4 setup, expose <code>GET /api/ping</code> returning <code>{"status":"ok"}</code> and call it from a second tiny Java <code>main</code> using <code>HttpClient</code>. Then add <code>POST /api/echo</code> that returns whatever JSON you send it. You'll have built and consumed a REST API end to end.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+
+<!-- ============ A6 JAVA 21 FEATURES ============ -->
+<section class="module" id="t-java21">
+  <div class="topeyebrow"><span>A6 · Modern Java</span><span class="badge v">JDK 21 LTS</span></div>
+  <h3>Java 21 Features — the headline answer</h3>
+  <p>Java 21 (Sept 2023) is the LTS the role targets. If asked "what's new in Java 21," lead with <strong>virtual threads</strong>, then <strong>pattern matching for switch + record patterns</strong>, then <strong>sequenced collections</strong>, and mention <strong>structured concurrency</strong> as a preview. Records, sealed classes, text blocks and switch expressions arrived earlier (Java 14–17) but are part of the same "modern Java" story. Each is detailed in Part B; here's the interview-ready summary.</p>
+
+  <table>
+    <thead><tr><th>Feature</th><th>Since</th><th>One-line pitch</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Virtual threads</strong></td><td>21 (final)</td><td>Millions of cheap threads; write blocking code that scales like async.</td></tr>
+      <tr><td><strong>Pattern matching for switch</strong></td><td>21 (final)</td><td>Switch on type, with guards — no cast boilerplate.</td></tr>
+      <tr><td><strong>Record patterns</strong></td><td>21 (final)</td><td>Destructure records directly in <code>switch</code>/<code>instanceof</code>.</td></tr>
+      <tr><td><strong>Sequenced collections</strong></td><td>21 (final)</td><td><code>getFirst()/getLast()/reversed()</code> across List/Set/Map.</td></tr>
+      <tr><td>Records</td><td>16</td><td>Immutable data carriers, zero boilerplate.</td></tr>
+      <tr><td>Sealed classes</td><td>17</td><td>Restrict who can implement — exhaustive modelling.</td></tr>
+      <tr><td>Text blocks</td><td>15</td><td>Multi-line strings (SQL/JSON) without escaping.</td></tr>
+      <tr><td>Switch expressions</td><td>14</td><td><code>switch</code> that returns a value, arrow syntax.</td></tr>
+      <tr><td>Structured concurrency</td><td>21 (preview)</td><td>Treat a group of subtasks as one unit of work.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p><strong>Virtual threads</strong> are the one to internalise: imagine running thousands of parallel source-reads or API lookups without exhausting a thread pool — like scaling pipeline parallelism without scaling hardware. <strong>Record patterns</strong> are like decomposing a structured row into its fields in a single expression.</p>
+  </div>
+
+  <div class="codecap">A taste of three Java 21 features together</div>
+<pre><code class="language-java">sealed interface Event permits Trade, Heartbeat {}
+record Trade(String symbol, int qty) implements Event {}
+record Heartbeat(long ts) implements Event {}
+
+String describe(Event e) {
+    return switch (e) {                                  // pattern matching for switch
+        case Trade(String sym, int q) when q &gt; 1000 -&gt;   // record pattern + guard
+                "BIG " + sym + " x" + q;
+        case Trade(String sym, int q) -&gt; sym + " x" + q;
+        case Heartbeat h            -&gt; "ping@" + h.ts();
+    };                                                   // exhaustive: no default needed
+}
+
+// Virtual threads: 10,000 concurrent tasks, trivially
+try (var ex = Executors.newVirtualThreadPerTaskExecutor()) {
+    for (int i = 0; i &lt; 10_000; i++) ex.submit(() -&gt; fetchQuote());
+}</code></pre>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>Because the type hierarchy is <strong>sealed</strong>, the <code>switch</code> is exhaustive and needs no <code>default</code> — add a new permitted type and the compiler forces you to handle it. <strong>Structured concurrency</strong> is still a <em>preview</em> in 21 (needs <code>--enable-preview</code>); know it conceptually, don't claim production use. Note Java <strong>25</strong> is now the newer LTS (Sept 2025) — fine to mention, but 21 is what this role asks for.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What's the single biggest feature in Java 21?</summary>
+      <div class="ans"><p>Virtual threads (Project Loom, JEP 444). They make blocking I/O cheap to scale: you keep simple thread-per-request code but can run millions of them, because a blocked virtual thread unmounts from its carrier OS thread. See P3.</p></div></details>
+    <details class="qa"><summary>What are record patterns?</summary>
+      <div class="ans"><p>They let you destructure a record's components inside <code>instanceof</code> or <code>switch</code> — e.g. <code>case Trade(String sym, int q)</code> binds the fields directly, no manual accessors or casts.</p></div></details>
+    <details class="qa"><summary>What are sequenced collections?</summary>
+      <div class="ans"><p>New interfaces (<code>SequencedCollection</code>/<code>SequencedMap</code>) giving a uniform <code>getFirst()</code>, <code>getLast()</code>, <code>addFirst()</code>, <code>reversed()</code> across ordered collections — previously inconsistent across List/Deque/LinkedHashMap.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Build the <code>Event</code> hierarchy above and a <code>List&lt;Event&gt;</code> of mixed trades and heartbeats; map each to its description with the switch. Then try removing one <code>case</code> and watch the compiler reject it — that's exhaustiveness from sealed types doing its job.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ A7 SQL INDEXES ============ -->
+<section class="module" id="t-sql">
+  <div class="topeyebrow"><span>A7 · Data</span><span class="badge">SQL · your home turf</span></div>
+  <h3>SQL Indexes &amp; Fast Retrievals</h3>
+  <p>This is the topic closest to your 20 years of experience — frame it that way. An <strong>index</strong> is a separate, sorted data structure (almost always a <strong>B-tree</strong>) that lets the database find rows without scanning the whole table. Without an index, finding one row in a million is a <strong>full table scan</strong> — O(n). With a B-tree index it's roughly <strong>O(log n)</strong>: a handful of page reads.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 230" role="img" aria-label="B-tree index lookup">
+      <style>
+        .nb{fill:#fff;stroke:#cfd7e2}.amb{fill:#fdf3d6;stroke:#e0a500}
+        .k{font:600 12px var(--mono,monospace);fill:#1b2433}.s{font:11px var(--mono,monospace);fill:#5a6b80}
+        .a{stroke:#5a6b80;stroke-width:1.3;fill:none;marker-end:url(#bx)}
+      </style>
+      <defs><marker id="bx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a6b80"/></marker></defs>
+      <rect x="305" y="20" width="150" height="34" rx="6" class="nb"/><text x="330" y="42" class="k">[ 50 | 100 ]</text>
+      <text x="470" y="40" class="s">root</text>
+      <rect x="120" y="100" width="120" height="32" rx="6" class="nb"/><text x="140" y="121" class="k">[20|35]</text>
+      <rect x="320" y="100" width="120" height="32" rx="6" class="amb"/><text x="335" y="121" class="k">[60|80]</text>
+      <rect x="520" y="100" width="120" height="32" rx="6" class="nb"/><text x="535" y="121" class="k">[120|150]</text>
+      <path class="a" d="M360 56 L200 98"/><path class="a" d="M380 56 L380 98"/><path class="a" d="M400 56 L560 98"/>
+      <rect x="300" y="170" width="170" height="34" rx="6" class="amb"/><text x="312" y="192" class="k">leaf: 60→row, 72→row …</text>
+      <path class="a" d="M380 132 V168"/>
+      <text x="40" y="160" class="s">Looking for id = 72:</text>
+      <text x="40" y="178" class="s">72 &gt; 50, &lt; 100 → middle</text>
+      <text x="40" y="196" class="s">72 in [60,80] → leaf →</text>
+      <text x="40" y="214" class="s">row pointer. 3 hops, not 1M.</text>
+    </svg>
+    <figcaption>A B-tree index narrows the search by orders of magnitude per level — a few page reads instead of a full scan.</figcaption>
+  </figure>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>You already tune this. An index is the database's version of a <strong>pre-sorted lookup / hash cache</strong> on a join key. Choosing index columns is the same decision as choosing partition/sort keys so your loads and lookups don't scan everything. "Methods to get fast retrievals" = the same toolkit you use to make ETL targets queryable.</p>
+  </div>
+
+  <h4>Index types and when to use them</h4>
+  <table>
+    <thead><tr><th>Type</th><th>Best for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>B-tree</strong> (default)</td><td>Equality and range: <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>BETWEEN</code>, <code>ORDER BY</code>, prefix <code>LIKE 'abc%'</code></td></tr>
+      <tr><td><strong>Composite</strong> (multi-column)</td><td>Filtering on several columns together — order matters (leftmost-prefix rule)</td></tr>
+      <tr><td><strong>Covering</strong> (INCLUDE)</td><td>Index holds all selected columns → answer from index, never touch the table</td></tr>
+      <tr><td><strong>Hash</strong></td><td>Pure equality only (no ranges); niche in Postgres</td></tr>
+      <tr><td><strong>Partial</strong></td><td>Index only rows matching a condition (e.g. <code>WHERE active = true</code>)</td></tr>
+      <tr><td><strong>Unique</strong></td><td>Enforce uniqueness <em>and</em> speed lookups</td></tr>
+    </tbody>
+  </table>
+
+  <div class="codecap">Creating and using indexes (PostgreSQL)</div>
+<pre><code class="language-sql">-- single column
+CREATE INDEX idx_trade_symbol ON trade(symbol);
+
+-- composite: order matters. Good for WHERE symbol=? AND trade_date=?
+CREATE INDEX idx_trade_sym_date ON trade(symbol, trade_date);
+
+-- covering index: query is answered entirely from the index
+CREATE INDEX idx_trade_cover ON trade(symbol) INCLUDE (qty, price);
+
+-- partial index: only the rows you actually query
+CREATE INDEX idx_active_cust ON customer(email) WHERE active = true;
+
+-- see whether the planner uses it
+EXPLAIN ANALYZE
+SELECT qty, price FROM trade WHERE symbol = 'AAPL' AND trade_date = '2026-06-26';
+-- Look for "Index Scan using idx_trade_sym_date" (good)
+-- vs "Seq Scan on trade" (bad: full table scan)</code></pre>
+
+  <h4>The leftmost-prefix rule (top interview trap)</h4>
+  <p>A composite index on <code>(symbol, trade_date)</code> can serve <code>WHERE symbol = ?</code> and <code>WHERE symbol = ? AND trade_date = ?</code>, but <strong>not</strong> <code>WHERE trade_date = ?</code> alone — because the index is sorted by symbol first. Order the columns by how you query, most-selective equality columns first.</p>
+
+  <h4>Other "fast retrieval" levers (mention these to stand out)</h4>
+  <ul>
+    <li><strong>Selectivity:</strong> index high-cardinality columns (many distinct values). Indexing a boolean rarely helps.</li>
+    <li><strong>Covering indexes</strong> avoid the extra "heap fetch" back to the table.</li>
+    <li><strong>Keep indexes usable:</strong> a function on the column (<code>WHERE UPPER(symbol)=…</code>) disables a plain index — use an <em>expression index</em> instead.</li>
+    <li><strong>Partitioning</strong> for very large tables (by date/range) so scans hit one partition.</li>
+    <li><strong>Statistics:</strong> run <code>ANALYZE</code> so the planner has fresh row estimates.</li>
+    <li><strong>Pagination:</strong> prefer keyset pagination (<code>WHERE id &gt; ?</code>) over large <code>OFFSET</code>.</li>
+  </ul>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>Indexes are not free: every <code>INSERT/UPDATE/DELETE</code> must maintain them, so over-indexing slows writes and bloats storage — a real concern for high-throughput ETL targets. A query can usually use only one index per table (Postgres can combine via bitmap, but plan for one). Leading wildcards (<code>LIKE '%abc'</code>) and column-side functions defeat B-trees. Always confirm with <code>EXPLAIN ANALYZE</code> rather than assuming.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What is an index and how does it speed up queries?</summary>
+      <div class="ans"><p>A sorted auxiliary structure (B-tree) on one or more columns. It turns a full O(n) scan into an O(log n) descent to the matching rows, at the cost of extra storage and slower writes.</p></div></details>
+    <details class="qa"><summary>Why might the database ignore your index?</summary>
+      <div class="ans"><p>Low selectivity (a scan is cheaper), stale statistics, a function/implicit cast on the indexed column, a leading-wildcard <code>LIKE</code>, or the query violating the leftmost-prefix rule of a composite index.</p></div></details>
+    <details class="qa"><summary>Clustered vs non-clustered index?</summary>
+      <div class="ans"><p>A clustered index defines the physical row order (one per table — e.g. SQL Server's primary key, or Postgres' <code>CLUSTER</code>). Non-clustered indexes are separate structures pointing back to the rows. In Postgres the table is a heap and all indexes are "secondary".</p></div></details>
+    <details class="qa"><summary>How would you diagnose a slow query?</summary>
+      <div class="ans"><p>Run <code>EXPLAIN ANALYZE</code>, look for seq scans on big tables, check row-estimate vs actual (stats drift), confirm the right index exists and is leftmost-usable, consider a covering or partial index, and re-<code>ANALYZE</code>.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>In the Postgres you'll run for P6, create a <code>trade</code> table, insert ~500k rows with <code>generate_series</code>, then time <code>SELECT … WHERE symbol='AAPL'</code> before and after <code>CREATE INDEX</code>, comparing <code>EXPLAIN ANALYZE</code> output. Seeing "Seq Scan" flip to "Index Scan" with a 100×+ speedup is the most convincing thing you can describe in an interview.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+
+<h2 class="sec">Part B · Your 6-Phase Syllabus</h2>
+<p style="margin-top:18px;color:var(--muted)">Part A gave you the interview-day answers. Part B is the build-up: the same concepts with more depth and runnable code, in the phase order you planned. Together they cover everything in your Eraser sheet.</p>
+
+<!-- ============ P1 JAVA 8 ============ -->
+<section class="module" id="p1">
+  <div class="topeyebrow"><span>Phase 1 · 1 week</span><span class="badge v">Java 8</span><span class="badge">the big jump</span></div>
+  <h3>Java 8 Core — Lambdas, Streams, Optional, java.time</h3>
+  <p>Java 8 (2014) is the watershed between "old" and "modern" Java. If you internalise <strong>Streams</strong>, most modern code becomes readable. Functional interfaces (A4) are the engine; Streams are the assembly line built on them.</p>
+
+  <h4>Streams API — the pipeline you already think in</h4>
+  <p>A Stream is a <strong>declarative pipeline</strong> over a collection: a <em>source</em>, zero or more <em>lazy intermediate</em> operations (each returns a new stream), and one <em>terminal</em> operation that triggers execution and produces a result. Nothing runs until the terminal op.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 150" role="img" aria-label="Stream pipeline">
+      <style>.bx{fill:#fff;stroke:#cfd7e2}.src{fill:#e4f3f1;stroke:#1f7a72}.term{fill:#fdf3d6;stroke:#e0a500}
+        .k{font:600 12px var(--mono,monospace);fill:#1b2433}.s{font:10.5px var(--mono,monospace);fill:#5a6b80}
+        .a{stroke:#5a6b80;stroke-width:1.4;fill:none;marker-end:url(#sx)}</style>
+      <defs><marker id="sx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a6b80"/></marker></defs>
+      <rect x="14" y="50" width="120" height="48" rx="8" class="src"/><text x="30" y="72" class="k">stream()</text><text x="30" y="90" class="s">SOURCE</text>
+      <path class="a" d="M136 74 H168"/>
+      <rect x="168" y="50" width="120" height="48" rx="8" class="bx"/><text x="182" y="72" class="k">filter()</text><text x="182" y="90" class="s">intermediate</text>
+      <path class="a" d="M290 74 H322"/>
+      <rect x="322" y="50" width="120" height="48" rx="8" class="bx"/><text x="336" y="72" class="k">map()</text><text x="336" y="90" class="s">intermediate</text>
+      <path class="a" d="M444 74 H476"/>
+      <rect x="476" y="50" width="130" height="48" rx="8" class="bx"/><text x="490" y="72" class="k">sorted()</text><text x="490" y="90" class="s">intermediate</text>
+      <path class="a" d="M608 74 H640"/>
+      <rect x="640" y="50" width="110" height="48" rx="8" class="term"/><text x="654" y="72" class="k">toList()</text><text x="654" y="90" class="s">TERMINAL</text>
+      <text x="168" y="128" class="s">lazy — nothing executes until the terminal op pulls data through</text>
+    </svg>
+    <figcaption>Source → lazy intermediate ops → one terminal op. This is your ETL pipeline expressed in Java.</figcaption>
+  </figure>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>This is almost literally a Pentaho/Informatica mapping: <code>stream()</code> = the reader, <code>filter()</code> = a filter step, <code>map()</code> = an expression/transform, <code>sorted()</code>/<code>distinct()</code> = sort/dedup, <code>collect()</code>/<code>toList()</code> = the writer. Laziness = the pipeline only does work when the target pulls rows.</p>
+  </div>
+
+  <div class="codecap">From loop to stream (the slide your client already has)</div>
+<pre><code class="language-java">// Java 7 — imperative
+List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+for (Employee e : employees) {
+    if (e.getSalary() &gt; 100000) result.add(e);
+}
+
+// Java 8+ — declarative
+List&lt;Employee&gt; rich = employees.stream()
+        .filter(e -&gt; e.getSalary() &gt; 100000)
+        .toList();</code></pre>
+
+  <div class="codecap">The operations you'll use 90% of the time</div>
+<pre><code class="language-java">import java.util.stream.*;
+
+// map + filter + collect
+List&lt;String&gt; names = employees.stream()
+        .filter(e -&gt; e.getSalary() &gt; 100000)
+        .map(Employee::getName)
+        .sorted()
+        .toList();
+
+// grouping (like GROUP BY)
+Map&lt;String, List&lt;Employee&gt;&gt; byDept = employees.stream()
+        .collect(Collectors.groupingBy(Employee::getDept));
+
+// aggregate per group (GROUP BY dept, AVG(salary))
+Map&lt;String, Double&gt; avgByDept = employees.stream()
+        .collect(Collectors.groupingBy(Employee::getDept,
+                 Collectors.averagingDouble(Employee::getSalary)));
+
+// reduce to a single value
+double total = employees.stream()
+        .mapToDouble(Employee::getSalary)   // primitive stream avoids boxing
+        .sum();
+
+// counting + partitioning
+Map&lt;Boolean, Long&gt; split = employees.stream()
+        .collect(Collectors.partitioningBy(e -&gt; e.getSalary() &gt; 100000,
+                 Collectors.counting()));</code></pre>
+
+  <h4>Optional — no more NullPointerException reflexes</h4>
+  <p><code>Optional&lt;T&gt;</code> is a box that holds a value or nothing, forcing the caller to handle "absent" explicitly instead of returning <code>null</code>.</p>
+<pre><code class="language-java">Optional&lt;Employee&gt; top = employees.stream()
+        .max(Comparator.comparingDouble(Employee::getSalary));
+
+String name = top.map(Employee::getName)      // transform if present
+                 .orElse("none");             // fallback if absent
+
+top.ifPresent(e -&gt; System.out.println(e.getName()));   // act only if present</code></pre>
+
+  <h4>Method references — shorthand for obvious lambdas</h4>
+<pre><code class="language-java">employees.stream().map(Employee::getName)      // e -&gt; e.getName()
+                  .forEach(System.out::println);  // s -&gt; System.out.println(s)
+List&lt;Employee&gt; copy = employees.stream().sorted(Comparator.comparing(Employee::getName)).toList();</code></pre>
+
+  <h4>java.time — the modern date/time API</h4>
+  <p>Replaces the broken, mutable <code>java.util.Date</code>/<code>Calendar</code>. The types are immutable and clearly named.</p>
+<pre><code class="language-java">import java.time.*;
+
+LocalDate today   = LocalDate.now();
+LocalDate settle  = today.plusDays(2);                 // T+2
+LocalDateTime ts  = LocalDateTime.now();
+Duration d        = Duration.between(ts, ts.plusHours(3));
+Period age        = Period.between(LocalDate.of(1990,1,1), today);
+boolean overdue   = settle.isBefore(today);</code></pre>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>A stream is <strong>single-use</strong> — consume it once; reusing throws <code>IllegalStateException</code>. Streams don't mutate the source, they produce results. Don't do I/O or mutate shared state inside <code>map()</code>/<code>filter()</code> (no side effects). Use primitive streams (<code>mapToInt/Double</code>) for number crunching to avoid boxing. <strong>Don't reach for <code>parallelStream()</code></strong> unless you've measured — it's rarely worth it and easy to misuse.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>Intermediate vs terminal operations?</summary>
+      <div class="ans"><p>Intermediate ops (<code>filter</code>, <code>map</code>, <code>sorted</code>) are lazy and return a new stream; terminal ops (<code>collect</code>, <code>forEach</code>, <code>reduce</code>, <code>count</code>) trigger execution and produce a result or side effect.</p></div></details>
+    <details class="qa"><summary>map() vs flatMap()?</summary>
+      <div class="ans"><p><code>map</code> is 1→1 (transform each element). <code>flatMap</code> is 1→many flattened into one stream — e.g. turning <code>List&lt;Order&gt;</code> with line items into a single stream of all line items.</p></div></details>
+    <details class="qa"><summary>Why Optional instead of returning null?</summary>
+      <div class="ans"><p>It makes "no value" part of the type, so callers must handle absence; it composes with <code>map/filter/orElse</code> and reduces NPEs. Use it for return types, not fields or method parameters.</p></div></details>
+    <details class="qa"><summary>What is a Collector?</summary>
+      <div class="ans"><p>A recipe for accumulating stream elements into a result — <code>toList()</code>, <code>toMap()</code>, <code>groupingBy()</code>, <code>joining()</code>, <code>counting()</code>. It's the "writer/aggregator" end of the pipeline.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Take your <code>BatchJobRun</code> list from A1. Using Streams: (1) total rows written across all runs, (2) group runs by job name, (3) the run with the most skipped rows as an <code>Optional</code>, (4) a comma-joined string of job names sorted alphabetically (<code>Collectors.joining(", ")</code>). Rewrite each as the old for-loop too, to feel the difference.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ P2 JAVA 9-17 ============ -->
+<section class="module" id="p2">
+  <div class="topeyebrow"><span>Phase 2 · 2 weeks</span><span class="badge v">Java 9–17</span></div>
+  <h3>Java 9–17 — var, Records, Text Blocks, Switch Expressions, Sealed Classes</h3>
+  <p>These features remove boilerplate and make data modelling safer. Each is small on its own; together they're "modern Java style."</p>
+
+  <h4><code>var</code> — local type inference (Java 10)</h4>
+  <p>The compiler infers the type from the right-hand side. It's still <strong>statically typed</strong> — only the typing is shorter. Use it when the type is obvious; spell the type out when it aids readability.</p>
+<pre><code class="language-java">var name = "Nag";                       // String
+var totals = new HashMap&lt;String,Integer&gt;();   // HashMap&lt;String,Integer&gt;
+for (var e : employees) { /* ... */ }   // Employee inferred
+// var x;          // ERROR: needs an initialiser
+// var y = null;   // ERROR: nothing to infer</code></pre>
+
+  <h4>Records — immutable data carriers (Java 16)</h4>
+  <p>A <code>record</code> auto-generates the constructor, private final fields, accessors, and correct <code>equals()</code>/<code>hashCode()</code>/<code>toString()</code>. This is the single biggest boilerplate killer — perfect for DTOs, API responses, and map keys (recall A3).</p>
+<pre><code class="language-java">public record Employee(int id, String name, double salary) {}
+
+// equivalent to ~40 lines of a classic POJO. Usage:
+var e = new Employee(1, "Asha", 120000);
+e.name();                 // accessor (no "get" prefix)
+e.equals(new Employee(1,"Asha",120000));  // true — value equality for free
+
+// compact constructor for validation
+public record Money(String ccy, long minorUnits) {
+    public Money {                       // runs before fields are assigned
+        if (minorUnits &lt; 0) throw new IllegalArgumentException("negative");
+    }
+}</code></pre>
+
+  <h4>Text blocks — multi-line strings (Java 15)</h4>
+  <p>Triple-quoted strings for SQL, JSON, HTML — no <code>\n</code> or escaping noise. Indentation is stripped relative to the closing delimiter.</p>
+<pre><code class="language-java">String sql = """
+        SELECT id, name, salary
+        FROM   employee
+        WHERE  salary &gt; ?
+        ORDER  BY salary DESC
+        """;
+
+String json = """
+        { "symbol": "AAPL", "qty": %d }
+        """.formatted(500);</code></pre>
+
+  <h4>Switch expressions — switch that returns a value (Java 14)</h4>
+  <p>Arrow syntax, no fall-through, no <code>break</code>, and it can be assigned. <code>yield</code> returns from a multi-line branch.</p>
+<pre><code class="language-java">String label = switch (status) {
+    case "A" -&gt; "Active";
+    case "I" -&gt; "Inactive";
+    case "P", "H" -&gt; "Pending";          // multiple labels
+    default -&gt; "Unknown";
+};
+
+int score = switch (grade) {
+    case "A" -&gt; { int base = 90; yield base + 5; }   // block form
+    default  -&gt; 0;
+};</code></pre>
+
+  <h4>Sealed classes — control who can extend (Java 17)</h4>
+  <p>A sealed type lists exactly which classes may implement/extend it. This makes your domain model <strong>exhaustive</strong>: combined with switch pattern matching (P3/A6), the compiler guarantees you've handled every case.</p>
+<pre><code class="language-java">public sealed interface PaymentResult
+        permits Approved, Declined, Pending {}
+
+public record Approved(String authCode) implements PaymentResult {}
+public record Declined(String reason)   implements PaymentResult {}
+public record Pending(long retryAfter)  implements PaymentResult {}
+// No other class can implement PaymentResult — the set is closed.</code></pre>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p><strong>Records</strong> are your row/DTO definitions with zero ceremony — think of a strongly-typed record schema. <strong>Sealed types</strong> are like a constrained domain/reference list: only these statuses are legal, and downstream logic must handle each one. <strong>Text blocks</strong> are for the SQL you embed everywhere.</p>
+  </div>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>Records are <strong>immutable</strong> — no setters; "change" means create a new record. Records can't extend a class (they implicitly extend <code>Record</code>) but can implement interfaces. Don't overuse <code>var</code> where it hides an unclear type. A sealed type's permitted subclasses must be in the same module/package and must themselves be <code>final</code>, <code>sealed</code>, or <code>non-sealed</code>.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What does a record give you for free?</summary>
+      <div class="ans"><p>A canonical constructor, private final fields, public accessors, and value-based <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>. Ideal for immutable DTOs and map keys.</p></div></details>
+    <details class="qa"><summary>Switch statement vs switch expression?</summary>
+      <div class="ans"><p>The expression form (<code>-&gt;</code>) returns a value, has no fall-through, requires exhaustiveness, and avoids accidental <code>break</code> bugs. The classic statement form is still available for side-effecting code.</p></div></details>
+    <details class="qa"><summary>Why seal a class hierarchy?</summary>
+      <div class="ans"><p>To close the set of subtypes so the compiler can verify exhaustive handling (great with pattern-matching switch) and so the domain can't be extended in unexpected ways — safer modelling of a finite set of cases.</p></div></details>
+    <details class="qa"><summary>Is <code>var</code> dynamic typing?</summary>
+      <div class="ans"><p>No. The type is fixed at compile time by inference; <code>var x = 1</code> is an <code>int</code> forever. It's purely a syntax convenience for locals.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Re-model your <code>Employee</code> as a <code>record</code> with a compact constructor rejecting negative salary. Add a <code>sealed interface Status permits Active, Inactive, OnLeave</code> and a switch expression turning a <code>Status</code> into a display string. Store an SQL query in a text block. You've now used four Phase-2 features in one tiny file.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+
+<!-- ============ P3 JAVA 17-21 ============ -->
+<section class="module" id="p3">
+  <div class="topeyebrow"><span>Phase 3 · 1 week</span><span class="badge v">Java 17–21</span><span class="badge">virtual threads = huge</span></div>
+  <h3>Java 17–21 — Virtual Threads, Pattern Matching, Structured Concurrency</h3>
+
+  <h4>Virtual Threads (Java 21) — the headline</h4>
+  <p>A <strong>platform thread</strong> maps 1:1 to an OS thread and costs ~1&nbsp;MB of stack, so a server can run maybe a few thousand. A <strong>virtual thread</strong> is managed by the JVM and costs almost nothing; you can run <strong>millions</strong>. When a virtual thread blocks on I/O, the JVM <em>unmounts</em> it from its carrier OS thread and runs another — so simple blocking code scales like hand-written async, without the callback spaghetti.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 180" role="img" aria-label="Virtual threads vs platform threads">
+      <style>.k{font:600 12px var(--mono,monospace);fill:#1b2433}.s{font:10.5px var(--mono,monospace);fill:#5a6b80}
+        .vt{fill:#fdf3d6;stroke:#e0a500}.ct{fill:#e4f3f1;stroke:#1f7a72}.os{fill:#16233a}</style>
+      <text x="20" y="24" class="k">Many virtual threads…</text>
+      <g>
+        <rect x="20" y="36" width="34" height="20" rx="4" class="vt"/><rect x="60" y="36" width="34" height="20" rx="4" class="vt"/>
+        <rect x="100" y="36" width="34" height="20" rx="4" class="vt"/><rect x="140" y="36" width="34" height="20" rx="4" class="vt"/>
+        <rect x="180" y="36" width="34" height="20" rx="4" class="vt"/><rect x="220" y="36" width="34" height="20" rx="4" class="vt"/>
+        <text x="270" y="51" class="s">… × millions (cheap, JVM-managed)</text>
+      </g>
+      <text x="20" y="92" class="k">…multiplexed onto a few carrier OS threads</text>
+      <rect x="20" y="104" width="90" height="30" rx="6" class="ct"/><text x="34" y="124" class="s">carrier 1</text>
+      <rect x="120" y="104" width="90" height="30" rx="6" class="ct"/><text x="134" y="124" class="s">carrier 2</text>
+      <rect x="220" y="104" width="90" height="30" rx="6" class="ct"/><text x="234" y="124" class="s">carrier 3</text>
+      <text x="20" y="162" class="s">Block on I/O → virtual thread unmounts, freeing the carrier for others.</text>
+    </svg>
+    <figcaption>Virtual threads decouple "number of concurrent tasks" from "number of OS threads."</figcaption>
+  </figure>
+
+  <div class="codecap">Virtual threads in practice</div>
+<pre><code class="language-java">import java.util.concurrent.*;
+
+// Run 10,000 blocking calls concurrently — no pool tuning
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    List&lt;Future&lt;String&gt;&gt; futures = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 10_000; i++) {
+        int id = i;
+        futures.add(executor.submit(() -&gt; fetchQuote(id)));  // blocking I/O is fine
+    }
+    for (var f : futures) System.out.println(f.get());
+}   // executor.close() waits for all tasks
+
+// Or a one-off
+Thread.startVirtualThread(() -&gt; System.out.println("on a virtual thread"));</code></pre>
+  <p>In Spring Boot 3.2+ you flip them on for the whole web layer with one property: <code>spring.threads.virtual.enabled=true</code>.</p>
+
+  <h4>Pattern Matching (Java 16 instanceof → Java 21 switch + records)</h4>
+<pre><code class="language-java">// instanceof pattern — bind and test in one step (Java 16)
+if (obj instanceof String s &amp;&amp; s.length() &gt; 3) {
+    System.out.println(s.toUpperCase());      // 's' already typed as String
+}
+
+// switch + record patterns + guards (Java 21)
+sealed interface Shape permits Circle, Rect {}
+record Circle(double r) implements Shape {}
+record Rect(double w, double h) implements Shape {}
+
+double area(Shape sh) {
+    return switch (sh) {
+        case Circle(double r)            -&gt; Math.PI * r * r;
+        case Rect(double w, double h) when w == h -&gt; w * w;   // guarded
+        case Rect(double w, double h)    -&gt; w * h;
+    };   // exhaustive — sealed type means no default needed
+}</code></pre>
+
+  <h4>Structured Concurrency (preview in Java 21 — understand conceptually)</h4>
+  <p>It treats several related subtasks as a single unit: if one fails, the others are cancelled; the parent waits for all. It turns "fan out, then join" into something with clear ownership and error propagation, instead of leaking threads on failure.</p>
+<pre><code class="language-java">// PREVIEW in 21: compile/run with --enable-preview
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+    var user  = scope.fork(() -&gt; loadUser(id));      // subtask 1
+    var orders = scope.fork(() -&gt; loadOrders(id));   // subtask 2
+    scope.join().throwIfFailed();                    // wait; propagate first failure
+    return new Dashboard(user.get(), orders.get());
+}   // if either fails, the other is cancelled automatically</code></pre>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p><strong>Virtual threads</strong> = massively parallel source reads / API lookups without exhausting a thread pool — scaling pipeline parallelism without scaling hardware. <strong>Structured concurrency</strong> = a parent job that fans out parallel sub-extracts and fails the whole job cleanly if any branch fails (no orphaned threads).</p>
+  </div>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>Virtual threads help <strong>I/O-bound</strong> work, not CPU-bound number crunching (that's still limited by cores). Avoid <code>synchronized</code> blocks around blocking calls — they can "pin" a virtual thread to its carrier (use <code>ReentrantLock</code> instead). Don't pool virtual threads — create one per task. Structured concurrency is <strong>preview</strong> in 21: know it, but say so.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>Platform thread vs virtual thread?</summary>
+      <div class="ans"><p>Platform threads wrap OS threads (heavy, few thousand max). Virtual threads are JVM-scheduled, extremely cheap (millions), and unmount from a carrier OS thread when they block — so blocking code scales without async complexity.</p></div></details>
+    <details class="qa"><summary>When do virtual threads NOT help?</summary>
+      <div class="ans"><p>CPU-bound workloads — you're still bounded by cores. They shine for high-concurrency I/O (HTTP calls, DB queries, file reads).</p></div></details>
+    <details class="qa"><summary>What is pattern matching for switch?</summary>
+      <div class="ans"><p>Switching on an object's <em>type</em> (and destructured record components, with optional <code>when</code> guards) instead of a constant, binding variables in each branch — eliminating cast boilerplate and enabling exhaustive handling over sealed types.</p></div></details>
+    <details class="qa"><summary>What problem does structured concurrency solve?</summary>
+      <div class="ans"><p>Unmanaged executor tasks can leak on failure and have unclear lifecycles. Structured concurrency scopes related subtasks so failure cancels siblings and the parent reliably joins — clearer error handling and no orphaned threads.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Write a method that "fetches" 1,000 fake quotes (each <code>Thread.sleep(100)</code> to simulate I/O). Run it once with a fixed <code>Executors.newFixedThreadPool(10)</code> and once with <code>newVirtualThreadPerTaskExecutor()</code>; time both. The virtual-thread version finishing in a fraction of the time is the demo to describe in your interview.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ P4 SPRING BOOT ============ -->
+<section class="module" id="p4">
+  <div class="topeyebrow"><span>Phase 4 · 3 weeks</span><span class="badge">Spring Boot 3.5</span><span class="badge v">most of your effort</span></div>
+  <h3>Spring Boot — REST, DI, JPA, Errors, Validation, Security</h3>
+  <p>Spring Boot lets you build a production web service with almost no configuration: an embedded Tomcat, sensible defaults ("auto-configuration"), and "starter" dependencies that pull in everything a feature needs. You write business code; Boot wires the plumbing.</p>
+
+  <div class="call note"><span class="lbl">Version note for your interview</span>
+    <p>This guide targets <strong>Spring Boot 3.5.x on JDK 21</strong> — what most enterprises run and what interview questions assume. As of mid-2026 the newest line is <strong>Spring Boot 4.x</strong> (built on Spring Framework 7, Java 17+ min, JSpecify null-safety, modularised jars); <strong>3.5 is the final 3.x release and its open-source support ends 30 June 2026</strong>. Everything below is API-stable across 3.x; on 4.x the main differences you'd mention are Security 7 config changes and the Framework-7 baseline. Knowing that 3.x→4.x story is itself a good talking point.</p>
+  </div>
+
+  <h4>The layered architecture (memorise this shape)</h4>
+  <figure>
+    <svg viewBox="0 0 760 210" role="img" aria-label="Spring Boot layers">
+      <style>.k{font:600 13px var(--mono,monospace);fill:#1b2433}.s{font:10.5px var(--mono,monospace);fill:#5a6b80}
+        .l{fill:#fff;stroke:#cfd7e2}.c{fill:#e9eaff;stroke:#4b51c8}.sv{fill:#fdf3d6;stroke:#e0a500}.rp{fill:#e4f3f1;stroke:#1f7a72}
+        .a{stroke:#5a6b80;stroke-width:1.5;fill:none;marker-end:url(#p4x)}</style>
+      <defs><marker id="p4x" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5a6b80"/></marker></defs>
+      <rect x="40" y="20" width="120" height="44" rx="8" class="l"/><text x="58" y="40" class="k">HTTP client</text><text x="58" y="56" class="s">JSON</text>
+      <path class="a" d="M162 42 H210"/>
+      <rect x="210" y="20" width="150" height="44" rx="8" class="c"/><text x="226" y="40" class="k">@RestController</text><text x="226" y="56" class="s">web layer</text>
+      <path class="a" d="M285 66 V96"/>
+      <rect x="210" y="98" width="150" height="44" rx="8" class="sv"/><text x="232" y="118" class="k">@Service</text><text x="226" y="134" class="s">business logic / @Transactional</text>
+      <path class="a" d="M285 144 V174"/>
+      <rect x="210" y="176" width="150" height="30" rx="8" class="rp"/><text x="226" y="196" class="k">@Repository (JPA)</text>
+      <path class="a" d="M362 191 H470"/>
+      <rect x="470" y="176" width="120" height="30" rx="8" class="l"/><text x="500" y="196" class="k">PostgreSQL</text>
+      <text x="430" y="118" class="s">DI wires these together;</text>
+      <text x="430" y="134" class="s">each layer depends on the</text>
+      <text x="430" y="150" class="s">interface below it, not the impl.</text>
+    </svg>
+    <figcaption>Controller → Service → Repository → DB. Keep web concerns out of the service, and persistence out of the controller.</figcaption>
+  </figure>
+
+  <h4>1 · Dependency Injection (DI) &amp; IoC — the heart of Spring</h4>
+  <p>Instead of objects creating their own collaborators (<code>new CustomerService()</code>), the Spring <strong>container</strong> creates them ("beans") and <strong>injects</strong> them where needed. You declare <em>what</em> you need; Spring provides it. This is Inversion of Control: the framework owns object creation and lifetime.</p>
+<pre><code class="language-java">@Service                                   // a managed bean
+public class CustomerService {
+    private final CustomerRepository repo;
+    // constructor injection (preferred): Spring passes the repo bean in
+    public CustomerService(CustomerRepository repo) { this.repo = repo; }
+    public Customer findById(Long id) { /* ... */ }
+}</code></pre>
+  <p>Stereotype annotations mark beans: <code>@Component</code> (generic), <code>@Service</code> (business), <code>@Repository</code> (data, adds exception translation), <code>@RestController</code> (web). <strong>Prefer constructor injection</strong> (shown) over field injection — it makes dependencies explicit, final, and testable.</p>
+  <div class="call etl"><span class="lbl">ETL analogy</span><p>DI is like a job scheduler that hands each transform its configured connections and resources at runtime, rather than each step hard-coding its own DB connection. You declare the dependency; the container supplies the wired-up instance.</p></div>
+
+  <h4>2 · REST APIs</h4>
+  <p>You saw the controller in A5. The flow: <code>@RestController</code> maps HTTP to methods, Jackson auto-converts JSON ↔ your records, status codes communicate outcome.</p>
+<pre><code class="language-java">@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+    private final CustomerService service;
+    public CustomerController(CustomerService service) { this.service = service; }
+
+    @GetMapping("/{id}")
+    public CustomerDto get(@PathVariable Long id) { return service.findById(id); }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CustomerDto create(@RequestBody @Valid CreateCustomer body) {
+        return service.create(body);
+    }
+}
+
+public record CreateCustomer(@NotBlank String name, @Email String email) {}
+public record CustomerDto(Long id, String name, String email) {}</code></pre>
+
+  <h4>3 · Spring Data JPA — persistence without SQL boilerplate</h4>
+  <p>JPA maps Java objects to table rows (ORM). Spring Data goes further: you declare a <strong>repository interface</strong> and Spring generates the implementation, including queries derived from method names.</p>
+<pre><code class="language-java">@Entity
+@Table(name = "customer")
+public class Customer {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String email;
+    private boolean active;
+    // getters/setters (or use Lombok) ...
+}
+
+public interface CustomerRepository extends JpaRepository&lt;Customer, Long&gt; {
+    // CRUD (save, findById, findAll, deleteById) is inherited — zero code.
+    List&lt;Customer&gt; findByActiveTrue();                 // derived query
+    Optional&lt;Customer&gt; findByEmail(String email);      // derived query
+
+    @Query("select c from Customer c where c.name like %:q%")
+    List&lt;Customer&gt; search(@Param("q") String q);       // explicit JPQL
+}</code></pre>
+  <div class="call etl"><span class="lbl">ETL analogy</span><p>The repository is a generated data-access layer — like a reusable target/lookup connector. Method-name queries (<code>findByActiveTrue</code>) are the framework writing the SQL for you; <code>@Query</code> is when you take the wheel, exactly like dropping to hand-written SQL in a mapping.</p></div>
+
+  <h4>4 · Exception Handling — one place, consistent errors</h4>
+  <p>Throw meaningful exceptions in your service; translate them centrally so every error returns the right status and a uniform body. This is the <code>@ControllerAdvice</code> in your notes (its REST-specific form is <code>@RestControllerAdvice</code>).</p>
+<pre><code class="language-java">public class NotFoundException extends RuntimeException {
+    public NotFoundException(String m) { super(m); }
+}
+
+@RestControllerAdvice
+public class ApiExceptionHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)                 // 404
+    public ApiError handleNotFound(NotFoundException ex) {
+        return new ApiError("NOT_FOUND", ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)               // 400
+    public ApiError handleValidation(MethodArgumentNotValidException ex) {
+        String msg = ex.getBindingResult().getFieldErrors().stream()
+                .map(f -&gt; f.getField() + ": " + f.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+        return new ApiError("VALIDATION", msg);
+    }
+}
+public record ApiError(String code, String message) {}</code></pre>
+
+  <h4>5 · Validation — reject bad input at the edge</h4>
+  <p>Bean Validation annotations on your request record + <code>@Valid</code> on the parameter make Spring validate before your method runs; failures become a 400 via the handler above. Needs the <code>spring-boot-starter-validation</code> starter.</p>
+<pre><code class="language-java">public record CreateCustomer(
+        @NotBlank String name,
+        @Email String email,
+        @Min(18) int age,
+        @Size(max = 500) String notes
+) {}
+// @NotNull @NotBlank @Email @Min @Max @Size @Pattern @Positive ...</code></pre>
+
+  <h4>6 · Security Basics — JWT, OAuth2, Keycloak</h4>
+  <p>Spring Security intercepts every request through a filter chain and decides authentication (who are you?) and authorisation (what may you do?). The modern stateless pattern for APIs: the client sends a <strong>JWT</strong> (a signed token) on each request; the server validates the signature and reads the claims — no server-side session (which fits REST's statelessness, A5).</p>
+  <ul>
+    <li><strong>JWT</strong> — a compact signed token (header.payload.signature) carrying claims (user, roles, expiry). Self-contained: the server trusts it because the signature checks out.</li>
+    <li><strong>OAuth2 / OIDC</strong> — the protocol for <em>obtaining</em> tokens from an authorisation server, so your app never handles passwords directly.</li>
+    <li><strong>Keycloak</strong> — a popular open-source identity provider that issues those OAuth2/OIDC tokens (users, roles, login UI) so you don't build auth yourself.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 760 150" role="img" aria-label="JWT flow with Keycloak">
+      <style>.k{font:600 12px var(--mono,monospace);fill:#1b2433}.s{font:10px var(--mono,monospace);fill:#5a6b80}
+        .b{fill:#fff;stroke:#cfd7e2}.a{stroke:#4b51c8;stroke-width:1.5;fill:none;marker-end:url(#jx)}</style>
+      <defs><marker id="jx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4b51c8"/></marker></defs>
+      <rect x="20" y="55" width="110" height="40" rx="8" class="b"/><text x="42" y="80" class="k">Client</text>
+      <rect x="320" y="20" width="140" height="40" rx="8" class="b"/><text x="338" y="44" class="k">Keycloak (OIDC)</text>
+      <rect x="600" y="55" width="140" height="40" rx="8" class="b"/><text x="616" y="80" class="k">Your API</text>
+      <path class="a" d="M132 70 C220 70 230 40 318 40"/><text x="150" y="58" class="s">1) login → JWT</text>
+      <path class="a" d="M132 80 H598"/><text x="300" y="98" class="s">2) request + Authorization: Bearer &lt;JWT&gt;</text>
+      <text x="600" y="128" class="s">3) API verifies signature &amp; claims → allow/deny</text>
+    </svg>
+    <figcaption>OAuth2/OIDC issues the JWT; your stateless API just validates it on each call.</figcaption>
+  </figure>
+<pre><code class="language-java">// Minimal stateless resource-server config (Spring Security 6, Boot 3.x)
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    @Bean
+    SecurityFilterChain chain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -&gt; csrf.disable())
+            .authorizeHttpRequests(reg -&gt; reg
+                .requestMatchers("/api/public/**").permitAll()
+                .anyRequest().authenticated())
+            .oauth2ResourceServer(o -&gt; o.jwt(Customizer.withDefaults())); // validate JWTs
+        return http.build();
+    }
+}</code></pre>
+  <p>For learning, you don't need Keycloak on day one — Spring Security's HTTP Basic or an in-memory user gets you started; add JWT/Keycloak once the basics click.</p>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p><strong>Don't expose entities directly</strong> — map to DTO records (avoids lazy-loading serialization errors and leaking columns). <strong>N+1 queries</strong>: lazy associations in a loop fire one query per row; fix with <code>JOIN FETCH</code> or an <code>@EntityGraph</code>. Put <code>@Transactional</code> on the <strong>service</strong>, not the controller. In Security 6/Boot 3 the old <code>WebSecurityConfigurerAdapter</code> is gone — configure a <code>SecurityFilterChain</code> bean as above. Never log or commit secrets; never disable CSRF on a browser-session app (it's fine for a stateless token API).</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>What is dependency injection and why use it?</summary>
+      <div class="ans"><p>The container creates and supplies an object's collaborators instead of the object building them. Benefits: loose coupling, easy swapping/mocking for tests, single place to manage lifecycle and config. Prefer constructor injection.</p></div></details>
+    <details class="qa"><summary>What does Spring Boot auto-configuration do?</summary>
+      <div class="ans"><p>Based on the classpath and properties, it configures sensible beans automatically (datasource, web server, Jackson, etc.), which you can override. "Starters" bundle the dependencies for a feature.</p></div></details>
+    <details class="qa"><summary>How does Spring Data JPA generate queries?</summary>
+      <div class="ans"><p>From method-name conventions (<code>findByEmailAndActiveTrue</code>) it parses into a query; for complex cases you supply <code>@Query</code> JPQL/native SQL. CRUD comes from <code>JpaRepository</code>.</p></div></details>
+    <details class="qa"><summary>How do you centralise error handling?</summary>
+      <div class="ans"><p><code>@RestControllerAdvice</code> with <code>@ExceptionHandler</code> methods that map exceptions to HTTP status + a consistent error body, keeping controllers clean.</p></div></details>
+    <details class="qa"><summary>Session vs JWT authentication?</summary>
+      <div class="ans"><p>Sessions store state server-side (a cookie holds the session id). JWTs are stateless: the signed token carries the claims, so any server instance can validate it without shared session storage — better for scaling and REST.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on (this is your week-by-week core)</span>
+    <p>Generate a project at <a class="inline" href="https://start.spring.io">start.spring.io</a> with <em>Web, JPA, Validation, PostgreSQL Driver</em>. Build a full <code>Customer</code> CRUD: entity → repository → service → controller, with DTO records, validation, and a <code>@RestControllerAdvice</code> returning 404/400 properly. Test with <code>curl</code> or the browser. Then add HTTP Basic security, and only after that attempt JWT. That single app exercises every Phase-4 topic.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ P5 SPRING BATCH ============ -->
+<section class="module" id="p5">
+  <div class="topeyebrow"><span>Phase 5 · 1 week</span><span class="badge">Spring Batch 5</span><span class="badge v">your ETL, in Java</span></div>
+  <h3>Spring Batch — Your ETL Mental Model, One-to-One</h3>
+  <p>This is the phase where your 20 years pay off immediately. Spring Batch is an ETL framework: it reads items, processes them, and writes them in <strong>chunks</strong>, with restartability, transaction boundaries, skip/retry, and run history — the same concerns you've handled in Informatica and Pentaho. You already know the concepts; you're just learning the Java names.</p>
+
+  <h4>The mapping (put this on a sticky note)</h4>
+  <table>
+    <thead><tr><th>ETL / Informatica / Pentaho</th><th>Spring Batch</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td>Source / Reader</td><td><code>ItemReader&lt;I&gt;</code></td><td>Reads one item at a time (CSV, JDBC, queue…)</td></tr>
+      <tr><td>Expression / Transformation</td><td><code>ItemProcessor&lt;I,O&gt;</code></td><td>Transforms/validates/filters an item (return <code>null</code> to drop it)</td></tr>
+      <tr><td>Target / Writer</td><td><code>ItemWriter&lt;O&gt;</code></td><td>Writes a chunk of items (JDBC, JPA, file…)</td></tr>
+      <tr><td>Mapping / Workflow</td><td><code>Step</code></td><td>One reader→processor→writer pass, chunked &amp; transactional</td></tr>
+      <tr><td>Workflow / Sequence</td><td><code>Job</code></td><td>An ordered set of Steps</td></tr>
+      <tr><td>Session run / run log</td><td><code>JobInstance</code> / <code>JobExecution</code></td><td>A run and its history in the metadata tables</td></tr>
+      <tr><td>Session parameters</td><td><code>JobParameters</code></td><td>Inputs that identify/parametrise a run</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Chunk-oriented processing (the core idea)</h4>
+  <p>Batch reads items one by one, but <strong>writes them in chunks</strong> of N inside a single transaction. Read N, process N, write N, commit — repeat. If the write fails, that chunk's transaction rolls back; the framework records progress so you can restart from where it stopped. This is exactly "commit interval" tuning from your ETL world.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 180" role="img" aria-label="Chunk oriented processing">
+      <style>.k{font:600 12px var(--mono,monospace);fill:#1b2433}.s{font:10.5px var(--mono,monospace);fill:#5a6b80}
+        .r{fill:#e4f3f1;stroke:#1f7a72}.p{fill:#e9eaff;stroke:#4b51c8}.w{fill:#fdf3d6;stroke:#e0a500}
+        .a{stroke:#5a6b80;stroke-width:1.4;fill:none;marker-end:url(#cx)}.tx{fill:none;stroke:#c2453f;stroke-dasharray:5 4}</style>
+      <defs><marker id="cx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a6b80"/></marker></defs>
+      <rect x="30" y="55" width="150" height="46" rx="8" class="r"/><text x="50" y="74" class="k">ItemReader</text><text x="50" y="91" class="s">read 1 … N</text>
+      <path class="a" d="M182 78 H220"/>
+      <rect x="220" y="55" width="160" height="46" rx="8" class="p"/><text x="240" y="74" class="k">ItemProcessor</text><text x="240" y="91" class="s">transform each</text>
+      <path class="a" d="M382 78 H420"/>
+      <rect x="420" y="55" width="160" height="46" rx="8" class="w"/><text x="440" y="74" class="k">ItemWriter</text><text x="440" y="91" class="s">write chunk of N</text>
+      <rect x="210" y="40" width="380" height="76" rx="10" class="tx"/><text x="430" y="132" class="s">one transaction per chunk → commit, then next chunk</text>
+      <path class="a" d="M500 101 C500 150 120 150 105 103"/><text x="250" y="168" class="s">loop until reader is exhausted; progress saved for restart</text>
+    </svg>
+    <figcaption>Read→process→write in chunks of N, one transaction per chunk — restartable, like a tuned ETL commit interval.</figcaption>
+  </figure>
+
+  <div class="codecap">A CSV → transform → DB step (Spring Batch 5 API)</div>
+<pre><code class="language-java">@Configuration
+public class BatchConfig {
+
+    // SOURCE: read a CSV line into a Customer (FlatFileItemReader)
+    @Bean
+    public FlatFileItemReader&lt;Customer&gt; reader() {
+        return new FlatFileItemReaderBuilder&lt;Customer&gt;()
+                .name("customerReader")
+                .resource(new ClassPathResource("customers.csv"))
+                .delimited().names("name", "email", "active")
+                .targetType(Customer.class)
+                .linesToSkip(1)                 // header row
+                .build();
+    }
+
+    // TRANSFORM: normalise; return null to FILTER an item out
+    @Bean
+    public ItemProcessor&lt;Customer, Customer&gt; processor() {
+        return c -&gt; {
+            if (c.getEmail() == null || c.getEmail().isBlank()) return null; // drop
+            c.setEmail(c.getEmail().toLowerCase());
+            return c;
+        };
+    }
+
+    // TARGET: insert each chunk via JPA
+    @Bean
+    public JpaItemWriter&lt;Customer&gt; writer(EntityManagerFactory emf) {
+        var w = new JpaItemWriter&lt;Customer&gt;();
+        w.setEntityManagerFactory(emf);
+        return w;
+    }
+
+    // STEP: wire R→P→W with a chunk size (commit interval)
+    @Bean
+    public Step importStep(JobRepository jobRepository,
+                           PlatformTransactionManager txManager,
+                           FlatFileItemReader&lt;Customer&gt; reader,
+                           ItemProcessor&lt;Customer, Customer&gt; processor,
+                           JpaItemWriter&lt;Customer&gt; writer) {
+        return new StepBuilder("importStep", jobRepository)
+                .&lt;Customer, Customer&gt;chunk(100, txManager)   // 100 = commit interval
+                .reader(reader).processor(processor).writer(writer)
+                .faultTolerant().skipLimit(10).skip(FlatFileParseException.class)
+                .build();
+    }
+
+    // JOB: an ordered set of steps
+    @Bean
+    public Job importJob(JobRepository jobRepository, Step importStep) {
+        return new JobBuilder("importJob", jobRepository)
+                .start(importStep)
+                .build();
+    }
+}</code></pre>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>Read the code above as a mapping: <code>FlatFileItemReader</code> is your flat-file source, the <code>ItemProcessor</code> lambda is an expression/filter transform (returning <code>null</code> = a router dropping the row), <code>JpaItemWriter</code> is the target, <code>chunk(100)</code> is your commit interval, and <code>faultTolerant().skipLimit()</code> is your reject/error-handling strategy. The metadata tables Spring Batch maintains are your run/session logs.</p>
+  </div>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>Spring Batch needs its <strong>metadata tables</strong> (<code>BATCH_JOB_*</code>); Boot can auto-create them (<code>spring.batch.jdbc.initialize-schema=always</code> for dev). A <code>JobInstance</code> is identified by job name + identifying <code>JobParameters</code> — re-running with the <em>same</em> parameters won't run a completed instance again (add a unique param like a run timestamp to force a new run). In Spring Batch 5 the old <code>JobBuilderFactory</code>/<code>StepBuilderFactory</code> are gone — build with <code>JobBuilder</code>/<code>StepBuilder</code> taking the <code>JobRepository</code> (as above). Chunk size is a tuning knob: too small = slow (many commits), too large = big transactions/memory.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>Explain Job, Step, and chunk processing.</summary>
+      <div class="ans"><p>A <strong>Job</strong> is the whole batch process, made of ordered <strong>Steps</strong>. A chunk-oriented Step reads items via an <code>ItemReader</code>, transforms via an <code>ItemProcessor</code>, and writes N at a time via an <code>ItemWriter</code>, committing one transaction per chunk.</p></div></details>
+    <details class="qa"><summary>How does Spring Batch support restartability?</summary>
+      <div class="ans"><p>It persists execution state in metadata tables. On restart it skips completed steps and, for chunk steps, resumes from the last committed position, so you don't reprocess everything after a failure.</p></div></details>
+    <details class="qa"><summary>How do you skip/retry bad records?</summary>
+      <div class="ans"><p>Make the step <code>faultTolerant()</code> and declare <code>skip(Exception.class)</code> with a <code>skipLimit</code>, or <code>retry(...)</code> with a <code>retryLimit</code> for transient failures — the framework isolates the offending item.</p></div></details>
+    <details class="qa"><summary>How is this different from your Informatica/Pentaho work?</summary>
+      <div class="ans"><p>Conceptually identical — source/transform/target, commit intervals, reject handling, run logs. The difference is it's code-first and embeddable in a Spring Boot app/REST service rather than a separate GUI tool, which is exactly the migration story in Phase 6.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on</span>
+    <p>Add <em>Spring Batch</em> to your Phase-4 project. Drop a <code>customers.csv</code> on the classpath and build the Job above to load it into Postgres, with the lowercase-email transform and a skip for malformed lines. Run it, then query the <code>BATCH_JOB_EXECUTION</code> table to see your run history — that's your "session log," now self-managed.</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ P6 MIGRATION PROJECT ============ -->
+<section class="module" id="p6">
+  <div class="topeyebrow"><span>Phase 6 · 2 weeks</span><span class="badge">Capstone</span><span class="badge v">GitHub portfolio</span></div>
+  <h3>Migration Project — Informatica/Pentaho → Spring Batch</h3>
+  <p>This is your proof piece and your best interview story: "I re-implemented an ETL flow as a Spring Boot + Spring Batch service." It demonstrates every phase at once and reframes your ETL depth as modern-Java capability. Scope it small and finish it: <strong>CSV → transform → PostgreSQL</strong>, containerised, on GitHub.</p>
+
+  <h4>What it shows an interviewer</h4>
+  <ul>
+    <li>Spring Boot service structure (P4) wrapping a Spring Batch job (P5)</li>
+    <li>A REST endpoint to <em>trigger</em> the job — modern + on-demand, not just scheduled</li>
+    <li>Java 21 records/streams in the transform logic (P1–P3)</li>
+    <li>Docker for a reproducible Postgres — the "runs anywhere" story</li>
+    <li>The exact ETL→Java translation a migration role wants to hear</li>
+  </ul>
+
+  <h4>Project structure</h4>
+<pre><code class="language-bash">etl-migration-demo/
+├── pom.xml
+├── Dockerfile
+├── docker-compose.yml
+├── src/main/java/com/gudiseva/etl/
+│   ├── EtlMigrationApplication.java      # @SpringBootApplication
+│   ├── domain/Customer.java              # @Entity
+│   ├── repo/CustomerRepository.java      # JpaRepository
+│   ├── batch/BatchConfig.java            # Reader/Processor/Writer/Step/Job (P5)
+│   └── web/JobController.java            # POST /api/jobs/import  -> launch job
+└── src/main/resources/
+    ├── application.yml
+    └── customers.csv</code></pre>
+
+  <h4>pom.xml — pinned to your toolchain (JDK 21, Spring Boot 3.5.x)</h4>
+<pre><code class="language-xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;3.5.6&lt;/version&gt;          &lt;!-- final 3.x line; bump to latest 3.5.x --&gt;
+    &lt;relativePath/&gt;
+  &lt;/parent&gt;
+  &lt;groupId&gt;com.gudiseva&lt;/groupId&gt;
+  &lt;artifactId&gt;etl-migration-demo&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+  &lt;properties&gt;&lt;java.version&gt;21&lt;/java.version&gt;&lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;&lt;/dependency&gt;
+    &lt;dependency&gt;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-batch&lt;/artifactId&gt;&lt;/dependency&gt;
+    &lt;dependency&gt;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;&lt;/dependency&gt;
+    &lt;dependency&gt;&lt;groupId&gt;org.postgresql&lt;/groupId&gt;
+      &lt;artifactId&gt;postgresql&lt;/artifactId&gt;&lt;scope&gt;runtime&lt;/scope&gt;&lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;&lt;plugins&gt;
+    &lt;plugin&gt;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;&lt;/plugin&gt;
+  &lt;/plugins&gt;&lt;/build&gt;
+&lt;/project&gt;</code></pre>
+
+  <h4>application.yml</h4>
+<pre><code class="language-yaml">spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/etl
+    username: etl
+    password: etl
+  jpa:
+    hibernate.ddl-auto: update      # dev only; use migrations in prod
+  batch:
+    jdbc.initialize-schema: always  # create BATCH_* metadata tables (dev)
+    job.enabled: false              # don't auto-run on startup; trigger via REST</code></pre>
+
+  <h4>Trigger the job from REST (the modern touch)</h4>
+<pre><code class="language-java">@RestController
+@RequestMapping("/api/jobs")
+public class JobController {
+    private final JobLauncher launcher;
+    private final Job importJob;
+    public JobController(JobLauncher launcher, Job importJob) {
+        this.launcher = launcher; this.importJob = importJob;
+    }
+
+    @PostMapping("/import")
+    public Map&lt;String,Object&gt; run() throws Exception {
+        var params = new JobParametersBuilder()
+                .addLong("ts", System.currentTimeMillis())   // unique → fresh run
+                .toJobParameters();
+        var exec = launcher.run(importJob, params);
+        return Map.of("status", exec.getStatus().toString(),
+                      "id", exec.getId());
+    }
+}</code></pre>
+
+  <h4>Docker — reproducible Postgres + app</h4>
+  <div class="codecap">docker-compose.yml — one command to bring up the DB</div>
+<pre><code class="language-yaml">services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: etl
+      POSTGRES_USER: etl
+      POSTGRES_PASSWORD: etl
+    ports: ["5432:5432"]</code></pre>
+  <div class="codecap">Dockerfile — package the app (multi-stage)</div>
+<pre><code class="language-bash">FROM eclipse-temurin:21-jdk AS build
+WORKDIR /app
+COPY . .
+RUN ./mvnw -q clean package -DskipTests
+
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=build /app/target/etl-migration-demo-1.0.0.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]</code></pre>
+
+  <h4>Run it</h4>
+<pre><code class="language-bash">docker compose up -d                 # start Postgres
+./mvnw spring-boot:run               # start the app (port 8080)
+curl -X POST http://localhost:8080/api/jobs/import   # launch the batch job
+# -> {"status":"COMPLETED","id":1}
+# verify:
+docker exec -it &lt;db_container&gt; psql -U etl -d etl -c "select count(*) from customer;"</code></pre>
+
+  <h4>Push to GitHub (your portfolio)</h4>
+<pre><code class="language-bash">git init
+echo "target/" &gt; .gitignore
+git add .
+git commit -m "ETL migration demo: CSV -> Spring Batch -> PostgreSQL (Boot 3.5, Java 21)"
+git branch -M main
+git remote add origin https://github.com/gudiseva/etl-migration-demo.git
+git push -u origin main</code></pre>
+  <p>Write a short <code>README.md</code> framing it as a migration: a table mapping the old Informatica/Pentaho steps to the Spring Batch components (reuse the P5 table). That README is the artifact you point an interviewer to — it sits naturally alongside your existing <code>Informatica-Scenarios</code> and <code>n8n-workflows</code> repos and ties your ETL past to your Java present.</p>
+
+  <div class="call etl"><span class="lbl">ETL analogy</span>
+    <p>You're not learning a new domain — you're re-platforming a familiar one. The CSV source, the lowercase/validation transform, the Postgres target, the commit interval, the reject handling: all concepts you've shipped for years. The only new thing is expressing them as Spring Batch beans inside a deployable service.</p>
+  </div>
+
+  <div class="call gotcha"><span class="lbl">Gotchas</span>
+    <p>Set <code>spring.batch.job.enabled=false</code> so the job doesn't fire on every startup — you want to trigger it via REST. Add a unique <code>JobParameter</code> per run or a completed instance won't re-run. <code>ddl-auto: update</code> and <code>initialize-schema: always</code> are fine for a demo but say "I'd use Flyway/Liquibase migrations in production" — interviewers listen for that. Keep secrets out of <code>application.yml</code> (use env vars); don't commit them.</p>
+  </div>
+
+  <div class="qa-wrap"><span class="lbl">Likely interview questions</span>
+    <details class="qa"><summary>Walk me through migrating an Informatica mapping to Spring Batch.</summary>
+      <div class="ans"><p>Map source→<code>ItemReader</code>, transformations→<code>ItemProcessor</code>, target→<code>ItemWriter</code>, the mapping→a <code>Step</code>, the workflow→a <code>Job</code>; set the chunk size from the old commit interval, port reject handling to <code>skip/retry</code>, and replace the scheduler/session log with Spring Batch's metadata tables — optionally triggering via REST instead of a scheduler.</p></div></details>
+    <details class="qa"><summary>Why move off a GUI ETL tool to code?</summary>
+      <div class="ans"><p>Version control and code review, unit/integration testing, CI/CD, no licence cost, easier embedding in microservices, and on-demand triggering. Trade-off: you lose the visual designer and some out-of-the-box connectors, so it's a case-by-case call.</p></div></details>
+    <details class="qa"><summary>How would you scale this for large volumes?</summary>
+      <div class="ans"><p>Tune chunk size, use partitioned or multi-threaded steps, switch to a high-throughput writer (<code>JdbcBatchItemWriter</code> with batched inserts), index the target appropriately (A7), and consider parallel steps for independent feeds.</p></div></details>
+  </div>
+
+  <div class="call exercise"><span class="lbl">Hands-on — the finish line</span>
+    <p>Build the whole project end to end and push it to <code>github.com/gudiseva</code>. Then extend it once: add a second step that writes a rejected-rows CSV (your "bad file" target), or expose <code>GET /api/jobs/{id}</code> to report a run's status. Either extension gives you a concrete, confident answer to "tell me about a recent project."</p>
+  </div>
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+<!-- ============ SETUP & STUDY PLAN ============ -->
+<section class="module" id="setup">
+  <div class="topeyebrow"><span>Wrap-up</span><span class="badge v">JDK 21 + Maven</span></div>
+  <h3>⚙ Setup &amp; 10-Week Study Plan</h3>
+
+  <h4>1 · Install JDK 21 and Maven</h4>
+  <p>Confirm Java first — you likely have it. You need the <strong>JDK</strong> (has <code>javac</code>), not just a JRE.</p>
+<pre><code class="language-bash"># verify
+java -version      # expect: openjdk version "21.x"
+javac -version     # expect: javac 21.x   (if missing, install the JDK)
+mvn -version       # expect: Apache Maven 3.9.x, Java version: 21
+
+# --- install if needed ---
+# macOS (Homebrew):
+brew install openjdk@21 maven
+# Windows: install Temurin 21 from adoptium.net, then  choco install maven
+# Linux (Debian/Ubuntu):
+sudo apt install openjdk-21-jdk maven</code></pre>
+  <p>If you prefer juggling JDK versions, <a class="inline" href="https://sdkman.io">SDKMAN!</a> (<code>sdk install java 21-tem</code>, <code>sdk install maven</code>) is the cleanest option on macOS/Linux.</p>
+
+  <h4>2 · Generate Spring Boot projects the easy way</h4>
+  <p>Use <a class="inline" href="https://start.spring.io">start.spring.io</a> (Spring Initializr): pick <strong>Maven</strong>, <strong>Java 21</strong>, Spring Boot <strong>3.5.x</strong>, then add dependencies per phase:</p>
+  <ul>
+    <li><strong>P4:</strong> Spring Web, Spring Data JPA, Validation, PostgreSQL Driver, (later) Spring Security</li>
+    <li><strong>P5–P6:</strong> add Spring Batch</li>
+  </ul>
+  <p>Download, unzip, then <code>./mvnw spring-boot:run</code>. The <code>mvnw</code> wrapper means you don't even need Maven installed globally.</p>
+
+  <h4>3 · For pure-Java practice (Parts A1–A4, P1–P3)</h4>
+  <p>You don't need Spring or even Maven to drill core Java. A single file runs directly on JDK 21:</p>
+<pre><code class="language-bash">// Demo.java
+public class Demo {
+    public static void main(String[] args) {
+        System.out.println("hello, modern java");
+    }
+}
+// run without compiling separately (single-file source launch):
+java Demo.java
+// preview features (e.g. structured concurrency in P3):
+java --enable-preview --source 21 Demo.java</code></pre>
+
+  <h4>4 · The 10-week plan, mapped to this guide</h4>
+  <table>
+    <thead><tr><th>Week</th><th>Focus</th><th>Sections</th><th>Deliverable</th></tr></thead>
+    <tbody>
+      <tr><td>0 (now)</td><td>Read Part A end-to-end for interview readiness</td><td>A1–A7</td><td>Can answer all 7 client topics aloud</td></tr>
+      <tr><td>1</td><td>Java 8 — lambdas, Streams, Optional, java.time</td><td>P1, A4</td><td>Stream exercises from P1</td></tr>
+      <tr><td>2–3</td><td>Java 9–17 — var, records, text blocks, switch, sealed</td><td>P2</td><td>Re-model domain with records + sealed</td></tr>
+      <tr><td>4</td><td>Java 17–21 — virtual threads, pattern matching</td><td>P3, A6</td><td>Virtual-threads timing demo</td></tr>
+      <tr><td>5–7</td><td>Spring Boot — DI, REST, JPA, errors, validation, security</td><td>P4, A5</td><td>Customer CRUD service with validation + error handling</td></tr>
+      <tr><td>8</td><td>Spring Batch — reader/processor/writer/job/step</td><td>P5</td><td>CSV → Postgres batch job</td></tr>
+      <tr><td>9–10</td><td>Migration capstone + polish + mock interviews</td><td>P6, A7</td><td>Project on GitHub + README mapping table</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--muted)">If your interview lands sooner: do Week 0 (Part A) first, then skim P1 + P4, and be ready to say "I built the Phase 6 migration demo" once it exists. Depth where you're strong (ETL→Batch, SQL) plus honesty where you're ramping (Spring Boot specifics) is a credible, senior posture.</p>
+
+  <h4>Quick reference links</h4>
+  <ul>
+    <li>Spring Initializr — <a class="inline" href="https://start.spring.io">start.spring.io</a></li>
+    <li>Spring Boot reference — <a class="inline" href="https://docs.spring.io/spring-boot/index.html">docs.spring.io/spring-boot</a></li>
+    <li>Spring Batch reference — <a class="inline" href="https://docs.spring.io/spring-batch/reference/">docs.spring.io/spring-batch</a></li>
+    <li>Baeldung tutorials (practical) — <a class="inline" href="https://www.baeldung.com">baeldung.com</a></li>
+    <li>Your repos — <a class="inline" href="https://github.com/gudiseva">github.com/gudiseva</a></li>
+  </ul>
+
+  <a class="toplink" href="#top">↑ back to top</a>
+</section>
+
+<footer>
+  <p>Built for your Tudor / Sagarsoft prep · JDK 21 · Maven · Spring Boot 3.5.x. Code samples are standard Java 21 / Spring Boot 3.x and are meant to be typed and run, not just read. Where a feature is a preview (structured concurrency), that's flagged inline. Bump Spring Boot to the latest 3.5.x patch when you generate the project.</p>
+</footer>
+
+    </div><!-- /wrap -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script>
+  if(window.Prism&&Prism.plugins&&Prism.plugins.autoloader){
+    Prism.plugins.autoloader.languages_path="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/";
+  }
+  // active-section highlight in the rail
+  (function(){
+    var links=[].slice.call(document.querySelectorAll('#rail-nav a'));
+    var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){a.classList.remove('active');});
+          var a=map[e.target.id];if(a)a.classList.add('active');
+        }
+      });
+    },{rootMargin:"-15% 0px -75% 0px"});
+    document.querySelectorAll('.module[id]').forEach(function(m){io.observe(m);});
+  })();
+</script>
+</body>
+</html>

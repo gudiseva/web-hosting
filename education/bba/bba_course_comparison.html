@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBA Course Comparison 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F0E0C;
+  --paper: #F7F4EE;
+  --cream: #EDE9DF;
+  --rule: #C8C2B5;
+  --A: #1A3352; --A-lt: #E8EEF5; --A-acc: #4A80C4;
+  --B: #1F4A2E; --B-lt: #E8F2EC; --B-acc: #4EA86A;
+  --C: #6B1A0F; --C-lt: #F5EAE8; --C-acc: #C4503A;
+  --D: #3D2060; --D-lt: #EFE9F8; --D-acc: #8A56C4;
+  --gold: #B8860B;
+  --ok: #1A5C28;
+  --err: #8B1A1A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Syne', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
+
+/* MASTHEAD */
+.masthead { background: var(--ink); color: var(--paper); padding: 2.5rem 1.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+.masthead::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.03) 60px, rgba(255,255,255,.03) 61px); }
+.masthead-kicker { font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: .7rem; font-family: 'DM Mono', monospace; }
+.masthead-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -.01em; margin-bottom: .6rem; }
+.masthead-sub { font-size: .75rem; color: #A8A49C; letter-spacing: .08em; font-family: 'DM Mono', monospace; }
+
+/* COURSE STRIPS */
+.strips { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1200px; margin: 0 auto; border-left: 1px solid var(--rule); }
+.strip { padding: 1.5rem 1.2rem 1rem; border-right: 1px solid var(--rule); border-bottom: 3px solid; position: relative; }
+.strip.A { border-color: var(--A); } .strip.B { border-color: var(--B); }
+.strip.C { border-color: var(--C); } .strip.D { border-color: var(--D); }
+.strip-opt { font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .5rem; opacity: .55; }
+.strip-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; line-height: 1.25; margin-bottom: .35rem; }
+.strip.A .strip-title { color: var(--A); } .strip.B .strip-title { color: var(--B); }
+.strip.C .strip-title { color: var(--C); } .strip.D .strip-title { color: var(--D); }
+.strip-inst { font-size: .68rem; color: #6B6560; line-height: 1.5; }
+.strip-pill { display: inline-block; margin-top: .6rem; font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; }
+.strip.A .strip-pill { background: var(--A); color: #fff; }
+.strip.B .strip-pill { background: var(--B); color: #fff; }
+.strip.C .strip-pill { background: var(--C); color: #fff; }
+.strip.D .strip-pill { background: var(--D); color: #fff; }
+
+/* CONTENT AREA */
+.content { max-width: 1200px; margin: 0 auto; }
+
+/* SECTION HEADER */
+.sec-head { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 0 .5rem; border-top: 1.5px solid var(--ink); margin: 0 0 .5rem; }
+.sec-icon { font-size: 1.1rem; }
+.sec-label { font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-family: 'DM Mono', monospace; color: var(--ink); }
+.sec-line { flex: 1; height: 1px; background: var(--rule); }
+
+/* GRID TABLE */
+.gtable { display: grid; grid-template-columns: 145px 1fr 1fr 1fr 1fr; border: 1px solid var(--rule); background: white; }
+.ghead { padding: 8px 11px; font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-family: 'DM Mono', monospace; border-bottom: 1.5px solid var(--rule); border-right: 1px solid var(--rule); }
+.ghead:last-child { border-right: none; }
+.ghead.A { color: var(--A); background: var(--A-lt); }
+.ghead.B { color: var(--B); background: var(--B-lt); }
+.ghead.C { color: var(--C); background: var(--C-lt); }
+.ghead.D { color: var(--D); background: var(--D-lt); }
+.ghead.blank { background: var(--cream); }
+.grow { display: contents; }
+.gparam { padding: 9px 11px; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-family: 'DM Mono', monospace; color: #6B6560; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); background: var(--cream); line-height: 1.4; }
+.gcell { padding: 9px 11px; font-size: .73rem; font-family: 'Syne', sans-serif; line-height: 1.52; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); color: var(--ink); vertical-align: top; }
+.gcell:last-child { border-right: none; }
+.grow:last-child .gparam, .grow:last-child .gcell { border-bottom: none; }
+.alt .gparam, .alt .gcell { background: #FAFAF7; }
+.tag { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: .62rem; font-weight: 600; margin: 2px 2px 2px 0; font-family: 'DM Mono', monospace; white-space: nowrap; }
+.tA { background: var(--A-lt); color: var(--A); border: 1px solid #C0CCE0; }
+.tB { background: var(--B-lt); color: var(--B); border: 1px solid #B0D4BE; }
+.tC { background: var(--C-lt); color: var(--C); border: 1px solid #E0C0BC; }
+.tD { background: var(--D-lt); color: var(--D); border: 1px solid #C8B4E8; }
+.tG { background: #EAF3DE; color: #1A5C28; border: 1px solid #BEDDA0; }
+.tGR { background: #F0EDE8; color: #5A5550; border: 1px solid #D8D4CC; }
+.pro { color: var(--ok); font-size: .7rem; line-height: 1.55; padding: 1px 0; }
+.con { color: var(--err); font-size: .7rem; line-height: 1.55; padding: 1px 0; }
+.st { color: #C9960C; font-size: .8rem; } .se { color: #D8D4CC; font-size: .8rem; }
+
+/* CAMPUS CARDS */
+.campus-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--rule); background: white; }
+.camp { padding: 1.1rem 1.2rem; border-right: 1px solid var(--rule); }
+.camp:last-child { border-right: none; }
+.camp-head { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; margin-bottom: .7rem; padding-bottom: .45rem; border-bottom: 1.5px solid; line-height: 1.25; }
+.camp.A .camp-head { color: var(--A); border-color: var(--A); }
+.camp.B .camp-head { color: var(--B); border-color: var(--B); }
+.camp.C .camp-head { color: var(--C); border-color: var(--C); }
+.camp.D .camp-head { color: var(--D); border-color: var(--D); }
+.citem { display: flex; gap: .4rem; padding: 3px 0; border-bottom: 1px dotted #E2DED7; font-size: .7rem; line-height: 1.4; }
+.citem:last-child { border-bottom: none; }
+.ckey { font-weight: 700; color: #6B6560; min-width: 72px; font-size: .65rem; font-family: 'DM Mono', monospace; flex-shrink: 0; }
+.cval { color: var(--ink); }
+
+/* USA SECTION */
+.usa-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--rule); background: white; }
+.usa-card { padding: 1.1rem 1.2rem; border-right: 1px solid var(--rule); }
+.usa-card:last-child { border-right: none; }
+.usa-head { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; margin-bottom: .65rem; padding-bottom: .4rem; border-bottom: 1.5px solid; line-height: 1.25; }
+.usa-card.A .usa-head { color: var(--A); border-color: var(--A); }
+.usa-card.B .usa-head { color: var(--B); border-color: var(--B); }
+.usa-card.C .usa-head { color: var(--C); border-color: var(--C); }
+.usa-card.D .usa-head { color: var(--D); border-color: var(--D); }
+.usa-row { font-size: .7rem; padding: 3px 0; border-bottom: 1px dotted #E2DED7; color: var(--ink); line-height: 1.4; }
+.usa-row:last-of-type { border-bottom: none; }
+.usa-row strong { color: #6B6560; font-weight: 600; }
+.usa-hl { margin-top: .65rem; padding: .5rem .65rem; border-radius: 3px; font-size: .7rem; line-height: 1.5; font-weight: 500; border-left: 3px solid; }
+.usa-card.A .usa-hl { background: var(--A-lt); color: var(--A); border-color: var(--A-acc); }
+.usa-card.B .usa-hl { background: var(--B-lt); color: var(--B); border-color: var(--B-acc); }
+.usa-card.C .usa-hl { background: var(--C-lt); color: var(--C); border-color: var(--C-acc); }
+.usa-card.D .usa-hl { background: var(--D-lt); color: var(--D); border-color: var(--D-acc); }
+
+/* VERDICT */
+.verdict { background: var(--ink); color: var(--paper); padding: 2rem 1.5rem; }
+.v-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--paper); margin-bottom: 1.2rem; padding-bottom: .6rem; border-bottom: 1px solid #3A3830; }
+.v-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.v-card { background: #1C1B18; border-radius: 4px; padding: 1rem 1.1rem; border-top: 3px solid; }
+.v-card.A { border-color: var(--A-acc); } .v-card.B { border-color: var(--B-acc); }
+.v-card.C { border-color: var(--C-acc); } .v-card.D { border-color: var(--D-acc); }
+.v-key { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-family: 'DM Mono', monospace; margin-bottom: .5rem; }
+.v-card.A .v-key { color: var(--A-acc); } .v-card.B .v-key { color: var(--B-acc); }
+.v-card.C .v-key { color: var(--C-acc); } .v-card.D .v-key { color: var(--D-acc); }
+.v-val { font-size: .75rem; color: #C8C4BC; line-height: 1.6; }
+.v-note { font-size: .67rem; color: #6B6560; margin-top: .4rem; line-height: 1.45; }
+.final-box { margin-top: 1.2rem; background: #1C1B18; border: 1px solid #3A3830; border-radius: 4px; padding: 1.2rem 1.3rem; }
+.final-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: .8rem; }
+.final-row { display: grid; grid-template-columns: 160px 1fr; gap: .7rem; padding: .45rem 0; border-bottom: 1px solid #2E2D2A; font-size: .73rem; }
+.final-row:last-child { border-bottom: none; }
+.final-key { color: #888; font-weight: 600; }
+.final-val { color: var(--paper); line-height: 1.5; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: .63rem; font-weight: 700; margin-right: 3px; }
+.pA { background: var(--A); color: #fff; } .pB { background: var(--B); color: #fff; }
+.pC { background: var(--C); color: #fff; } .pD { background: var(--D); color: #fff; }
+.warn { background: #2A2200; border: 1px solid #6B4D00; border-radius: 3px; padding: .5rem .7rem; font-size: .68rem; color: #E8C060; line-height: 1.5; margin-top: .5rem; }
+
+/* PADDING WRAPPER */
+.pad { padding: 0 1rem; }
+
+@media(max-width:900px){
+  .strips,.campus-grid,.usa-grid,.v-grid { grid-template-columns: 1fr 1fr; }
+  .gtable { grid-template-columns: 90px 1fr 1fr 1fr 1fr; }
+  body { font-size: 14px; }
+  .final-row { grid-template-columns: 1fr; gap: .2rem; }
+}
+@media(max-width:580px){
+  .strips,.campus-grid,.usa-grid,.v-grid { grid-template-columns: 1fr; }
+  .gtable { display: block; }
+  .gparam,.gcell,.ghead { display: block; border-right: none; }
+  .masthead-title { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-kicker">Post-12th Course Evaluation · 2025–26 · For a US Citizen</div>
+  <h1 class="masthead-title">BBA Course<br><em>Comparison</em></h1>
+  <div class="masthead-sub">Campus · India Jobs · USA Opportunities · Salary · Higher Studies</div>
+</div>
+
+<!-- COURSE STRIPS -->
+<div class="strips">
+  <div class="strip A">
+    <div class="strip-opt">Option A · 3 Years</div>
+    <div class="strip-title">BBA — Data Analytics</div>
+    <div class="strip-inst">University College of Management<br>JNTUH, Kukatpally, Hyderabad<br>Govt · Est. 1989 (SMS) · NAAC A+</div>
+    <div><span class="strip-pill">Tech / Analytics</span></div>
+  </div>
+  <div class="strip B">
+    <div class="strip-opt">Option B · 4 Years</div>
+    <div class="strip-title">BBA — Tourism &amp; Hospitality Mgmt</div>
+    <div class="strip-inst">National Institute of Tourism &amp;<br>Hospitality Management (NITHM)<br>Gachibowli, Hyderabad · Govt-aided · AICTE</div>
+    <div><span class="strip-pill">Tourism / Hospitality</span></div>
+  </div>
+  <div class="strip C">
+    <div class="strip-opt">Option C · 3 Years</div>
+    <div class="strip-title">BBA — Analytics</div>
+    <div class="strip-inst">University Post Graduate College<br>Osmania University, Secunderabad<br>Govt Constituent College · Est. 1947</div>
+    <div><span class="strip-pill">Analytics / Management</span></div>
+  </div>
+  <div class="strip D">
+    <div class="strip-opt">Option D · 3 Years</div>
+    <div class="strip-title">BBA — Culinary Arts</div>
+    <div class="strip-inst">Indian Culinary Institute (ICI)<br>Tirupati, Andhra Pradesh<br>Ministry of Tourism, Govt of India · Est. 2018</div>
+    <div><span class="strip-pill">Culinary / Chef Career</span></div>
+  </div>
+</div>
+
+<!-- CAMPUS SECTION -->
+<div class="pad content">
+<div class="sec-head"><span class="sec-icon">🏛</span><span class="sec-label">Campus &amp; Infrastructure</span><span class="sec-line"></span></div>
+</div>
+<div class="campus-grid" style="max-width:1200px;margin:0 auto 0;">
+  <div class="camp A">
+    <div class="camp-head">JNTUH — UCM<br>Kukatpally, Hyderabad</div>
+    <div class="citem"><span class="ckey">Location</span><span class="cval">Kukatpally, Hyderabad — well-connected urban area. Near IT corridor, metro access.</span></div>
+    <div class="citem"><span class="ckey">Campus</span><span class="cval">89-acre JNTUH campus. UCM (School of Mgmt Studies) is a constituent college within this large tech university campus.</span></div>
+    <div class="citem"><span class="ckey">Labs</span><span class="cval">Computer labs, data analytics software (Python, R, Excel), smart classrooms. Shares JNTUH central infrastructure.</span></div>
+    <div class="citem"><span class="ckey">Library</span><span class="cval">JNTUH Central Library — 93,441 books, 187 print journals, 30,560+ e-journals via Springer & databases.</span></div>
+    <div class="citem"><span class="ckey">Hostel</span><span class="cval">JNTUH hostels available — ₹2,000/month. Separate boys &amp; girls. Basic but functional.</span></div>
+    <div class="citem"><span class="ckey">Sports</span><span class="cval">Full JNTUH sports complex — badminton, basketball, cricket, football, kabaddi, volleyball, gym.</span></div>
+    <div class="citem"><span class="ckey">Wi-Fi</span><span class="cval">Campus Wi-Fi available. Students report some inconsistency. Two auditoriums (1050 + 330 seats).</span></div>
+    <div class="citem"><span class="ckey">Vibe</span><span class="cval">Large, urban, engineering-tech atmosphere. BBA batch is small within a big tech university. EDC for entrepreneurship. Active tech events.</span></div>
+    <div style="margin-top:.55rem"><span class="tag tA">NAAC A+</span><span class="tag tA">NIRF #94 Engg</span><span class="tag tA">Est. 1972 (JNTUH)</span></div>
+  </div>
+  <div class="camp B">
+    <div class="camp-head">NITHM<br>Gachibowli, Hyderabad</div>
+    <div class="citem"><span class="ckey">Location</span><span class="cval">Telecom Nagar, Gachibowli — prime Hyderabad location. Near Hitech City, financial district, metro.</span></div>
+    <div class="citem"><span class="ckey">Campus</span><span class="cval">Dedicated hospitality campus. Focused, purpose-built infrastructure for tourism &amp; hotel management education.</span></div>
+    <div class="citem"><span class="ckey">Labs</span><span class="cval">Training kitchen, food &amp; beverage lab, front office lab, housekeeping lab, mock hotel rooms, travel agency simulation lab. Industry-standard equipment.</span></div>
+    <div class="citem"><span class="ckey">Library</span><span class="cval">Dedicated management library. Good hospitality and tourism titles. Digital resources.</span></div>
+    <div class="citem"><span class="ckey">Hostel</span><span class="cval">Hostel available on / near campus. NITHM total fees ~₹1L/yr (govt-aided rates) includes hostel component.</span></div>
+    <div class="citem"><span class="ckey">Sports</span><span class="cval">Sports facilities available. Smaller campus = focused sports programme. Student activity centre.</span></div>
+    <div class="citem"><span class="ckey">Training</span><span class="cval">10 months compulsory industrial training built into the 4-year BBA. Students placed in hotels &amp; travel companies during curriculum.</span></div>
+    <div class="citem"><span class="ckey">Vibe</span><span class="cval">Focused, industry-oriented hospitality campus. Active placement culture. Good peer group in niche field. JNTUH affiliated — degree from JNTUH.</span></div>
+    <div style="margin-top:.55rem"><span class="tag tB">AICTE Approved</span><span class="tag tB">NCHMCT Affiliated</span><span class="tag tB">Gachibowli</span><span class="tag tB">Govt-Aided</span></div>
+  </div>
+  <div class="camp C">
+    <div class="camp-head">UPGC — Osmania Univ.<br>Secunderabad</div>
+    <div class="citem"><span class="ckey">Location</span><span class="cval">Rasoolpura Rd, Secunderabad — central twin-city location. Excellent bus, metro, and auto connectivity.</span></div>
+    <div class="citem"><span class="ckey">Campus</span><span class="cval">Historic constituent college (est. 1947) of Osmania University. Co-educational. Separate UG &amp; PG blocks. 1,949 students enrolled.</span></div>
+    <div class="citem"><span class="ckey">Labs</span><span class="cval">Computer labs, practical demo laboratories. BBA Analytics likely uses shared computing infrastructure. Elegant auditorium for seminars.</span></div>
+    <div class="citem"><span class="ckey">Library</span><span class="cval">College Library — 56,000 books, 20 subject journals, 15 magazines, 12 newspapers. Automated since 2011.</span></div>
+    <div class="citem"><span class="ckey">Hostel</span><span class="cval">Gnana Gangotri Hostel (boys) &amp; CHW4 Hostel (girls). Affordable. City location = many day scholars.</span></div>
+    <div class="citem"><span class="ckey">Sports</span><span class="cval">Sprawling playground — cricket, volleyball, throwball, basketball, shuttle, kabaddi. Health centre with doctor.</span></div>
+    <div class="citem"><span class="ckey">Wi-Fi</span><span class="cval">Wi-Fi enabled campus. Generally well-reviewed by students (4.33/5 campus rating on Shiksha).</span></div>
+    <div class="citem"><span class="ckey">Vibe</span><span class="cval">Historic, community-oriented, co-educational. Active cultural fests, seminars, sports events. Small-town feel in city. Close-knit faculty-student relationship.</span></div>
+    <div style="margin-top:.55rem"><span class="tag tC">OU Constituent</span><span class="tag tC">Est. 1947</span><span class="tag tC">Secunderabad</span></div>
+  </div>
+  <div class="camp D">
+    <div class="camp-head">ICI Tirupati<br>Andhra Pradesh</div>
+    <div class="citem"><span class="ckey">Location</span><span class="cval">Tirupati, AP — ~550 km from Hyderabad. Pilgrimage city. Residential campus (mandatory stay). Away from metros.</span></div>
+    <div class="citem"><span class="ckey">Campus</span><span class="cval">Purpose-built, state-of-the-art Govt of India campus. Inaugurated 2018 by VP Venkaiah Naidu. Designed to be "at par with best international culinary institutes."</span></div>
+    <div class="citem"><span class="ckey">Labs</span><span class="cval">World-class: specialised kitchens for Indian cuisines, Continental, Oriental; microbiology labs; training restaurants (live service); culinary studios with smart classrooms. Best infrastructure of the four.</span></div>
+    <div class="citem"><span class="ckey">Library</span><span class="cval">Culinary library with specialised culinary arts &amp; hospitality titles. Research and documentation centre for Indian cuisine.</span></div>
+    <div class="citem"><span class="ckey">Hostel</span><span class="cval">Mandatory residential. Boys &amp; girls hostels on campus. Mess hall. ₹2,000–3,000/month hostel + mess. Very affordable.</span></div>
+    <div class="citem"><span class="ckey">Sports</span><span class="cval">Campus sports facilities. Cultural activities — dance, singing, art, drama, anchoring, event management. Very active campus life.</span></div>
+    <div class="citem"><span class="ckey">Unique</span><span class="cval">IGNTU Central University affiliation. Students work in actual training restaurants serving real guests. Live kitchen service from Year 1.</span></div>
+    <div class="citem"><span class="ckey">Vibe</span><span class="cval">Intensive, residential, culinary-focused. Small batches (30 BBA + 30 MBA per campus). Deep mentorship. High hands-on exposure. Best infrastructure for niche field.</span></div>
+    <div style="margin-top:.55rem"><span class="tag tD">Ministry of Tourism</span><span class="tag tD">IGNTU Affiliated</span><span class="tag tD">Govt of India</span><span class="tag tD">Residential</span></div>
+  </div>
+</div>
+
+<!-- COURSE PROFILE TABLE -->
+<div class="pad content">
+<div class="sec-head"><span class="sec-icon">📋</span><span class="sec-label">Course Profile, Fees &amp; Placements</span><span class="sec-line"></span></div>
+</div>
+<div class="gtable" style="max-width:1200px;margin:0 auto;">
+  <div class="ghead blank">Parameter</div>
+  <div class="ghead A">BBA Data Analytics<br><span>JNTUH-UCM</span></div>
+  <div class="ghead B">BBA Tourism &amp; Hospitality<br><span>NITHM, Hyderabad</span></div>
+  <div class="ghead C">BBA Analytics<br><span>UPGC, Secunderabad</span></div>
+  <div class="ghead D">BBA Culinary Arts<br><span>ICI, Tirupati</span></div>
+
+  <div class="grow">
+    <div class="gparam">Duration</div>
+    <div class="gcell">3 years · 6 semesters</div>
+    <div class="gcell">4 years · 8 semesters (incl. 10 months industrial training)</div>
+    <div class="gcell">3 years · 6 semesters (self-finance)</div>
+    <div class="gcell">3 years · 6 semesters</div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">Annual fees</div>
+    <div class="gcell"><strong style="color:var(--A)">~₹30,000–50,000/yr</strong><br><span style="font-size:.67rem;color:#6B6560">Govt university rate; total ~₹90K–₹1.5L for 3 years</span></div>
+    <div class="gcell"><strong style="color:var(--B)">~₹80,000–1,00,000/yr</strong><br><span style="font-size:.67rem;color:#6B6560">Govt-aided; total ~₹3.2–4L for 4 years. Affordable vs private.</span></div>
+    <div class="gcell"><strong style="color:var(--C)">~₹6,000–40,000/yr</strong><br><span style="font-size:.67rem;color:#6B6560">Most affordable. Self-finance BBA ~₹1.2L/yr as per UPGCS data range. Regular mode cheaper.</span></div>
+    <div class="gcell"><strong style="color:var(--D)">~₹1,00,000–1,25,000/yr</strong><br><span style="font-size:.67rem;color:#6B6560">Govt of India institute; hostel + mess extra ~₹60K/yr. Total ~₹4–5L for 3 years.</span></div>
+  </div>
+  <div class="grow">
+    <div class="gparam">Admission</div>
+    <div class="gcell">TS EAMCET / JNTUH entrance. Open to BTech students via dual degree pathway too. Competitive.</div>
+    <div class="gcell">UGAT / NCHMCT JEE / TS EAMCET + interview/merit. Entrance-based selection. Cut-off score ~140/200.</div>
+    <div class="gcell">OUCET merit rank. BBA offered as self-finance. Accessible admission process.</div>
+    <div class="gcell">IGNTU-ICI JEE (UG) / CUET (UG). All India Rank based. No GD/interview. Competitive national entrance.</div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">Curriculum focus</div>
+    <div class="gcell">Management core (Mktg, Finance, HR, Ops) + Data Science, Business Analytics, Python, R Programming, Data Visualization, ML basics, Business Intelligence in final year.</div>
+    <div class="gcell">Tourism management, hospitality operations, hotel management, food &amp; beverage, front office, travel agency operations, event management, airline ticketing, 10-month compulsory industry internship.</div>
+    <div class="gcell">BBA core (management, marketing, finance, HR) with analytics specialisation. Business statistics, data tools, market research, analytics-driven decision making. Less tech-deep than JNTUH option.</div>
+    <div class="gcell">Food production (Indian, International, Oriental, Continental cuisines), food &amp; beverage service, bakery &amp; confectionery, kitchen management, food costing, food safety, culinary entrepreneurship. Lab-heavy from Day 1.</div>
+  </div>
+  <div class="grow">
+    <div class="gparam">Campus placements</div>
+    <div class="gcell">JNTUH overall 2025: avg ₹9.4 LPA, highest ₹26.35 LPA. BBA DA batch is small &amp; new (started 2022) — dedicated placement data limited. Recruiters: TCS, Wipro, Amazon, Oracle, Cognizant.</div>
+    <div class="gcell">Good placement record. NITHM rated India's 10th top govt HMI. Recruiters: Taj Hotels, Marriott, Hyatt, Hilton, MakeMyTrip, Thomas Cook, ITDC, IndiGo. Avg hospitality entry: ₹2.5–4 LPA.</div>
+    <div class="gcell">UPGCS median placement: ₹1.65 LPA per Shiksha data — reflects arts/commerce focus. BBA Analytics likely better. Small batch, limited corporate recruiters currently.</div>
+    <div class="gcell">ICI actively arranges hospitality/culinary placements. Recent placements: McDonald's (Management Trainee), hotel chains, restaurant groups. Small batch (30/campus) = personalised placement support.</div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">Starting salary India</div>
+    <div class="gcell"><strong style="color:var(--A)">₹4–8 LPA</strong><br><span style="font-size:.67rem;color:#6B6560">Data analyst avg ₹6.6 LPA (Indeed 2025). With skills: ₹8–12 LPA. Mid: ₹12–18 LPA.</span></div>
+    <div class="gcell"><strong style="color:var(--B)">₹2.5–4 LPA</strong><br><span style="font-size:.67rem;color:#6B6560">Hospitality entry. Executive chef India: ₹6–10 LPA. Senior hotel mgr: ₹10–15 LPA+ at 5-star chains.</span></div>
+    <div class="gcell"><strong style="color:var(--C)">₹3–6 LPA</strong><br><span style="font-size:.67rem;color:#6B6560">BBA analytics entry. Mid (MBA follows): ₹6–10 LPA. Ceiling depends heavily on PG.</span></div>
+    <div class="gcell"><strong style="color:var(--D)">₹2.5–4.5 LPA</strong><br><span style="font-size:.67rem;color:#6B6560">Commis chef → chef de partie → sous chef progression. Fresh graduates ₹25K–₹45K/month in metro 5-stars.</span></div>
+  </div>
+</div>
+
+<!-- INDIA JOBS TABLE -->
+<div class="pad content">
+<div class="sec-head"><span class="sec-icon">🇮🇳</span><span class="sec-label">India Job Opportunities</span><span class="sec-line"></span></div>
+</div>
+<div class="gtable" style="max-width:1200px;margin:0 auto;">
+  <div class="ghead blank">Category</div>
+  <div class="ghead A">BBA Data Analytics</div>
+  <div class="ghead B">BBA Tourism &amp; Hospitality</div>
+  <div class="ghead C">BBA Analytics</div>
+  <div class="ghead D">BBA Culinary Arts</div>
+
+  <div class="grow">
+    <div class="gparam">Job roles</div>
+    <div class="gcell"><span class="tag tA">Data Analyst</span><span class="tag tA">Business Analyst</span><span class="tag tA">MIS Executive</span><span class="tag tA">Market Research Analyst</span><span class="tag tA">BI Analyst</span><span class="tag tA">Operations Analyst</span><span class="tag tA">Digital Marketing Analyst</span></div>
+    <div class="gcell"><span class="tag tB">Tour Manager</span><span class="tag tB">Hotel Manager</span><span class="tag tB">Front Office Exec</span><span class="tag tB">Travel Consultant</span><span class="tag tB">Event Coordinator</span><span class="tag tB">Airline GRE</span><span class="tag tB">Revenue Mgr</span></div>
+    <div class="gcell"><span class="tag tC">Data Analyst</span><span class="tag tC">Market Research</span><span class="tag tC">Business Analyst</span><span class="tag tC">HR Analyst</span><span class="tag tC">Finance Analyst</span><span class="tag tC">Operations Exec</span><span class="tag tC">Sales Analyst</span></div>
+    <div class="gcell"><span class="tag tD">Chef (Commis→Executive)</span><span class="tag tD">Pastry Chef</span><span class="tag tD">Kitchen Manager</span><span class="tag tD">Food Entrepreneur</span><span class="tag tD">Culinary Educator</span><span class="tag tD">Food Stylist</span><span class="tag tD">R&amp;D Chef</span></div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">Top recruiters</div>
+    <div class="gcell" style="font-size:.7rem">TCS, Infosys, Wipro, Deloitte, Accenture, Amazon, ICICI Bank, HDFC Analytics, Genpact, EXL Service, Mu Sigma, Fractal Analytics, Nielsen, Kantar</div>
+    <div class="gcell" style="font-size:.7rem">Taj Hotels, Marriott, Hyatt, Hilton, Oberoi, ITC Hotels, OYO, MakeMyTrip, Thomas Cook, SOTC, Cox &amp; Kings, IndiGo, Air India, ITDC</div>
+    <div class="gcell" style="font-size:.7rem">IT companies via Osmania brand, BFSI sector, SMEs, marketing agencies, consulting firms, startups. Limited dedicated analytics placement at UPGCS currently.</div>
+    <div class="gcell" style="font-size:.7rem">Taj, Oberoi, ITC Hotels, Marriott, Hyatt, Hilton, McDonald's, KFC, Domino's, Cafe Coffee Day, airline catering (Taj SATS, Air India SATS), cruise lines, food media</div>
+  </div>
+  <div class="grow">
+    <div class="gparam">Govt sector</div>
+    <div class="gcell"><span class="tag tG">NSSO (Statistician)</span><span class="tag tG">PSU Data Roles</span><span class="tag tG">NABARD Analytics</span><span class="tag tG">Govt IT analytics roles</span><br><span style="font-size:.67rem;color:#6B6560;margin-top:3px;display:block">Limited dedicated govt data roles at UG level; typically need PG. Govt bank SO (IT) is possible.</span></div>
+    <div class="gcell"><span class="tag tG">ITDC (India Tourism Dev Corp)</span><span class="tag tG">IRCTC Tourism</span><span class="tag tG">State Tourism Depts</span><span class="tag tG">ASI</span><span class="tag tG">Airport Auth of India</span><br><span style="font-size:.67rem;color:#6B6560;margin-top:3px;display:block">Strong govt scope via tourism ministry and state tourism boards. ITDC is a major employer.</span></div>
+    <div class="gcell"><span class="tag tG">Govt bank clerk/PO</span><span class="tag tG">SSC CGL</span><span class="tag tG">State PSC</span><br><span style="font-size:.67rem;color:#6B6560;margin-top:3px;display:block">BBA from OU is eligible for most govt management exams. Analytics specialisation adds edge in data-focussed govt roles.</span></div>
+    <div class="gcell"><span class="tag tG">ITDC (catering)</span><span class="tag tG">Armed Forces catering</span><span class="tag tG">Railway Catering</span><span class="tag tG">Govt hotel/resort chains</span><br><span style="font-size:.67rem;color:#6B6560;margin-top:3px;display:block">Ministry of Tourism background gives ICI grads strong govt hospitality network. ITDC catering division hires culinary graduates.</span></div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">Industry growth</div>
+    <div class="gcell">India data analytics market projected at <strong>$118B by 2026</strong>. 1.5M+ data-related jobs expected by 2030. <strong>Fastest-growing sector</strong> across all four options.</div>
+    <div class="gcell">India tourism industry: projected at <strong>$542B by 2030</strong>. 8.2% CAGR. Post-COVID recovery strong. Domestic tourism booming under Dekho Apna Desh initiative.</div>
+    <div class="gcell">Same data/analytics industry growth as Option A — $118B by 2026 — but UPGCS analytics programme is newer and less established than JNTUH's tech-backed offering.</div>
+    <div class="gcell">India restaurant industry: <strong>₹7.5 lakh crore by 2030</strong>. QSR sector growing at 23% CAGR. Cloud kitchens, food startups, culinary tourism all expanding rapidly.</div>
+  </div>
+  <div class="grow">
+    <div class="gparam">Key advantages</div>
+    <div class="gcell">
+      <div class="pro">✔ Highest salary trajectory of the four</div>
+      <div class="pro">✔ Most future-proof field — data skills needed everywhere</div>
+      <div class="pro">✔ JNTUH tech ecosystem gives strong industry exposure</div>
+      <div class="pro">✔ Can pivot to IT, fintech, consulting, e-commerce</div>
+      <div class="pro">✔ MBA in data analytics = best PG pathway</div>
+    </div>
+    <div class="gcell">
+      <div class="pro">✔ 10 months industrial training built into degree</div>
+      <div class="pro">✔ Niche specialisation = less competition for top hotel roles</div>
+      <div class="pro">✔ Strong ITDC/govt tourism sector pathway</div>
+      <div class="pro">✔ Global mobility — hospitality is universal</div>
+      <div class="pro">✔ Gachibowli location = prime industry access</div>
+    </div>
+    <div class="gcell">
+      <div class="pro">✔ Cheapest option — extremely low fees</div>
+      <div class="pro">✔ Osmania University brand recognition</div>
+      <div class="pro">✔ Central Secunderabad location — city convenience</div>
+      <div class="pro">✔ Eligible for all govt management exams</div>
+      <div class="pro">✔ Good for MBA prep — analytics background helps</div>
+    </div>
+    <div class="gcell">
+      <div class="pro">✔ Unique Ministry of Tourism, Govt of India institute</div>
+      <div class="pro">✔ Best-in-class culinary infrastructure in South India</div>
+      <div class="pro">✔ Small batch (30) = personalised learning</div>
+      <div class="pro">✔ Live training restaurant experience</div>
+      <div class="pro">✔ Global culinary career — worldwide demand for skilled chefs</div>
+    </div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">Key disadvantages</div>
+    <div class="gcell">
+      <div class="con">✘ BBA DA is new (2022) — limited placement track record</div>
+      <div class="con">✘ BBA analytics competes with BTech CS graduates for data roles</div>
+      <div class="con">✘ Must upskill consistently to stay competitive</div>
+    </div>
+    <div class="gcell">
+      <div class="con">✘ Lower starting salary — hospitality entry is modest</div>
+      <div class="con">✘ 4 years (longest duration) vs 3 years for others</div>
+      <div class="con">✘ Long hours, shift work — demanding industry lifestyle</div>
+      <div class="con">✘ Higher fees vs Options A &amp; C</div>
+    </div>
+    <div class="gcell">
+      <div class="con">✘ Lowest placement data (₹1.65 LPA median) — most are in arts/commerce</div>
+      <div class="con">✘ Analytics programme is newer — less established</div>
+      <div class="con">✘ Fewer dedicated corporate analytics recruiters at UPGCS</div>
+      <div class="con">✘ Must supplement with online certifications actively</div>
+    </div>
+    <div class="gcell">
+      <div class="con">✘ Tirupati campus — 550 km from Hyderabad</div>
+      <div class="con">✘ Kitchen profession is physically demanding (long standing hours)</div>
+      <div class="con">✘ BBA Culinary Arts brand is niche — limited to hospitality sector</div>
+      <div class="con">✘ Career ceiling needs entrepreneurship or international exposure</div>
+    </div>
+  </div>
+  <div class="grow">
+    <div class="gparam">India rating</div>
+    <div class="gcell"><span class="st">★★★★★</span><br><span style="font-size:.67rem;color:#6B6560">Best India prospects — fastest growing sector, highest salary, most versatile</span></div>
+    <div class="gcell"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.67rem;color:#6B6560">Strong niche; 10-month training is differentiator; lower starting pay</span></div>
+    <div class="gcell"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.67rem;color:#6B6560">Good if MBA follows; placement record currently modest; very affordable</span></div>
+    <div class="gcell"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.67rem;color:#6B6560">Excellent for culinary passion; lower salary ceiling without international exposure</span></div>
+  </div>
+</div>
+
+<!-- USA SECTION -->
+<div class="pad content">
+<div class="sec-head"><span class="sec-icon">🇺🇸</span><span class="sec-label">USA Job Opportunities — US Citizen Advantage</span><span class="sec-line"></span></div>
+</div>
+<div class="usa-grid" style="max-width:1200px;margin:0 auto;">
+  <div class="usa-card A">
+    <div class="usa-head">BBA Data Analytics<br>— USA Career</div>
+    <div class="usa-row"><strong>Entry salary:</strong> $70,000–$80,000/yr (IIT Kanpur 2025 data)</div>
+    <div class="usa-row"><strong>Average (all levels):</strong> $90,000–$115,000/yr</div>
+    <div class="usa-row"><strong>Senior/specialist:</strong> $120,000–$160,000/yr (ML engineer, data scientist)</div>
+    <div class="usa-row"><strong>Job growth (BLS):</strong> +35% projected 2022–2032 — among fastest of all occupations</div>
+    <div class="usa-row"><strong>US market:</strong> 1.5M+ data science/analytics roles projected by 2030</div>
+    <div class="usa-row"><strong>Top employers:</strong> Amazon, Google, Meta, Microsoft, Goldman Sachs, JPMorgan, Deloitte, McKinsey, Nielsen, Fractal</div>
+    <div class="usa-row"><strong>Top states:</strong> California, New York, Texas, Washington, Massachusetts</div>
+    <div class="usa-row"><strong>Best PG in USA:</strong> MS Data Science — MIT, Carnegie Mellon, Columbia, Georgia Tech, Purdue, UT Austin. TA/RA available.</div>
+    <div class="usa-row"><strong>STEM OPT (Indian students):</strong> 3 years (12 + 24 extension)</div>
+    <div class="usa-hl">★ Best USA option. US citizenship = direct access to Amazon, Google, Goldman Sachs, FDA analytics from Day 1. Data skills are universally demanded. MS Data Science in USA after BBA DA + MBA = exceptional profile. No visa barrier for any employer.</div>
+  </div>
+  <div class="usa-card B">
+    <div class="usa-head">BBA Tourism &amp; Hospitality<br>— USA Career</div>
+    <div class="usa-row"><strong>Entry salary (hotel/tourism):</strong> $38,000–$55,000/yr</div>
+    <div class="usa-row"><strong>Hotel general manager (senior):</strong> $80,000–$130,000/yr</div>
+    <div class="usa-row"><strong>Tourism director (senior):</strong> $70,000–$110,000/yr</div>
+    <div class="usa-row"><strong>Job growth (BLS):</strong> +10–13% projected (food service mgr, lodging mgr)</div>
+    <div class="usa-row"><strong>US market:</strong> US travel &amp; tourism: $1.9 trillion industry; post-COVID recovery strong</div>
+    <div class="usa-row"><strong>Top employers:</strong> Marriott International, Hilton, Hyatt, Disney Parks, Carnival Cruise, American Airlines, Expedia, Airbnb, USTA</div>
+    <div class="usa-row"><strong>Top states:</strong> Florida, New York, California, Nevada, Hawaii, Texas</div>
+    <div class="usa-row"><strong>Best PG in USA:</strong> MS Hospitality Mgmt / MBA Hotel Mgmt — Cornell (SHA), UNLV, FIU, Michigan State, NYU</div>
+    <div class="usa-row"><strong>Unique advantage:</strong> Indian hospitality training + US citizenship = strong profile for international luxury hotel chains in USA</div>
+    <div class="usa-hl">Good USA pathway. US citizenship = direct entry to Marriott, Hilton, Disney Parks, cruise lines without sponsorship. 10-month industrial training from NITHM is valued by US employers. MS Hospitality at Cornell (SHA) = top global credential. Starting salary lower than analytics.</div>
+  </div>
+  <div class="usa-card C">
+    <div class="usa-head">BBA Analytics<br>— USA Career</div>
+    <div class="usa-row"><strong>Entry salary:</strong> $55,000–$75,000/yr (BBA analytics, less tech-intensive)</div>
+    <div class="usa-row"><strong>Average (business analyst level):</strong> $75,000–$100,000/yr</div>
+    <div class="usa-row"><strong>Senior:</strong> $90,000–$130,000/yr (with MBA or specialisation)</div>
+    <div class="usa-row"><strong>Job growth:</strong> +14% (management analysts) to +35% (data analysts) — field-dependent</div>
+    <div class="usa-row"><strong>Top employers:</strong> Deloitte, Accenture, EY, KPMG, McKinsey, JPMorgan, Amazon, healthcare analytics firms</div>
+    <div class="usa-row"><strong>Limitation:</strong> BBA Analytics from UPGC (Osmania) is less recognised in USA than a JNTUH degree. Will need strong supplementary certifications (Google DA, Tableau, AWS) to compete.</div>
+    <div class="usa-row"><strong>Best PG in USA:</strong> MBA with analytics / MS Business Analytics — Indiana, Ohio State, Michigan, ASU. More accessible entry than top STEM MS programmes.</div>
+    <div class="usa-row"><strong>STEM OPT:</strong> Depends on programme classification — verify if analytics BBA counts</div>
+    <div class="usa-hl">Moderate USA pathway. US citizenship removes visa barriers but UPGCS brand has limited recognition abroad. Must build strong certifications portfolio independently. MBA in USA after BBA Analytics is the recommended bridge. Salary improves significantly post-MBA.</div>
+  </div>
+  <div class="usa-card D">
+    <div class="usa-head">BBA Culinary Arts<br>— USA Career</div>
+    <div class="usa-row"><strong>Entry salary (commis/line cook):</strong> $34,000–$40,000/yr (BLS 2024)</div>
+    <div class="usa-row"><strong>Sous chef:</strong> $50,000–$70,000/yr</div>
+    <div class="usa-row"><strong>Executive chef (senior):</strong> $62,640 median; top 10%: $93,900/yr (BLS 2024)</div>
+    <div class="usa-row"><strong>Celebrity/high-end chef:</strong> $200,000–$1M+ (top tier, star restaurants)</div>
+    <div class="usa-row"><strong>Job growth (BLS):</strong> +8% (chefs &amp; head cooks) — faster than average; restaurant cooks +15%</div>
+    <div class="usa-row"><strong>US food service:</strong> $1.5 trillion industry (2025); 2nd largest private employer in USA</div>
+    <div class="usa-row"><strong>Top employers:</strong> Marriott (food &amp; bev), Hyatt, Michelin-star restaurants, Disney culinary, Royal Caribbean, Norwegian Cruise Line, Nobu, food media (Netflix, Food Network)</div>
+    <div class="usa-row"><strong>Top states (chef salaries):</strong> New York, California, Hawaii, Illinois, Washington DC</div>
+    <div class="usa-row"><strong>Unique USA advantage:</strong> Indian cuisine is booming in USA — 5,000+ Indian restaurants; demand for authentic Indian culinary specialists growing. ICI Tirupati's Indian cuisine focus is a differentiator.</div>
+    <div class="usa-row"><strong>Best PG:</strong> MBA Culinary Arts (ICI itself); CIA (Culinary Institute of America) AOS/BPS; Johnson &amp; Wales University</div>
+    <div class="usa-hl">Interesting USA option for a culinary-passionate US citizen. No OPT/H-1B issues. Can work in USA kitchens from Day 1. Executive chef salaries can be very high with experience &amp; in the right city/restaurant. BUT: Starting salaries are the lowest of the four. Career progression is skills-driven, not degree-driven. Top-tier success needs exceptional talent + 5–10 years kitchen experience.</div>
+  </div>
+</div>
+
+<!-- HIGHER STUDIES TABLE -->
+<div class="pad content">
+<div class="sec-head"><span class="sec-icon">🎓</span><span class="sec-label">Higher Studies &amp; Overall Ratings</span><span class="sec-line"></span></div>
+</div>
+<div class="gtable" style="max-width:1200px;margin:0 auto;">
+  <div class="ghead blank">Parameter</div>
+  <div class="ghead A">BBA Data Analytics</div>
+  <div class="ghead B">BBA Tourism &amp; Hospitality</div>
+  <div class="ghead C">BBA Analytics</div>
+  <div class="ghead D">BBA Culinary Arts</div>
+
+  <div class="grow">
+    <div class="gparam">PG India</div>
+    <div class="gcell"><span class="tag tA">MBA Business Analytics (CAT)</span><span class="tag tA">MBA Data Science</span><span class="tag tA">MTech Data Analytics</span><span class="tag tA">PG Diploma Data Science</span><span class="tag tA">MBA Operations</span></div>
+    <div class="gcell"><span class="tag tB">MBA Tourism Mgmt</span><span class="tag tB">MBA Hospitality</span><span class="tag tB">PGDM Hotel Mgmt</span><span class="tag tB">MBA Marketing</span><span class="tag tB">MBA Events Mgmt</span></div>
+    <div class="gcell"><span class="tag tC">MBA (CAT / MAT)</span><span class="tag tC">MBA Analytics</span><span class="tag tC">MBA Marketing / Finance</span><span class="tag tC">PGDM</span><span class="tag tC">CA after BBA</span></div>
+    <div class="gcell"><span class="tag tD">MBA Culinary Arts (ICI itself)</span><span class="tag tD">MBA Hospitality</span><span class="tag tD">PG Diploma Pastry Arts</span><span class="tag tD">International Culinary Certificate</span></div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">PG USA</div>
+    <div class="gcell">MS Data Science: MIT, Carnegie Mellon, Columbia, Georgia Tech, Purdue, UT Austin — TA/RA available. Also MBA with analytics at top B-schools. FAFSA eligible as US citizen.</div>
+    <div class="gcell">MS Hospitality Mgmt: Cornell SHA (top globally), UNLV, FIU, Michigan State, NYU Tisch. Some TA/RA available. MBA Hotel Mgmt at top B-schools.</div>
+    <div class="gcell">MBA / MS Business Analytics at Indiana, Ohio State, Michigan, ASU, Purdue. More accessible than top STEM MS. FAFSA as US citizen. Less funding vs STEM fields.</div>
+    <div class="gcell">CIA (Culinary Institute of America), Johnson &amp; Wales, Le Cordon Bleu USA, Kendall College. Professional certificates more common than MS. No major funded research programmes in culinary.</div>
+  </div>
+  <div class="grow">
+    <div class="gparam">USA salary ceiling</div>
+    <div class="gcell"><strong>$120K–$160K/yr</strong><br><span style="font-size:.67rem;color:#6B6560">Senior data scientist, ML engineer, analytics director — highest of the four</span></div>
+    <div class="gcell"><strong>$80K–$130K/yr</strong><br><span style="font-size:.67rem;color:#6B6560">Hotel GM, tourism director, regional hospitality director</span></div>
+    <div class="gcell"><strong>$90K–$130K/yr</strong><br><span style="font-size:.67rem;color:#6B6560">MBA + analytics = strong ceiling. BBA alone modest.</span></div>
+    <div class="gcell"><strong>$62K–$93K/yr median</strong><br><span style="font-size:.67rem;color:#6B6560">Executive chef median. Top chefs at Michelin restaurants: $150K–$300K+. Celebrity chefs: $1M+.</span></div>
+  </div>
+  <div class="grow alt">
+    <div class="gparam">USA overall rating</div>
+    <div class="gcell"><span class="st">★★★★★</span><br><span style="font-size:.67rem;color:#6B6560">Best USA career — fastest growing sector, highest salary, widest employer base</span></div>
+    <div class="gcell"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.67rem;color:#6B6560">Good — US tourism is massive; Cornell MS pathway is world-class; entry salary modest</span></div>
+    <div class="gcell"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.67rem;color:#6B6560">Decent — needs MBA bridge for best USA roles; UPGCS brand not well-known in USA</span></div>
+    <div class="gcell"><span class="st">★★★</span><span class="se">★★</span><br><span style="font-size:.67rem;color:#6B6560">Passion-driven career — huge upside for talented individuals; lowest guaranteed entry salary</span></div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div class="verdict" style="margin-top:1.5rem">
+  <h2 class="v-title">Final Assessment — US Citizen Strategic Summary</h2>
+  <div class="v-grid">
+    <div class="v-card A">
+      <div class="v-key">🏆 Best overall — India + USA</div>
+      <div class="v-val"><span class="pill pA">BBA Data Analytics — JNTUH UCM</span> Data analytics is the fastest-growing career globally and in India. Highest India salary (₹4–8 LPA entry, ₹12–18 LPA mid). Best USA salary ceiling ($70K–$160K). US citizenship means she can work at Amazon, Google, JPMorgan, FDA analytics from Day 1 with no visa complications. The India data market projects 1.5 million+ jobs by 2030 — supply cannot keep up with demand.</div>
+      <div class="v-note">Roadmap: JNTUH BBA DA (₹1–1.5L total) → Online certifications (Google DA, Tableau, SQL, Python) alongside → MBA Data Science or MS Data Science in USA via FAFSA → Top analytics career as US citizen.</div>
+    </div>
+    <div class="v-card B">
+      <div class="v-key">🏆 Best for global mobility &amp; hospitality passion</div>
+      <div class="v-val"><span class="pill pB">BBA Tourism &amp; Hospitality — NITHM</span> If she enjoys people, travel, and hospitality, NITHM's 10-month compulsory industrial training is a genuine differentiator. India tourism projected at $542B by 2030. US citizenship means she can join Marriott, Hilton, Disney resorts, or cruise lines in the USA without any sponsorship. India's luxury hotel boom (Taj, Oberoi, ITC) also offers strong career growth.</div>
+      <div class="v-note">Roadmap: NITHM BBA (4 yrs, ~₹3.2–4L total) → MS Hospitality at Cornell SHA (USA, FAFSA eligible) → Hotel management career with US citizenship. Cornell SHA is the gold standard globally.</div>
+    </div>
+    <div class="v-card C">
+      <div class="v-key">✅ Best value for MBA aspirants</div>
+      <div class="v-val"><span class="pill pC">BBA Analytics — UPGC Secunderabad</span> If the goal is simply to secure a BBA degree affordably and then pursue a good MBA in India (IIM/NIT MBA via CAT) or USA (MBA via GMAT), UPGC Secunderabad offers the most cost-effective base. OU brand is respected for MBA admissions. Total fees negligible. However, as a standalone degree for direct placement, it currently has the weakest placement track record of the four.</div>
+      <div class="v-note">Best suited if: she is preparing for CAT/GMAT and sees BBA as a stepping stone to MBA, not as a terminal degree. Supplement aggressively with Coursera/Google certifications during the 3 years.</div>
+    </div>
+    <div class="v-card D">
+      <div class="v-key">🍳 Best for culinary passion &amp; entrepreneurship</div>
+      <div class="v-val"><span class="pill pD">BBA Culinary Arts — ICI Tirupati</span> If cooking is her genuine passion, ICI is the only Govt of India institute dedicated to culinary arts — with world-class kitchens, live training restaurants, and direct connections to the Ministry of Tourism ecosystem. Chefs who reach executive level in the USA earn $62K–$93K median with top talent earning $200K+. Indian cuisine is booming in the USA — 5,000+ Indian restaurants and growing. Her US citizenship means she can work at any American restaurant, hotel kitchen, or food media outlet from Day 1.</div>
+      <div class="v-note">Critical: This career requires genuine passion, physical stamina, and long kitchen hours. It is not recommended as a fallback — choose it only if cooking is a calling. Starting salary is the lowest of the four options.</div>
+    </div>
+  </div>
+  <div class="final-box">
+    <h3>Quick Decision Guide</h3>
+    <div class="final-row">
+      <div class="final-key">Best India salary</div>
+      <div class="final-val"><span class="pill pA">Option A — BBA Data Analytics, JNTUH</span> ₹4–8 LPA entry, fastest growth to ₹15–20 LPA</div>
+    </div>
+    <div class="final-row">
+      <div class="final-key">Best USA salary ceiling</div>
+      <div class="final-val"><span class="pill pA">Option A — BBA Data Analytics, JNTUH</span> $70K–$160K — widest range, highest ceiling</div>
+    </div>
+    <div class="final-row">
+      <div class="final-key">Best campus experience</div>
+      <div class="final-val"><span class="pill pD">Option D — ICI Tirupati</span> World-class culinary infrastructure; or <span class="pill pB">Option B — NITHM</span> best Hyderabad hospitality campus</div>
+    </div>
+    <div class="final-row">
+      <div class="final-key">Best for global mobility</div>
+      <div class="final-val"><span class="pill pB">Option B — NITHM</span> Hospitality is a universal, borderless career — Marriott/Hilton operate in 130+ countries</div>
+    </div>
+    <div class="final-row">
+      <div class="final-key">Best govt jobs (India)</div>
+      <div class="final-val"><span class="pill pB">Option B — NITHM</span> ITDC, State Tourism Boards; <span class="pill pD">Option D — ICI</span> ITDC catering, Armed Forces, Railway catering</div>
+    </div>
+    <div class="final-row">
+      <div class="final-key">Most affordable</div>
+      <div class="final-val"><span class="pill pC">Option C — UPGC Secunderabad</span> ₹6K–40K/yr — near-free govt education as MBA stepping stone</div>
+    </div>
+    <div class="final-row">
+      <div class="final-key">Our recommendation</div>
+      <div class="final-val">If interest lies in technology/business → <span class="pill pA">BBA Data Analytics, JNTUH</span>. If passion is travel/people → <span class="pill pB">BBA Tourism, NITHM</span>. If cooking is a calling → <span class="pill pD">BBA Culinary Arts, ICI Tirupati</span>. If budget is primary concern &amp; MBA is the plan → <span class="pill pC">BBA Analytics, UPGC</span>.</div>
+    </div>
+    <div class="warn">⚠ Key note for a US citizen: All four options lead to careers where US citizenship is an advantage — no OPT, no H-1B, no visa sponsorship required. The question is entirely about which field matches her interests and which career gives the best return on investment in the USA. Data Analytics gives the highest guaranteed financial return. Culinary Arts gives the highest ceiling for exceptionally talented individuals. Hospitality gives the best global lifestyle and mobility.</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBA College Comparison — Hyderabad 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:   #0f6e56;
+    --teal-l: #e1f5ee;
+    --blue:   #185fa5;
+    --blue-l: #e6f1fb;
+    --purple: #534ab7;
+    --purple-l: #eeedfe;
+    --amber:  #854f0b;
+    --amber-l:#faeeda;
+    --coral:  #993c1d;
+    --coral-l:#faece7;
+    --gray:   #5f5e5a;
+    --gray-l: #f1efe8;
+    --text:   #1a1a18;
+    --muted:  #6b6a65;
+    --faint:  #b4b2a9;
+    --border: #dddbd3;
+    --bg:     #fafaf8;
+    --white:  #ffffff;
+    --green-text: #27500a;
+    --green-bg:   #eaf3de;
+    --red-text:   #791f1f;
+    --red-bg:     #fcebeb;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2.5rem 1.5rem;
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Score strip ── */
+  .score-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+  }
+  .score-card {
+    background: var(--white);
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .score-rank {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .score-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .score-total {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .score-max {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .score-bar-wrap {
+    height: 4px;
+    background: var(--gray-l);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .score-bar {
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  /* ── Main table ── */
+  .table-wrapper {
+    padding: 2rem 2.5rem;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 820px;
+  }
+  thead th {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--muted);
+    text-align: left;
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+  thead th:first-child {
+    width: 160px;
+    background: var(--bg);
+  }
+  thead .col-gdcw { background: var(--teal-l); color: var(--teal); }
+  thead .col-jntu  { background: var(--blue-l);  color: var(--blue); }
+  thead .col-vciwu { background: var(--purple-l);color: var(--purple); }
+  thead .col-nizam { background: var(--gray-l);  color: var(--gray); }
+  thead .col-oupg  { background: var(--coral-l); color: var(--coral); }
+
+  .col-rank {
+    font-size: 10px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+    opacity: .75;
+  }
+  .col-title {
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    line-height: 1.3;
+  }
+  .col-sub {
+    font-size: 10px;
+    font-weight: 400;
+    display: block;
+    opacity: .8;
+    margin-top: 2px;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  tbody td:first-child {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--muted);
+    background: var(--bg);
+    white-space: nowrap;
+  }
+  tbody tr:hover td { background: #fafaf5; }
+  tbody tr:hover td:first-child { background: var(--bg); }
+
+  /* ── Section header rows ── */
+  .section-row td {
+    background: var(--text) !important;
+    color: var(--white) !important;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-color: var(--text) !important;
+  }
+
+  /* ── Pill / badge helpers ── */
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pill-teal   { background: var(--teal-l);   color: var(--teal); }
+  .pill-blue   { background: var(--blue-l);   color: var(--blue); }
+  .pill-purple { background: var(--purple-l); color: var(--purple); }
+  .pill-amber  { background: var(--amber-l);  color: var(--amber); }
+  .pill-coral  { background: var(--coral-l);  color: var(--coral); }
+  .pill-gray   { background: var(--gray-l);   color: var(--gray); }
+  .pill-green  { background: var(--green-bg); color: var(--green-text); }
+  .pill-red    { background: var(--red-bg);   color: var(--red-text); }
+
+  .yes { color: var(--green-text); font-weight: 500; }
+  .no  { color: var(--red-text);   font-weight: 500; }
+  .na  { color: var(--faint);      font-style: italic; }
+
+  /* star rating */
+  .stars { color: #ba7517; font-size: 13px; letter-spacing: 1px; }
+  .stars-gray { color: var(--faint); font-size: 13px; letter-spacing: 1px; }
+
+  /* metric score cell */
+  .metric-cell {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .metric-num {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .metric-denom {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* DOST rank badge */
+  .dost-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 2.5rem;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page-header, .table-wrapper { padding: 1rem; }
+    table { font-size: 11px; }
+    thead th, tbody td { padding: 6px 8px; }
+  }
+
+  @media (max-width: 600px) {
+    .page-header, .table-wrapper, footer { padding: 1rem; }
+    h1 { font-size: 22px; }
+    .score-strip { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="header-top">
+    <div>
+      <div class="eyebrow">DOST 2026 · BBA Admissions · Hyderabad</div>
+      <h1>College Comparison Report</h1>
+      <p class="meta">5 colleges · 20+ parameters · Sources: NAAC official, NIRF 2025, Careers360, CollegeDunia, college websites · Prepared June 2026</p>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span> GDCW Begumpet — Metrics rank #2 · DOST rank #1</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span> JNTU–UCM — Metrics rank #1 · DOST rank #5</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--purple)"></span> VCIWU Koti — Metrics rank #3 · DOST rank #3</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--gray)"></span> Nizam College — Metrics rank #4 · DOST rank #2</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--coral)"></span> OU PG Secunderabad — Metrics rank #5 · DOST rank #4</span>
+  </div>
+</div>
+
+<!-- ══ SCORE STRIP ══ -->
+<div class="score-strip">
+  <div class="score-card">
+    <div class="score-rank" style="color:var(--blue)">Metrics #1</div>
+    <div class="score-name">JNTU–UCM<br>Hyderabad</div>
+    <div class="score-total" style="color:var(--blue)">94</div><span class="score-max">/100</span>
+    <div class="score-bar-wrap"><div class="score-bar" style="width:94%;background:var(--blue)"></div></div>
+  </div>
+  <div class="score-card">
+    <div class="score-rank" style="color:var(--teal)">Metrics #2</div>
+    <div class="score-name">GDCW<br>Begumpet</div>
+    <div class="score-total" style="color:var(--teal)">77</div><span class="score-max">/100</span>
+    <div class="score-bar-wrap"><div class="score-bar" style="width:77%;background:var(--teal)"></div></div>
+  </div>
+  <div class="score-card">
+    <div class="score-rank" style="color:var(--purple)">Metrics #3</div>
+    <div class="score-name">VCIWU<br>Koti</div>
+    <div class="score-total" style="color:var(--purple)">67</div><span class="score-max">/100</span>
+    <div class="score-bar-wrap"><div class="score-bar" style="width:67%;background:var(--purple)"></div></div>
+  </div>
+  <div class="score-card">
+    <div class="score-rank" style="color:var(--gray)">Metrics #4</div>
+    <div class="score-name">Nizam<br>College</div>
+    <div class="score-total" style="color:var(--gray)">65</div><span class="score-max">/100</span>
+    <div class="score-bar-wrap"><div class="score-bar" style="width:65%;background:var(--gray)"></div></div>
+  </div>
+  <div class="score-card">
+    <div class="score-rank" style="color:var(--coral)">Metrics #5</div>
+    <div class="score-name">OU PG<br>Secunderabad</div>
+    <div class="score-total" style="color:var(--coral)">53</div><span class="score-max">/100</span>
+    <div class="score-bar-wrap"><div class="score-bar" style="width:53%;background:var(--coral)"></div></div>
+  </div>
+</div>
+
+<!-- ══ MAIN TABLE ══ -->
+<div class="table-wrapper">
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th class="col-gdcw">
+        <span class="col-rank">DOST #1 · Metrics #2</span>
+        <span class="col-title">GDCW Begumpet</span>
+        <span class="col-sub">Govt. Degree College for Women</span>
+      </th>
+      <th class="col-jntu">
+        <span class="col-rank">DOST #5 · Metrics #1</span>
+        <span class="col-title">JNTU–UCM</span>
+        <span class="col-sub">Univ. College of Management, JNTUH</span>
+      </th>
+      <th class="col-vciwu">
+        <span class="col-rank">DOST #3 · Metrics #3</span>
+        <span class="col-title">VCIWU Koti</span>
+        <span class="col-sub">Veeranari Chakali Ilamma Women's Univ.</span>
+      </th>
+      <th class="col-nizam">
+        <span class="col-rank">DOST #2 · Metrics #4</span>
+        <span class="col-title">Nizam College</span>
+        <span class="col-sub">Autonomous, Osmania University</span>
+      </th>
+      <th class="col-oupg">
+        <span class="col-rank">DOST #4 · Metrics #5</span>
+        <span class="col-title">OU PG College</span>
+        <span class="col-sub">Constituent College, Osmania Univ., Secunderabad</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- ── RANKINGS & ACCREDITATION ── -->
+    <tr class="section-row"><td colspan="6">Rankings &amp; Accreditation</td></tr>
+
+    <tr>
+      <td>NAAC Grade</td>
+      <td><span class="pill pill-teal">A+</span></td>
+      <td><span class="pill pill-blue">A+ (university)</span></td>
+      <td><span class="pill pill-purple">A</span></td>
+      <td><span class="pill pill-gray">A / B++ (2019 cycle)</span></td>
+      <td><span class="pill pill-coral">A (2017)</span></td>
+    </tr>
+    <tr>
+      <td>NAAC CGPA</td>
+      <td><strong>3.5 / 4.0</strong> — 4th cycle<br><span class="pill pill-green">Highest in group</span></td>
+      <td>A+ (CGPA not pub. for mgmt. college separately)</td>
+      <td>A grade (recent upgrade 2022)</td>
+      <td>2.92 / 4.0 (2019)</td>
+      <td>A grade (2017; re-accreditation pending)</td>
+    </tr>
+    <tr>
+      <td>NAAC Cycle</td>
+      <td>4th cycle (most recent)</td>
+      <td>University-level (ongoing)</td>
+      <td>Post-upgrade accreditation (2022)</td>
+      <td>Last: 2019</td>
+      <td>Last: 2017</td>
+    </tr>
+    <tr>
+      <td>NIRF 2025 Rank</td>
+      <td><span class="na">Not ranked (Degree Colleges list)</span></td>
+      <td>#81 University · #94 Engineering</td>
+      <td><span class="na">Not ranked separately</span></td>
+      <td>101–150 (Degree Colleges)</td>
+      <td><span class="na">Not ranked separately</span></td>
+    </tr>
+    <tr>
+      <td>Metrics Score</td>
+      <td>
+        <div class="metric-cell"><span class="metric-num" style="color:var(--teal)">77</span><span class="metric-denom">/100</span></div>
+        NAAC 40 · NIRF 8 · Tier 16 · Accred. 13
+      </td>
+      <td>
+        <div class="metric-cell"><span class="metric-num" style="color:var(--blue)">94</span><span class="metric-denom">/100</span></div>
+        NAAC 34 · NIRF 25 · Tier 20 · Accred. 15
+      </td>
+      <td>
+        <div class="metric-cell"><span class="metric-num" style="color:var(--purple)">67</span><span class="metric-denom">/100</span></div>
+        NAAC 28 · NIRF 8 · Tier 20 · Accred. 11
+      </td>
+      <td>
+        <div class="metric-cell"><span class="metric-num" style="color:var(--gray)">65</span><span class="metric-denom">/100</span></div>
+        NAAC 20 · NIRF 18 · Tier 16 · Accred. 11
+      </td>
+      <td>
+        <div class="metric-cell"><span class="metric-num" style="color:var(--coral)">53</span><span class="metric-denom">/100</span></div>
+        NAAC 28 · NIRF 8 · Tier 10 · Accred. 7
+      </td>
+    </tr>
+    <tr>
+      <td>DOST Web Option Rank</td>
+      <td><span class="dost-badge" style="background:var(--teal-l);color:var(--teal)">1</span></td>
+      <td><span class="dost-badge" style="background:var(--blue-l);color:var(--blue)">5</span></td>
+      <td><span class="dost-badge" style="background:var(--purple-l);color:var(--purple)">3</span></td>
+      <td><span class="dost-badge" style="background:var(--gray-l);color:var(--gray)">2</span></td>
+      <td><span class="dost-badge" style="background:var(--coral-l);color:var(--coral)">4</span></td>
+    </tr>
+    <tr>
+      <td>UGC / Approvals</td>
+      <td>UGC approved · IQAC active</td>
+      <td>UGC · AICTE · NIRF submitted</td>
+      <td>UGC approved · CPE status renewed 2016–17</td>
+      <td>UGC CPE (X &amp; XI plan) · AICTE</td>
+      <td>UGC approved</td>
+    </tr>
+    <tr>
+      <td>Institutional Status</td>
+      <td><span class="pill pill-teal">Autonomous (Affiliated OU)</span></td>
+      <td><span class="pill pill-blue">University College (JNTUH)</span></td>
+      <td><span class="pill pill-purple">State University (since 2022)</span></td>
+      <td><span class="pill pill-gray">Autonomous (UGC 1988–89)</span></td>
+      <td><span class="pill pill-coral">Constituent College (OU)</span></td>
+    </tr>
+    <tr>
+      <td>Established</td>
+      <td>1971</td>
+      <td>1972 (JNTUH)</td>
+      <td>1924 <span class="pill pill-green">Oldest in group</span></td>
+      <td>1887 <span class="pill pill-green">Oldest college</span></td>
+      <td>1947</td>
+    </tr>
+
+    <!-- ── COURSE & FEES ── -->
+    <tr class="section-row"><td colspan="6">Course &amp; Fees</td></tr>
+
+    <tr>
+      <td>BBA Course Name</td>
+      <td>BBA (offered under autonomous curriculum)</td>
+      <td>BBA (Data Analytics)</td>
+      <td>BBA (Bachelor of Business Administration)</td>
+      <td>BBA (Bachelor of Business Administration)</td>
+      <td>BBA (Analytics)</td>
+    </tr>
+    <tr>
+      <td>Course Type</td>
+      <td>Regular / Govt.</td>
+      <td><span class="pill pill-amber">Self Financed</span></td>
+      <td>Regular</td>
+      <td><span class="pill pill-amber">Self Financed</span></td>
+      <td><span class="pill pill-amber">Self Financed</span></td>
+    </tr>
+    <tr>
+      <td>Annual Fee (approx.)</td>
+      <td><span class="pill pill-green">Very low — govt. fees + reimbursement eligible</span></td>
+      <td><span class="pill pill-red">₹1,09,500/yr</span> <br><small>Tuition ₹1,00,000 · Special ₹5,500 · Exam ₹3,000 · Other ₹1,000</small></td>
+      <td>₹46,250/yr<br><small>Tuition ₹1,400 · Special ₹33,000 · Exam ₹4,250 · Other ₹7,600</small></td>
+      <td>₹40,425/yr<br><small>Tuition ₹22,000 · Special ₹2,600 · Exam ₹3,700 · Other ₹12,125</small></td>
+      <td>₹40,551/yr<br><small>Tuition ₹33,275 · Special ₹3,396 · Exam ₹3,880</small></td>
+    </tr>
+    <tr>
+      <td>Fee Reimbursement</td>
+      <td><span class="yes">Yes — TS govt. scheme</span></td>
+      <td>Not applicable (self-financed)</td>
+      <td><span class="yes">Yes — for eligible categories</span></td>
+      <td>Partial scholarships available</td>
+      <td><span class="yes">Yes — TS govt. scheme</span></td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>English</td>
+      <td>English</td>
+      <td>English</td>
+      <td>English / Telugu / Hindi</td>
+      <td>English</td>
+    </tr>
+    <tr>
+      <td>CBCS / Credit System</td>
+      <td>CBCS framework</td>
+      <td>JNTUH curriculum</td>
+      <td>CBCS (Choice Based Credit System)</td>
+      <td>Autonomous syllabus (own BoS)</td>
+      <td>CBCS (OU)</td>
+    </tr>
+
+    <!-- ── CAMPUS & INFRASTRUCTURE ── -->
+    <tr class="section-row"><td colspan="6">Campus &amp; Infrastructure</td></tr>
+
+    <tr>
+      <td>Campus Size</td>
+      <td>Compact urban campus, Begumpet</td>
+      <td>89 acres, Kukatpally</td>
+      <td>42 acres — heritage Koti Residency (built 1803)</td>
+      <td>25 acres, Basheerbagh</td>
+      <td>City campus, Secunderabad</td>
+    </tr>
+    <tr>
+      <td>Laboratories</td>
+      <td>Science &amp; computer labs; well-maintained per student reviews</td>
+      <td>Extensive labs; 93,441-book central library; 187 journal subscriptions</td>
+      <td>Science &amp; computer labs; cyber centre (40 systems + 4 differently-abled)</td>
+      <td>Computer, Zoology, Botany, Chemistry labs; digital library</td>
+      <td>Computer labs; 56,000-book library; 20 journals</td>
+    </tr>
+    <tr>
+      <td>Computers / IT</td>
+      <td>Computer labs; WiFi; JKC nodal centre (skill training)</td>
+      <td>Strong IT infra; WiFi; 93k library books; 187 journal subs</td>
+      <td>40 computer systems; 4 for differently abled; WiFi</td>
+      <td>10+ library computers; computer lab; WiFi</td>
+      <td>Computer labs; WiFi campus</td>
+    </tr>
+    <tr>
+      <td>Library</td>
+      <td>Digital library; well-stocked per reviews</td>
+      <td>Central library — 93,441 books; 187 print journals</td>
+      <td>Library with digital &amp; print resources</td>
+      <td>140+ seating; 10+ computers; books, journals, e-resources, book bank</td>
+      <td>56,000 books; 20 subject journals; 15 magazines; 12 newspapers</td>
+    </tr>
+    <tr>
+      <td>Hostel</td>
+      <td><span class="no">Not prominently listed</span></td>
+      <td><span class="yes">Boys &amp; girls hostels</span></td>
+      <td><span class="yes">865 UG seats; free for economically challenged</span></td>
+      <td><span class="yes">Boys: 188 rooms · Girls: 71 rooms</span></td>
+      <td><span class="yes">Gnana Gangotri (boys) &amp; CHW4 (girls)</span></td>
+    </tr>
+    <tr>
+      <td>Health Centre</td>
+      <td><span class="yes">Yes (per NIRF)</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Full-time dispensary; regular doctor</span></td>
+      <td><span class="yes">Free medical treatment for students; gym</span></td>
+      <td><span class="yes">Regular doctor; health camps with hospitals</span></td>
+    </tr>
+    <tr>
+      <td>Auditorium</td>
+      <td>Seminar halls</td>
+      <td>Conference &amp; seminar halls</td>
+      <td>Auditorium</td>
+      <td>AC auditorium (200 capacity)</td>
+      <td>Seminar hall</td>
+    </tr>
+    <tr>
+      <td>Canteen</td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+      <td><span class="yes">Yes</span></td>
+    </tr>
+
+    <!-- ── STUDENT LIFE ── -->
+    <tr class="section-row"><td colspan="6">Student Life &amp; Extracurriculars</td></tr>
+
+    <tr>
+      <td>Gender</td>
+      <td><span class="pill pill-teal">Women only</span></td>
+      <td><span class="pill pill-blue">Co-educational</span></td>
+      <td><span class="pill pill-purple">Women only</span></td>
+      <td><span class="pill pill-gray">Co-educational</span></td>
+      <td><span class="pill pill-coral">Co-educational</span></td>
+    </tr>
+    <tr>
+      <td>NCC</td>
+      <td><span class="yes">Yes (per student reviews)</span></td>
+      <td>NSS active; NCC not listed separately for mgmt. college</td>
+      <td><span class="yes">NCC &amp; NSS — physical educators on staff</span></td>
+      <td><span class="yes">NCC &amp; NSS units on campus</span></td>
+      <td><span class="yes">NCC &amp; NSS both active</span></td>
+    </tr>
+    <tr>
+      <td>Sports</td>
+      <td>Sports grounds; well-maintained; sports admission quota</td>
+      <td>Extensive — 89-acre campus; gym; strong sports culture; sports quota</td>
+      <td>Sports facilities; inter-university participation; physical educators</td>
+      <td>Grounds; gym (boys &amp; girls); sports admission quota</td>
+      <td>Cricket, volleyball, throwball, softball, basketball, kabaddi, shuttle &amp; more</td>
+    </tr>
+    <tr>
+      <td>Cultural Festivals</td>
+      <td>Annual day; national &amp; international conferences; Golden Jubilee (2021)</td>
+      <td>Annual tech &amp; cultural fests; hackathons; vibrant campus life</td>
+      <td>Cultural clubs; IWD &amp; Republic Day celebrations; women empowerment events</td>
+      <td>Annual day; Bathukamma; freshers; farewell; October cultural festival</td>
+      <td>Literature, fine arts, cultural programmes; NCC/NSS events</td>
+    </tr>
+    <tr>
+      <td>Technical Symposiums</td>
+      <td>State-level Jignasa project competition; national &amp; international conferences; FDPs</td>
+      <td>Active — engineering university; hackathons, tech events, industry talks</td>
+      <td>State &amp; national-level seminars; research participation</td>
+      <td>Academic conferences; IQAC events; UGC-sponsored seminars</td>
+      <td>Academic seminars; student study projects</td>
+    </tr>
+    <tr>
+      <td>Alumni Network</td>
+      <td>Active alumni; women leaders in Telangana; Golden Jubilee celebrated 2021</td>
+      <td>Strong — premier tech university; MNC alumni globally; 50+ yr history</td>
+      <td>Oldest women's institution in Telangana (1924); notable women leaders</td>
+      <td><span class="pill pill-green">Strongest</span> — est. 1887; notable alumni incl. T. Subbarami Reddy; 139-yr legacy</td>
+      <td>Established OU network (OU founded 1918); 75+ yr college history</td>
+    </tr>
+
+    <!-- ── PLACEMENTS ── -->
+    <tr class="section-row"><td colspan="6">Placements &amp; Career</td></tr>
+
+    <tr>
+      <td>Placement Cell</td>
+      <td><span class="yes">Yes — JKC Nodal Centre (Hyd &amp; RR districts)</span></td>
+      <td><span class="yes">Yes — dedicated placement cell</span></td>
+      <td><span class="yes">Yes — industry interface cell</span></td>
+      <td><span class="yes">Yes — TASK-registered placement cell</span></td>
+      <td><span class="yes">Yes — training &amp; placement cell</span></td>
+    </tr>
+    <tr>
+      <td>Students Placed (NIRF 2025)</td>
+      <td>286 students placed</td>
+      <td>534 / 1,106 UG students (48%); 706 / 830 PG (85%)</td>
+      <td>~70–80% annually (student reviews)</td>
+      <td>238 / 830 UG (NIRF 2024); 93% PG placement rate</td>
+      <td>Data not separately published</td>
+    </tr>
+    <tr>
+      <td>Median UG Package</td>
+      <td><span class="na">Not published separately</span></td>
+      <td>₹9.4 LPA (engineering UG); BBA separate</td>
+      <td>₹3–5 LPA (student reviews)</td>
+      <td>₹4.2 LPA (NIRF 2025)</td>
+      <td><span class="na">Not published</span></td>
+    </tr>
+    <tr>
+      <td>Top Recruiters</td>
+      <td>JKC-linked industry tie-ups; skill &amp; aptitude training</td>
+      <td>Amazon, TCS, Wipro, Oracle, Cognizant, Accenture, MathWorks</td>
+      <td>Infosys, TCS, Deloitte, Dr Reddy's, Novartis, HDFC Bank, Vivifi, Innovacx</td>
+      <td>Accenture, Genpact, Infosys, Wipro, Kotak, Amazon, TCL</td>
+      <td>OU-network companies (campus drives)</td>
+    </tr>
+    <tr>
+      <td>Pre-placement Training</td>
+      <td>JKC — aptitude, soft skills, computer skills</td>
+      <td>Industry grooming sessions; seminars; webinars</td>
+      <td>Career guidance; industry interface</td>
+      <td>Soft skills, CV writing, aptitude, mock interviews (TASK)</td>
+      <td>Training &amp; placement cell programmes</td>
+    </tr>
+
+    <!-- ── ACCESSIBILITY ── -->
+    <tr class="section-row"><td colspan="6">Location &amp; Accessibility</td></tr>
+
+    <tr>
+      <td>Location</td>
+      <td>Opp. HPS, Begumpet, Hyd – 500016</td>
+      <td>Kukatpally, Hyd – 500085</td>
+      <td>Sultan Bazar, Koti, Hyd – 500095</td>
+      <td>Opp. LB Stadium, Basheerbagh, Hyd – 500001</td>
+      <td>Sardar Patel Rd, Secunderabad – 500003</td>
+    </tr>
+    <tr>
+      <td>Nearest Metro</td>
+      <td><span class="pill pill-green">Begumpet stn. (walking distance)</span></td>
+      <td>JNTU Metro (Red line) — ~6 km</td>
+      <td>Nampally / Kachiguda (nearby)</td>
+      <td>LB Stadium Metro — very central</td>
+      <td>Secunderabad metro corridor</td>
+    </tr>
+    <tr>
+      <td>Nearest Railway Stn.</td>
+      <td><span class="pill pill-green">Begumpet Rly. Stn. — walking distance</span></td>
+      <td>Bharat Nagar — ~7 km; Lingampally — ~9 km</td>
+      <td>Nampally / Kachiguda — close</td>
+      <td>Hyderabad / Nampally — ~2 km</td>
+      <td><span class="pill pill-green">Secunderabad Rly. Stn. — very close</span></td>
+    </tr>
+    <tr>
+      <td>Bus Connectivity</td>
+      <td>TSRTC buses; near HUDA Complex</td>
+      <td>JNTU Bus Station; Kukatpally depot</td>
+      <td>Koti bus stop — central Hyderabad hub</td>
+      <td>Multiple TSRTC routes; near JBS</td>
+      <td>Near JBS Secunderabad; excellent connectivity</td>
+    </tr>
+    <tr>
+      <td>Distance from Airport</td>
+      <td>~30 km, ~40 min</td>
+      <td>~47 km, ~50 min</td>
+      <td>~30 km, ~40 min</td>
+      <td>~30 km, ~40 min</td>
+      <td>~32 km, ~40 min</td>
+    </tr>
+    <tr>
+      <td>Overall Accessibility</td>
+      <td>
+        <div class="stars">★★★★★</div>
+        <small>Best — city centre with rly. &amp; metro</small>
+      </td>
+      <td>
+        <div class="stars">★★★</div><div class="stars-gray">★★</div>
+        <small>Suburban; metro available but far from centre</small>
+      </td>
+      <td>
+        <div class="stars">★★★★</div><div class="stars-gray">★</div>
+        <small>Central city; busy but well-connected</small>
+      </td>
+      <td>
+        <div class="stars">★★★★★</div>
+        <small>Very central; walkable to LB Stadium metro</small>
+      </td>
+      <td>
+        <div class="stars">★★★★★</div>
+        <small>Best — near Secunderabad rly. &amp; JBS</small>
+      </td>
+    </tr>
+
+    <!-- ── QUICK VERDICT ── -->
+    <tr class="section-row"><td colspan="6">Quick Verdict</td></tr>
+
+    <tr>
+      <td>Best For</td>
+      <td>Best overall for women — highest NAAC, lowest fees, central location, skill training</td>
+      <td>Tech-forward BBA Data Analytics; students who can afford ₹1.1 L/yr and want a university brand</td>
+      <td>Women seeking a university-level degree with free hostel and strong placement %</td>
+      <td>Brand name, alumni network, placements via TASK; best co-ed option</td>
+      <td>Co-ed, modern BBA Analytics specialisation, very affordable, excellent Secunderabad access</td>
+    </tr>
+    <tr>
+      <td>Watch Out For</td>
+      <td>High competition for seat; no hostel listed</td>
+      <td>High fees; JNTU brand benefit mostly in engineering, not BBA</td>
+      <td>Busy Koti area; recent university upgrade means less established BBA track record</td>
+      <td>Most recent NAAC cycle returned B++ (2.92); verify current grade before applying</td>
+      <td>Non-autonomous; no independent NIRF rank; weaker placement data</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span>Sources: NAAC official portal · NIRF 2025 · Careers360 · CollegeDunia · Official college websites · DOST 2026 portal (dost.cgg.gov.in)</span>
+  <span>Prepared June 2026 · For personal use — verify fees &amp; seats at dost.cgg.gov.in before submitting web options</span>
+</footer>
+
+</body>
+</html>

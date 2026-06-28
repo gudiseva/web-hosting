@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Comparison: BME vs Pharma vs Food Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1A3A6B;
+    --blue-light: #E8F0FB;
+    --blue-mid: #4A72B8;
+    --teal: #0C5E4A;
+    --teal-light: #E2F5EF;
+    --teal-mid: #2E9E7A;
+    --amber: #7A3E00;
+    --amber-light: #FDF0E2;
+    --amber-mid: #D47A1A;
+    --bg: #F7F5F0;
+    --white: #FFFFFF;
+    --dark: #1C1C1E;
+    --gray: #6B6B6B;
+    --gray-light: #E8E6E0;
+    --success: #2E7D32;
+    --danger: #C62828;
+    --gold: #C9960C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    min-height: 100vh;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1.page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  /* HERO CARDS */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-card {
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem;
+    border: 1.5px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card.blue { background: var(--blue-light); border-color: #B8CEF5; }
+  .hero-card.teal { background: var(--teal-light); border-color: #9FD9C3; }
+  .hero-card.amber { background: var(--amber-light); border-color: #F5C888; }
+  .hero-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    opacity: 0.08;
+    line-height: 1;
+  }
+  .hero-card.blue .hero-num { color: var(--blue); }
+  .hero-card.teal .hero-num { color: var(--teal); }
+  .hero-card.amber .hero-num { color: var(--amber); }
+  .hero-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .hero-card.blue .hero-tag { background: var(--blue); color: white; }
+  .hero-card.teal .hero-tag { background: var(--teal); color: white; }
+  .hero-card.amber .hero-tag { background: var(--amber); color: white; }
+  .hero-course {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+  .hero-card.blue .hero-course { color: var(--blue); }
+  .hero-card.teal .hero-course { color: var(--teal); }
+  .hero-card.amber .hero-course { color: var(--amber); }
+  .hero-college { font-size: 0.78rem; color: var(--gray); line-height: 1.4; }
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin: 2rem 0 0.75rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  /* TABLE */
+  .compare-wrap {
+    max-width: 1100px;
+    margin: 0 auto 0;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--gray-light);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 148px 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.head-row { background: #F0EDE8; }
+  .param-cell {
+    padding: 10px 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-right: 1px solid var(--gray-light);
+    background: #F7F5F0;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+  }
+  .data-cell {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    color: var(--dark);
+    border-right: 1px solid var(--gray-light);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+  .data-cell:last-child { border-right: none; }
+  .head-cell {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-right: 1px solid var(--gray-light);
+    line-height: 1.35;
+  }
+  .head-cell:last-child { border-right: none; }
+  .head-cell.blue { color: var(--blue); background: #EEF4FF; }
+  .head-cell.teal { color: var(--teal); background: #EBF8F3; }
+  .head-cell.amber { color: var(--amber); background: #FEF6EC; }
+  .head-cell span { font-size: 0.65rem; font-weight: 400; color: var(--gray); display: block; }
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 500;
+    margin: 2px 2px 2px 0;
+    white-space: nowrap;
+  }
+  .b-blue { background: var(--blue-light); color: var(--blue); border: 1px solid #C5D8F7; }
+  .b-teal { background: var(--teal-light); color: var(--teal); border: 1px solid #B0DFCF; }
+  .b-amber { background: var(--amber-light); color: var(--amber); border: 1px solid #ECC07A; }
+  .b-green { background: #EAF3DE; color: #2E5E10; border: 1px solid #C2DCA0; }
+  .b-gray { background: #F0EDE8; color: #555; border: 1px solid #DDD9D0; }
+  .b-purple { background: #EEEDFE; color: #3C3489; border: 1px solid #C9C5F5; }
+  /* STARS */
+  .stars { color: #E8A000; font-size: 0.85rem; }
+  .star-e { color: #D0CCC4; font-size: 0.85rem; }
+  .pro { color: var(--success); font-size: 0.73rem; padding: 1px 0; line-height: 1.5; }
+  .con { color: var(--danger); font-size: 0.73rem; padding: 1px 0; line-height: 1.5; }
+  /* USA CARDS */
+  .usa-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .usa-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1.5px solid var(--gray-light);
+    padding: 1.2rem 1.3rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .usa-card.blue { border-color: #B8CEF5; }
+  .usa-card.teal { border-color: #9FD9C3; }
+  .usa-card.amber { border-color: #F5C888; }
+  .usa-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.3;
+  }
+  .usa-title.blue { color: var(--blue); }
+  .usa-title.teal { color: var(--teal); }
+  .usa-title.amber { color: var(--amber); }
+  .usa-row { font-size: 0.75rem; color: var(--dark); padding: 3px 0; line-height: 1.45; border-bottom: 1px solid #F0EDE8; }
+  .usa-row:last-child { border-bottom: none; }
+  .usa-row strong { color: var(--gray); font-weight: 600; }
+  .usa-highlight {
+    margin-top: 0.7rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.73rem;
+    line-height: 1.5;
+  }
+  .usa-highlight.blue { background: var(--blue-light); color: var(--blue); }
+  .usa-highlight.teal { background: var(--teal-light); color: var(--teal); }
+  .usa-highlight.amber { background: var(--amber-light); color: var(--amber); }
+  /* VERDICT */
+  .verdict-box {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1.5px solid var(--gray-light);
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .verdict-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 0.6rem;
+  }
+  .verdict-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #F0EDE8;
+    font-size: 0.8rem;
+    align-items: flex-start;
+  }
+  .verdict-row:last-child { border-bottom: none; }
+  .verdict-key { font-weight: 600; color: var(--gray); }
+  .verdict-val { color: var(--dark); line-height: 1.5; }
+  .pill {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .pill-blue { background: var(--blue); color: white; }
+  .pill-teal { background: var(--teal); color: white; }
+  .pill-amber { background: var(--amber); color: white; }
+  .note { font-size: 0.7rem; color: var(--gray); margin-top: 2px; display: block; }
+  .alt-row { background: #FAFAF8; }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .compare-row { grid-template-columns: 100px 1fr 1fr 1fr; }
+    .usa-grid { grid-template-columns: 1fr; }
+    .verdict-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    body { padding: 1rem 0.75rem 3rem; }
+    h1.page-title { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Engineering Degree Comparison</h1>
+<p class="subtitle">India & USA Job Opportunities · Placements · Salary · Higher Studies · Career Scope</p>
+
+<!-- HERO CARDS -->
+<div class="hero-grid">
+  <div class="hero-card blue">
+    <div class="hero-num">1</div>
+    <div class="hero-tag">Option A</div>
+    <div class="hero-course">BE Biomedical Engineering</div>
+    <div class="hero-college">University College of Engineering<br>Osmania University, Hyderabad<br>4 yrs · Govt · TS EAMCET · ₹40,000/yr</div>
+  </div>
+  <div class="hero-card teal">
+    <div class="hero-num">2</div>
+    <div class="hero-tag">Option B</div>
+    <div class="hero-course">BTech Pharmaceutical Engineering</div>
+    <div class="hero-college">BV Raju Institute of Technology (BVRIT)<br>Narsapur, Telangana<br>4 yrs · Private · TS EAMCET · ₹1.38L/yr</div>
+  </div>
+  <div class="hero-card amber">
+    <div class="hero-num">3</div>
+    <div class="hero-tag">Option C</div>
+    <div class="hero-course">BTech Food Technology</div>
+    <div class="hero-college">University College of Technology<br>Osmania University, Hyderabad<br>4 yrs · Govt · TS EAMCET · ₹44,180/yr</div>
+  </div>
+</div>
+
+<!-- SECTION 1: COLLEGE PROFILE -->
+<div class="section-label">College &amp; Course Profile</div>
+<div class="compare-wrap">
+  <div class="compare-row head-row">
+    <div class="param-cell">Parameter</div>
+    <div class="head-cell blue">BE Biomedical Engg<span>UCEOU, Osmania</span></div>
+    <div class="head-cell teal">BTech Pharma Engg<span>BVRIT, Narsapur</span></div>
+    <div class="head-cell amber">BTech Food Technology<span>UCT, Osmania</span></div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">College type &amp; ranking</div>
+    <div class="data-cell"><span class="badge b-green">Govt / Autonomous</span><span class="badge b-blue">NIRF #18 Engg (2023)</span><span class="badge b-blue">NAAC A+</span><br><span style="font-size:0.72rem;color:var(--gray)">One of the oldest & most respected engineering colleges in Telangana. Premium brand.</span></div>
+    <div class="data-cell"><span class="badge b-gray">Private</span><span class="badge b-teal">NAAC A</span><span class="badge b-teal">NBA Accredited</span><br><span style="font-size:0.72rem;color:var(--gray)">Well-known private college; strong placement infrastructure; Narsapur campus.</span></div>
+    <div class="data-cell"><span class="badge b-green">Govt / Autonomous</span><span class="badge b-amber">NBA Accredited</span><br><span style="font-size:0.72rem;color:var(--gray)">Established 1969; Osmania University campus; one of few govt food tech colleges in South India.</span></div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Total fees (4 yrs)</div>
+    <div class="data-cell"><strong style="font-size:1rem;color:var(--blue)">~₹1.60 lakh</strong><br><span style="font-size:0.72rem;color:var(--gray)">₹40,000/yr · Extremely affordable govt college</span></div>
+    <div class="data-cell"><strong style="font-size:1rem;color:var(--teal)">~₹5.50 lakh</strong><br><span style="font-size:0.72rem;color:var(--gray)">₹1.38 lakh/yr · Private college fees</span></div>
+    <div class="data-cell"><strong style="font-size:1rem;color:var(--amber)">~₹1.56 lakh</strong><br><span style="font-size:0.72rem;color:var(--gray)">₹44,180 (yr 1) / ₹36,680 (yrs 2–4) · Most affordable</span></div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">TS EAMCET cutoff</div>
+    <div class="data-cell">Rank <strong>~3,000–6,000</strong><br><span style="font-size:0.72rem;color:var(--gray)">Very competitive; strong rank required for this premium govt college</span></div>
+    <div class="data-cell">Rank <strong>~30,000–70,000</strong><br><span style="font-size:0.72rem;color:var(--gray)">More accessible; private college with wider intake</span></div>
+    <div class="data-cell">Rank <strong>~1,15,952</strong><br><span style="font-size:0.72rem;color:var(--gray)">Very accessible cutoff; easiest entry among the three</span></div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Curriculum focus</div>
+    <div class="data-cell">Medical devices, bioelectronics, biomechanics, bioinstrumentation, imaging systems (MRI/CT), prosthetics, clinical engineering, hospital engineering, neural engineering</div>
+    <div class="data-cell">Drug manufacturing, pharma process engineering, formulation technology, quality control, GMP compliance, bioprocessing, drug delivery, validation engineering</div>
+    <div class="data-cell">Food processing & preservation, food chemistry, packaging technology, microbiology, HACCP, food safety regulations, FSSAI standards, quality management</div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Campus placements</div>
+    <div class="data-cell">Overall OU UCE median: <strong>₹10 LPA</strong> (2024); highest ₹24 LPA (Mathworks). BE Biomedical has fewer dedicated BME recruiters; many graduates enter IT/healthcare/software roles via Osmania's strong brand.</div>
+    <div class="data-cell">BTech median: <strong>₹4.39–4.50 LPA</strong>; highest ₹46.38 LPA (Amazon 2025). 135 companies visited; 1,431 students placed 2025. Pharma Engg: ₹3–15 LPA per alumni reviews. Strong infrastructure.</div>
+    <div class="data-cell">UCT overall median: <strong>₹5 LPA</strong> (UG 2024); 65 UG students placed per NIRF 2025. Food Tech batch is small. FMCG recruiters: Nestlé, ITC, Britannia, HUL, Dabur visit campus.</div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Value for money</div>
+    <div class="data-cell"><span class="stars">★★★★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Exceptional — top-ranked govt college at ₹1.6L total; best ROI of the three</span></div>
+    <div class="data-cell"><span class="stars">★★★</span><span class="star-e">★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Reasonable — good placement infrastructure but 3.5× more expensive than govt options</span></div>
+    <div class="data-cell"><span class="stars">★★★★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Exceptional — cheapest option; govt Osmania campus; strong institution brand</span></div>
+  </div>
+</div>
+
+<!-- SECTION 2: INDIA JOBS -->
+<div class="section-label">India Job Opportunities</div>
+<div class="compare-wrap">
+  <div class="compare-row head-row">
+    <div class="param-cell">Category</div>
+    <div class="head-cell blue">BE Biomedical Engg</div>
+    <div class="head-cell teal">BTech Pharma Engg</div>
+    <div class="head-cell amber">BTech Food Technology</div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Private sector job roles</div>
+    <div class="data-cell">
+      <span class="badge b-blue">Biomedical Engineer</span><span class="badge b-blue">Clinical Engineer</span><span class="badge b-blue">Application Specialist</span><span class="badge b-blue">Medical Device Design</span><span class="badge b-blue">Bioinstrumentation Engr</span><span class="badge b-blue">R&amp;D Engineer</span><span class="badge b-blue">Medical Equipment Sales</span>
+    </div>
+    <div class="data-cell">
+      <span class="badge b-teal">Process Engineer</span><span class="badge b-teal">Production Engineer</span><span class="badge b-teal">QC/QA Engineer</span><span class="badge b-teal">Formulation Scientist</span><span class="badge b-teal">Validation Engineer</span><span class="badge b-teal">Regulatory Affairs</span><span class="badge b-teal">Drug Delivery Specialist</span>
+    </div>
+    <div class="data-cell">
+      <span class="badge b-amber">Food Technologist</span><span class="badge b-amber">Quality Analyst</span><span class="badge b-amber">R&amp;D Scientist</span><span class="badge b-amber">Food Safety Officer</span><span class="badge b-amber">Product Development</span><span class="badge b-amber">FSSAI Consultant</span><span class="badge b-amber">Packaging Engineer</span>
+    </div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Top private recruiters</div>
+    <div class="data-cell" style="font-size:0.75rem">Medtronic, Philips Healthcare, Siemens Healthineers, GE Healthcare, Johnson &amp; Johnson, Stryker, Abbott, Fortis, Apollo, Biocon, BD, Baxter</div>
+    <div class="data-cell" style="font-size:0.75rem">Sun Pharma, Dr Reddy's, Cipla, Lupin, Aurobindo, Biocon, Pfizer India, Sanofi, Hetero Drugs, Divi's Labs, Natco, Granules</div>
+    <div class="data-cell" style="font-size:0.75rem">Nestlé India, ITC, Britannia, HUL, Amul, Dabur, PepsiCo, Coca-Cola, Cargill, Marico, Godrej Foods, Mother Dairy, Parle</div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Government sector</div>
+    <div class="data-cell">
+      <span class="badge b-green">AIIMS / Govt Hospitals</span><span class="badge b-green">DRDO</span><span class="badge b-green">CSIR</span><span class="badge b-green">ISRO (biomedical)</span><span class="badge b-green">Defence R&amp;D</span>
+      <br><span style="font-size:0.72rem;color:var(--gray);margin-top:3px;display:block">Clinical/hospital engineering at AIIMS, NIMHANS. Limited but prestigious posts.</span>
+    </div>
+    <div class="data-cell">
+      <span class="badge b-green">CDRI Lucknow</span><span class="badge b-green">CSIR Labs</span><span class="badge b-green">DRDO</span><span class="badge b-green">IDPL / PSU Pharma</span>
+      <br><span style="font-size:0.72rem;color:var(--gray);margin-top:3px;display:block">R&D and manufacturing roles in govt pharma units. Moderate scope.</span>
+    </div>
+    <div class="data-cell">
+      <span class="badge b-green">Food Corporation of India</span><span class="badge b-green">FSSAI</span><span class="badge b-green">Dept of Food &amp; Pub. Distribution</span><span class="badge b-green">Central Warehousing Corp</span>
+      <br><span style="font-size:0.72rem;color:var(--gray);margin-top:3px;display:block">Strong dedicated govt tracks: Food Safety Officer, FCI Manager, Food Inspector.</span>
+    </div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Govt job strength</div>
+    <div class="data-cell"><span class="stars">★★★</span><span class="star-e">★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Limited dedicated BME posts; mainly research labs & hospital engineering</span></div>
+    <div class="data-cell"><span class="stars">★★★</span><span class="star-e">★★</span><br><span style="font-size:0.72rem;color:var(--gray)">DRDO, CSIR roles available; not as broad as pharmacy/food tech in govt</span></div>
+    <div class="data-cell"><span class="stars">★★★★</span><span class="star-e">★</span><br><span style="font-size:0.72rem;color:var(--gray)">FCI, FSSAI, Food Safety Officers — strong dedicated govt sector; good openings</span></div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Starting salary (India)</div>
+    <div class="data-cell"><strong style="color:var(--blue)">₹3–7 LPA</strong><br><span style="font-size:0.72rem;color:var(--gray)">Median ₹6.60 LPA per UCEOU data. Mid-career: ₹7–15 LPA. Senior: ₹15–25 LPA+</span></div>
+    <div class="data-cell"><strong style="color:var(--teal)">₹3–7 LPA</strong><br><span style="font-size:0.72rem;color:var(--gray)">Avg ₹4.50 LPA at BVRIT. Pharma MNC roles: ₹5–8 LPA. Senior: ₹12–20 LPA</span></div>
+    <div class="data-cell"><strong style="color:var(--amber)">₹2–5 LPA</strong><br><span style="font-size:0.72rem;color:var(--gray)">Avg ₹3–4 LPA fresh grad. R&D scientist (5–7 yrs): ₹7–8 LPA. Senior: ₹8–12 LPA</span></div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Industry growth (India)</div>
+    <div class="data-cell">Indian medical devices market growing at <strong>~16% CAGR</strong>; PLI scheme for domestic MedTech manufacturing; Hyderabad emerging as a MedTech hub</div>
+    <div class="data-cell">India is world's <strong>3rd largest pharma producer</strong>; Hyderabad called "Pharma City" globally; 500+ pharma companies in TS/AP region alone</div>
+    <div class="data-cell">India's food processing industry is <strong>5th largest globally</strong>; ₹26 lakh crore sector; PM Kisan Sampada Yojana &amp; food park policy driving strong growth</div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">India scope rating</div>
+    <div class="data-cell"><span class="stars">★★★★</span><span class="star-e">★</span><br><span style="font-size:0.72rem;color:var(--gray)">Growing MedTech ecosystem; strong Osmania brand; some roles need PG for best positions</span></div>
+    <div class="data-cell"><span class="stars">★★★★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Best India scope — Hyderabad is pharma capital; 500+ companies; most relevant locally</span></div>
+    <div class="data-cell"><span class="stars">★★★</span><span class="star-e">★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Good food industry growth; salary ceiling lower than BME/Pharma without PG</span></div>
+  </div>
+</div>
+
+<!-- SECTION 3: USA JOBS -->
+<div class="section-label">🇺🇸 USA Job Opportunities — Key Focus for US Citizen</div>
+<div class="usa-grid">
+  <div class="usa-card blue">
+    <div class="usa-title blue">BE Biomedical Engineering</div>
+    <div class="usa-row"><strong>Entry salary:</strong> $65,000–$95,000/yr</div>
+    <div class="usa-row"><strong>Average salary (all levels):</strong> $74,000–$115,020/yr</div>
+    <div class="usa-row"><strong>Senior / specialist:</strong> $100,000–$165,000/yr</div>
+    <div class="usa-row"><strong>Top US employers:</strong> Medtronic, Abbott, Boston Scientific, GE Healthcare, Stryker, Zimmer Biomet, Philips, FDA, NIH, BD Medical</div>
+    <div class="usa-row"><strong>Top paying states:</strong> California ($120K avg), Massachusetts, Texas, Minnesota, New Mexico, Arizona</div>
+    <div class="usa-row"><strong>Best MS pathway:</strong> Johns Hopkins, Duke, Georgia Tech, UC San Diego, Purdue, Univ of Michigan, UC Berkeley</div>
+    <div class="usa-row"><strong>STEM OPT (Indian students):</strong> 12 months + 24 months STEM extension = 3 years work authorisation</div>
+    <div class="usa-row"><strong>US market size:</strong> $200.14B (2025) → $266.64B by 2030 at 6% CAGR</div>
+    <div class="usa-row"><strong>BLS job growth:</strong> 7% projected through 2032</div>
+    <div class="usa-highlight blue"><strong>★ For US Citizen:</strong> No OPT/H1-B needed. Direct access to Medtronic, Abbott, FDA, GE Healthcare. Highest USA salary ceiling of the three options. Medical device market booming — strongest long-term career in USA.</div>
+    <div style="margin-top:0.6rem">
+      <span class="badge b-blue">Highest USA salary</span><span class="badge b-green">STEM 3yr OPT</span><span class="badge b-purple">FDA career path</span>
+    </div>
+  </div>
+  <div class="usa-card teal">
+    <div class="usa-title teal">BTech Pharmaceutical Engineering</div>
+    <div class="usa-row"><strong>Entry salary:</strong> $65,000–$90,000/yr</div>
+    <div class="usa-row"><strong>Average salary (all levels):</strong> $80,000–$115,000/yr</div>
+    <div class="usa-row"><strong>Senior / specialist:</strong> $90,000–$140,000/yr</div>
+    <div class="usa-row"><strong>Top US employers:</strong> Pfizer, Johnson &amp; Johnson, Merck, AbbVie, Eli Lilly, Baxter, Amgen, Genentech, FDA, Abbott Laboratories</div>
+    <div class="usa-row"><strong>Top paying states:</strong> New Jersey, California, Massachusetts, Maryland, Illinois</div>
+    <div class="usa-row"><strong>Best MS pathway:</strong> Purdue, Rutgers, Univ of Maryland, Texas A&amp;M, Univ of Michigan, MIT (ChemEng)</div>
+    <div class="usa-row"><strong>STEM OPT (Indian students):</strong> 12 months + 24 months STEM extension = 3 years work authorisation</div>
+    <div class="usa-row"><strong>Industry trend:</strong> mRNA vaccines, biologics, biosimilars, continuous manufacturing driving strong demand</div>
+    <div class="usa-row"><strong>BLS job growth:</strong> Strong — pharma manufacturing growing with post-COVID reshoring</div>
+    <div class="usa-highlight teal"><strong>★ For US Citizen:</strong> No OPT/H1-B. Direct access to pharma MNCs. India + pharma engg background = unique global profile. CMC Regulatory, Validation, Bioprocess roles pay premium. FDA career is realistic.</div>
+    <div style="margin-top:0.6rem">
+      <span class="badge b-teal">Pharma MNC access</span><span class="badge b-green">STEM 3yr OPT</span><span class="badge b-purple">FDA regulatory</span>
+    </div>
+  </div>
+  <div class="usa-card amber">
+    <div class="usa-title amber">BTech Food Technology</div>
+    <div class="usa-row"><strong>Entry salary:</strong> $47,000–$65,000/yr</div>
+    <div class="usa-row"><strong>Average salary (IFT 2024 BS median):</strong> $96,500/yr (experienced)</div>
+    <div class="usa-row"><strong>Starting salary (Penn State 2024):</strong> ~$65,000/yr avg</div>
+    <div class="usa-row"><strong>Top US employers:</strong> Nestlé USA, Kraft Heinz, General Mills, Cargill, Tyson Foods, Conagra, USDA, FDA (CFSAN), Eurofins, Mondelez</div>
+    <div class="usa-row"><strong>Top paying states:</strong> California, Illinois, Wisconsin, Minnesota, Iowa</div>
+    <div class="usa-row"><strong>Best MS pathway:</strong> Cornell, Penn State, UC Davis, Kansas State, Univ of Florida, Texas A&amp;M — TA/RA available</div>
+    <div class="usa-row"><strong>STEM OPT (Indian students):</strong> 12 months + 24 months STEM extension = 3 years work authorisation</div>
+    <div class="usa-row"><strong>BLS projection:</strong> Food scientists & technologists +6% growth through 2032</div>
+    <div class="usa-row"><strong>IFT all professionals median:</strong> $110,000 (2022 data, all experience levels)</div>
+    <div class="usa-highlight amber"><strong>For US Citizen:</strong> No OPT/H1-B. Can join USDA, FDA's CFSAN food division, food MNCs. Starting salary lower than BME/Pharma. Improves significantly with MS from Cornell or Penn State.</div>
+    <div style="margin-top:0.6rem">
+      <span class="badge b-amber">USDA/FDA food div.</span><span class="badge b-green">STEM 3yr OPT</span><span class="badge b-amber">Lower starting salary</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: HIGHER STUDIES -->
+<div class="section-label">Higher Studies &amp; Advantages / Disadvantages</div>
+<div class="compare-wrap">
+  <div class="compare-row head-row">
+    <div class="param-cell">Parameter</div>
+    <div class="head-cell blue">BE Biomedical Engg</div>
+    <div class="head-cell teal">BTech Pharma Engg</div>
+    <div class="head-cell amber">BTech Food Technology</div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">PG options (India)</div>
+    <div class="data-cell"><span class="badge b-blue">MTech Biomedical Engg (GATE)</span><span class="badge b-blue">MTech Bioelectronics</span><span class="badge b-blue">MBA Healthcare Mgmt</span><span class="badge b-blue">MTech AI in Healthcare</span><span class="badge b-blue">PhD</span></div>
+    <div class="data-cell"><span class="badge b-teal">MTech Pharma Engg (GATE)</span><span class="badge b-teal">MTech Chemical Engg</span><span class="badge b-teal">MTech Bioprocess Engg</span><span class="badge b-teal">MBA (CAT/GMAT)</span><span class="badge b-teal">PhD</span></div>
+    <div class="data-cell"><span class="badge b-amber">MTech Food Technology (GATE)</span><span class="badge b-amber">MSc Food Science</span><span class="badge b-amber">MBA FMCG / Agribusiness</span><span class="badge b-amber">PhD Food Science</span></div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">PG options (USA)</div>
+    <div class="data-cell">MS Biomedical Engg: Johns Hopkins, Duke, Georgia Tech, Purdue, UMich. Avg fees $62K–$1.38L total. TA/RA frequently available in research labs.</div>
+    <div class="data-cell">MS Pharmaceutical Sciences/Engg: Purdue, Rutgers, Texas A&amp;M, Univ of Maryland. TA/RA often available in pharma research groups.</div>
+    <div class="data-cell">MS Food Science: Cornell, Penn State, UC Davis, Kansas State, Univ of Florida. TA/RA roles available in food science and ag departments.</div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Key advantages</div>
+    <div class="data-cell">
+      <div class="pro">✔ Top-ranked govt college — NIRF #18 Engineering</div>
+      <div class="pro">✔ Only ₹1.6L total fees — exceptional value</div>
+      <div class="pro">✔ Highest USA salary ceiling of the three</div>
+      <div class="pro">✔ Cross-disciplinary — engineering + healthcare</div>
+      <div class="pro">✔ Growing $266B US medical device market</div>
+      <div class="pro">✔ Can pivot to IT/software via strong Osmania brand</div>
+      <div class="pro">✔ FDA, NIH career pathway available</div>
+    </div>
+    <div class="data-cell">
+      <div class="pro">✔ Best India prospects — Hyderabad is pharma capital</div>
+      <div class="pro">✔ 500+ pharma companies in TS/AP region</div>
+      <div class="pro">✔ Strong BVRIT placement cell (135 companies)</div>
+      <div class="pro">✔ GATE opens IIT/NIT MTech pathway</div>
+      <div class="pro">✔ India + pharma = unique global profile for USA</div>
+      <div class="pro">✔ mRNA, biologics, biosimilars = future-ready field</div>
+    </div>
+    <div class="data-cell">
+      <div class="pro">✔ Only ₹1.56L total fees — most affordable</div>
+      <div class="pro">✔ Strong government job scope (FCI, FSSAI)</div>
+      <div class="pro">✔ India's food processing sector is world's 5th largest</div>
+      <div class="pro">✔ Good FMCG employer network (Nestlé, ITC, HUL)</div>
+      <div class="pro">✔ Emerging areas: alternative proteins, nutraceuticals</div>
+    </div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Key disadvantages</div>
+    <div class="data-cell">
+      <div class="con">✘ Very competitive EAMCET cutoff required</div>
+      <div class="con">✘ Fewer dedicated BME campus recruiters</div>
+      <div class="con">✘ PG often needed for top USA/India roles</div>
+      <div class="con">✘ Medical device market niche — specialized career</div>
+    </div>
+    <div class="data-cell">
+      <div class="con">✘ Highest fees (₹5.5L) — 3.5× govt options</div>
+      <div class="con">✘ Pharma Engg is niche BTech stream</div>
+      <div class="con">✘ Rural campus location (Narsapur)</div>
+      <div class="con">✘ Overall BVRIT median ₹4.5 LPA (most get tech roles, not pharma)</div>
+    </div>
+    <div class="data-cell">
+      <div class="con">✘ Lowest starting salary of the three</div>
+      <div class="con">✘ Smaller batch; fewer campus recruiters</div>
+      <div class="con">✘ Lower salary ceiling without PG degree</div>
+      <div class="con">✘ BTech Food Tech at OU-UCT may have been discontinued — verify current status</div>
+    </div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Emerging opportunities</div>
+    <div class="data-cell">AI diagnostics, robotic surgery, wearables, neural engineering, gene therapy devices, MedTech startups, telemedicine hardware</div>
+    <div class="data-cell">Continuous pharma manufacturing, AI-driven drug discovery, mRNA vaccines, biologics, biosimilars, personalized medicine</div>
+    <div class="data-cell">Alternative proteins, plant-based foods, precision fermentation, food safety tech, nutraceuticals, agri-food tech startups</div>
+  </div>
+  <div class="compare-row alt-row">
+    <div class="param-cell">Overall USA rating</div>
+    <div class="data-cell"><span class="stars">★★★★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Best USA career — highest salary, fastest growing US market, strongest future scope</span></div>
+    <div class="data-cell"><span class="stars">★★★★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Excellent — pharma MNC access, FDA path, strong STEM designation, great MS routes</span></div>
+    <div class="data-cell"><span class="stars">★★★</span><span class="star-e">★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Good but lower starting salary; significantly better with MS from Cornell/Penn State</span></div>
+  </div>
+  <div class="compare-row">
+    <div class="param-cell">Overall India rating</div>
+    <div class="data-cell"><span class="stars">★★★★</span><span class="star-e">★</span><br><span style="font-size:0.72rem;color:var(--gray)">Growing MedTech ecosystem; premium Osmania brand; strong long-term trajectory</span></div>
+    <div class="data-cell"><span class="stars">★★★★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Best India prospects — pharma hub location; 500+ companies; highest local relevance</span></div>
+    <div class="data-cell"><span class="stars">★★★</span><span class="star-e">★★</span><br><span style="font-size:0.72rem;color:var(--gray)">Good food industry growth; lower salary ceiling vs other two</span></div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div class="section-label">Final Assessment for Your Daughter (US Citizen)</div>
+<div class="verdict-box">
+  <div class="verdict-title">Strategic Recommendation Summary</div>
+  <div class="verdict-row">
+    <div class="verdict-key">🏆 Best for USA career</div>
+    <div class="verdict-val"><span class="pill pill-blue">BE Biomedical Engg</span> — Highest USA salary ceiling ($115K avg, up to $165K+); US medical device market growing to $266B by 2030; her US citizenship removes all work barriers at Medtronic, Abbott, GE Healthcare, FDA. <span class="note">Recommended roadmap: UCEOU (₹1.6L) → MS Biomedical Engg at Purdue/Georgia Tech (FAFSA + TA/RA) → Work at leading MedTech company as US citizen from Day 1.</span></div>
+  </div>
+  <div class="verdict-row">
+    <div class="verdict-key">🏆 Best for India career</div>
+    <div class="verdict-val"><span class="pill pill-teal">BTech Pharma Engg</span> — Hyderabad/Telangana is the pharma capital of India; 500+ pharma companies in the region; BVRIT has strong placement infrastructure with 135 companies visiting. Best local relevance. <span class="note">If she stays in India post-graduation, this is the most job-rich environment.</span></div>
+  </div>
+  <div class="verdict-row">
+    <div class="verdict-key">💰 Best value for money</div>
+    <div class="verdict-val"><span class="pill pill-blue">BE Biomedical</span> or <span class="pill pill-amber">BTech Food Tech</span> — Both Osmania govt colleges charge only ₹1.56–1.60 lakh for 4 years, vs ₹5.5L at private BVRIT. For a US citizen who will do MS in USA anyway, saving ₹4 lakh on Indian UG makes clear sense.</div>
+  </div>
+  <div class="verdict-row">
+    <div class="verdict-key">🏛️ Best for India govt jobs</div>
+    <div class="verdict-val"><span class="pill pill-amber">BTech Food Technology</span> — FCI, FSSAI, Food Safety Officer, Dept of Food & Public Distribution are dedicated govt tracks with the most openings for food technology graduates.</div>
+  </div>
+  <div class="verdict-row">
+    <div class="verdict-key">⚠️ Important note on Food Tech</div>
+    <div class="verdict-val">Shiksha data indicates the BTech Food Technology at UCT Osmania may have been <strong>discontinued as of October 2024</strong>. Please verify with the college directly before applying, as this is a critical detail that could change the decision entirely.</div>
+  </div>
+  <div class="verdict-row" style="border-bottom:none">
+    <div class="verdict-key">🎯 Optimal roadmap for your daughter</div>
+    <div class="verdict-val"><span class="pill pill-blue">BE Biomedical Engineering at UCEOU, Osmania</span> — Total UG cost ₹1.6 lakh → Strong academic record → MS Biomedical Engineering in USA (apply FAFSA + TA/RA to make it near-free) → Work at Medtronic / GE Healthcare / FDA / Abbott as a US citizen with no visa restriction → Starting $65K–$95K, growing to $115K–$165K. <strong>Maximum career upside in the USA with minimum investment in India.</strong></div>
+  </div>
+</div>
+
+</body>
+</html>

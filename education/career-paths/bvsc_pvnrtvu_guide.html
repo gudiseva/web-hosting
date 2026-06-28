@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BVSc & AH — PVNRTVU Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0D0C0A; --paper:#F6F3EC; --cream:#EDEAE0; --rule:#C9C4B5;
+  --green:#1A4A28; --green-lt:#E6F2EA; --green-md:#2E7D4A; --green-acc:#5BBF7A;
+  --gold:#B8860B; --gold-lt:#FDF5E0;
+  --red:#7A1A0D; --red-lt:#F8ECEB;
+  --blue:#1A2E52; --blue-lt:#EAF0F8;
+  --ok:#1A5C28; --warn:#8B1A1A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Syne',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* MASTHEAD */
+.masthead{background:var(--green);color:#fff;padding:3rem 1.5rem 2.5rem;position:relative;overflow:hidden}
+.masthead::after{content:'BVSc';font-family:'Spectral',serif;font-size:clamp(8rem,20vw,18rem);font-weight:700;position:absolute;right:-1rem;bottom:-2rem;opacity:.05;line-height:1;color:#fff;pointer-events:none;letter-spacing:-.03em}
+.mast-kicker{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--green-acc);margin-bottom:.75rem}
+.mast-title{font-family:'Spectral',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:.5rem}
+.mast-title em{font-style:italic;color:var(--green-acc)}
+.mast-sub{font-size:.78rem;color:rgba(255,255,255,.6);font-family:'DM Mono',monospace;max-width:600px;line-height:1.6}
+.mast-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.mast-badge{display:inline-block;padding:3px 10px;border-radius:2px;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.mb-green{background:var(--green-acc);color:var(--green)}
+.mb-gold{background:var(--gold);color:#fff}
+.mb-out{border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+
+/* QUICK FACTS STRIP */
+.qstrip{display:grid;grid-template-columns:repeat(5,1fr);background:var(--ink);border-top:3px solid var(--green-acc)}
+.qf{padding:.9rem 1rem;text-align:center;border-right:1px solid #2A2A28}
+.qf:last-child{border-right:none}
+.qf-val{font-family:'Spectral',serif;font-size:1.4rem;font-weight:700;color:var(--green-acc);line-height:1}
+.qf-key{font-size:.6rem;color:#888;text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem;font-family:'DM Mono',monospace}
+
+/* LAYOUT */
+.wrap{max-width:1100px;margin:0 auto;padding:0 1rem}
+
+/* SECTION HEADER */
+.sh{display:flex;align-items:center;gap:.75rem;padding:1.75rem 0 .65rem;border-top:2px solid var(--ink);margin:0 0 .5rem}
+.sh-icon{font-size:1rem}
+.sh-label{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.sh-line{flex:1;height:1px;background:var(--rule)}
+
+/* ABOUT SECTION */
+.about-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start}
+.about-body{font-family:'Spectral',serif;font-size:1.02rem;line-height:1.75;color:var(--ink)}
+.about-body p+p{margin-top:.9rem}
+.about-pull{background:var(--green);color:#fff;padding:1.3rem 1.4rem;border-radius:4px}
+.about-pull-quote{font-family:'Spectral',serif;font-size:1.05rem;font-style:italic;line-height:1.55;margin-bottom:.75rem;color:rgba(255,255,255,.95)}
+.about-pull-label{font-size:.6rem;font-family:'DM Mono',monospace;color:var(--green-acc);letter-spacing:.1em;text-transform:uppercase}
+
+/* INFO CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.card{background:#fff;border-radius:6px;border:1px solid var(--rule);padding:1.1rem 1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card.green-top{border-top:3px solid var(--green)}
+.card.gold-top{border-top:3px solid var(--gold)}
+.card.red-top{border-top:3px solid var(--red)}
+.card-title{font-family:'Spectral',serif;font-size:.95rem;font-weight:700;margin-bottom:.6rem;color:var(--ink)}
+.card-row{font-size:.73rem;display:flex;gap:.5rem;padding:3px 0;border-bottom:1px dotted var(--rule);line-height:1.4}
+.card-row:last-child{border-bottom:none}
+.cr-key{font-weight:700;color:#6B6560;min-width:85px;font-size:.67rem;font-family:'DM Mono',monospace;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em}
+.cr-val{color:var(--ink)}
+
+/* BIG TABLE */
+.btable{background:#fff;border-radius:6px;border:1px solid var(--rule);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.brow{display:grid;grid-template-columns:160px 1fr 1fr;border-bottom:1px solid var(--rule)}
+.brow:last-child{border-bottom:none}
+.brow.head{background:var(--cream)}
+.bparam{padding:9px 12px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-family:'DM Mono',monospace;color:#6B6560;border-right:1px solid var(--rule);background:var(--cream);display:flex;align-items:flex-start}
+.bcell{padding:9px 12px;font-size:.74rem;line-height:1.52;border-right:1px solid var(--rule);color:var(--ink);vertical-align:top}
+.bcell:last-child{border-right:none}
+.bcell.head-cell{font-size:.73rem;font-weight:700;font-family:'DM Mono',monospace}
+.bcell.head-cell.a{color:var(--green);background:var(--green-lt)}
+.bcell.head-cell.b{color:var(--blue);background:var(--blue-lt)}
+.alt .bparam,.alt .bcell{background:#FAFAF7}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:.62rem;font-weight:600;margin:2px 2px 2px 0;font-family:'DM Mono',monospace;white-space:nowrap}
+.tg{background:var(--green-lt);color:var(--green);border:1px solid #B5D4BE}
+.tb{background:var(--blue-lt);color:var(--blue);border:1px solid #B5C5E0}
+.tok{background:#EAF3DE;color:#1A5C28;border:1px solid #C2DCA0}
+.tgold{background:var(--gold-lt);color:var(--gold);border:1px solid #E8CC80}
+.tred{background:var(--red-lt);color:var(--red);border:1px solid #DDB0A8}
+.tgr{background:var(--cream);color:#5A5550;border:1px solid var(--rule)}
+.pro{color:var(--ok);font-size:.71rem;line-height:1.55;padding:1px 0}
+.con{color:var(--warn);font-size:.71rem;line-height:1.55;padding:1px 0}
+.st{color:#C9960C;font-size:.82rem}.se{color:#D8D4CC;font-size:.82rem}
+
+/* SALARY BAND */
+.salary-band{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border-radius:6px;border:1px solid var(--rule);overflow:hidden}
+.sb{padding:.9rem 1rem;border-right:1px solid var(--rule);text-align:center}
+.sb:last-child{border-right:none}
+.sb-stage{font-size:.6rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;color:#6B6560;margin-bottom:.35rem}
+.sb-val{font-family:'Spectral',serif;font-size:1.1rem;font-weight:700;color:var(--green);line-height:1.1}
+.sb-note{font-size:.62rem;color:#888;margin-top:.25rem;line-height:1.3}
+
+/* USA PATHWAY */
+.usa-box{background:var(--blue);color:#fff;border-radius:6px;padding:1.4rem 1.5rem}
+.usa-title{font-family:'Spectral',serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.usa-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.usa-card{background:rgba(255,255,255,.08);border-radius:4px;padding:.9rem 1rem;border:1px solid rgba(255,255,255,.15)}
+.usa-card-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:'DM Mono',monospace;color:rgba(255,255,255,.6);margin-bottom:.5rem}
+.usa-item{font-size:.73rem;color:rgba(255,255,255,.9);padding:2.5px 0;line-height:1.45;border-bottom:1px solid rgba(255,255,255,.07)}
+.usa-item:last-child{border-bottom:none}
+.usa-item strong{color:rgba(255,255,255,.55)}
+.usa-highlight{background:var(--green);border-radius:4px;padding:.8rem 1rem;margin-top:.75rem;font-size:.75rem;color:#fff;line-height:1.55;font-family:'Spectral',serif;font-style:italic;border-left:3px solid var(--green-acc)}
+
+/* VERDICT */
+.verdict{background:var(--ink);color:#fff;padding:2.5rem 1.5rem}
+.vt{font-family:'Spectral',serif;font-size:1.6rem;font-weight:700;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid #2A2A28;color:#fff}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem}
+.vc{background:#1C1B18;border-radius:4px;padding:1rem 1.1rem;border-top:3px solid}
+.vc.good{border-color:var(--green-acc)}
+.vc.note{border-color:var(--gold)}
+.vc.warn{border-color:#CC5544}
+.vc-key{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.vc.good .vc-key{color:var(--green-acc)}
+.vc.note .vc-key{color:var(--gold)}
+.vc.warn .vc-key{color:#CC7766}
+.vc-val{font-size:.76rem;color:#C8C4BC;line-height:1.6}
+.vc-note{font-size:.67rem;color:#6B6560;margin-top:.4rem;line-height:1.4}
+.final{background:#1C1B18;border-radius:4px;padding:1.2rem 1.4rem;border:1px solid #2A2A28}
+.final h3{font-family:'Spectral',serif;font-size:1.05rem;color:var(--gold);margin-bottom:.8rem}
+.frow{display:grid;grid-template-columns:170px 1fr;gap:.7rem;padding:.45rem 0;border-bottom:1px solid #2E2D2A;font-size:.74rem;align-items:flex-start}
+.frow:last-child{border-bottom:none}
+.fkey{color:#888;font-weight:600;font-family:'DM Mono',monospace;font-size:.67rem;text-transform:uppercase;letter-spacing:.05em;line-height:1.4}
+.fval{color:var(--paper);line-height:1.5}
+.pill{display:inline-block;padding:2px 8px;border-radius:2px;font-size:.65rem;font-weight:700;margin-right:3px}
+.pg{background:var(--green);color:#fff}
+.pb{background:var(--blue);color:#fff}
+.pw{background:#555;color:#fff}
+.warn-box{background:#2A1500;border:1px solid #6B3800;border-radius:4px;padding:.55rem .8rem;font-size:.7rem;color:#E8C060;line-height:1.5;margin-top:.7rem}
+
+@media(max-width:800px){
+  .qstrip{grid-template-columns:repeat(3,1fr)}
+  .qf:nth-child(4),.qf:nth-child(5){display:none}
+  .about-grid,.card-grid,.vgrid,.usa-grid{grid-template-columns:1fr}
+  .salary-band{grid-template-columns:repeat(2,1fr)}
+  .brow{grid-template-columns:100px 1fr 1fr}
+  .frow{grid-template-columns:1fr;gap:.2rem}
+  body{padding-bottom:2rem}
+}
+@media(max-width:520px){
+  .qstrip{grid-template-columns:repeat(2,1fr)}
+  .salary-band{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mast-kicker">Complete Course Evaluation · 2025–26 · For a US Citizen</div>
+  <h1 class="mast-title">Bachelor of Veterinary Science<br>&amp; <em>Animal Husbandry</em></h1>
+  <p class="mast-sub">P. V. Narasimha Rao Telangana Veterinary University (PVNRTVU) · Rajendranagar, Hyderabad · 5.5 years including 1-year internship</p>
+  <div class="mast-badges">
+    <span class="mast-badge mb-green">ICAR Accredited</span>
+    <span class="mast-badge mb-gold">VCI Recognised</span>
+    <span class="mast-badge mb-out">Est. 2014</span>
+    <span class="mast-badge mb-out">Govt of Telangana</span>
+    <span class="mast-badge mb-out">Rajendranagar, Hyderabad</span>
+  </div>
+</div>
+
+<!-- QUICK FACTS -->
+<div class="qstrip">
+  <div class="qf"><div class="qf-val">5.5 yrs</div><div class="qf-key">Duration</div></div>
+  <div class="qf"><div class="qf-val">~₹1.1L</div><div class="qf-key">Total fees</div></div>
+  <div class="qf"><div class="qf-val">₹5.22 LPA</div><div class="qf-key">NIRF median salary</div></div>
+  <div class="qf"><div class="qf-val">$125K+</div><div class="qf-key">USA vet median</div></div>
+  <div class="qf"><div class="qf-val">NEET / TS EAPCET</div><div class="qf-key">Admission via</div></div>
+</div>
+
+<div class="wrap">
+
+<!-- ABOUT -->
+<div class="sh"><span class="sh-icon">📖</span><span class="sh-label">About the Course &amp; University</span><span class="sh-line"></span></div>
+<div class="about-grid">
+  <div class="about-body">
+    <p>The <strong>Bachelor of Veterinary Science and Animal Husbandry (BVSc & AH)</strong> is a 5.5-year professional degree — equivalent in stature to MBBS in the medical field — that trains students to become licensed veterinarians. The programme spans 5 years of academic study across 10 semesters, followed by a mandatory one-year rotating internship in veterinary hospitals, farms, and research centres.</p>
+    <p><strong>P. V. Narasimha Rao Telangana Veterinary University (PVNRTVU)</strong>, established in 2014 by the Government of Telangana and located in Rajendranagar, Hyderabad, is the state's dedicated veterinary university. It is accredited by the Indian Council of Agricultural Research (ICAR) and recognised by the Veterinary Council of India (VCI). The university operates three veterinary colleges, a dairy technology college, and five animal husbandry polytechnics across Telangana.</p>
+    <p>The BVSc & AH curriculum covers anatomy, physiology, animal nutrition, pathology, pharmacology, microbiology, surgery, obstetrics, animal husbandry, livestock production, and veterinary public health — a broad, rigorous training that qualifies graduates to practice medicine on all species of animals, from companion pets to livestock, wildlife, and exotic animals.</p>
+    <p>The curriculum uses smart boards, real specimens in practicals, and includes externship with TANUVSS (Telangana Animal Husbandry department) during the final year, with students receiving a stipend of ₹3,000/month during internship. This is a <strong>genuinely demanding professional degree</strong> — not unlike MBBS — and requires strong commitment over five and a half years.</p>
+  </div>
+  <div class="about-pull">
+    <div class="about-pull-quote">"Veterinary medicine is not just a profession — it is a calling. India has one of the world's largest livestock populations, and the demand for skilled veterinarians has never been higher. This degree opens doors to government service, private practice, research, wildlife conservation, pharmaceutical industry, and increasingly, global careers."</div>
+    <div class="about-pull-label">Course character · BVSc & AH</div>
+  </div>
+</div>
+
+<!-- UNIVERSITY & CAMPUS -->
+<div class="sh"><span class="sh-icon">🏛</span><span class="sh-label">University &amp; Campus</span><span class="sh-line"></span></div>
+<div class="card-grid">
+  <div class="card green-top">
+    <div class="card-title">University Overview</div>
+    <div class="card-row"><span class="cr-key">Established</span><span class="cr-val">2014, by Govt of Telangana</span></div>
+    <div class="card-row"><span class="cr-key">Location</span><span class="cr-val">Rajendranagar, Hyderabad — southern suburbs, well-connected. ~18 km from city centre.</span></div>
+    <div class="card-row"><span class="cr-key">Accreditation</span><span class="cr-val">ICAR accredited · Recognised by Veterinary Council of India (VCI)</span></div>
+    <div class="card-row"><span class="cr-key">Constituent colleges</span><span class="cr-val">3 veterinary colleges + 1 dairy tech college + 5 polytechnics across Telangana</span></div>
+    <div class="card-row"><span class="cr-key">Research</span><span class="cr-val">Active research in animal genetics, livestock diseases, zoonotic diseases, dairy science</span></div>
+    <div class="card-row"><span class="cr-key">Extension</span><span class="cr-val">University mandate includes teaching, research, and extension services to farmers of Telangana</span></div>
+    <div class="card-row"><span class="cr-key">Affiliation</span><span class="cr-val">Veterinary Council of India + ICAR + UGC</span></div>
+  </div>
+  <div class="card green-top">
+    <div class="card-title">Campus &amp; Infrastructure</div>
+    <div class="card-row"><span class="cr-key">Facilities</span><span class="cr-val">Well-equipped veterinary hospital, teaching labs, pathology labs, anatomy lab, microbiology lab, pharmacology lab, physiology lab</span></div>
+    <div class="card-row"><span class="cr-key">Hospital</span><span class="cr-val">Teaching Veterinary Hospital — students do clinical rotations treating real patients (cattle, dogs, cats, horses, birds)</span></div>
+    <div class="card-row"><span class="cr-key">Farm</span><span class="cr-val">University farm for livestock management, dairy, poultry practicals — essential hands-on exposure</span></div>
+    <div class="card-row"><span class="cr-key">Library</span><span class="cr-val">Dedicated veterinary library with national & international journals, e-resources</span></div>
+    <div class="card-row"><span class="cr-key">Hostel</span><span class="cr-val">Boys & girls hostels on campus. First year fee ₹30,286 (includes hostel). Subsequent years ₹19,480/yr.</span></div>
+    <div class="card-row"><span class="cr-key">Teaching</span><span class="cr-val">Smart boards in classrooms. Real specimens in practicals. Students note good faculty quality.</span></div>
+    <div class="card-row"><span class="cr-key">Stipend</span><span class="cr-val">₹3,000/month during internship year. TANUVSS externship accommodation provided.</span></div>
+  </div>
+  <div class="card green-top">
+    <div class="card-title">Fees, Admission &amp; Placements</div>
+    <div class="card-row"><span class="cr-key">Total fees (5 yrs)</span><span class="cr-val">Year 1: ₹30,286 · Years 2–5: ₹19,480/yr each = ~₹1.08 lakh total. Very affordable govt university.</span></div>
+    <div class="card-row"><span class="cr-key">Admission</span><span class="cr-val">NEET-UG score + TS EAPCET · Counselling by Telangana govt. Cutoff last year: ~rank 51,453</span></div>
+    <div class="card-row"><span class="cr-key">Eligibility</span><span class="cr-val">10+2 with Physics, Chemistry, Biology (PCB). NEET score mandatory. Age max 25 years (30 for SC/ST).</span></div>
+    <div class="card-row"><span class="cr-key">Seats</span><span class="cr-val">Limited intake — competitive admissions. Multiple constituent colleges across Telangana.</span></div>
+    <div class="card-row"><span class="cr-key">Placement data</span><span class="cr-val">NIRF 2024: BVSc & AH median salary ₹5.22 LPA (5-yr UG). Overall range ₹3–6.30 LPA. Private sector, govt, clinics, pharma.</span></div>
+    <div class="card-row"><span class="cr-key">Placement support</span><span class="cr-val">Placement cell conducts aptitude tests, mock interviews, GDs, resume building. Good university hospital for alumni networking.</span></div>
+    <div class="card-row"><span class="cr-key">Reviews</span><span class="cr-val">Students appreciate curriculum quality and faculty. Some note limited north Indian student representation. Teaching methodology rated positively.</span></div>
+  </div>
+</div>
+
+<!-- INDIA CAREER TABLE -->
+<div class="sh"><span class="sh-icon">🇮🇳</span><span class="sh-label">Career Opportunities — India</span><span class="sh-line"></span></div>
+<div class="btable">
+  <div class="brow head">
+    <div class="bparam">Category</div>
+    <div class="bcell head-cell a">Government Sector</div>
+    <div class="bcell head-cell b">Private / Industry Sector</div>
+  </div>
+  <div class="brow">
+    <div class="bparam">Key job roles</div>
+    <div class="bcell">
+      <span class="tag tg">Veterinary Assistant Surgeon</span><span class="tag tg">Veterinary Officer</span><span class="tag tg">Livestock Development Officer</span><span class="tag tg">Animal Husbandry Officer</span><span class="tag tg">Veterinary Inspector</span><span class="tag tg">Assistant Director Animal Husb.</span><span class="tag tg">Veterinary Pathologist (Govt Labs)</span><span class="tag tg">Food Inspector (Animal Products)</span>
+    </div>
+    <div class="bcell">
+      <span class="tag tb">Private Veterinarian / Clinic Owner</span><span class="tag tb">Pet Clinic Veterinarian</span><span class="tag tb">Livestock Farm Manager</span><span class="tag tb">Dairy Farm Manager</span><span class="tag tb">Poultry Farm Manager</span><span class="tag tb">Veterinary Pharma (MR/Scientific)</span><span class="tag tb">R&amp;D Scientist (Vet Pharma)</span><span class="tag tb">Animal Feed Industry</span>
+    </div>
+  </div>
+  <div class="brow alt">
+    <div class="bparam">Top employers / recruiters</div>
+    <div class="bcell" style="font-size:.71rem">State Dept of Animal Husbandry (Telangana, AP, all states), NDDB, NABARD, ICAR institutes, NRC (Equine/Pigs/Poultry), State Livestock Dev Board, Railways Veterinary Services, Remount &amp; Veterinary Corps (Army), ITBP, BSF Veterinary Wing, Zoos (Central Zoo Authority), Wildlife Institute of India, SPCA</div>
+    <div class="bcell" style="font-size:.71rem">Himalaya Drug Company, Zoetis India, Elanco, Boehringer Ingelheim (vet), Venky's India, Suguna Foods, Heritage Feeds, Amul, VetIndia, Wockhardt Vet, Sequent Scientific, private pet clinic chains, agri-biotech startups, NGOs (PETA India, WWF)</div>
+  </div>
+  <div class="brow">
+    <div class="bparam">Salary range</div>
+    <div class="bcell">
+      <strong>₹35,000–₹55,000/month</strong> as Veterinary Assistant Surgeon via state PSC.<br>
+      <span style="font-size:.69rem;color:#6B6560">Same pay scale as MBBS government doctors in many states. Includes DA, HRA, medical benefits, pension.</span>
+    </div>
+    <div class="bcell">
+      <strong>₹35,000–₹45,000/month</strong> in high-end pet clinics (Mumbai, Bangalore).<br>
+      <span style="font-size:.69rem;color:#6B6560">Senior vet in corporate/pharma: ₹8–12 LPA. Own clinic after 3–5 years: ₹1–2 lakh/month potential.</span>
+    </div>
+  </div>
+  <div class="brow alt">
+    <div class="bparam">Strength rating</div>
+    <div class="bcell"><span class="st">★★★★★</span><br><span style="font-size:.69rem;color:#6B6560">Excellent — BVSc graduates are eligible for Veterinary Officer posts through state PSC exams. Salary on par with MBBS doctors in govt service. Job security + pension.</span></div>
+    <div class="bcell"><span class="st">★★★★</span><span class="se">★</span><br><span style="font-size:.69rem;color:#6B6560">Strong — India's pet industry growing at 20%+ annually. Livestock sector massive. Pharma vet segment growing. Own practice has high earning potential.</span></div>
+  </div>
+  <div class="brow">
+    <div class="bparam">Emerging opportunities</div>
+    <div class="bcell">One Health approach (human-animal-environment health nexus), zoonotic disease surveillance (SARS, Nipah, H5N1 preparedness), food safety inspection at meat/dairy processing units, Integrated Disease Surveillance Programme (IDSP) vet roles</div>
+    <div class="bcell">Pet industry boom (urban India: 35 million+ pets), telemedicine for animals (veterinary telehealth startups), luxury pet care centres, animal nutrition consulting, agri-biotech (cell-cultured meat, precision livestock farming), insurance for livestock</div>
+  </div>
+  <div class="brow alt">
+    <div class="bparam">Higher studies (India)</div>
+    <div class="bcell" colspan="2" style="border-right:none">
+      <span class="tag tg">MVSc (2 yrs) — Multiple specialisations at PVNRTVU itself</span>
+      <span class="tag tg">MVSc via ICAR AICE-JRF/SRF</span>
+      <span class="tag tok">PhD Veterinary Sciences</span>
+      <span class="tag tgold">MBA (Healthcare / Agribusiness)</span>
+      <span class="tag tgr">PG Diploma Wildlife Conservation</span>
+      <span class="tag tgr">UPSC (Civil Services / IFS) with Vet Science Optional</span>
+      <br><span style="font-size:.69rem;color:#6B6560;margin-top:4px;display:block">MVSc specialisations at PVNRTVU include: Animal Genetics &amp; Breeding, Animal Nutrition, Veterinary Anatomy, Physiology, Pharmacology, Pathology, Microbiology, Surgery, Gynaecology, LPT, Veterinary Public Health. PhD also available (₹1.34L total fees). MVSc fees only ₹92,430 total.</span>
+    </div>
+  </div>
+</div>
+
+<!-- SALARY BAND -->
+<div class="sh"><span class="sh-icon">💰</span><span class="sh-label">Salary Trajectory — India</span><span class="sh-line"></span></div>
+<div class="salary-band">
+  <div class="sb">
+    <div class="sb-stage">Fresh Graduate (0–1 yr)</div>
+    <div class="sb-val">₹3–5 LPA</div>
+    <div class="sb-note">Private clinic / pharma. Govt: ₹35–55K/month after PSC selection.</div>
+  </div>
+  <div class="sb">
+    <div class="sb-stage">Mid Career (3–5 yrs)</div>
+    <div class="sb-val">₹6–10 LPA</div>
+    <div class="sb-note">Senior vet, specialist, pharma manager, own clinic income rising.</div>
+  </div>
+  <div class="sb">
+    <div class="sb-stage">Senior (8–10 yrs)</div>
+    <div class="sb-val">₹12–20 LPA</div>
+    <div class="sb-note">Experienced private vet, pharma director. Own clinic: ₹1–2L/month.</div>
+  </div>
+  <div class="sb">
+    <div class="sb-stage">Top Tier (specialist)</div>
+    <div class="sb-val">₹20 LPA+</div>
+    <div class="sb-note">MVSc specialist, veterinary surgeon at premium hospitals, wildlife expert.</div>
+  </div>
+</div>
+
+<!-- USA SECTION -->
+<div class="sh"><span class="sh-icon">🇺🇸</span><span class="sh-label">USA Career Pathway — Detailed Roadmap</span><span class="sh-line"></span></div>
+<div class="usa-box">
+  <div class="usa-title">🇺🇸 USA Career — What a US Citizen with BVSc from India Needs to Know</div>
+  <div class="usa-grid">
+    <div class="usa-card">
+      <div class="usa-card-title">The Big Advantage — US Citizen vs Indian Student</div>
+      <div class="usa-item"><strong>No H-1B / OPT needed:</strong> She can work in any US veterinary hospital, clinic, or federal agency from Day 1 after licensure.</div>
+      <div class="usa-item"><strong>USDA eligibility:</strong> Many USDA federal veterinary roles require US citizenship — she would qualify directly.</div>
+      <div class="usa-item"><strong>Salary potential:</strong> Median US veterinarian salary is $125,510/yr (BLS May 2024). Top earners: $180,000–$273,500/yr.</div>
+      <div class="usa-item"><strong>Job offers jumped 124%:</strong> Between 2021 and 2024, demand for veterinarians in USA has surged sharply. Workforce shortage = strong demand.</div>
+    </div>
+    <div class="usa-card">
+      <div class="usa-card-title">Licensing Requirements (Critical Path)</div>
+      <div class="usa-item"><strong>Step 1 — ECFVG:</strong> Educational Commission for Foreign Veterinary Graduates certification via AVMA. A 4-step process: Registration → English proficiency exam → Basic &amp; Clinical Sciences Exam (BCSE) → Clinical Proficiency Exam (CPE).</div>
+      <div class="usa-item"><strong>Step 2 — NAVLE:</strong> North American Veterinary Licensing Examination (360 MCQ). Required for licensure in all 50 US states. Indian BVSc grads need ECFVG certificate first to sit for NAVLE.</div>
+      <div class="usa-item"><strong>Step 3 — State licence:</strong> Each state has its own registration + jurisprudence exam requirements.</div>
+      <div class="usa-item"><strong>Alternative path:</strong> Do a DVM (Doctor of Veterinary Medicine) programme at an AVMA-accredited US university (4 years). Then NAVLE directly. This is the cleaner but more expensive route.</div>
+    </div>
+    <div class="usa-card">
+      <div class="usa-card-title">USA Job Roles &amp; Salaries</div>
+      <div class="usa-item"><strong>Companion animal vet:</strong> $80,000–$130,000/yr (general practice)</div>
+      <div class="usa-item"><strong>Specialist vet (oncology, surgery, cardiology):</strong> $150,000–$250,000/yr</div>
+      <div class="usa-item"><strong>USDA Food Safety Vet Inspector:</strong> $75,000–$120,000/yr</div>
+      <div class="usa-item"><strong>Military veterinarian (Army/Navy):</strong> $80,000–$130,000/yr + benefits</div>
+      <div class="usa-item"><strong>Zoo/wildlife vet:</strong> $60,000–$100,000/yr</div>
+      <div class="usa-item"><strong>Pharmaceutical R&amp;D vet:</strong> $110,000–$160,000/yr</div>
+      <div class="usa-item"><strong>Academic / research vet:</strong> $90,000–$140,000/yr</div>
+    </div>
+    <div class="usa-card">
+      <div class="usa-card-title">Strategic USA Roadmap for Her</div>
+      <div class="usa-item"><strong>Option A (Best):</strong> BVSc at PVNRTVU (₹1.1L) → ECFVG certification while finishing degree → NAVLE → Licensed vet in USA as citizen. Total preparation: 2–3 years post-graduation. Then practise as US citizen with full rights.</div>
+      <div class="usa-item"><strong>Option B (Expensive but faster):</strong> BVSc at PVNRTVU → Admission to AVMA-accredited DVM in USA (some accept Indian BVSc with advanced standing credit). Some US vet schools accept foreign DVM/BVSc grads into 2-year advanced DVM programmes.</div>
+      <div class="usa-item"><strong>Option C (Research):</strong> BVSc → MVSc → PhD → Postdoc in USA → Academic / research veterinarian position. Many US universities hire international PhD vets as research faculty. FAFSA aid available as US citizen for graduate school.</div>
+      <div class="usa-item"><strong>Best US states for vets:</strong> California, Texas, New York, Florida, North Carolina — highest demand and pay.</div>
+    </div>
+  </div>
+  <div class="usa-highlight">"Indeed.com named veterinarian the #1 best job in the USA for 2025. The US faces a critical shortage of veterinarians — over 41 million pet-owning households, growing livestock industry, and food safety inspection needs are all driving demand. A US citizen who is a licensed veterinarian is exceptionally well-positioned to build a high-earning, secure career."</div>
+</div>
+
+<!-- PROS CONS TABLE -->
+<div class="sh"><span class="sh-icon">⚖️</span><span class="sh-label">Honest Assessment — Advantages &amp; Disadvantages</span><span class="sh-line"></span></div>
+<div class="btable">
+  <div class="brow head">
+    <div class="bparam">Dimension</div>
+    <div class="bcell head-cell a">Advantages ✔</div>
+    <div class="bcell head-cell" style="color:var(--red);background:var(--red-lt)">Disadvantages ✘</div>
+  </div>
+  <div class="brow">
+    <div class="bparam">Course &amp; degree</div>
+    <div class="bcell">
+      <div class="pro">✔ Professional degree like MBBS — full veterinary licence on graduation</div>
+      <div class="pro">✔ Recognised by Veterinary Council of India (VCI) + ICAR</div>
+      <div class="pro">✔ Extremely affordable — only ~₹1.1 lakh total fees</div>
+      <div class="pro">✔ Stipend of ₹3,000/month during internship</div>
+      <div class="pro">✔ Mandatory 1-year clinical internship = strong practical exposure</div>
+    </div>
+    <div class="bcell">
+      <div class="con">✘ Very long duration — 5.5 years (vs 3-4 years for most other UG degrees)</div>
+      <div class="con">✘ Intensive curriculum — anatomy, surgery, pharmacology are demanding</div>
+      <div class="con">✘ NEET score required — competitive entrance</div>
+      <div class="con">✘ Requires genuine passion — not suitable as a fallback choice</div>
+    </div>
+  </div>
+  <div class="brow alt">
+    <div class="bparam">India career</div>
+    <div class="bcell">
+      <div class="pro">✔ Govt Veterinary Officer salary = same as MBBS doctors in state service</div>
+      <div class="pro">✔ One of the only PCB careers outside MBBS with such strong govt job scope</div>
+      <div class="pro">✔ India's livestock sector is massive — 536 million cattle + buffaloes</div>
+      <div class="pro">✔ Pet industry growing at 20%+ CAGR — urban vet demand surging</div>
+      <div class="pro">✔ Own practice can be highly lucrative in 5–7 years</div>
+    </div>
+    <div class="bcell">
+      <div class="con">✘ Entry-level private sector salary (₹3–5 LPA) is lower than engineering/analytics</div>
+      <div class="con">✘ Govt recruitment has slowed in some states — vacancies cycle</div>
+      <div class="con">✘ Many posted in rural/semi-urban areas for govt roles</div>
+      <div class="con">✘ PVNRTVU placement median ₹5.22 LPA — modest for a 5.5-year degree</div>
+    </div>
+  </div>
+  <div class="brow">
+    <div class="bparam">USA career</div>
+    <div class="bcell">
+      <div class="pro">✔ US median vet salary $125,510/yr — among top professional careers</div>
+      <div class="pro">✔ Named #1 best job in USA by Indeed (2025)</div>
+      <div class="pro">✔ Job offers jumped 124% from 2021–2024 — severe workforce shortage</div>
+      <div class="pro">✔ US citizen = can work at USDA, military vet corps, federal agencies directly</div>
+      <div class="pro">✔ Companion animal / specialist vet = $130K–$250K/yr at senior level</div>
+    </div>
+    <div class="bcell">
+      <div class="con">✘ Indian BVSc not directly accepted for US licensure — ECFVG process needed (1–2 years extra)</div>
+      <div class="con">✘ PVNRTVU is not AVMA-accredited — cannot sit NAVLE directly without ECFVG</div>
+      <div class="con">✘ ECFVG is a multi-step, multi-year, costly process (~$5,000–8,000 USD in fees)</div>
+      <div class="con">✘ Alternative: DVM in USA (4 years, $200K–$350K total cost at US vet schools)</div>
+    </div>
+  </div>
+  <div class="brow alt">
+    <div class="bparam">Compared to other options</div>
+    <div class="bcell">
+      <div class="pro">✔ Unique — no other PCB course gives this breadth of govt + private + global scope</div>
+      <div class="pro">✔ Can pivot to pharma, research, wildlife, food safety, academia</div>
+      <div class="pro">✔ Extremely meaningful work — animal welfare + public health + food security</div>
+      <div class="pro">✔ Only ₹1.1L for a full professional degree — unmatched value if passionate</div>
+    </div>
+    <div class="bcell">
+      <div class="con">✘ Much longer than BSc/BTech options (5.5 vs 3–4 years)</div>
+      <div class="con">✘ USA licensure pathway is complex — adds 2+ years vs direct US professional</div>
+      <div class="con">✘ Starting salaries in India lower than data analytics / biomedical engineering</div>
+    </div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+</div><!-- end wrap -->
+
+<div class="verdict">
+  <h2 class="vt">Our Assessment — Is BVSc & AH at PVNRTVU the Right Choice?</h2>
+  <div class="vgrid">
+    <div class="vc good">
+      <div class="vc-key">✔ Strong Choice If — Animal Passion Is Genuine</div>
+      <div class="vc-val">If your daughter genuinely loves animals, wants to treat and care for them, and is drawn to a career in veterinary medicine — this is one of the most meaningful, well-rounded, and financially rewarding professional degrees available. At only ₹1.1 lakh total, it is extraordinary value for a full professional licence. The USA opportunity is real and substantial — a licensed veterinarian in the US earns ₹1+ crore per year, and the profession is facing a severe workforce shortage.</div>
+      <div class="vc-note">Best suited for: someone who scored well in biology and is passionate about animal care, agriculture, food safety, or wildlife conservation.</div>
+    </div>
+    <div class="vc good">
+      <div class="vc-key">✔ Outstanding USA Potential (With the Right Steps)</div>
+      <div class="vc-val">As a US citizen, she will have major advantages over Indian graduates once licensed in the USA. No OPT, no H-1B, no employer sponsorship required. The USDA alone employs hundreds of veterinarians as federal employees — a career not accessible to foreign nationals. Indeed named veterinarian the #1 best job in the USA for 2025. The path requires the ECFVG certification + NAVLE — an investment of 2–3 years post-graduation, but the reward ($125K+ median, specialists $200K+) is exceptional.</div>
+      <div class="vc-note">Recommended roadmap: PVNRTVU BVSc (₹1.1L) → Start ECFVG prep from Year 4 → ECFVG certificate post-graduation → NAVLE → Licensed US vet → USDA / pet clinic / specialist practice.</div>
+    </div>
+    <div class="vc note">
+      <div class="vc-key">⚡ The Critical Question to Ask First</div>
+      <div class="vc-val">This course only makes sense if she is genuinely passionate about animal healthcare. Unlike engineering or management degrees that can be redirected mid-career, veterinary science is deeply specialised. Students who enter it without passion find it extremely hard — 5.5 years of demanding surgery, pathology, and clinical work. The profession also involves physical demands, difficult hours, and emotional challenges (treating critically ill animals, euthanasia). If she loves biology, animals, and medicine — this is a remarkable career. If she's unsure, it's better to choose a different path.</div>
+    </div>
+    <div class="vc note">
+      <div class="vc-key">💡 Smart Alternatives If She's 50–50</div>
+      <div class="vc-val">If she is interested in animal science but uncertain about clinical veterinary work, she could consider: (1) BSc Biotechnology → MS in Animal Sciences / Comparative Medicine in USA; (2) BTech Food Technology → food safety inspector (deals with meat/dairy inspection which overlaps with vet science); (3) BSc Zoology → Wildlife Research. But if animals are her calling, none of these are substitutes for the BVSc — it is the gold standard professional degree for working with animals.</div>
+    </div>
+  </div>
+  <div class="final">
+    <h3>Summary Scorecard</h3>
+    <div class="frow"><div class="fkey">Course quality at PVNRTVU</div><div class="fval"><span class="st">★★★★</span><span class="se">★</span> — ICAR accredited, VCI recognised, good clinical infrastructure, affordable fees. Established and respected.</div></div>
+    <div class="frow"><div class="fkey">India career scope</div><div class="fval"><span class="st">★★★★★</span> — Govt Veterinary Officer (same pay as MBBS doctor), private practice, pharma, dairy, poultry, wildlife. Among the best PCB career options in India after MBBS.</div></div>
+    <div class="frow"><div class="fkey">India starting salary</div><div class="fval"><span class="st">★★★</span><span class="se">★★</span> — NIRF median ₹5.22 LPA fresh grad. Lower than engineering but grows significantly with govt service + increments and own practice income.</div></div>
+    <div class="frow"><div class="fkey">USA career potential</div><div class="fval"><span class="st">★★★★★</span> — Exceptional. $125K+ median salary. #1 best job USA 2025. 124% jump in job offers 2021–2024. Her US citizenship = major advantage (USDA, federal vet roles).</div></div>
+    <div class="frow"><div class="fkey">USA pathway ease</div><div class="fval"><span class="st">★★★</span><span class="se">★★</span> — Requires ECFVG + NAVLE process (2–3 years extra effort). Not a simple transfer — but very much achievable and rewarding.</div></div>
+    <div class="frow"><div class="fkey">Value for money</div><div class="fval"><span class="st">★★★★★</span> — Only ₹1.1 lakh total fees for a full professional degree. Extraordinary ROI if she builds a career in govt service or USA practice.</div></div>
+    <div class="frow"><div class="fkey">Suitability for her</div><div class="fval">Ideal if she loves animals and biology. Not recommended if choosing it as a fallback or without genuine passion. This is a calling, not just a course.</div></div>
+    <div class="frow" style="border-bottom:none"><div class="fkey">Overall recommendation</div><div class="fval"><span class="pill pg">Strong Yes</span> — if passion for animals is confirmed. <span class="pill pw">Proceed with caution</span> — if choosing without strong interest. This degree, when chosen for the right reasons, leads to one of the most fulfilling and financially rewarding careers available — both in India and the USA — for a PCB student.</div></div>
+    <div class="warn-box">⚠️ One critical action step: Before applying, have her spend a few days at a veterinary clinic or animal hospital (PVNRTVU itself may allow observation visits). This exposure will quickly confirm whether veterinary medicine is right for her. A week of observation is more valuable than months of deliberation.</div>
+  </div>
+</div>
+
+</body>
+</html>
